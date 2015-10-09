@@ -34,12 +34,17 @@ angular.module("mainModule", [])
 
     $scope.currentHotel = function (index) {
       console.log("currentHotel");
+      // var myHidden = document.getElementById("<%= user.local.email>");
+      //  console.log(myHidden);
       console.log(index);
       console.log($scope.hotellist[index]);
       $scope.hotel =  $scope.hotellist[index];
        angular.forEach($scope.hotel.menu, function(item) {
             item.qty = 0 ;
         })
+
+       console.log($scope.user);
+        $scope.getCustsomerDetails();
     };
 
     $scope.total = function() {
@@ -78,4 +83,42 @@ angular.module("mainModule", [])
           $scope.postOrder(ordarr);
         }
     };
+
+    $scope.getCustsomerDetails = function () {
+      console.log("getCustsomerDetails");
+      var url = "/v1/customer";
+      $http.get(url)
+        .success(function (data, status, headers, config)
+        {
+           console.log(data[0].phone);
+                   $scope.phone = data[0].phone;
+          $scope.user = data[0].id;
+          $scope.flat_no = data[0].address.addressLine1;
+          $scope.address = data[0].address.addressLine2;
+          $scope.landmark = data[0].address.LandMark;
+          $scope.areaName = data[0].address.areaName;
+          $scope.city = data[0].address.city;
+        })
+        .error(function (data, status, headers, config)
+        {
+          $scope.simpleGetCallResult = logResult("GET ERROR", data, status, headers, config);
+        });
+    };
+
+    $scope.postCustsomerDetails = function (param) {
+      console.log("postCustsomerDetails");
+      console.log(ordarr);
+      var url = "/v1/customer/";
+      url = url + param;
+      $http.post(url, ordarr)
+        .success(function (data, status, headers)
+        {
+          console.log("Success in postorder")
+        })
+        .error(function (data, status, headers)
+        {
+          console.log("ERROR in postorder");
+        });
+    };
+
   });

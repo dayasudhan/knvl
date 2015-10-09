@@ -454,9 +454,11 @@ app.get( '/v1/vendor/account/:id', function( request, response ) {
     });
  // });
 });
-app.get( '/v1/customer/:id', function( request, response ) {
-  console.log(request.params.id);
-     return CustomerInfoModel.find({ 'id':request.params.id},function( err, customerInfo ) {
+app.get( '/v1/customer', function( request, response ) {
+    console.log(request.user.local);
+     console.log(request.user.local.email);
+  
+     return CustomerInfoModel.find({ 'id':request.user.local.email},function( err, customerInfo ) {
         if( !err ) {
             return response.send( customerInfo );
         } else {
