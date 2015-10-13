@@ -19,6 +19,13 @@ app.get('/', function (req, res) {
         res.render('test', { user : "dummy" });
 });
 
+app.get('/p/customer_menu', function (req, res) {
+    if(req.isAuthenticated())
+        res.render('customer_menu', { user : req.user });
+    else
+        res.render('customer_menu', { user : "dummy" });
+});
+
 // PROFILE SECTION =========================
 app.get('/profile', isLoggedIn, function(req, res) {
     res.render('profile.ejs', {

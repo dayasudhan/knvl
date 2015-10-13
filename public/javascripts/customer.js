@@ -15,7 +15,21 @@ angular.module("mainModule", [])
           $scope.simpleGetCallResult = logResult("GET ERROR", data, status, headers, config);
         });
     };
-
+    $scope.findRestaurants2 = function () {
+      console.log("findRestaurants");
+      var url = "/v1/vendor/city/Bangalore";
+     // url = url + 'Bangalore';
+      $http.get(url)
+        .success(function (data, status, headers, config)
+        {
+          $scope.hotellist = data;
+          $scope.hotel =  $scope.hotellist[1];
+        })
+        .error(function (data, status, headers, config)
+        {
+          $scope.simpleGetCallResult = logResult("GET ERROR", data, status, headers, config);
+        });
+    };
     $scope.postOrder = function (ordarr) {
       console.log("postOrder");
       console.log(ordarr);
@@ -61,16 +75,20 @@ angular.module("mainModule", [])
       console.log("order function 2");
        var ordMenu =  [];
        var isOrderPresent =  false;
+       var total_price = 0;
        angular.forEach($scope.hotel.menu, function(item) {
           var obj = new Object();
           if(item.qty > 0)
           {
             obj.name = item.name;
             obj.no_of_order = item.qty;
+            obj.price = item.qty * item.price;
+            total_price +=  obj.price;
             ordMenu.push(obj);
             isOrderPresent = true;
           }
         });
+       
         var ordarr = {
          "hotel":{"name":$scope.hotel.hotel.name,"email": $scope.hotel.hotel.email},
           "menu":ordMenu,
@@ -78,9 +96,11 @@ angular.module("mainModule", [])
           "address":{"addressLine1":$scope.flat_no,"addressLine2":$scope.address,"street":"", 
           "LandMark":$scope.landmark, "areaName":"","city":"", "zip":"", "latitude":0,"longitude":0}
         };
+        $scope.orderSummary = ordarr;
+         $scope.total_price = total_price;
         if(isOrderPresent)
         {
-          $scope.postOrder(ordarr);
+          //$scope.postOrder(ordarr);
         }
     };
 

@@ -43,6 +43,7 @@ app = angular.module("vendorModule", []);
   app.controller("menuController", function ($scope, $http, jsonFilter)
   {
  $scope.getMenuList = function (param) {
+  console.log(param);
       console.log("getmenulist");
       var url3 = "/v1/vendor/menu/";
       url3 = url3 + param;
