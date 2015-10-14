@@ -1,6 +1,26 @@
-angular.module("mainModule", [])
-  .controller("mainController", function ($scope, $http, jsonFilter)
+var customerApp =angular.module("mainModule", ['ui.router']);
+customerApp.config( function ($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('/');
+  $stateProvider
+        
+        // HOME STATES AND NESTED VIEWS ========================================
+        .state('home', {
+            url: '/',
+            templateUrl: '../../views/customer_home.ejs',
+            controller: 'mainController'
+        })
+        
+        // nested list with custom controller
+        .state('menu2', {
+            url: '/menu2',
+            templateUrl: '../../views/customer_menu.ejs',
+            controller: 'mainController'
+        })
+      });
+  customerApp.controller('mainController', function ($rootScope,$scope, $http, jsonFilter,$window)
   {
+   
+
     $scope.findRestaurants = function () {
       console.log("findRestaurants");
       var url = "/v1/vendor/city/";
@@ -16,19 +36,19 @@ angular.module("mainModule", [])
         });
     };
     $scope.findRestaurants2 = function () {
-      console.log("findRestaurants");
-      var url = "/v1/vendor/city/Bangalore";
-     // url = url + 'Bangalore';
-      $http.get(url)
-        .success(function (data, status, headers, config)
-        {
-          $scope.hotellist = data;
-          $scope.hotel =  $scope.hotellist[1];
-        })
-        .error(function (data, status, headers, config)
-        {
-          $scope.simpleGetCallResult = logResult("GET ERROR", data, status, headers, config);
-        });
+      console.log("findRestaurants2");
+     //  var url = "/v1/vendor/city/Bangalore";
+     // // url = url + 'Bangalore';
+     //  $http.get(url)
+     //    .success(function (data, status, headers, config)
+     //    {
+     //      $scope.hotellist = data;
+     //      $scope.hotel =  $scope.hotellist[1];
+     //    })
+     //    .error(function (data, status, headers, config)
+     //    {
+     //      $scope.simpleGetCallResult = logResult("GET ERROR", data, status, headers, config);
+     //    });
     };
     $scope.postOrder = function (ordarr) {
       console.log("postOrder");
@@ -51,14 +71,17 @@ angular.module("mainModule", [])
       // var myHidden = document.getElementById("<%= user.local.email>");
       //  console.log(myHidden);
       console.log(index);
+     
       console.log($scope.hotellist[index]);
-      $scope.hotel =  $scope.hotellist[index];
+      $rootScope.hotel =  $scope.hotellist[index];
        angular.forEach($scope.hotel.menu, function(item) {
             item.qty = 0 ;
         })
 
-       console.log($scope.user);
-        $scope.getCustsomerDetails();
+       // console.log($scope.user);
+       //  $scope.getCustsomerDetails();
+
+          // $window.location.href = '/menu'; 
     };
 
     $scope.total = function() {
