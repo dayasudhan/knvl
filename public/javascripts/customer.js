@@ -11,8 +11,8 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
         })
         
         // nested list with custom controller
-        .state('menu2', {
-            url: '/menu2',
+        .state('menu', {
+            url: '/menu',
             templateUrl: '../../views/customer_menu.ejs',
             controller: 'mainController'
         })

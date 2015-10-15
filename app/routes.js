@@ -1,7 +1,6 @@
 var OrderModel = require('../app/models/vendorOrder');
 var VendorInfoModel = require('../app/models/vendorInfo');
 var CustomerInfoModel = require('../app/models/customerInfo');
-var Account = require('../app/models/account');
 module.exports = function(app, passport) {
 
 
@@ -36,10 +35,17 @@ app.get('/profile', isLoggedIn, function(req, res) {
 
 // LOGOUT ==============================
 app.get('/logout', function(req, res) {
+  
+  var redirect_url = '/';
     req.logout();
-    res.redirect('/');
+    res.redirect(redirect_url);
 });
 
+app.get('/vendor_logout', function(req, res) {
+    var redirect_url = '/vendor';
+    req.logout();
+    res.redirect(redirect_url);
+});
 // =============================================================================
 // AUTHENTICATE (FIRST LOGIN) ==================================================
 // =============================================================================
@@ -52,24 +58,38 @@ app.get('/logout', function(req, res) {
         });
 
         // process the login form
-        app.post('/login', passport.authenticate('local-login', {
-            successRedirect : '/test', // redirect to the secure profile section
-            failureRedirect : '/login', // redirect back to the signup page if there is an error
-            failureFlash : true // allow flash messages
-        }));
+        // app.post('/login', passport.authenticate('local-login', {
+        //     successRedirect : '/', // redirect to the secure profile section
+        //     failureRedirect : '/login', // redirect back to the signup page if there is an error
+        //     failureFlash : true // allow flash messages
+        // }));
+app.post('/login', function(req, res, next) {
 
+  passport.authenticate('local-login', function(err, user, info) {
+   
+    if (err) { return next(err); }
+    if (!user) { return res.redirect('/signup'); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      console.log(req.body.role);
+      var redirect_url = '/';
+      if(req.body.role == 'customer')
+      {
+        redirect_url = '/';
+      }
+       else if(req.body.role == 'vendor') 
+       {
+        redirect_url = '/p/vendor_details';
+       }
+      return res.redirect(redirect_url);
+    });
+  })(req, res, next);
+});
         // SIGNUP =================================
         // show the signup form
         app.get('/signup', function(req, res) {
-            res.render('signup.ejs', { message: req.flash('signupMessage') });
+            res.render('customer_signup.ejs', { message: req.flash('signupMessage') });
         });
-
-        // process the signup form
-        app.post('/signup', passport.authenticate('local-signup', {
-            successRedirect : '/profile', // redirect to the secure profile section
-            failureRedirect : '/signup', // redirect back to the signup page if there is an error
-            failureFlash : true // allow flash messages
-        }));
 
     // facebook -------------------------------
 
@@ -203,20 +223,15 @@ app.get('/logout', function(req, res) {
         });
     });
 
-
-
-
-
-app.get('/p/vendor2', function (req, res) {
-    res.render('vendor_order', { user : req.user });
+app.get('/vendor', function (req, res) {
+    res.render('vendor_login', { user : req.user });
 });
-
-app.get('/p/vendor3', function (req, res) {
-    res.render('index3', { user : req.user });
+app.get('/', function (req, res) {
+    res.render('customer', { user : req.user });
 });
-
 
 app.get('/p/vendor_order', function (req, res) {
+    console.log(req.user);
     res.render('vendor_order', { user : req.user });
 });
 
@@ -233,100 +248,67 @@ app.get('/p/vendor_details', function (req, res) {
 });
 
 
-app.get('/p/signin', function (req, res) {
-    res.render('starter', { user : req.user });
+app.get('/p/vendor_login', function (req, res) {
+    res.render('vendor_login', { user : req.user });
 });
 
-app.get('/p/register', function(req, res) {
-    res.render('register2', { });
-});
-
-
-
-app.get('/vendor', function (req, res) {
-    res.render('index', { user : req.user });
-});
-app.get('/', function (req, res) {
-    res.render('customer', { user : req.user });
-});
-
-app.get('/menu', function (req, res) {
-    res.render('menu', { user : req.user });
-});
-
-app.get('/register', function(req, res) {
-    res.render('register', { });
-});
-
-app.get('/orders', function (req, res) {
-    res.render('invoice_list', { user : req.user });
-});
-
-app.get('/order_summary', function (req, res) {
-    res.render('order_summary', { user : req.user });
-});
-
-app.get('/menus', function (req, res) {
-    res.render('menu_list', { user : req.user });
+app.get('/p/vendor_signup', function(req, res) {
+    res.render('vendor_signup', { });
 });
 
 app.get('/about_us', function (req, res) {
     res.render('about_us', { user : req.user });
 });
 
-// app.post('/register', function(req, res, next) {
-//   console.log(req.body.City);
-//     Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
-//         if (err) {
-//           return res.render("register", {info: "Sorry. That username already exists. Try again."});
-//         }
-//           console.log("aunthiticate 1");
-//           storeVendorInfo(req,res,function(req,res){
-//            console.log("aunthiticate 2");
-//         passport.authenticate('local')(req, res, function () {
 
-//             req.session.save(function (err) {
-//                 if (err) {
-//                     return next(err);
-//                 }
-//                 res.redirect('/orders');
-//             });
-//         });
-//       });
-//     });
-// });
-app.post('/register', function(req, res, next) {
-  console.log("/register post method");
-    Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
-        if (err) {
-          console.log("error register post method");
-          return res.render("register", {info: "Sorry. That username already exists. Try again."});
+
+
+app.post('/signup', function(req, res, next) {
+
+  passport.authenticate('local-signup', function(err, user, info) {
+   
+    if (err) { return next(err); }
+    if (!user) { return res.redirect('/signup'); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      console.log(req.body.role);
+      var redirect_url;
+      if(req.body.role == 'customer')
+        redirect_url = '/';
+       else if(req.body.role == 'vendor') 
+       {
+        redirect_url = '/p/vendor_details';
+        registerVendor(req, res, next);
         }
-          console.log("aunthiticate 1");
-           var vendorInfo = new VendorInfoModel({
-        hotel:{email:req.body.username}
+      return res.redirect(redirect_url);
+    });
+  })(req, res, next);
+});
+
+function registerVendor(req, res, next) {
+  console.log("/registerVendor");
+  var vendorInfo = new VendorInfoModel({
+        hotel:{email:req.body.email}
       });
       vendorInfo.save( function( err ) {
         if( !err ) {
-              console.log( 'storeVendorInfo created' );
-              console.log(req.body.username);
-              passport.authenticate('local')(req, res, function () {
+              console.log( 'registerVendor created' );
+              console.log(req.body.email);
                   req.session.save(function (err) {
                     if (err) {
+                        console.log( 'registerVendor save error' );
                       return next(err);
                     }
-                    res.redirect('/p/vendor_details');
+                    console.log( 'registerVendor save complete' );
                   });
-              });
               return ;
               } else {
-                console.log( 'storeVendorInfo error' );
+                console.log( 'registerVendor error' );
                 console.log( err );
                 return response.send('ERROR');
               }
         });
-    });
-});
+};
 app.post( '/v1/vendor/info/:id', function( req, res ) {
 
    console.log("VendorInfo post");
