@@ -15,9 +15,9 @@ app.get('/test', function(req, res) {
 
 app.get('/', function (req, res) {
     if(req.isAuthenticated())
-        res.render('test', { user : req.user });
+        res.render('customer', { user : req.user });
     else
-        res.render('test', { user : "dummy" });
+        res.render('customer', { user : "dummy" });
 });
 
 // app.get('/p/customer_menu', function (req, res) {
@@ -247,12 +247,9 @@ app.get('/vendor', function (req, res) {
     res.render('index', { user : req.user });
 });
 app.get('/', function (req, res) {
-    res.render('test', { user : req.user });
-});
-
-app.get('/test', function (req, res) {
     res.render('customer', { user : req.user });
 });
+
 app.get('/menu', function (req, res) {
     res.render('menu', { user : req.user });
 });
