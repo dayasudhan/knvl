@@ -171,6 +171,7 @@
                   <h3 class="box-title">Orders</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
+                  <label>Search: <input ng-model="searchText"></label>
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
@@ -179,18 +180,20 @@
                         <th>Customer Phone</th>
                         <th>Item Name</th>
                         <th>Item Quantity</th>
+                        <th>Time</th>
                         <th>AreaName</th>
                         <th>Landmark</th>
                         <th>Address</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="order in orderlist">
+                      <tr ng-repeat="order in orderlist| orderBy:'date':true | filter:searchText">
                         <td>{{order._id}}</td>
                         <td>{{order.customer.name}}</td>
                         <td>{{order.customer.phone}}</td>
                         <td>{{order.menu[0].name}}</td>
                         <td>{{order.menu[0].no_of_order}}</td>
+                        <td>{{order.date | date:'medium'}}</td>
                         <td>{{order.customer.address.addressLine1}}</td>
                         <td>{{order.customer.address.LandMark}}</td>
                         <td>{{order.customer.address.areaName}}</td>
@@ -204,6 +207,7 @@
                         <th>Customer Phone</th>
                         <th>Item Name</th>
                         <th>Item Quantity</th>
+                        <th>Time</th>
                         <th>AreaName</th>
                          <th>Landmark</th>
                         <th>Address</th>

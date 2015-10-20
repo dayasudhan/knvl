@@ -91,6 +91,13 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
         })
         return total;
     };
+
+    $scope.confirmOrder = function() {
+      if($scope.isOrderPresent)
+      {
+        $scope.postOrder($scope.orderSummary);
+      }
+    }
     $scope.order = function() {
 
       console.log("order function 1");
@@ -108,7 +115,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
             obj.price = item.qty * item.price;
             total_price +=  obj.price;
             ordMenu.push(obj);
-            isOrderPresent = true;
+            $scope.isOrderPresent = true;
           }
         });
        
@@ -121,10 +128,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
         };
         $scope.orderSummary = ordarr;
          $scope.total_price = total_price;
-        if(isOrderPresent)
-        {
-          //$scope.postOrder(ordarr);
-        }
+
     };
 
     $scope.getCustsomerDetails = function () {

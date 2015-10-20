@@ -11,7 +11,15 @@ app = angular.module("adminModule", []);
         {
           $scope.orderlist = data;
           $scope.total2 = data.length;
-         // $scope.getMenuList(param);
+
+        angular.forEach($scope.orderlist, function(item) {
+          var timestamp = item._id.toString().substring(0,8);
+          item.date = new Date( parseInt( timestamp, 16 ) * 1000 );
+        //  item.date.setTimezone("Asia/kolkata");
+          console.log(item._id);
+         console.log(item.date);
+        });
+       console.log("timestamp 2");
         })
         .error(function (data, status, headers, config)
         {

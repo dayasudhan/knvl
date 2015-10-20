@@ -555,6 +555,14 @@ app.get( '/v1/vendor/order_all', function( request, response ) {
     return OrderModel.find(function( err, order ) {
         if( !err ) {
             console.log("no error");
+            console.log("timestamp 1");
+             console.log(order[0]._id);
+              //console.log(ObjectId(order.orderlist[0]._id).getTimestamp());
+              var timestamp = order[0]._id.toString().substring(0,8);
+              console.log(timestamp);
+               var date = new Date( parseInt( timestamp, 16 ) * 1000 );
+               console.log(date);
+              console.log("timestamp 2");
             return response.send( order );
         } else {
             console.log("error");
@@ -586,28 +594,6 @@ console.log( request.body.hotel.name);
         }
     });
 });
-
-// app.get( '/v1/vendor/order_summary', function( req, res ) {
-//    OrderModel.aggregate(
-//    {$group:{_id: '$menu.name',total:{$sum :'$menu.no_of_order'}}},
-//       function (err, summary) {
-//         console.log("k1");
-//         if(err){
-//   console.log("k12");
-//             return res.send(500, { error: err }); 
-//         }
-
-//         if(summary) {
-//               console.log("k13");
-//             return res.send(summary);
-//         } else {
-//               console.log("k14");
-//             res.send(500, { error: 'couldnt find expenses' }); 
-//         }
-//           console.log("k15");
-//     }
-//     )
-// });
 
 app.get( '/v1/vendor/order/summary/:id', function( request, res ) {
    OrderModel.aggregate(
