@@ -260,7 +260,14 @@ app.get('/about_us', function (req, res) {
     res.render('about_us', { user : req.user });
 });
 
+app.get('/admin', function (req, res) {
+    res.render('admin_login', { user : req.user });
+});
 
+app.get('/p/admin_order', function (req, res) {
+    console.log(req.user);
+    res.render('admin_order', { user : req.user });
+});
 
 
 app.post('/signup', function(req, res, next) {
@@ -543,11 +550,14 @@ app.delete( '/v1/vendor/order/:id', function( request, response ) {
         });
     //});
 });
-app.get( '/v1/vendor/order/all', function( request, response ) {
+app.get( '/v1/vendor/order_all', function( request, response ) {
+    console.log("/v1/vendor/order_all");
     return OrderModel.find(function( err, order ) {
         if( !err ) {
+            console.log("no error");
             return response.send( order );
         } else {
+            console.log("error");
             console.log( err );
             return response.send('ERROR');
         }
@@ -577,27 +587,27 @@ console.log( request.body.hotel.name);
     });
 });
 
-app.get( '/v1/vendor/order/summary', function( req, res ) {
-   OrderModel.aggregate(
-   {$group:{_id: '$menu.name',total:{$sum :'$menu.no_of_order'}}},
-      function (err, summary) {
-        console.log("k1");
-        if(err){
-  console.log("k12");
-            return res.send(500, { error: err }); 
-        }
+// app.get( '/v1/vendor/order_summary', function( req, res ) {
+//    OrderModel.aggregate(
+//    {$group:{_id: '$menu.name',total:{$sum :'$menu.no_of_order'}}},
+//       function (err, summary) {
+//         console.log("k1");
+//         if(err){
+//   console.log("k12");
+//             return res.send(500, { error: err }); 
+//         }
 
-        if(summary) {
-              console.log("k13");
-            return res.send(summary);
-        } else {
-              console.log("k14");
-            res.send(500, { error: 'couldnt find expenses' }); 
-        }
-          console.log("k15");
-    }
-    )
-});
+//         if(summary) {
+//               console.log("k13");
+//             return res.send(summary);
+//         } else {
+//               console.log("k14");
+//             res.send(500, { error: 'couldnt find expenses' }); 
+//         }
+//           console.log("k15");
+//     }
+//     )
+// });
 
 app.get( '/v1/vendor/order/summary/:id', function( request, res ) {
    OrderModel.aggregate(
@@ -624,27 +634,6 @@ app.get( '/v1/vendor/order/summary/:id', function( request, res ) {
     )
 });
 
-app.post( '/v1/vendor/list2', function( request, response ) {
-
-    // var order = new OrderModel({
-    //     customer: {name: request.body.name, email: request.body.email, phone: request.body.phone,  Address: "daya"},
-    //     menu:{name: request.body.menu, no_of_order: request.body.no_of_order }       });
-     var order = new OrderModel({
-        customer: {name: "daya", email: "daya@gmail.com", phone: 1234,  Address: "daya"},
-        menu:{name:" request.body.menu", no_of_order: 123 }       });
-
-    console.log(request.body);
-    order.save( function( err ) {
-        if( !err ) {
-            console.log( 'created' );
-            return response.send( order );
-        } else {
-         console.log( 'error' );
-            console.log( err );
-            return response.send('ERROR');
-        }
-    });
-});
 //Delete a book
 app.delete( '/v1/vendor/list', function( request, response ) {
   //  ExampleModel.findById( request.params.id, function( err, book ) {
