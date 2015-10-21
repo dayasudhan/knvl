@@ -1,5 +1,59 @@
-                        
-                              <div class="row" >
+                                    <section class="hero" >
+                <div class="container text-center">
+                    <h2 class="hero-title">Online Food Order</h2>
+                    <p class="hero-description hidden-xs">Find all food you need on Khaanavali. We give you a simple way.</p>
+                    <div class="row hero-search-box">
+                        <form>
+                            <div class="col-md-5 col-sm-5 search-input">
+                                <input type="text" class="form-control input-lg search-first" placeholder="I'm feeling lucky...">
+                            </div>
+                            <div class="col-md-5 col-sm-5 search-input">
+                                        <select class="form-control input-lg search-second" ng-model="search_city" >
+                                            <option selected="">All Location</option>
+                                            <option>Bangalore</option>
+                                            <option>Shivamogga</option>
+                                            <option>Davanagere</option>
+                                            <option>Chennai</option>
+                                            <option>qwe</option>
+                                        </select>
+                            </div>
+                            <div class="col-md-2 col-sm-2 search-input">
+                                <button class="btn btn-custom btn-block btn-lg"  ng-click="findRestaurants()">Find</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+<section class="main">
+                <div class="container">
+                    <div class="row">
+
+                        <!--div class="col-md-3 col-sm-3">
+
+                            <div class="widget">
+                                <div class="widget-header">
+                                    <h3>Trends</h3>
+                                </div>
+                                <div class="widget-body">
+                                    <ul class="trends">
+                                        <li><a href="#">Northa Karnataks dishes &nbsp;<span class="item-numbers">(2,342)</span></a></li>
+                                        <li><a href="#">South Karnataks dishes &nbsp;<span class="item-numbers">(2,342)</span></a></li>
+                                        <li><a href="#">Idly/Dosa &nbsp;<span class="item-numbers">(2,342)</span></a></li>
+                                        <li><a href="#">Biryani &nbsp;<span class="item-numbers">(2,342)</span></a></li>
+                                        <li><a href="#">North Indian &nbsp;<span class="item-numbers">(2,342)</span></a></li>
+                     
+                  
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="banner-widget">
+                                <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Uttar_Karnataka_food.JPG/1024px-Uttar_Karnataka_food.JPG" alt="banner" class="img-responsive">
+                            </div>
+                        </div>
+                    </div-->
+                        <div class="container">
+                            <div class="row" >
                               <div class="col-xs-6 col-sm-6" ng-repeat="hotel in hotellist">
                                     <div class="col-xs-2 col-sm-2">
                                       <br>
@@ -18,4 +72,10 @@
                                   </div>
 
                                </div>
+                        </div>
+
+                    
+                </div>
+            </section>
+                             
                       
