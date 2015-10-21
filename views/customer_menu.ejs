@@ -1,12 +1,30 @@
             <section class="hero" >
                 <div class="container " style="color:white">
+                <div class="row">
+                <div class="col-md-4 col-sm-4">
                 <h2 class="hero-title">{{hotel.hotel.name}}</h2>
                 <p  class="hero-description hidden-xs">Phone No:{{hotel.phone}}</p>
-                <p class="hero-description hidden-xs"><u>Address</u></p>
+                </div>
+                
+                <div class="col-md-4 col-sm-4">
+                <p class="hero-title"><u>Address</u></p>
                 <p class="hero-description hidden-xs">{{hotel.address.addressLine1}}</p>
                 <p class="hero-description hidden-xs">{{hotel.address.LandMark}}</p>
                 <p class="hero-description hidden-xs">{{hotel.address.areaName}}</p>
                 <p class="hero-description hidden-xs">{{hotel.address.city}}</p>
+                </div>
+
+                <div class="col-md-4 col-sm-4">
+                  <p class="hero-title"><u>Details</u></p>
+                  <p class="hero-description hidden-xs">DeliverRange  : {{hotel.deliverRange}}</p>
+                  <p class="hero-description hidden-xs">Speciality    : {{hotel.speciality}}</p>
+                  <!--p class="hero-description hidden-xs">{{hotel.vegornoveg}}</p>
+                  <div ng-repeat="areas in hotel.deliverAreas"-->
+                  <p class="hero-description hidden-xs">DeliverAreas  : {{areas.name}}</p>
+                </div>
+                </div>
+
+                </div>
 
                 </div>
             </section>
