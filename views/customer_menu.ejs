@@ -13,7 +13,7 @@
                                               <tr ng-repeat="menu in hotel.menu">
                                                 <td>{{menu.name}}</td>
                                                 <td>{{menu.price}}</td>
-                                                <td><input type="number"  ng:model="menu.qty" ng:required class="input-mini"></td>
+                                                <td><input type="number"  ng:model="menu.qty" ng:required class="input-mini" maxlength="2" size="2"></td>
                                                 <td>{{menu.price * menu.qty | currency}}</td>
 
                                               </tr>
@@ -27,7 +27,7 @@
                                           </table>  
                                   </div>
 
-                             <div class="col-md-3 col-sm-3">
+                             <div class="col-md-6 col-sm-6">
                               <div class="widget">
                                   <div class="widget-header">
                                       <h3>Delivery Address</h3>
