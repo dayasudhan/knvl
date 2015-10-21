@@ -73,14 +73,14 @@
                                                 <td>{{menu.name}}</td>
                                                 <td>{{menu.price}}</td>
                                                 <td><input type="number"  ng:model="menu.qty" ng:required class="input-mini" maxlength="2" size="2"></td>
-                                                <td>Rs. {{menu.price * menu.qty }}</td>
+                                                <td> ₹ {{menu.price * menu.qty }}</td>
 
                                               </tr>
                                               <tr>
                                                 <td></td>
                                                 <td></td>
                                                 <td>Total:</td>
-                                                <td>Rs .{{total() }}</td>
+                                                <td> ₹ {{total() }}</td>
                                               </tr>
                                             </tbody>
                                           </table>  
@@ -137,12 +137,12 @@
                                               <tr ng-repeat="menu in orderSummary.menu">
                                                 <td>{{menu.name}}</td>
                                                 <td>{{menu.no_of_order}}</td>
-                                              <td>Rs .{{menu.price}}</td>
+                                              <td> ₹ {{menu.price}}</td>
                                               </tr>
                                              <tr>
                                               <td></td>
                                                 <td>Total:</td>
-                                                <td>Rs .{{total_price}}</td>
+                                                <td> ₹ {{total_price}}</td>
                                               </tr>
                                             </tbody>
                                           </table>  
