@@ -3,10 +3,13 @@ var mongoose = require('mongoose');
 var OrderSchema = new mongoose.Schema({
 	hotel:{name:String,email: String},
     menu:[{name: String,no_of_order:Number}],
-    status:Number,
+    current_status:String,
+    tracker:[{status: String,time:Date,reason:String}],
     date:Date,
     customer:{       id:String, name: String,        phone: Number,        email: String,        
-        address:{addressLine1:String,addressLine2:String,street:String, LandMark:String, areaName:String,city:String, zip:String, latitude:Number,longitude:Number }
+        address:{addressLine1:String,addressLine2:String,street:String, 
+        	LandMark:String, areaName:String,city:String, zip:String, 
+        	latitude:Number,longitude:Number }
     }
 });
 

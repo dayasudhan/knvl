@@ -175,42 +175,54 @@
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>Order ID</th>
-                        <th>Customer Name</th>
-                        <th>Customer Phone</th>
-                        <th>Item Name</th>
-                        <th>Item Quantity</th>
-                        <th>Time</th>
-                        <th>AreaName</th>
-                        <th>Landmark</th>
-                        <th>Address</th>
+                       
+                        <th>Customer Details</th>
+                        <th>Menu Details</th>
+                        <th>Status Details</th>
+                        <th>Update Status</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr ng-repeat="order in orderlist| orderBy:'date':true | filter:searchText">
-                        <td>{{order._id}}</td>
-                        <td>{{order.customer.name}}</td>
-                        <td>{{order.customer.phone}}</td>
-                        <td>{{order.menu}}</td>
-                        <td>{{order.menu[0].no_of_order}}</td>
-                        <td>{{order.date | date:'medium'}}</td>
-                        <td>{{order.customer.address.addressLine1}}</td>
-                        <td>{{order.customer.address.LandMark}}</td>
-                        <td>{{order.customer.address.areaName}}</td>
-                      </tr>
-          
+                        
+                        <td><b>Name:</b> {{order.customer.name}} 
+                          <br><b>Phone:</b> {{order.customer.phone}}
+                          <br><b>Address:</b>
+                          <br>{{order.customer.address.addressLine1}}
+                          <br>{{order.customer.address.LandMark}}
+                          <br>{{order.customer.address.areaName}}
+                        </td>
+                        <td>
+                        <div ng-repeat="menu1 in order.menu">
+                          {{menu1.name}} : {{menu1.no_of_order}}
+                        </div>
+                        </td>
+                       
+                        <td>                        
+                          <div ng-repeat="tracker in order.tracker">
+                            <b>{{tracker.status}}</b> : {{tracker.time| date:'medium'}}
+                          </div>
+                        </td>
+                        <td>
+                        <select class="form-control" ng-model="selectedStatus" ng-change="trackerUpdateStatus(order._id)">
+                                <option
+                                    ng-repeat="status in order.statusArrayList"
+                                    ng-disabled="order.DisabledStatus.indexOf(status.name) !== -1"
+                                    ng-value="fruit"
+
+                                >{{status.name}}</option>
+                            </select>
+
+                        </td>
+         
                     </tbody>
                     <tfoot>
                       <tr>
-                       <th>Order ID</th>
-                        <th>Customer Name</th>
-                        <th>Customer Phone</th>
-                        <th>Item Name</th>
-                        <th>Item Quantity</th>
-                        <th>Time</th>
-                        <th>AreaName</th>
-                         <th>Landmark</th>
-                        <th>Address</th>
+                
+                        <th>Customer Details</th>
+                        <th>Menu Details</th>
+                        <th>Status Details</th>
+                        <th>Update Status</th>
                       </tr>
                     </tfoot>
                   </table>

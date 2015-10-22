@@ -536,6 +536,21 @@ app.get( '/v1/vendor/order/:id', function( request, response ) {
     });
  // });
 });
+
+app.get( '/v1/vendor/order_by_id/:id', function( request, response ) {
+     console.log('/v1/vendor/order_by_id/:id');
+     console.log(request.params.id);
+     return OrderModel.find({ '_id':request.params.id},function( err, order ) {
+        if( !err ) {
+            return response.send( order );
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+ // });
+});
+
 //unregister a book
 app.delete( '/v1/vendor/order/:id', function( request, response ) {
   //  ExampleModel.findById( request.params.id, function( err, book ) {
@@ -555,14 +570,6 @@ app.get( '/v1/vendor/order_all', function( request, response ) {
     return OrderModel.find(function( err, order ) {
         if( !err ) {
             console.log("no error");
-            console.log("timestamp 1");
-             console.log(order[0]._id);
-              //console.log(ObjectId(order.orderlist[0]._id).getTimestamp());
-              var timestamp = order[0]._id.toString().substring(0,8);
-              console.log(timestamp);
-               var date = new Date( parseInt( timestamp, 16 ) * 1000 );
-               console.log(date);
-              console.log("timestamp 2");
             return response.send( order );
         } else {
             console.log("error");
@@ -574,18 +581,20 @@ app.get( '/v1/vendor/order_all', function( request, response ) {
 
 app.post( '/v1/vendor/order', function( request, response ) {
 
-console.log(request.body);
-
-console.log( request.body.hotel.name);
     var order = new OrderModel({
         hotel:request.body.hotel,
-        customer: {name: request.body.customer.name, email: request.body.customer.email, phone: request.body.customer.phone,  Address: "daya"},
-        menu: request.body.menu       });
+        customer: {name: request.body.customer.name, email: request.body.customer.email, 
+            phone: request.body.customer.phone,  
+            address: request.body.address},
+            menu: request.body.menu,
+            current_status:"Ordered",
+            tracker:  [{status:"Ordered",time:new Date()}]     });
  
     console.log(request.body);
     order.save( function( err ) {
         if( !err ) {
             console.log( 'created' );
+            console.log( order);
             return response.send( order );
         } else {
          console.log( 'error' );
@@ -635,26 +644,40 @@ app.delete( '/v1/vendor/list', function( request, response ) {
     //});
 });
 
+app.put( '/v1/vendor/order/status/:id', function( request, response ) {
 
+    console.log('/v1/vendor/order/status/:id');
+    console.log(request.params.id);
+    console.log(request.body);
 
-
-app.post( '/v1/vendor/menu/:id', function( request, response ) {
-  // OrderModel.findById( request.params.id, function( err, book ) 
-     console.log("post /vendor/menu/");
-     console.log(request.body);
-  console.log(request.params.id);
-
-     return VendorInfoModel.update({ 'hotel.email':request.params.id},{ $addToSet: {menu: {$each:[{name: request.body.fooditem,  price:request.body.foodprice,availability:1}] }}},function( err, order ) {
+     return OrderModel.update({ '_id':request.params.id},
+        { $addToSet: {tracker: {$each:[{status: request.body.status,  time:new Date(),reason:request.body.reason}] }}},function( err, order ) {
         if( !err ) {
             console.log("no error");
             console.log(order);
-            //return response.send( order );
+            return response.send('success');
         } else {
             console.log( err );
             return response.send('ERROR');
         }
     });
- // });
+});
+
+
+app.post( '/v1/vendor/menu/:id', function( request, response ) {
+     console.log("post /vendor/menu/");
+     console.log(request.body);
+     console.log(request.params.id);
+
+     return VendorInfoModel.update({ 'hotel.email':request.params.id},{ $addToSet: {menu: {$each:[{name: request.body.fooditem,  price:request.body.foodprice,availability:1}] }}},function( err, order ) {
+        if( !err ) {
+            console.log("no error");
+            console.log(order);
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
 });
 
 app.get( '/v1/vendor/menu/:id', function( request, response ) {

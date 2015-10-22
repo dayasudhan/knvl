@@ -14,7 +14,18 @@ app = angular.module("vendorModule", []);
           angular.forEach($scope.orderlist, function(item) {
           var timestamp = item._id.toString().substring(0,8);
           item.date = new Date( parseInt( timestamp, 16 ) * 1000 );
-        
+          item.statusArrayList =[
+                      { id: 1, name: 'Ordered',disabled:true},
+                      { id: 2, name: 'Accepted', disabled: false },
+                      { id: 3, name: 'Delivered', disabled: false },
+                      { id: 4, name: 'Cancelled', disabled: false },
+                      { id: 5, name: 'Rejected', disabled: false }
+                  ];
+          item.DisabledStatus = [];          
+          angular.forEach(item.tracker,function(st)
+          {           
+            item.DisabledStatus.push(st.status);
+          });
         });
           $scope.getOrderSummary(param);
           // $scope.getMenuList(param);
@@ -24,7 +35,29 @@ app = angular.module("vendorModule", []);
           $scope.simpleGetCallResult = logResult("GET ERROR", data, status, headers, config);
         });
     };
-
+$scope.trackerUpdateStatus = function(param1)
+{
+    console.log("trackerUpdateStatus");
+    console.log(this.selectedStatus);
+    console.log(param1);
+   
+    var url = "/v1/vendor/order/status/";
+    url = url + param1;
+    var postData={status:this.selectedStatus,reason:'ok'};
+    $http.put(url,postData)
+    .success(function (data, status, headers, config)
+    {
+    console.log("success put");
+    console.log(data);
+    })
+    .error(function (data, status, headers, config)
+    {
+    getMenuList(param);
+    console.log("errod on put");
+    console.log(status);
+    console.log(data);
+    });
+};
 
     $scope.getOrderSummary = function (param) {
       console.log("getOrdersummary");

@@ -35,21 +35,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
           $scope.simpleGetCallResult = logResult("GET ERROR", data, status, headers, config);
         });
     };
-    $scope.findRestaurants2 = function () {
-      console.log("findRestaurants2");
-     //  var url = "/v1/vendor/city/Bangalore";
-     // // url = url + 'Bangalore';
-     //  $http.get(url)
-     //    .success(function (data, status, headers, config)
-     //    {
-     //      $scope.hotellist = data;
-     //      $scope.hotel =  $scope.hotellist[1];
-     //    })
-     //    .error(function (data, status, headers, config)
-     //    {
-     //      $scope.simpleGetCallResult = logResult("GET ERROR", data, status, headers, config);
-     //    });
-    };
+    
     $scope.postOrder = function (ordarr) {
       console.log("postOrder");
       console.log(ordarr);
