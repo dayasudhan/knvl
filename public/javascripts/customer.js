@@ -35,7 +35,24 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
           $scope.simpleGetCallResult = logResult("GET ERROR", data, status, headers, config);
         });
     };
-    
+    $scope.getOrderStatus = function () {
+      console.log("getOrderStatus");
+       console.log($scope.orderId);
+      var url = "/v1/vendor/order_by_id/";
+      url = url + $scope.orderId;
+      $http.get(url)
+        .success(function (data, status, headers, config)
+        {
+          console.log(data);
+          $scope.OrderStatus = data;
+          $scope.order_status = "delivered";
+          console.log($scope.OrderStatus[0].tracker);
+        })
+        .error(function (data, status, headers, config)
+        {
+          $scope.simpleGetCallResult = logResult("GET ERROR", data, status, headers, config);
+        });
+    };
     $scope.postOrder = function (ordarr) {
       console.log("postOrder");
       console.log(ordarr);
