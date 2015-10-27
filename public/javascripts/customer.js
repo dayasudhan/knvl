@@ -23,9 +23,9 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
 
     $scope.findRestaurants = function () {
       console.log("findRestaurants");
-      var url = "/v1/vendor/city/";
+      var url = "/v1/vendor/city?";
       console.log($scope.search_areaname);
-      url = url +  $scope.cityCoverage.citys[$scope.selectedCity];
+      url = url +  "city=" +$scope.cityCoverage.citys[$scope.selectedCity] + "&areaName="+$scope.search_areaname;
       $http.get(url)
         .success(function (data, status, headers, config)
         {

@@ -413,8 +413,10 @@ app.get( '/v1/vendor/test', function( request, response ) {
             return response.send( "vendor" );
    });
 
-app.get( '/v1/vendor/city/:id', function( request, response ) {
-    return VendorInfoModel.find({ 'address.city':request.params.id},function( err, vendor ) {
+app.get( '/v1/vendor/city', function( request, response ) {
+    console.log("GET --/v1/vendor/city/");
+    console.log(request.query);
+    return VendorInfoModel.find({ 'address.city':request.query.city},function( err, vendor ) {
         if( !err ) {
             return response.send( vendor );
         } else {
