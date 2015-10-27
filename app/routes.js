@@ -1,6 +1,7 @@
 var OrderModel = require('../app/models/vendorOrder');
 var VendorInfoModel = require('../app/models/vendorInfo');
 var CustomerInfoModel = require('../app/models/customerInfo');
+var CoverageAreaModel = require('../app/models/coverageArea');
 module.exports = function(app, passport) {
 
 
@@ -669,7 +670,8 @@ app.post( '/v1/vendor/menu/:id', function( request, response ) {
      console.log(request.body);
      console.log(request.params.id);
 
-     return VendorInfoModel.update({ 'hotel.email':request.params.id},{ $addToSet: {menu: {$each:[{name: request.body.fooditem,  price:request.body.foodprice,availability:1}] }}},function( err, order ) {
+     return VendorInfoModel.update({ 'hotel.email':request.params.id},
+        { $addToSet: {menu: {$each:[{name: request.body.fooditem,  price:request.body.foodprice,availability:1}] }}},function( err, order ) {
         if( !err ) {
             console.log("no error");
             console.log(order);
@@ -680,6 +682,75 @@ app.post( '/v1/vendor/menu/:id', function( request, response ) {
     });
 });
 
+
+app.post( '/v1/admin/coverageArea', function( request, response ) {
+     console.log("post /vendor/menu/");
+     console.log(request.body);
+     //var dd = {'cityName':"dvg",'subAreas':[{'name':"rajajinagar"},{'name':"vijaynagar"}]};
+     var dd = {'cityName':request.body.cityName};
+      var coverageArea = new CoverageAreaModel(
+         dd);
+
+
+        return coverageArea.save(function( err) {
+        if( !err ) {
+            console.log("no error");
+            console.log(coverageArea);
+            return response.send(coverageArea);
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+});
+
+app.put( '/v1/admin/coverageArea', function( request, response ) {
+     console.log("put /vendor/menu/");
+     console.log(request.body);
+     var dd = {'name':"tilaknagar"};
+        return CoverageAreaModel.update({ 'cityName':request.body.cityName},
+            { $addToSet: {'subAreas': {$each:[{name: request.body.AreaName}] }}},
+            function( err, order ) 
+             {
+        if( !err ) {
+            console.log("no error");
+            console.log(order);
+            return response.send(order);
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+});
+app.get( '/v1/admin/coverageArea', function( request, response ) {
+    console.log("/v1/admin/coverageArea");
+    return CoverageAreaModel.find(function( err, order ) {
+        if( !err ) {
+            console.log("no error");
+            return response.send( order );
+        } else {
+            console.log("error");
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+});
+
+//Delete a book
+app.delete( '/v1/admin/coverageArea', function( request, response ) {
+    console.log("/v1/admin/coverageArea");
+  //  ExampleModel.findById( request.params.id, function( err, book ) {
+        return CoverageAreaModel.remove( {},function( err ) {
+            if( !err ) {
+                console.log( 'Book removed' );
+                return response.send( '' );
+            } else {
+                console.log( err );
+                return response.send('ERROR');
+            }
+        });
+    //});
+});
 app.get( '/v1/vendor/menu/:id', function( request, response ) {
   // OrderModel.findById( request.params.id, function( err, book ) 
      console.log("get /vendor/menu/");

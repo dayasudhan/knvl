@@ -1,20 +1,17 @@
             <section class="hero" >
-                <div class="container text-center">
+                <div class="container text-center" ng-init="getCityCoverage()">
                     <h2 class="hero-title">Online Food Order</h2>
                     <p class="hero-description hidden-xs">Find all food you need on Khaanavali. We give you a simple way.</p>
                     <div class="row hero-search-box">
                         <form>
                             <div class="col-md-5 col-sm-5 search-input">
-                                <input type="text" class="form-control input-lg search-first" placeholder="I'm feeling lucky...">
+                                <select class="form-control input-lg search-first" ng-model="selectedCity" ng-options="cityCoverage.citys.indexOf(selectedCity) as selectedCity for selectedCity in cityCoverage.citys "" >
+                              </select>
+
                             </div>
                             <div class="col-md-5 col-sm-5 search-input">
-                                        <select class="form-control input-lg search-second" ng-model="search_city" >
-                                            <option selected="">All Location</option>
-                                            <option>Bangalore</option>
-                                            <option>Shivamogga</option>
-                                            <option>Davanagere</option>
-                                            <option>Chennai</option>
-                                            <option>qwe</option>
+                                <select class="form-control input-lg search-second" ng-model="search_areaname" ng-options="o for o in cityCoverage[selectedCity].subAreas track by o" >
+
                                         </select>
                             </div>
                             <div class="col-md-2 col-sm-2 search-input">

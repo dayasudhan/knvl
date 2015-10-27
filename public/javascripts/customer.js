@@ -24,7 +24,8 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
     $scope.findRestaurants = function () {
       console.log("findRestaurants");
       var url = "/v1/vendor/city/";
-      url = url + $scope.search_city;
+      console.log($scope.search_areaname);
+      url = url +  $scope.cityCoverage.citys[$scope.selectedCity];
       $http.get(url)
         .success(function (data, status, headers, config)
         {
@@ -168,6 +169,44 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
         .error(function (data, status, headers)
         {
           console.log("ERROR in postorder");
+        });
+    };
+    $scope.updateCitySelected = function(){
+    };
+    $scope.getCityCoverage = function(){
+      console.log("getCityCoverage");
+      var url = "/v1/admin/coverageArea";
+      $http.get(url)
+        .success(function (data, status, headers, config)
+        {
+          console.log("response");
+          console.log(data);
+          
+          var cityCoverage =  [];
+          var objCity = [];
+          angular.forEach(data, function(city) {
+            var obj = new Object();
+            var obj2 = new Object();
+            obj2 = city.cityName;
+             var subAreaCoverage =  [];
+             angular.forEach(city.subAreas, function(area) {
+             //  var obj2 = new Object();
+              // obj2.subAreaName = area.name;
+               subAreaCoverage.push(area.name);
+             });
+             obj.subAreas = subAreaCoverage;
+             cityCoverage.push(obj);
+              objCity.push(obj2)
+          });
+           console.log("sngulr");
+           cityCoverage.citys = objCity;
+           $scope.cityCoverage = cityCoverage;
+           $scope.selectedCity = 0;
+      console.log($scope.cityCoverage);
+        })
+        .error(function (data, status, headers, config)
+        {
+          $scope.simpleGetCallResult = logResult("GET ERROR", data, status, headers, config);
         });
     };
 
