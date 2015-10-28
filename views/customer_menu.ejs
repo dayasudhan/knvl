@@ -1,10 +1,10 @@
             <section class="hero" >
                 <div class="container " style="color:white">
                 <div class="row">
-                  <div class="col-md-4 col-sm-4">
-                  <h2 class="hero-title">{{hotel.hotel.name}}</h2>
+                <div class="col-md-4 col-sm-4">
+                <h2 class="hero-title">{{hotel.hotel.name}}</h2>
                   <p  class="hero-description hidden-xs">Phone No:{{hotel.phone}}</p>
-                  </div>
+                </div>
                 
                   <div class="col-md-4 col-sm-4">
                   <p class="hero-title"><u>Address</u></p>
@@ -77,7 +77,7 @@
                                               <tr ng-repeat="menu in hotel.menu">
                                                 <td>{{menu.name}}</td>
                                                 <td>{{menu.price}}</td>
-                                                <td><input type="number"  ng:model="menu.qty" ng:required class="input-mini" maxlength="2" size="2"></td>
+                                                <td><input type="number"  ng-model="menu.qty" min="0" max="99"></td>
                                                 <td> ₹ {{menu.price * menu.qty }}</td>
 
                                               </tr>
