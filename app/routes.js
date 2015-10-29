@@ -69,7 +69,18 @@ app.post('/login', function(req, res, next) {
   passport.authenticate('local-login', function(err, user, info) {
    
     if (err) { return next(err); }
-    if (!user) { return res.redirect('/signup'); }
+    if (!user) {
+         var redirect_url = '/';
+            if(req.body.role == 'customer')
+            {
+                redirect_url = '/signup';
+            }
+            else if(req.body.role == 'vendor') 
+            {
+                redirect_url = '/p/vendor_signup';
+            } 
+            return res.redirect(redirect_url); 
+    }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
       console.log(req.body.role);
@@ -274,9 +285,20 @@ app.get('/p/admin_order', function (req, res) {
 app.post('/signup', function(req, res, next) {
 
   passport.authenticate('local-signup', function(err, user, info) {
-   
+   console.log(req.body);
     if (err) { return next(err); }
-    if (!user) { return res.redirect('/signup'); }
+    if (!user) { 
+        var redirect_url = '/';
+            if(req.body.role == 'customer')
+            {
+                redirect_url = '/signup';
+            }
+            else if(req.body.role == 'vendor') 
+            {
+                redirect_url = '/p/vendor_signup';
+            } 
+            return res.redirect(redirect_url); 
+     }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
       console.log(req.body.role);
