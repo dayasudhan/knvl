@@ -64,8 +64,34 @@ app.get('/vendor_logout', function(req, res) {
         //     failureRedirect : '/login', // redirect back to the signup page if there is an error
         //     failureFlash : true // allow flash messages
         // }));
-app.post('/login', function(req, res, next) {
 
+app.post('/v1/m/login', function(req, res, next) {
+    console.log('post /v1/m/login');
+     console.log(req.body);
+  passport.authenticate('local-login', function(err, user, info) {
+   
+    if (err) {console.log('post /v1/m/login  1');return next(err); }
+    if (!user) {
+        console.log('post /v1/m/login  2');
+             return res.send("0"); 
+    }
+    req.logIn(user, function(err) {
+        console.log('post /v1/m/login  3');
+      if (err) {
+      console.log('post /v1/m/login 4'); 
+        return next(err); }
+      return res.send("1");
+    });
+    console.log('post /v1/m/login 5');
+  })(req, res, next);
+});
+
+
+
+
+app.post('/login', function(req, res, next) {
+    console.log('post /login');
+      console.log(req.body);
   passport.authenticate('local-login', function(err, user, info) {
    
     if (err) { return next(err); }
@@ -342,10 +368,10 @@ function registerVendor(req, res, next) {
 app.post( '/v1/vendor/info/:id', function( req, res ) {
 
    console.log("VendorInfo post");
-  console.log(req.body.Name);
+  console.log(req.body);
             storeVendorInfo(req,res,function(req,res){
            console.log("storeVendorInfo success");
-           console.log(res);
+           
         });
 
   });
@@ -395,26 +421,26 @@ app.post('/old/login', passport.authenticate('local'), function(req, res, next) 
        res.redirect('/p/vendor_order');
     });
 });
-app.post('/m/login', passport.authenticate('local'), function(req, res, next) {
+// app.post('/m/login', passport.authenticate('local'), function(req, res, next) {
 
-    req.session.save(function (err) {
+//     req.session.save(function (err) {
         
       
-        if (err) {
-          var err_response = {
-                        tag: "login",
-                        status: false,
-                        error_msg: "Incorrect Email or Password"
-                        };
-            res.send(err_response);
-        }
-        var suc_response = {
-                        tag: "login",
-                        status: true
-                        };
-        res.send(suc_response);
-    });
-});
+//         if (err) {
+//           var err_response = {
+//                         tag: "login",
+//                         status: false,
+//                         error_msg: "Incorrect Email or Password"
+//                         };
+//             res.send(err_response);
+//         }
+//         var suc_response = {
+//                         tag: "login",
+//                         status: true
+//                         };
+//         res.send(suc_response);
+//     });
+// });
 
 app.get('/old/logout', function(req, res, next) {
     req.logout();
@@ -440,6 +466,7 @@ app.get( '/v1/vendor/city', function( request, response ) {
     console.log(request.query);
     return VendorInfoModel.find({ 'address.city':request.query.city},function( err, vendor ) {
         if( !err ) {
+            console.log(vendor);
             return response.send( vendor );
         } else {
             console.log( err );
