@@ -365,6 +365,19 @@ function registerVendor(req, res, next) {
               }
         });
 };
+
+app.get( '/v1/vendor/info/:id', function( request, response ) {
+    console.log("GET --/v1/vendor/info/");
+    return VendorInfoModel.find({ 'hotel.email':request.params.id},function( err, vendor ) {
+        if( !err ) {
+            console.log(vendor);
+            return response.send( vendor );
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+});
 app.post( '/v1/vendor/info/:id', function( req, res ) {
 
    console.log("VendorInfo post");

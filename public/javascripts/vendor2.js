@@ -140,6 +140,43 @@ $scope.trackerUpdateStatus = function(param1)
           console.log("addDetails error");
         });
     };
+
+      $scope.getDetails = function (param) {
+      console.log("getDetails");
+      console.log(param);
+      var url = "/v1/vendor/info/";
+      url = url + param;
+      // var postData={Name:$scope.hotelName, username: param, Address1:$scope.hotelAddress1, phone:$scope.hotelphone,
+      //   Address2:"", street :"",Landmark:$scope.hotelLandmark, Areaname:$scope.hotelAreaname, 
+      //   City:$scope.hotelcity, zip:$scope.hotelzip,latitude:$scope.latitude, longitude:$scope.longitude, logo:"",
+      //    vegornonveg:$scope.vegornonveg, speciality: $scope.speciality , deliverrange:$scope.deliverrange,deliverareas:$scope.deliverareas};
+      $http.get(url)
+        .success(function (data, status, headers, config)
+        {
+            console.log("getDetails success");
+            console.log(data[0]);
+             $scope.hotelName = data[0].hotel.name;
+             $scope.hotelAddress1 =data[0].address.addressLine1;
+             $scope.hotelphone =data[0].phone;
+            $scope.hotelLandmark =data[0].address.LandMark;
+            $scope.hotelAreaname =data[0].address.areaName;
+            $scope.hotelcity =data[0].address.city;
+            $scope.hotelzip =data[0].address.zip;
+            $scope.latitude =data[0].address.latitude;
+            $scope.longitude =data[0].address.longitude;
+          //  $scope.vegornonveg =data[0].
+            $scope.speciality =data[0].speciality;
+            $scope.deliverrange =data[0].deliverRange;
+            $scope.deliverareas =data[0].deliverAreas;
+        })
+        .error(function (data, status, headers, config)
+        {
+          console.log("getDetails error");
+        });
+    };
+
+
+
   });
 
 
