@@ -108,8 +108,9 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       console.log($scope.user);
       console.log("order function 2");
        var ordMenu =  [];
-       var isOrderPresent =  false;
+       $scope.isOrderPresent =  false;
        var total_price = 0;
+       $scope.modalshown =false;
        angular.forEach($scope.hotel.menu, function(item) {
           var obj = new Object();
           if(item.qty > 0)
@@ -122,7 +123,14 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
             $scope.isOrderPresent = true;
           }
         });
-       
+        console.log("order function 34523");
+       if($scope.isOrderPresent == false)
+       {
+         console.log("order function 345");
+         $window.alert("no items selected");
+         $scope.myModal = false;
+         $scope.modalshown =false;
+       }
         var ordarr = {
          "hotel":{"name":$scope.hotel.hotel.name,"email": $scope.hotel.hotel.email},
           "menu":ordMenu,

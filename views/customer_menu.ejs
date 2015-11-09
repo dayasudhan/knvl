@@ -117,7 +117,6 @@
                                             <input type="text" class="form-control" id="inputlocality" ng-model="landmark" placeholder="Enter Locality/Landmark" required>
                                           </div>
                                         </div>
-
              
                                         <div class="modal-footer" >
                                           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="order()" ng-disabled= "myForm.$invalid ">Order</button>
@@ -127,7 +126,7 @@
                             </div>
                             <div class="col-md-6 col-sm-6">
                                   <div id="myModal" class="modal fade" role="dialog">
-                                    <div class="modal-dialog">
+                                    <div class="modal-dialog" show ='modalshown'>
 
                                       <!-- Modal content-->
                                       <div class="modal-content">
