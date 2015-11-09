@@ -93,33 +93,39 @@
                               </div>
                              <div class="col-md-6 col-sm-6">
                               <div class="widget">
+                              <form name="myForm">
                                   <div class="widget-header">
                                       <h3>Delivery Address</h3>
 
                                   </div>
-
-                                          <div class="form-group" name="myForm">
-                                            <input type="text" class="form-control" id="user"  ng-model="user" required placeholder="Enter Name">
-                                          </div>
-                                          <div class="form-group">
-                                            <input type="tel" class="form-control" id="inputphone" ng-model="phone"placeholder="Enter Phone Number">
-                                          </div>
-                                          <div class="form-group">
-                                            <input type="text" class="form-control" id="inputflat" ng-model="flat_no" placeholder="Enter House/Flat No">
-                                          </div>
-                                          <div class="form-group">
-                                            <input type="text" class="form-control" id="inputaddress" ng-model="address" placeholder="Enter Address">
-                                          </div>
-                                          <div class="form-group">
-                                            <input type="text" class="form-control" id="inputlocality" ng-model="landmark" placeholder="Enter Locality/Landmark">
-                                          </div>
-                                        </div>
                                         <div class="modal-footer" >
-                                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="order()">Order</button>
+                                          <button type="button" class="btn btn-primary"  ng-click="getCurrentAddress()">GetCurrentAddress</button>
+                                        </div>
+                                          <div class="form-group" name="name">
+                                            <input type="text" class="form-control" id="user"  ng-model="user"  placeholder="Enter Name" required>
+                                          </div>
+                                          <div class="form-group">
+                                            <input type="number" class="form-control" id="inputphone" ng-model="phone" placeholder="Enter Phone Number" required>
+                                          </div>
+                                          <div class="form-group">
+                                            <input type="text" class="form-control" id="inputflat" ng-model="address" placeholder="Enter House/Flat No" required>
+                                          </div>
+                                          <div class="form-group">
+                                            <input type="text" class="form-control" name="inputareaName" ng-model="areaName" placeholder="Enter AreaName"  ng-trim="false" required>
+                                          </div>
+                                          <div class="form-group">
+                                            <input type="text" class="form-control" id="inputlocality" ng-model="landmark" placeholder="Enter Locality/Landmark" required>
+                                          </div>
                                         </div>
 
-                          </div>
-<div class="col-md-6 col-sm-6">
+             
+                                        <div class="modal-footer" >
+                                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="order()" ng-disabled= "myForm.$invalid ">Order</button>
+                                        </div>
+                                         </form>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6">
                                   <div id="myModal" class="modal fade" role="dialog">
                                     <div class="modal-dialog">
 

@@ -128,10 +128,10 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
           "menu":ordMenu,
           "customer":{"name":$scope.user,"email": "","phone":$scope.phone},
           "address":{"addressLine1":$scope.flat_no,"addressLine2":$scope.address,"street":"", 
-          "LandMark":$scope.landmark, "areaName":"","city":"", "zip":"", "latitude":0,"longitude":0}
+          "LandMark":$scope.landmark, "areaName":$scope.areaName,"city":$scope.city, "zip":$scope.zip, "latitude":$scope.latitude,"longitude":$scope.longitude}
         };
         $scope.orderSummary = ordarr;
-         $scope.total_price = total_price;
+        $scope.total_price = total_price;
 
     };
 
@@ -210,4 +210,49 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
         });
     };
 
+    $scope.getCurrentAddress = function()
+    {
+      console.log("getCurrentAddress");
+      var url = "/v1/customer";
+
+      if (navigator.geolocation) {
+        console.log("getCurrentAddress 2");
+        navigator.geolocation.getCurrentPosition(showPosition);
+        console.log("getCurrentAddress 4");
+      }
+
+    };
+    function showPosition(position)
+    {
+      console.log("getCurrentAddress 3");
+      console.log(position.coords.latitude);
+      console.log(position.coords.longitude);
+      var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=";
+      url = url + position.coords.latitude + ',' + position.coords.longitude + '&sensor=false';
+      $http.get(url)
+        .success(function (data, status, headers, config)
+        {
+          console.log("getCurrentAddress 4  ");
+          console.log(data);
+          console.log("getCurrentAddress 5  ");
+          console.log(data.results[0].address_components[0].long_name);
+          console.log(data.results[0].address_components[1].long_name);
+          console.log(data.results[0].address_components[2].long_name);
+          console.log(data.results[0].address_components[3].long_name);
+          console.log(data.results[0].address_components[4].long_name);
+          console.log(data.results[0].formatted_address);
+           $scope.address = data.results[0].address_components[0].long_name + ',' + data.results[0].address_components[1].long_name;
+           $scope.areaName = data.results[0].address_components[2].long_name + ',' + data.results[0].address_components[3].long_name;
+         //  $scope.landmark = data.results[0].address_components[3].long_name;
+           $scope.city = data.results[0].address_components[4].long_name;
+           $scope.latitude = position.coords.latitude;
+           $scope.longitude = position.coords.longitude;
+           $scope.zip = data.results[0].address_components[8].long_name;
+        })
+        .error(function (data, status, headers, config)
+        {
+
+          $scope.simpleGetCallResult = logResult("GET ERROR", data, status, headers, config);
+        });
+    }
   });
