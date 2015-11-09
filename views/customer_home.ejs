@@ -4,21 +4,24 @@
                     <p class="hero-description hidden-xs">Find all food you need on Khaanavali. We give you a simple way.</p>
                     <div class="row hero-search-box">
                         <form>
-                            <div class="col-md-5 col-sm-5 search-input">
+                            <div class="col-md-3 col-sm-3 search-input">
                                 <select class="form-control input-lg search-first" ng-model="selectedCity" ng-options="cityCoverage.citys.indexOf(selectedCity) as selectedCity for selectedCity in cityCoverage.citys "" >
                               </select>
 
                             </div>
-                            <div class="col-md-5 col-sm-5 search-input">
+                            <div class="col-md-3 col-sm-3 search-input">
                                 <select class="form-control input-lg search-second" ng-model="search_areaname" ng-options="o for o in cityCoverage[selectedCity].subAreas track by o" >
 
-                                        </select>
+                            </select>
                             </div>
                             <div class="col-md-2 col-sm-2 search-input">
                                 <button class="btn btn-custom btn-block btn-lg"  ng-click="findRestaurants()">Find</button>
                             </div>
-                            <!--div class="col-md-2 col-sm-2 search-input">
-                                <button class="btn btn-custom btn-block btn-lg"  ng-click="findRestaurants()">CurrentAddress</button>
+                            <div class="col-md-2 col-sm-2">
+                            <label>or</label>
+                            </div>
+                            <div class="col-md-2 col-sm-2 search-input">
+                                <button class="btn btn-custom btn-block btn-lg"  ng-click="findRestaurantsByNearBy()">NearBy</button>
                             </div-->
                         </form>
                     </div>

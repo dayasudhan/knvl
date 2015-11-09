@@ -98,8 +98,8 @@
                                       <h3>Delivery Address</h3>
 
                                   </div>
-                                        <div class="modal-footer" >
-                                          <button type="button" class="btn btn-primary"  ng-click="getCurrentAddress()">GetCurrentAddress</button>
+                                        <div>
+                                         <center> <img src= "/images/google_location.jpg" alt="button"  width="48" height="48" ng-click="getCurrentAddress()"></center>
                                         </div>
                                           <div class="form-group" name="name">
                                             <input type="text" class="form-control" id="user"  ng-model="user"  placeholder="Enter Name" required>
@@ -119,14 +119,14 @@
                                         </div>
              
                                         <div class="modal-footer" >
-                                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="order()" ng-disabled= "myForm.$invalid ">Order</button>
+                                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="order()" ng-disabled= "myForm.$invalid || {{showModal ==false}}">Order</button>
                                         </div>
                                          </form>
 
                             </div>
                             <div class="col-md-6 col-sm-6">
-                                  <div id="myModal" class="modal fade" role="dialog">
-                                    <div class="modal-dialog" show ='modalshown'>
+                                  <div id="myModal" class="modal fade" role="dialog" >
+                                    <div class="modal-dialog" >
 
                                       <!-- Modal content-->
                                       <div class="modal-content">

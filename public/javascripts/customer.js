@@ -21,6 +21,24 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
   {
    
 
+     $scope.findRestaurantsByNearBy = function () {
+    //  $scope.getCurrentAddress()
+      console.log("findRestaurantsByNearBy");
+      var url = "/v1/vendor/city?";
+      console.log($scope.areaName);
+       console.log($scope.city);
+      url = url +  "city=" +$scope.city + "&areaName="+$scope.areaName;
+      $http.get(url)
+        .success(function (data, status, headers, config)
+        {
+          $scope.hotellist = data;
+        })
+        .error(function (data, status, headers, config)
+        {
+          $scope.simpleGetCallResult = logResult("GET ERROR", data, status, headers, config);
+        });
+    };
+
     $scope.findRestaurants = function () {
       console.log("findRestaurants");
       var url = "/v1/vendor/city?";
@@ -110,7 +128,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
        var ordMenu =  [];
        $scope.isOrderPresent =  false;
        var total_price = 0;
-       $scope.modalshown =false;
+       $scope.showModal =false;
        angular.forEach($scope.hotel.menu, function(item) {
           var obj = new Object();
           if(item.qty > 0)
@@ -128,8 +146,8 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
        {
          console.log("order function 345");
          $window.alert("no items selected");
-         $scope.myModal = false;
-         $scope.modalshown =false;
+
+         $scope.showModal =false;
        }
         var ordarr = {
          "hotel":{"name":$scope.hotel.hotel.name,"email": $scope.hotel.hotel.email},
@@ -236,7 +254,8 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       console.log(position.coords.latitude);
       console.log(position.coords.longitude);
       var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=";
-      url = url + position.coords.latitude + ',' + position.coords.longitude + '&sensor=false';
+      //url = url + position.coords.latitude + ',' + position.coords.longitude + '&sensor=false';
+      url = url + 12.999390499999999 + ',' + 77.55813169999999 + '&sensor=false';
       $http.get(url)
         .success(function (data, status, headers, config)
         {
@@ -250,8 +269,8 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
           console.log(data.results[0].address_components[4].long_name);
           console.log(data.results[0].formatted_address);
            $scope.address = data.results[0].address_components[0].long_name + ',' + data.results[0].address_components[1].long_name;
-           $scope.areaName = data.results[0].address_components[2].long_name + ',' + data.results[0].address_components[3].long_name;
-         //  $scope.landmark = data.results[0].address_components[3].long_name;
+           $scope.areaName = data.results[0].address_components[2].long_name ;
+           $scope.landmark = data.results[0].address_components[3].long_name;
            $scope.city = data.results[0].address_components[4].long_name;
            $scope.latitude = position.coords.latitude;
            $scope.longitude = position.coords.longitude;
