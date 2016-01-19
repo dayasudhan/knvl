@@ -819,6 +819,8 @@ app.get( '/v1/vendor/menu/:id', function( request, response ) {
   // OrderModel.findById( request.params.id, function( err, book ) 
      console.log("get /vendor/menu/");
   console.log(request.params.id);
+   console.log(request.body);
+     console.log(request.params.id);
    // return OrderModel.find({ customer:{email:'daya@gmail.com'}},function( err, order ) {
      return VendorInfoModel.find({ 'hotel.email':request.params.id},function( err, vendorinfo ) {
         if( !err ) {
@@ -851,9 +853,11 @@ app.delete( '/v1/vendor/unregister/:id', function( request, response ) {
 });
 
 //Delete a menu item
-app.delete( '/v1/vendor/menu/item/:id', function( request, response ) {
-  //  ExampleModel.findById( request.params.id, function( err, book ) {
-        return VendorInfoModel.update( { 'hotel.email':request.params.id},{ $pull: {menu: {"name": request.body.fooditem }}},function( err ) {
+app.delete( '/v1/vendor/menu/item/:id/:fooditem', function( request, response ) {
+     console.log('delete /v1/vendor/menu/item/');
+     console.log(request.params.id);
+      console.log(request.params.fooditem);
+        return VendorInfoModel.update( { 'hotel.email':request.params.id},{ $pull: {menu: {"name": request.params.fooditem }}},function( err ) {
             if( !err ) {
                 console.log( 'Book removed' );
                 return response.send( '' );

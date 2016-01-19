@@ -248,6 +248,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       }
 
     };
+    
     function showPosition(position)
     {
       console.log("getCurrentAddress 3");

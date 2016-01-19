@@ -80,6 +80,27 @@ $scope.trackerUpdateStatus = function(param1)
 
   app.controller("menuController", function ($scope, $http, jsonFilter)
   {
+     $scope.selection = [];
+   // toggle selection for a given fruit by name
+    $scope.toggleSelection = function (tobedeletedMenulist) {
+      console.log("toggleSelection 1");
+      console.log(tobedeletedMenulist);
+      console.log($scope.selection);
+      var idx = $scope.selection.indexOf(tobedeletedMenulist);
+
+      // is currently selected
+      if (idx > -1) {
+        console.log("toggleSelection 2");
+        $scope.selection.splice(idx, 1);
+      }
+
+      // is newly selected
+      else {
+        console.log("toggleSelection 3");
+        $scope.selection.push(tobedeletedMenulist);
+      }
+    };
+
  $scope.getMenuList = function (param) {
   console.log(param);
       console.log("getmenulist");
@@ -96,7 +117,27 @@ $scope.trackerUpdateStatus = function(param1)
           $scope.simpleGetCallResult = logResult("GET ERROR", data, status, headers, config);
         });
     };
-
+    $scope.deleteMenu = function (param,foodmenu) {
+      console.log("deleteMenu");
+       console.log(param);
+       console.log(foodmenu);
+      var url4 = "/v1/vendor/menu/item/";
+      url4 = url4 + param + "/" + foodmenu.name;
+      $http.delete(url4,$scope.selection)
+        .success(function (data, status, headers, config)
+        {
+           console.log("success add");
+           console.log(data);
+        })
+        .error(function (data, status, headers, config)
+        {
+           getMenuList(param);
+          console.log("errod on add");
+          console.log(status);
+          console.log(data);
+        });
+         $scope.getMenuList(param);
+    };
     $scope.addMenu = function (param) {
       console.log("addMenu");
        console.log( $scope.fooditem);
