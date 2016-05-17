@@ -649,6 +649,7 @@ var UTC = UTC.getTime() // Get UTC Timestamp
 var IST = new Date(UTC); // Clone UTC Timestamp
 IST.setHours(IST.getHours() + 5); // set Hours to 5 hours later
 IST.setMinutes(IST.getMinutes() + 30); // set Minutes to be 30 minutes late
+
     var order = new OrderModel({
         hotel:request.body.hotel,
         customer: {name: request.body.customer.name, email: request.body.customer.email, 
