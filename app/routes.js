@@ -645,10 +645,12 @@ app.get( '/v1/vendor/order_all', function( request, response ) {
 });
 
 app.post( '/v1/vendor/order', function( request, response ) {
-var UTC = UTC.getTime() // Get UTC Timestamp
-var IST = new Date(UTC); // Clone UTC Timestamp
-IST.setHours(IST.getHours() + 5); // set Hours to 5 hours later
-IST.setMinutes(IST.getMinutes() + 30); // set Minutes to be 30 minutes late
+
+// var UTC = new Date();
+// var UTC = UTC.getTime() // Get UTC Timestamp
+// var IST = new Date(UTC); // Clone UTC Timestamp
+// IST.setHours(IST.getHours() + 5); // set Hours to 5 hours later
+// IST.setMinutes(IST.getMinutes() + 30); // set Minutes to be 30 minutes late
 
     var order = new OrderModel({
         hotel:request.body.hotel,
