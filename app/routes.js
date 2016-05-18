@@ -659,7 +659,7 @@ app.post( '/v1/vendor/order', function( request, response ) {
             address: request.body.address},
             menu: request.body.menu,
             current_status:"Ordered",
-            tracker:  [{status:"Ordered",time:IST}]     });
+            tracker:  [{status:"Ordered",time:new Date()}]     });
  
     console.log(request.body);
     order.save( function( err ) {
