@@ -651,13 +651,44 @@ app.post( '/v1/vendor/order', function( request, response ) {
 // var IST = new Date(UTC); // Clone UTC Timestamp
 // IST.setHours(IST.getHours() + 5); // set Hours to 5 hours later
 // IST.setMinutes(IST.getMinutes() + 30); // set Minutes to be 30 minutes late
-
+console.log('post order');
     var order = new OrderModel({
         hotel:request.body.hotel,
         customer: {name: request.body.customer.name, email: request.body.customer.email, 
             phone: request.body.customer.phone,  
             address: request.body.address},
             menu: request.body.menu,
+            current_status:"Ordered",
+            tracker:  [{status:"Ordered",time:new Date()}]     });
+ 
+    console.log(request.body);
+    order.save( function( err ) {
+        if( !err ) {
+            console.log( 'created' );
+            console.log( order);
+            return response.send( order );
+        } else {
+         console.log( 'error' );
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+});
+
+app.post( '/v1/mobile/vendor/order', function( request, response ) {
+
+// var UTC = new Date();
+// var UTC = UTC.getTime() // Get UTC Timestamp
+// var IST = new Date(UTC); // Clone UTC Timestamp
+// IST.setHours(IST.getHours() + 5); // set Hours to 5 hours later
+// IST.setMinutes(IST.getMinutes() + 30); // set Minutes to be 30 minutes late
+console.log('post order');
+    var order = new OrderModel({
+        hotel:request.body.hotelItem,
+        customer: {name: request.body.customer.name, email: request.body.customer.email, 
+            phone: request.body.customer.phone,  
+            address: request.body.customer.address},
+            menu: request.body.menuItems,
             current_status:"Ordered",
             tracker:  [{status:"Ordered",time:new Date()}]     });
  

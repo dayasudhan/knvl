@@ -52,7 +52,7 @@ $scope.trackerUpdateStatus = function(param1)
     })
     .error(function (data, status, headers, config)
     {
-    getMenuList(param);
+   // getMenuList(param);
     console.log("errod on put");
     console.log(status);
     console.log(data);
