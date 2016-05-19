@@ -684,11 +684,11 @@ app.post( '/v1/mobile/vendor/order', function( request, response ) {
 // IST.setMinutes(IST.getMinutes() + 30); // set Minutes to be 30 minutes late
 console.log('post order');
     var order = new OrderModel({
-        hotel:request.body.hotelItem,
+        hotel:request.body.hotel,
         customer: {name: request.body.customer.name, email: request.body.customer.email, 
             phone: request.body.customer.phone,  
             address: request.body.customer.address},
-            menu: request.body.menuItems,
+            menu: request.body.menu,
             current_status:"Ordered",
             tracker:  [{status:"Ordered",time:new Date()}]     });
  
