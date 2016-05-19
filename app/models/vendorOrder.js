@@ -10,7 +10,10 @@ var OrderSchema = new mongoose.Schema({
         address:{addressLine1:String,addressLine2:String,street:String, 
         	LandMark:String, areaName:String,city:String, zip:String, 
         	latitude:Number,longitude:Number }
-    }
+    },
+    bill_value:Number,
+    deliveryCharge: Number,
+    totalCost:Number
 });
 
 //Model

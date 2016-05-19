@@ -8,7 +8,8 @@ var VendorInfoSchema = new mongoose.Schema({
     vegornoveg: String,
     speciality:String,
     deliverRange: Number,
-    deliverAreas:[{name:String}]
+    deliverAreas:[{name:String}],
+    delivercharge:Number
     });
 
 //Model

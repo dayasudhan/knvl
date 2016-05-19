@@ -658,6 +658,9 @@ console.log('post order');
             phone: request.body.customer.phone,  
             address: request.body.address},
             menu: request.body.menu,
+            bill_value:request.body.bill_value,
+            deliveryCharge: request.body.deliveryCharge,
+            totalCost:request.body.totalCost,
             current_status:"Ordered",
             tracker:  [{status:"Ordered",time:new Date()}]     });
  
@@ -689,6 +692,9 @@ console.log('post order');
             phone: request.body.customer.phone,  
             address: request.body.customer.address},
             menu: request.body.menu,
+            bill_value:request.body.bill_value,
+            deliveryCharge: request.body.deliveryCharge,
+            totalCost:request.body.totalCost,
             current_status:"Ordered",
             tracker:  [{status:"Ordered",time:new Date()}]     });
  
