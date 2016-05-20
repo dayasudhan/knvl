@@ -487,7 +487,21 @@ app.get( '/v1/vendor/city', function( request, response ) {
         }
     });
 });
-
+app.get( '/v1/vendor/area', function( request, response ) {
+    console.log("GET --/v1/vendor/area/");
+    console.log(request.query);//find( { price: { $ne: 1.99, $exists: true } } )
+    return VendorInfoModel.find(
+        { 'address.areaName':request.query.areaName},
+        function( err, vendor ) {
+        if( !err ) {
+            console.log(vendor);
+            return response.send( vendor );
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+});
 app.get( '/v1/vendor/account/all', function( request, response ) {
     return VendorInfoModel.find(function( err, order ) {
         if( !err ) {
@@ -791,7 +805,7 @@ app.post( '/v1/vendor/menu/:id', function( request, response ) {
 
 
 app.post( '/v1/admin/coverageArea', function( request, response ) {
-     console.log("post /vendor/menu/");
+     console.log("post /v1/admin/coverageArea");
      console.log(request.body);
      //var dd = {'cityName':"dvg",'subAreas':[{'name':"rajajinagar"},{'name':"vijaynagar"}]};
      var dd = {'cityName':request.body.cityName};

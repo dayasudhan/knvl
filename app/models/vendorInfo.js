@@ -9,7 +9,9 @@ var VendorInfoSchema = new mongoose.Schema({
     speciality:String,
     deliverRange: Number,
     deliverAreas:[{name:String}],
-    delivercharge:Number
+    deliverCharge:Number,
+    deliveryTime:Number,
+    rating:Number
     });
 
 //Model
