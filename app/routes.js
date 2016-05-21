@@ -504,8 +504,8 @@ app.get( '/v1/vendor/area', function( request, response ) {
         }
     });
 });
-app.get( '/v1/vendor/delievryareas', function( request, response ) {
-    console.log("GET --/v1/vendor/delievryareas/");
+app.get( '/v1/vendor/delieveryareas', function( request, response ) {
+    console.log("GET --/v1/vendor/delieveryareas/");
     console.log(request.query);//find( { price: { $ne: 1.99, $exists: true } } )
     return VendorInfoModel.find(
         { 
@@ -851,9 +851,11 @@ app.post( '/v1/admin/coverageArea', function( request, response ) {
 app.put( '/v1/admin/coverageArea', function( request, response ) {
      console.log("put /vendor/menu/");
      console.log(request.body);
+     console.log(request.body.cityName);
+      console.log(request.body.areaName);
      var dd = {'name':"tilaknagar"};
         return CoverageAreaModel.update({ 'cityName':request.body.cityName},
-            { $addToSet: {'subAreas': {$each:[{name: request.body.AreaName}] }}},
+            { $addToSet: {'subAreas': {$each:[{name: request.body.areaName}] }}},
             function( err, order ) 
              {
         if( !err ) {
@@ -866,6 +868,24 @@ app.put( '/v1/admin/coverageArea', function( request, response ) {
         }
     });
 });
+// app.delete( '/v1/admin/coverageArea', function( request, response ) {
+//   console.log("delete /vendor/coverageArea/");
+//      console.log(request.body);
+//         return CoverageAreaModel.update({ 'cityName':request.body.cityName},
+//             { $pull: {'subAreas': { $elemMatch:{'name': 'Vijaynagara'}}}},
+         
+//             function( err, order ) 
+//              {
+//         if( !err ) {
+//             console.log("no error");
+//             console.log(order);
+//             return response.send(order);
+//         } else {
+//             console.log( err );
+//             return response.send('ERROR');
+//         }
+//     });
+// });
 app.get( '/v1/admin/coverageArea', function( request, response ) {
     console.log("/v1/admin/coverageArea");
     return CoverageAreaModel.find(function( err, order ) {
@@ -881,7 +901,7 @@ app.get( '/v1/admin/coverageArea', function( request, response ) {
 });
 
 //Delete a book
-app.delete( '/v1/admin/coverageArea', function( request, response ) {
+app.delete( '/v1/admin/coverageAreaAll', function( request, response ) {
     console.log("/v1/admin/coverageArea");
   //  ExampleModel.findById( request.params.id, function( err, book ) {
         return CoverageAreaModel.remove( {},function( err ) {
@@ -895,6 +915,8 @@ app.delete( '/v1/admin/coverageArea', function( request, response ) {
         });
     //});
 });
+
+
 app.get( '/v1/vendor/menu/:id', function( request, response ) {
   // OrderModel.findById( request.params.id, function( err, book ) 
      console.log("get /vendor/menu/");
