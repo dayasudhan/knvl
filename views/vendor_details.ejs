@@ -187,7 +187,7 @@
                     <div class="form-group">
                       <label for="inputEmail3"  class="col-sm-2 control-label">Speciality</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control"  name="Speciality"  placeholder="ItemName" ng-model = "speciality" required>
+                        <input type="text" class="form-control"  name="Speciality"  placeholder="Speciality" ng-model = "speciality" required>
                       </div>
                     </div>
                     <div class="form-group">
@@ -201,18 +201,36 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="inputEmail3"  class="col-sm-2 control-label">phone</label>
+                      <label for="inputEmail3"  class="col-sm-2 control-label">Phone</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control"  name="phone" placeholder="ItemName" ng-model = "hotelphone" required>
+                        <input type="text" class="form-control"  name="phone" placeholder="Phone" ng-model = "hotelphone" required>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="inputdeliverrange"  class="col-sm-2 control-label">Deliver Range in KM's</label>
+                      <label for="inputdeliverrange"  class="col-sm-2 control-label">Delivery Range in KM's</label>
                       <div class="col-sm-10">
-                        <input type="number" class="form-control"  name="phone" placeholder="Deliver Range" ng-model = "deliverrange" required>
+                        <input type="number" class="form-control"  name="phone" placeholder="Deliver Range" ng-model 
+                        = "deliverRange" 
+                        min="1" max="10"
+                        required>
                       </div>
                     </div>
-
+                    <div class="form-group">
+                      <label for="inputdeliverrange"  class="col-sm-2 control-label">Delivery Time in minutes</label>
+                      <div class="col-sm-10">
+                        <input type="number" class="form-control"  name="phone" 
+                        min="0" max="90"
+                        placeholder="Deliver Time" ng-model = "deliveryTime" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputdeliverrange"  class="col-sm-2 control-label">Delivery Charge in Rupees's</label>
+                      <div class="col-sm-10">
+                        <input type="number" class="form-control"  name="phone" 
+                        min="0" max="200"
+                        laceholder="Deliver Charge" ng-model = "deliverCharge" required>
+                      </div>
+                    </div>
                     <div class="form-group">
                       <label for="inputdeliverareas"  class="col-sm-2 control-label">Deliver Areas Covered</label>
                       <div class="col-sm-10">
@@ -233,7 +251,7 @@
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">Address1</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control"  name="Address1" placeholder={{hotelName}} ng-model = "hotelAddress1">
+                        <input type="text" class="form-control"  name="Address1" placeholder="Address1" ng-model = "hotelAddress1">
                       </div>
                     </div>
                     <!--div class="form-group">
@@ -252,13 +270,13 @@
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">Areaname</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" name="Areaname" placeholder="ItemName" ng-model = "hotelAreaname" required>
+                        <input type="text" class="form-control" name="Areaname" placeholder="Areaname" ng-model = "hotelAreaname" required>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputEmail3"name="Landmark" class="col-sm-2 control-label">Landmark</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control"  name="Landmark" placeholder="ItemName" ng-model = "hotelLandmark">
+                        <input type="text" class="form-control"  name="Landmark" placeholder="Landmark" ng-model = "hotelLandmark">
                       </div>
                     </div>
                     <div class="form-group">
@@ -274,19 +292,19 @@
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">zip</label>
                       <div class="col-sm-10">
-                        <input type="Number" class="form-control"  name="zip" placeholder={{hotelName}} ng-model = "hotelzip" required>
+                        <input type="Number" class="form-control"  name="zip" placeholder="zip" ng-model = "hotelzip" required>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputEmail3" name="latitude"  class="col-sm-2 control-label">latitude</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" name="latitude" placeholder="ItemName" ng-model = "latitude" required>
+                        <input type="text" class="form-control" name="latitude" placeholder="latitude" ng-model = "latitude" required>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="inputEmail3"name="longitude"  class="col-sm-2 control-label">logitude</label>
+                      <label for="inputEmail3"name="longitude"  class="col-sm-2 control-label">longitude</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" name="longitude" placeholder="ItemName" ng-model = "longitude">
+                        <input type="text" class="form-control" name="longitude" placeholder="longitude" ng-model = "longitude">
                       </div>
                     </div>
                    

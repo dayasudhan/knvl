@@ -164,13 +164,23 @@ $scope.trackerUpdateStatus = function(param1)
   {
       $scope.addDetails = function (param) {
       console.log("addDetails 1");
+      var deliverAreas =  [];
+        angular.forEach($scope.deliverareas, function(item) {
+           var obj = new Object();
+            obj.name = item;
+            deliverAreas.push(obj);
+        })
       console.log($scope.deliverareas);
       var url = "/v1/vendor/info/";
       url = url + param;
       var postData={Name:$scope.hotelName, username: param, Address1:$scope.hotelAddress1, phone:$scope.hotelphone,
         Address2:"", street :"",Landmark:$scope.hotelLandmark, Areaname:$scope.hotelAreaname, 
         City:$scope.hotelcity, zip:$scope.hotelzip,latitude:$scope.latitude, longitude:$scope.longitude, logo:"",
-         vegornonveg:$scope.vegornonveg, speciality: $scope.speciality , deliverrange:$scope.deliverrange,deliverareas:$scope.deliverareas};
+         vegornonveg:$scope.vegornonveg, speciality: $scope.speciality , 
+         deliverRange:$scope.deliverRange,
+         deliverCharge:$scope.deliverCharge,
+         deliveryTime:$scope.deliveryTime,
+         deliverareas:deliverAreas};
       $http.post(url,postData)
         .success(function (data, status, headers, config)
         {

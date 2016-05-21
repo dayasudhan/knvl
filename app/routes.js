@@ -403,8 +403,10 @@ console.log(request.params.id);
         logo:request.body.logo,
         speciality:request.body.speciality,
         vegornonveg:request.body.vegornonveg,
-        deliverRange: request.body.deliverrange
-        //deliverAreas:request.body.deliverareas
+        deliverRange: request.body.deliverRange,
+        deliverCharge: request.body.deliverCharge,
+        deliveryTime: request.body.deliveryTime,
+        deliverAreas:request.body.deliverareas
       },
        function( err ) {
         if( !err ) {
@@ -492,6 +494,27 @@ app.get( '/v1/vendor/area', function( request, response ) {
     console.log(request.query);//find( { price: { $ne: 1.99, $exists: true } } )
     return VendorInfoModel.find(
         { 'address.areaName':request.query.areaName},
+        function( err, vendor ) {
+        if( !err ) {
+            console.log(vendor);
+            return response.send( vendor );
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+});
+app.get( '/v1/vendor/delievryareas', function( request, response ) {
+    console.log("GET --/v1/vendor/delievryareas/");
+    console.log(request.query);//find( { price: { $ne: 1.99, $exists: true } } )
+    return VendorInfoModel.find(
+        { 
+            deliverAreas:{
+                            $elemMatch: {
+                                 name: request.query.areaName
+                                }
+                            } 
+        },
         function( err, vendor ) {
         if( !err ) {
             console.log(vendor);
