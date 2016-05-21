@@ -170,6 +170,8 @@ $scope.trackerUpdateStatus = function(param1)
             obj.name = item;
             deliverAreas.push(obj);
         })
+        $scope.hotelcity = $scope.cityCoverage.citys[$scope.selectedCity]
+        console.log($scope.hotelcity);
       console.log($scope.deliverareas);
       var url = "/v1/vendor/info/";
       url = url + param;
@@ -195,7 +197,9 @@ $scope.trackerUpdateStatus = function(param1)
       $scope.getDetails = function (param) {
       console.log("getDetails");
       console.log(param);
+      $scope.getCityCoverage();
       var url = "/v1/vendor/info/";
+
       url = url + param;
       // var postData={Name:$scope.hotelName, username: param, Address1:$scope.hotelAddress1, phone:$scope.hotelphone,
       //   Address2:"", street :"",Landmark:$scope.hotelLandmark, Areaname:$scope.hotelAreaname, 
@@ -219,14 +223,52 @@ $scope.trackerUpdateStatus = function(param1)
             $scope.speciality =data[0].speciality;
             $scope.deliverrange =data[0].deliverRange;
             $scope.deliverareas =data[0].deliverAreas;
+            
         })
         .error(function (data, status, headers, config)
         {
           console.log("getDetails error");
         });
+
     };
 
-
+    $scope.getCityCoverage = function(){
+      console.log("getCityCoverage");
+      var url = "/v1/admin/coverageArea";
+      $http.get(url)
+        .success(function (data, status, headers, config)
+        {
+          console.log("response");
+          console.log(data);
+          
+          var cityCoverage =  [];
+          var objCity = [];
+          angular.forEach(data, function(city) {
+            var obj = new Object();
+            var obj2 = new Object();
+            obj2 = city.cityName;
+             var subAreaCoverage =  [];
+             angular.forEach(city.subAreas, function(area) {
+             //  var obj2 = new Object();
+              // obj2.subAreaName = area.name;
+               subAreaCoverage.push(area.name);
+             });
+             obj.subAreas = subAreaCoverage;
+             cityCoverage.push(obj);
+              objCity.push(obj2)
+          });
+           console.log("sngulr");
+           cityCoverage.citys = objCity;
+           $scope.cityCoverage = cityCoverage;
+           $scope.selectedCity = 0;
+           $scope.hotelcity = $scope.cityCoverage[selectedCity];
+      console.log($scope.cityCoverage);
+        })
+        .error(function (data, status, headers, config)
+        {
+          $scope.simpleGetCallResult = logResult("GET ERROR", data, status, headers, config);
+        });
+    };
 
   });
 

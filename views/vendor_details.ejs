@@ -175,7 +175,7 @@
                   <h3 class="box-title">MenuAdd</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal">
+                <form class="form-horizontal" >
                   <div class="box-body">
                     <div class="form-group">
                       <label for="inputEmail3"  class="col-sm-2 control-label">Name</label>
@@ -231,19 +231,18 @@
                         laceholder="Deliver Charge" ng-model = "deliverCharge" required>
                       </div>
                     </div>
+                                        <div class="form-group">
+                      <label for="inputEmail3"name="City"  class="col-sm-2 control-label">City</label>
+                      <div class="col-sm-10">
+                       <select  class="form-control select2" style="width: 100%;" ng-model = "selectedCity" 
+                            ng-options="cityCoverage.citys.indexOf(selectedCity) as selectedCity for selectedCity in cityCoverage.citys "  required >
+                          </select>
+                        </div>
+                    </div>
                     <div class="form-group">
                       <label for="inputdeliverareas"  class="col-sm-2 control-label">Deliver Areas Covered</label>
                       <div class="col-sm-10">
-                          <select multiple class="form-control select2" style="width: 100%;" ng-model = "deliverareas" required>
-                            <option>VijayaNagar</option>
-                            <option>RajajiNagar</option>
-                            <option>Malleshwaram</option>
-                            <option>Vidyaranyapura</option>
-                            <option>JayaNagara</option>
-                            <option>JPNagara</option>
-                            <option>Basavanagudi</option>
-                            <option>ElectronicCity</option>
-                            <option>Marathahalli</option>
+                          <select multiple class="form-control select2" style="width: 100%;" ng-model = "deliverareas" ng-options="o for o in cityCoverage[selectedCity].subAreas track by o"  required>
                         </select>
                       </div>
                     </div>
@@ -279,16 +278,7 @@
                         <input type="text" class="form-control"  name="Landmark" placeholder="Landmark" ng-model = "hotelLandmark">
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label for="inputEmail3"name="City"  class="col-sm-2 control-label">City</label>
-                      <div class="col-sm-10">
-                       <select  class="form-control select2" style="width: 100%;" ng-model = "hotelcity" required>
-                            <option  selected>Bangalore</option>
-                            <option>Chennai</option>
-                            <option>Shivamogga</option>  
-                          </select>
-                        </div>
-                    </div>
+
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">zip</label>
                       <div class="col-sm-10">
