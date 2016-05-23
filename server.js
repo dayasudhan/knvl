@@ -20,7 +20,7 @@ var configDB = require('./config/database.js');
 // configuration ===============================================================
 //mongoose.connect(configDB.url); // connect to our database
 var uristring = 
-  process.env.MONGOLAB_URI || 
+  process.env.MONGODB_URI || 
   process.env.MONGOHQ_URL || 
   'mongodb://localhost/messoota';
 
