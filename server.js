@@ -32,7 +32,7 @@ mongoose.connect(uristring,function (err, res) {
     console.log ('Succeeded connected to: ' + uristring);
   }
 });
-require('./config/passport')(passport); // pass passport for configuration
+require('./config/passport')(passport); // passport for configuration
 
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
