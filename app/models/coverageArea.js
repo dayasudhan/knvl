@@ -6,6 +6,6 @@ var CoverageAreaSchema = new mongoose.Schema({
     });
 
 //Model
-var CoverageAreaModel = mongoose.model( 'CoverageAreaSchema1', CoverageAreaSchema );
+var CoverageAreaModel = mongoose.model( 'CoverageAreaSchema', CoverageAreaSchema );
 
 module.exports = CoverageAreaModel;
