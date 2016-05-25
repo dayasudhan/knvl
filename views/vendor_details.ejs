@@ -187,7 +187,7 @@
                     <div class="form-group">
                       <label for="inputEmail3"  class="col-sm-2 control-label">Speciality</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control"  name="Speciality"  placeholder="Speciality" ng-model = "speciality" required>
+                        <input type="text" class="form-control"  name="Speciality"  placeholder="Khaanavali" ng-model = "speciality" required>
                       </div>
                     </div>
                     <div class="form-group">
@@ -203,13 +203,13 @@
                     <div class="form-group">
                       <label for="inputEmail3"  class="col-sm-2 control-label">Phone</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control"  name="phone" placeholder="Phone" ng-model = "hotelphone" required>
+                        <input type="text" class="form-control"  name="phone" placeholder="0" ng-model = "hotelphone" required>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputdeliverrange"  class="col-sm-2 control-label">Delivery Range in KM's</label>
                       <div class="col-sm-10">
-                        <input type="number" class="form-control"  name="phone" placeholder="Deliver Range" ng-model 
+                        <input type="number" class="form-control"  name="phone" placeholder="3" ng-model 
                         = "deliverRange" 
                         min="1" max="10"
                         required>
@@ -220,7 +220,7 @@
                       <div class="col-sm-10">
                         <input type="number" class="form-control"  name="phone" 
                         min="0" max="90"
-                        placeholder="Deliver Time" ng-model = "deliveryTime" required>
+                        placeholder="60" ng-model = "deliveryTime" required>
                       </div>
                     </div>
                     <div class="form-group">
@@ -228,10 +228,18 @@
                       <div class="col-sm-10">
                         <input type="number" class="form-control"  name="phone" 
                         min="0" max="200"
-                        laceholder="Deliver Charge" ng-model = "deliverCharge" required>
+                        placeholder="0" ng-model = "deliverCharge" required>
                       </div>
                     </div>
-                                        <div class="form-group">
+                    <div class="form-group">
+                      <label for="inputdeliverrange"  class="col-sm-2 control-label">Minimum Order in Rupees's</label>
+                      <div class="col-sm-10">
+                        <input type="number" class="form-control"  name="phone" 
+                        min="0" max="200"
+                        placeholder="0" ng-model = "minimumOrder" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
                       <label for="inputEmail3"name="City"  class="col-sm-2 control-label">City</label>
                       <div class="col-sm-10">
                        <select  class="form-control select2" style="width: 100%;" ng-model = "selectedCity" 

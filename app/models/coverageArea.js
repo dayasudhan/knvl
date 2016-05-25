@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 //Schema
 var CoverageAreaSchema = new mongoose.Schema({
     cityName:String,
+    id:String,
     subAreas:[{name:String}]
     });
 

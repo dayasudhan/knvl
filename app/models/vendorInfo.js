@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 //Schema
 var VendorInfoSchema = new mongoose.Schema({
-	hotel:{name:String,email: String,logo:String},
+	hotel:{name:String,email: String,logo:String,id:String},
     menu:[{name: String,  price:Number, availability:Number}],
     address:{addressLine1:String,addressLine2:String,street:String, LandMark:String, areaName:String,city:String, zip:String, latitude:Number,longitude:Number },
     phone:Number,
@@ -11,6 +11,7 @@ var VendorInfoSchema = new mongoose.Schema({
     deliverAreas:[{name:String}],
     deliverCharge:Number,
     deliveryTime:Number,
+    minimumOrder:Number,
     rating:Number
     });
 

@@ -175,13 +175,16 @@ $scope.trackerUpdateStatus = function(param1)
       console.log($scope.deliverareas);
       var url = "/v1/vendor/info/";
       url = url + param;
-      var postData={Name:$scope.hotelName, username: param, Address1:$scope.hotelAddress1, phone:$scope.hotelphone,
-        Address2:"", street :"",Landmark:$scope.hotelLandmark, Areaname:$scope.hotelAreaname, 
+      var postData={Name:$scope.hotelName, username: param, id:$scope.hotelId,
+        Address1:$scope.hotelAddress1, phone:$scope.hotelphone,
+        Address2:"", street :"",Landmark:$scope.hotelLandmark, 
+        Areaname:$scope.hotelAreaname, 
         City:$scope.hotelcity, zip:$scope.hotelzip,latitude:$scope.latitude, longitude:$scope.longitude, logo:"",
          vegornonveg:$scope.vegornonveg, speciality: $scope.speciality , 
          deliverRange:$scope.deliverRange,
          deliverCharge:$scope.deliverCharge,
          deliveryTime:$scope.deliveryTime,
+         minimumOrder:$scope.minimumOrder,
          deliverareas:deliverAreas};
       $http.post(url,postData)
         .success(function (data, status, headers, config)
@@ -211,6 +214,7 @@ $scope.trackerUpdateStatus = function(param1)
             console.log("getDetails success");
             console.log(data[0]);
              $scope.hotelName = data[0].hotel.name;
+             $scope.hotelId = data[0].hotel.id;
              $scope.hotelAddress1 =data[0].address.addressLine1;
              $scope.hotelphone =data[0].phone;
             $scope.hotelLandmark =data[0].address.LandMark;
@@ -223,7 +227,8 @@ $scope.trackerUpdateStatus = function(param1)
             $scope.speciality =data[0].speciality;
             $scope.deliverrange =data[0].deliverRange;
             $scope.deliverareas =data[0].deliverAreas;
-            
+            $scope.minimumOrder =data[0].minimumOrder;
+
         })
         .error(function (data, status, headers, config)
         {

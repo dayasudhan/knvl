@@ -2,6 +2,7 @@ var OrderModel = require('../app/models/vendorOrder');
 var VendorInfoModel = require('../app/models/vendorInfo');
 var CustomerInfoModel = require('../app/models/customerInfo');
 var CoverageAreaModel = require('../app/models/coverageArea');
+var CountersModel = require('../app/models/counters');
 module.exports = function(app, passport) {
 
 
@@ -343,8 +344,14 @@ app.post('/signup', function(req, res, next) {
 
 function registerVendor(req, res, next) {
   console.log("/registerVendor");
-  var vendorInfo = new VendorInfoModel({
-        hotel:{email:req.body.email}
+  var hotel_id = "H";
+  var res = getNextSequence('hotel',function(data) {
+
+    hotel_id = hotel_id + data.sequence;
+    console.log(hotel_id);
+
+      var vendorInfo = new VendorInfoModel({
+        hotel:{email:req.body.email,id:hotel_id}
       });
       vendorInfo.save( function( err ) {
         if( !err ) {
@@ -364,6 +371,7 @@ function registerVendor(req, res, next) {
                 return response.send('ERROR');
               }
         });
+    });
 };
 
 app.get( '/v1/vendor/info/:id', function( request, response ) {
@@ -394,7 +402,7 @@ console.log("storeVendorInfo");
 console.log(request.params.id);
  VendorInfoModel.update({ 'hotel.email':request.params.id},
       {
-        hotel:{name:request.body.Name,email:request.params.id},
+        hotel:{name:request.body.Name,email:request.params.id, id:request.body.id},
        address:{addressLine1:request.body.Address1,addressLine2:request.body.Address2,
         street:request.body.street, LandMark:request.body.Landmark, 
         areaName:request.body.Areaname,city:request.body.City, zip:request.body.zip, 
@@ -406,6 +414,7 @@ console.log(request.params.id);
         deliverRange: request.body.deliverRange,
         deliverCharge: request.body.deliverCharge,
         deliveryTime: request.body.deliveryTime,
+        minimumOrder: request.body.minimumOrder,
         deliverAreas:request.body.deliverareas
       },
        function( err ) {
@@ -642,7 +651,7 @@ app.get( '/v1/vendor/order/:id', function( request, response ) {
 app.get( '/v1/vendor/order_by_id/:id', function( request, response ) {
      console.log('/v1/vendor/order_by_id/:id');
      console.log(request.params.id);
-     return OrderModel.find({ '_id':request.params.id},function( err, order ) {
+     return OrderModel.find({ 'id':request.params.id},function( err, order ) {
         if( !err ) {
             return response.send( order );
         } else {
@@ -653,9 +662,9 @@ app.get( '/v1/vendor/order_by_id/:id', function( request, response ) {
  // });
 });
 
-//unregister a book
+
 app.delete( '/v1/vendor/order/:id', function( request, response ) {
-  //  ExampleModel.findById( request.params.id, function( err, book ) {
+
         return OrderModel.remove( { 'hotel.email':request.params.id},function( err ) {
             if( !err ) {
                 console.log( 'orders removed' );
@@ -683,69 +692,74 @@ app.get( '/v1/vendor/order_all', function( request, response ) {
 
 app.post( '/v1/vendor/order', function( request, response ) {
 
-// var UTC = new Date();
-// var UTC = UTC.getTime() // Get UTC Timestamp
-// var IST = new Date(UTC); // Clone UTC Timestamp
-// IST.setHours(IST.getHours() + 5); // set Hours to 5 hours later
-// IST.setMinutes(IST.getMinutes() + 30); // set Minutes to be 30 minutes late
-console.log('post order');
-    var order = new OrderModel({
-        hotel:request.body.hotel,
-        customer: {name: request.body.customer.name, email: request.body.customer.email, 
-            phone: request.body.customer.phone,  
-            address: request.body.address},
-            menu: request.body.menu,
-            bill_value:request.body.bill_value,
-            deliveryCharge: request.body.deliveryCharge,
-            totalCost:request.body.totalCost,
-            current_status:"Ordered",
-            tracker:  [{status:"Ordered",time:new Date()}]     });
- 
-    console.log(request.body);
-    order.save( function( err ) {
-        if( !err ) {
-            console.log( 'created' );
-            console.log( order);
-            return response.send( order );
-        } else {
-         console.log( 'error' );
-            console.log( err );
-            return response.send('ERROR');
-        }
+
+  var res = getNextSequence('order',function(data) {
+    var order_id = request.body.hotel.id ;
+    order_id = order_id + "R";
+    order_id = order_id + data.sequence;
+    console.log(order_id);
+
+        console.log('post order');
+        var order = new OrderModel({
+            id:order_id,
+            hotel:request.body.hotel,
+            customer: {name: request.body.customer.name, email: request.body.customer.email, 
+                phone: request.body.customer.phone,  
+                address: request.body.address},
+                menu: request.body.menu,
+                bill_value:request.body.bill_value,
+                deliveryCharge: request.body.deliveryCharge,
+                totalCost:request.body.totalCost,
+                current_status:"Ordered",
+                tracker:  [{status:"Ordered",time:new Date()}]     });
+     
+        console.log(request.body);
+        order.save( function( err ) {
+            if( !err ) {
+                console.log( 'created' );
+                console.log( order);
+                return response.send( order );
+            } else {
+             console.log( 'error' );
+                console.log( err );
+                return response.send('ERROR');
+            }
+        });
     });
 });
 
 app.post( '/v1/mobile/vendor/order', function( request, response ) {
-
-// var UTC = new Date();
-// var UTC = UTC.getTime() // Get UTC Timestamp
-// var IST = new Date(UTC); // Clone UTC Timestamp
-// IST.setHours(IST.getHours() + 5); // set Hours to 5 hours later
-// IST.setMinutes(IST.getMinutes() + 30); // set Minutes to be 30 minutes late
-console.log('post order');
-    var order = new OrderModel({
-        hotel:request.body.hotel,
-        customer: {name: request.body.customer.name, email: request.body.customer.email, 
-            phone: request.body.customer.phone,  
-            address: request.body.customer.address},
-            menu: request.body.menu,
-            bill_value:request.body.bill_value,
-            deliveryCharge: request.body.deliveryCharge,
-            totalCost:request.body.totalCost,
-            current_status:"Ordered",
-            tracker:  [{status:"Ordered",time:new Date()}]     });
- 
-    console.log(request.body);
-    order.save( function( err ) {
-        if( !err ) {
-            console.log( 'created' );
-            console.log( order);
-            return response.send( order );
-        } else {
-         console.log( 'error' );
-            console.log( err );
-            return response.send('ERROR');
-        }
+  var res = getNextSequence('order',function(data) {
+    var order_id = request.body.hotel.id ;
+    order_id = order_id + "R";
+    order_id = order_id + data.sequence;
+    console.log(order_id);
+        console.log('post order');
+        var order = new OrderModel({
+            id:order_id,
+            hotel:request.body.hotel,
+            customer: {name: request.body.customer.name, email: request.body.customer.email, 
+                phone: request.body.customer.phone,  
+                address: request.body.customer.address},
+                menu: request.body.menu,
+                bill_value:request.body.bill_value,
+                deliveryCharge: request.body.deliveryCharge,
+                totalCost:request.body.totalCost,
+                current_status:"Ordered",
+                tracker:  [{status:"Ordered",time:new Date()}]     });
+     
+        console.log(request.body);
+        order.save( function( err ) {
+            if( !err ) {
+                console.log( 'created' );
+                console.log( order);
+                return response.send( order );
+            } else {
+             console.log( 'error' );
+                console.log( err );
+                return response.send('ERROR');
+            }
+        });
     });
 });
 
@@ -775,8 +789,8 @@ app.get( '/v1/vendor/order/summary/:id', function( request, res ) {
 });
 
 //Delete a book
-app.delete( '/v1/vendor/list', function( request, response ) {
-  //  ExampleModel.findById( request.params.id, function( err, book ) {
+app.delete( '/v1/admin/list', function( request, response ) {
+
         return OrderModel.remove( {},function( err ) {
             if( !err ) {
                 console.log( 'Book removed' );
@@ -786,9 +800,19 @@ app.delete( '/v1/vendor/list', function( request, response ) {
                 return response.send('ERROR');
             }
         });
-    //});
-});
 
+});
+app.delete( '/v1/admin/account/all', function( request, response ) {
+    return VendorInfoModel.remove( {},function( err ) {
+            if( !err ) {
+                console.log( 'vendor removed' );
+                return response.send( '' );
+            } else {
+                console.log( err );
+                return response.send('ERROR');
+            }
+        });
+});
 app.put( '/v1/vendor/order/status/:id', function( request, response ) {
 
     console.log('/v1/vendor/order/status/:id');
@@ -868,24 +892,7 @@ app.put( '/v1/admin/coverageArea', function( request, response ) {
         }
     });
 });
-// app.delete( '/v1/admin/coverageArea', function( request, response ) {
-//   console.log("delete /vendor/coverageArea/");
-//      console.log(request.body);
-//         return CoverageAreaModel.update({ 'cityName':request.body.cityName},
-//             { $pull: {'subAreas': { $elemMatch:{'name': 'Vijaynagara'}}}},
-         
-//             function( err, order ) 
-//              {
-//         if( !err ) {
-//             console.log("no error");
-//             console.log(order);
-//             return response.send(order);
-//         } else {
-//             console.log( err );
-//             return response.send('ERROR');
-//         }
-//     });
-// });
+
 app.get( '/v1/admin/coverageArea', function( request, response ) {
     console.log("/v1/admin/coverageArea");
     return CoverageAreaModel.find(function( err, order ) {
@@ -970,7 +977,88 @@ app.delete( '/v1/vendor/menu/item/:id/:fooditem', function( request, response ) 
         });
     //});
 });
+app.get( '/v1/admin/counters', function( request, response ) {
+    console.log("/v1/admin/counters");
+    return CountersModel.find(function( err, order ) {
+        if( !err ) {
+            console.log("no error");
+            return response.send( order );
+        } else {
+            console.log("error");
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+});
+app.post( '/v1/admin/counters/:id', function( request, response ) {
+    console.log("post /v1/admin/counters");
+    console.log(request.params.id);
+     //var dd = {'cityName':"dvg",'subAreas':[{'name':"rajajinagar"},{'name':"vijaynagar"}]};
+     var dd = {_id:request.params.id,
+                sequence:0};
+      var counters = new CountersModel(
+         dd);
+        return counters.save(function( err) {
+        if( !err ) {
+            console.log("no error");
+            console.log(counters);
+            return response.send(counters);
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+});
+app.get( '/v1/admin/counters/test', function( request, response )
+{
+    console.log('/v1/admin/counters/test');
+    var id = "H";
+    var res = getNextSequence('hotel',function(data) {
+    console.log('got data: '+data);
+    id  = id + data.sequence;
+    console.log(id);
+    return response.send(data);
+    });
+   
+});
+var myCallback = function(data) {
+  console.log('got data: '+data);
+};
+function getNextSequence(name,result)
+{
+   
+    var ret = CountersModel.findOneAndUpdate(
+            { _id: name },
+            { $inc: { sequence: 1 }} ,
+        function( err, order ) 
+        {
+        if( !err ) {
+            console.log("no error");
+            console.log(order);
+            ret2 = order;
+            result(order);
+           // return order;
+         
+        } else {
+            console.log( err );
+           result(err);
+        }
+    });
 
+}
+app.delete( '/v1/admin/counters/:id', function( request, response ) {
+  //  ExampleModel.findById( request.params.id, function( err, book ) {
+        return CountersModel.remove( { '_id':request.params.id},function( err ) {
+            if( !err ) {
+                console.log( 'counter removed' );
+                return response.send( '' );
+            } else {
+                console.log( err );
+                return response.send('ERROR');
+            }
+        });
+    //});
+});
 };
 
 // route middleware to ensure user is logged in

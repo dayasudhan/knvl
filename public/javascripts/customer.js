@@ -152,7 +152,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
          $scope.showModal =false;
        }
         var ordarr = {
-         "hotel":{"name":$scope.hotel.hotel.name,"email": $scope.hotel.hotel.email},
+         "hotel":$scope.hotel.hotel,
           "menu":ordMenu,
           "customer":{"name":$scope.user,"email": "","phone":$scope.phone},
           "address":{"addressLine1":$scope.flat_no,"addressLine2":$scope.address,"street":"", 

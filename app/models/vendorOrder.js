@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 //Schema
 var OrderSchema = new mongoose.Schema({
-	hotel:{name:String,email: String,phone:Number},
+	hotel:{name:String,email: String,phone:Number,id:String},
     menu:[{name: String,no_of_order:Number}],
     current_status:String,
     tracker:[{status: String,time:Date,reason:String}],
@@ -13,7 +13,8 @@ var OrderSchema = new mongoose.Schema({
     },
     bill_value:Number,
     deliveryCharge: Number,
-    totalCost:Number
+    totalCost:Number,
+    id:String
 });
 
 //Model
