@@ -81,7 +81,10 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       $http.post(url, ordarr)
         .success(function (data, status, headers)
         {
-          console.log("Success in postorder")
+          console.log("Success in postorder");
+           
+            console.log(data.id)
+            $scope.orderId =  data.id;
         })
         .error(function (data, status, headers)
         {
