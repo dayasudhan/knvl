@@ -415,7 +415,8 @@ console.log(request.params.id);
         deliverCharge: request.body.deliverCharge,
         deliveryTime: request.body.deliveryTime,
         minimumOrder: request.body.minimumOrder,
-        deliverAreas:request.body.deliverareas
+        deliverAreas:request.body.deliverareas,
+         orderAcceptTimings:request.body.orderAcceptTimings
       },
        function( err ) {
         if( !err ) {
