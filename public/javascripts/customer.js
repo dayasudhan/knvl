@@ -157,9 +157,12 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
         var ordarr = {
          "hotel":$scope.hotel.hotel,
           "menu":ordMenu,
-          "customer":{"name":$scope.user,"email": "","phone":$scope.phone},
+          "bill_value":total_price,
+          "deliverCharge":$scope.hotel.deliverCharge,
+          "customer":{"name":$scope.user,"email": "","phone":$scope.phone,
           "address":{"addressLine1":$scope.flat_no,"addressLine2":$scope.address,"street":"", 
-          "LandMark":$scope.landmark, "areaName":$scope.areaName,"city":$scope.city, "zip":$scope.zip, "latitude":$scope.latitude,"longitude":$scope.longitude}
+          "LandMark":$scope.landmark, "areaName":$scope.areaName,"city":$scope.city,
+           "zip":$scope.zip, "latitude":$scope.latitude,"longitude":$scope.longitude}}
         };
         $scope.orderSummary = ordarr;
         $scope.total_price = total_price;

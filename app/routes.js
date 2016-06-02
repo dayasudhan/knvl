@@ -691,50 +691,51 @@ app.get( '/v1/vendor/order_all', function( request, response ) {
     });
 });
 
-app.post( '/v1/vendor/order', function( request, response ) {
+// app.post( '/v1/vendor/order', function( request, response ) {
 
 
-  var res = getNextSequence('order',function(data) {
-    var order_id = request.body.hotel.id ;
-    order_id = order_id + "R";
-    order_id = order_id + data.sequence;
-    console.log(order_id);
-
-        console.log('post order');
-        var order = new OrderModel({
-            id:order_id,
-            hotel:request.body.hotel,
-            customer: {name: request.body.customer.name, email: request.body.customer.email, 
-                phone: request.body.customer.phone,  
-                address: request.body.address},
-                menu: request.body.menu,
-                bill_value:request.body.bill_value,
-                deliveryCharge: request.body.deliveryCharge,
-                totalCost:request.body.totalCost,
-                current_status:"Ordered",
-                tracker:  [{status:"Ordered",time:new Date()}]     });
+//   var res = getNextSequence('order',function(data) {
+//     var order_id = request.body.hotel.id ;
+//     order_id = order_id + "R";
+//     order_id = order_id + data.sequence;
+//     console.log(order_id);
+// var totalCostl = request.body.bill_value + request.body.hotel.deliveryCharge;
+//         console.log('post order');
+//         var order = new OrderModel({
+//             id:order_id,
+//             hotel:request.body.hotel,
+//             customer: {name: request.body.customer.name, email: request.body.customer.email, 
+//                 phone: request.body.customer.phone,  
+//                 address: request.body.address},
+//                 menu: request.body.menu,
+//                 bill_value:request.body.bill_value,
+//                 deliveryCharge: request.body.hotel.deliveryCharge,
+//                 totalCost:totalCostl,
+//                 current_status:"Ordered",
+//                 tracker:  [{status:"Ordered",time:new Date()}]     });
      
-        console.log(request.body);
-        order.save( function( err ) {
-            if( !err ) {
-                console.log( 'created' );
-                console.log( order);
-                return response.send( order );
-            } else {
-             console.log( 'error' );
-                console.log( err );
-                return response.send('ERROR');
-            }
-        });
-    });
-});
+//         console.log(request.body);
+//         order.save( function( err ) {
+//             if( !err ) {
+//                 console.log( 'created' );
+//                 console.log( order);
+//                 return response.send( order );
+//             } else {
+//              console.log( 'error' );
+//                 console.log( err );
+//                 return response.send('ERROR');
+//             }
+//         });
+//     });
+// });
 
-app.post( '/v1/mobile/vendor/order', function( request, response ) {
+app.post( '/v1/vendor/order', function( request, response ) {
   var res = getNextSequence('order',function(data) {
     var order_id = request.body.hotel.id ;
     order_id = order_id + "R";
     order_id = order_id + data.sequence;
     console.log(order_id);
+    var totalCostl = request.body.bill_value + request.body.deliverCharge;
         console.log('post order');
         var order = new OrderModel({
             id:order_id,
@@ -744,8 +745,8 @@ app.post( '/v1/mobile/vendor/order', function( request, response ) {
                 address: request.body.customer.address},
                 menu: request.body.menu,
                 bill_value:request.body.bill_value,
-                deliveryCharge: request.body.deliveryCharge,
-                totalCost:request.body.totalCost,
+                deliveryCharge: request.body.deliverCharge,
+                totalCost:totalCostl,
                 current_status:"Ordered",
                 tracker:  [{status:"Ordered",time:new Date()}]     });
      
