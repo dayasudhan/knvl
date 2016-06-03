@@ -658,7 +658,12 @@ console.log(start);
     end.setHours(23,59,59,999);
     console.log(end);
      return OrderModel.find({  'hotel.email':request.params.id,
-                               'date': {$gte: start, $lt: end}},
+                               // 'date': {$gte: start, $lt: end}},
+                               tracker:{
+                            $elemMatch: {
+                                 time:{$gte: start, $lt: end}
+                                }
+                            }},
         function( err, order ) {
         if( !err ) {
             return response.send( order );
