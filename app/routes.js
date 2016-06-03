@@ -646,8 +646,29 @@ app.get( '/v1/vendor/order/:id', function( request, response ) {
             return response.send('ERROR');
         }
     });
- // });
 });
+
+
+app.get( '/v1/vendor/order/today/:id', function( request, response ) {
+  console.log(request.params.id);
+  var start = new Date();
+    start.setHours(0,0,0,0);
+console.log(start);
+    var end = new Date();
+    end.setHours(23,59,59,999);
+    console.log(end);
+     return OrderModel.find({  'hotel.email':request.params.id,
+                               'date': {$gte: start, $lt: end}},
+        function( err, order ) {
+        if( !err ) {
+            return response.send( order );
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+});
+
 
 app.get( '/v1/vendor/order_by_id/:id', function( request, response ) {
      console.log('/v1/vendor/order_by_id/:id');
@@ -748,6 +769,7 @@ app.post( '/v1/vendor/order', function( request, response ) {
                 deliveryCharge: request.body.deliverCharge,
                 totalCost:totalCostl,
                 current_status:"Ordered",
+                date:new Date(),
                 tracker:  [{status:"Ordered",time:new Date()}]     });
      
         console.log(request.body);
