@@ -154,9 +154,11 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
 
          $scope.showModal =false;
        }
+       var totalCost = $scope.hotel.deliverCharge +  total_price;
         var ordarr = {
          "hotel":$scope.hotel.hotel,
           "menu":ordMenu,
+          "totalCost":totalCost,
           "bill_value":total_price,
           "deliverCharge":$scope.hotel.deliverCharge,
           "customer":{"name":$scope.user,"email": "","phone":$scope.phone,

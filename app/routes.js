@@ -761,7 +761,7 @@ app.post( '/v1/vendor/order', function( request, response ) {
     order_id = order_id + "R";
     order_id = order_id + data.sequence;
     console.log(order_id);
-    var totalCostl = request.body.bill_value + request.body.deliverCharge;
+    var dc;
         console.log('post order');
         var order = new OrderModel({
             id:order_id,
@@ -772,7 +772,7 @@ app.post( '/v1/vendor/order', function( request, response ) {
                 menu: request.body.menu,
                 bill_value:request.body.bill_value,
                 deliveryCharge: request.body.deliverCharge,
-                totalCost:totalCostl,
+                totalCost:request.body.totalCost,
                 current_status:"Ordered",
                 date:new Date(),
                 tracker:  [{status:"Ordered",time:new Date()}]     });
