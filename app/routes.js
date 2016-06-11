@@ -775,6 +775,7 @@ app.post( '/v1/vendor/order', function( request, response ) {
                 totalCost:request.body.totalCost,
                 current_status:"Ordered",
                 date:new Date(),
+                instruction:request.body.instruction,
                 tracker:  [{status:"Ordered",time:new Date()}]     });
      
         console.log(request.body);
@@ -902,7 +903,7 @@ app.post( '/v1/admin/coverageArea', function( request, response ) {
 });
 
 app.put( '/v1/admin/coverageArea', function( request, response ) {
-     console.log("put /vendor/menu/");
+     console.log("v1/admin/coverageArea");
      console.log(request.body);
      console.log(request.body.cityName);
       console.log(request.body.areaName);
@@ -914,7 +915,7 @@ app.put( '/v1/admin/coverageArea', function( request, response ) {
         if( !err ) {
             console.log("no error");
             console.log(order);
-            return response.send(order);
+            return response.send('SUCCESS');
         } else {
             console.log( err );
             return response.send('ERROR');
