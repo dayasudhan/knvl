@@ -171,18 +171,48 @@ $scope.trackerUpdateStatus = function(param1)
             deliverAreas.push(obj);
         })
         $scope.hotelcity = $scope.cityCoverage.citys[$scope.selectedCity]
-        console.log($scope.hotelcity);
+      console.log($scope.hotelcity);
       console.log($scope.deliverareas);
+      console.log($scope.morningSupportTime);
+      console.log($scope.morningstarttime);
+      console.log($scope.morningendtime);
+     
+  var mornstartTimevalue = "",mornendTimevalue = "",lunchstartTimevalue="",lunchendTimevalue="",dinnerendTimevalue="",dinnerstartTimevalue="";
+if($scope.morningSupportTime  == 'Yes')
+{
+       mornstartTimevalue = ($scope.morningstarttime.getHours()) + ':' + ($scope.morningstarttime.getMinutes());
+      mornendTimevalue = ($scope.morningendtime.getHours()) + ':' + ($scope.morningendtime.getMinutes());
+ }
+ if($scope.lunchSupportTime  == 'Yes')  
+ {  
+      lunchstartTimevalue = ($scope.lunchstarttime.getHours()) + ':' + ($scope.lunchstarttime.getMinutes());
+      lunchendTimevalue = ($scope.lunchendtime.getHours()) + ':' + ($scope.lunchendtime.getMinutes());
+  }
+  if($scope.dinnerSupportTime  == 'Yes')
+  {  
+      dinnerendTimevalue = ($scope.dinnerendtime.getHours()) + ':' + ($scope.dinnerendtime.getMinutes());
+      dinnerstartTimevalue = ($scope.dinnerstarttime.getHours()) + ':' + ($scope.dinnerstarttime.getMinutes());
+  }
+      var orderAcceptTimingsValue = {Morning:{startTime:mornstartTimevalue,endTime:mornendTimevalue,available:$scope.morningSupportTime},
+                        Lunch:{startTime:lunchstartTimevalue,endTime:lunchendTimevalue,available:$scope.lunchSupportTime},
+                        Dinner:{startTime:dinnerstartTimevalue,endTime:dinnerendTimevalue,available:$scope.dinnerSupportTime}
+                            }
+      console.log(orderAcceptTimingsValue);
       var url = "/v1/vendor/info/";
       url = url + param;
-      var postData={Name:$scope.hotelName, username: param, Address1:$scope.hotelAddress1, phone:$scope.hotelphone,
-        Address2:"", street :"",Landmark:$scope.hotelLandmark, Areaname:$scope.hotelAreaname, 
+      var postData={Name:$scope.hotelName, username: param, id:$scope.hotelId,
+        Address1:$scope.hotelAddress1, phone:$scope.hotelphone,
+        Address2:"", street :"",Landmark:$scope.hotelLandmark, 
+        Areaname:$scope.hotelAreaname, 
         City:$scope.hotelcity, zip:$scope.hotelzip,latitude:$scope.latitude, longitude:$scope.longitude, logo:"",
          vegornonveg:$scope.vegornonveg, speciality: $scope.speciality , 
          deliverRange:$scope.deliverRange,
          deliverCharge:$scope.deliverCharge,
          deliveryTime:$scope.deliveryTime,
+         minimumOrder:$scope.minimumOrder,
+         orderAcceptTimings:orderAcceptTimingsValue,
          deliverareas:deliverAreas};
+
       $http.post(url,postData)
         .success(function (data, status, headers, config)
         {
@@ -211,6 +241,7 @@ $scope.trackerUpdateStatus = function(param1)
             console.log("getDetails success");
             console.log(data[0]);
              $scope.hotelName = data[0].hotel.name;
+             $scope.hotelId = data[0].hotel.id;
              $scope.hotelAddress1 =data[0].address.addressLine1;
              $scope.hotelphone =data[0].phone;
             $scope.hotelLandmark =data[0].address.LandMark;
@@ -221,9 +252,12 @@ $scope.trackerUpdateStatus = function(param1)
             $scope.longitude =data[0].address.longitude;
           //  $scope.vegornonveg =data[0].
             $scope.speciality =data[0].speciality;
-            $scope.deliverrange =data[0].deliverRange;
+            $scope.deliverRange =data[0].deliverRange;
             $scope.deliverareas =data[0].deliverAreas;
-            
+            $scope.minimumOrder =data[0].minimumOrder;
+            $scope.deliverCharge = data[0].deliverCharge;
+            $scope.deliveryTime = data[0].deliveryTime;
+
         })
         .error(function (data, status, headers, config)
         {

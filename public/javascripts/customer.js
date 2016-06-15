@@ -81,7 +81,10 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       $http.post(url, ordarr)
         .success(function (data, status, headers)
         {
-          console.log("Success in postorder")
+          console.log("Success in postorder");
+           
+            console.log(data.id)
+            $scope.orderId =  data.id;
         })
         .error(function (data, status, headers)
         {
@@ -151,12 +154,17 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
 
          $scope.showModal =false;
        }
+       var totalCost = $scope.hotel.deliverCharge +  total_price;
         var ordarr = {
-         "hotel":{"name":$scope.hotel.hotel.name,"email": $scope.hotel.hotel.email},
+         "hotel":$scope.hotel.hotel,
           "menu":ordMenu,
-          "customer":{"name":$scope.user,"email": "","phone":$scope.phone},
+          "totalCost":totalCost,
+          "bill_value":total_price,
+          "deliverCharge":$scope.hotel.deliverCharge,
+          "customer":{"name":$scope.user,"email": "","phone":$scope.phone,
           "address":{"addressLine1":$scope.flat_no,"addressLine2":$scope.address,"street":"", 
-          "LandMark":$scope.landmark, "areaName":$scope.areaName,"city":$scope.city, "zip":$scope.zip, "latitude":$scope.latitude,"longitude":$scope.longitude}
+          "LandMark":$scope.landmark, "areaName":$scope.areaName,"city":$scope.city,
+           "zip":$scope.zip, "latitude":$scope.latitude,"longitude":$scope.longitude}}
         };
         $scope.orderSummary = ordarr;
         $scope.total_price = total_price;
