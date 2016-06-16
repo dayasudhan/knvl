@@ -1117,11 +1117,20 @@ app.post( '/v1/pn/addTofirebase', function( request, response ) {
  
     if( 1 ) {
             console.log('success');
+var msg_id= request.body.key;
+var person = {};
+var key = "name";
 
+person[request.body.key] /* this is same as person.name */ = {
+                msg:request.body.message
+              };
 
-            rootRef.set({
-              msg: request.body.message
-            });
+console.log(person); // should print  Object { name="John"}
+ console.log(msg_id);
+
+            rootRef.set(
+              person
+            );
             
             return response.send('success');
         } else {
