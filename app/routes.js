@@ -101,7 +101,14 @@ app.post('/v1/m/login', function(req, res, next) {
         console.log('post /v1/m/login  3');
       if (err) {
       console.log('post /v1/m/login 4'); 
+      
+
         return next(err); }
+       console.log("store the uniqui id") 
+              storeVendoruniqueId(req,res,function(req,res){
+           console.log("storeVendoruniqueId success");
+           
+        });
       return res.send("1");
     });
     console.log('post /v1/m/login 5');
@@ -452,6 +459,26 @@ console.log(request.params.id);
     });
 }
 
+function storeVendoruniqueId(request,response,callback,param)
+{
+console.log("storeVendorUniquiId");
+console.log(request.params.id);
+ VendorInfoModel.update({ 'hotel.email':request.body.email},
+      {
+        uniqueid:request.body.uniqueid
+      },
+       function( err ) {
+        if( !err ) {
+            console.log( 'storeVendorUniquiId created' );
+            callback(request,response);
+            return ;
+        } else {
+         console.log( 'storeVendorUniquiId error' );
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+}
 
 app.get('/old/login', function(req, res) {
     res.render('login', { user : req.user });
@@ -1117,21 +1144,16 @@ app.post( '/v1/pn/addTofirebase', function( request, response ) {
  
     if( 1 ) {
             console.log('success');
-var msg_id= request.body.key;
-var person = {};
-var key = "name";
-
-person[request.body.key] /* this is same as person.name */ = {
+            var pn = {};
+            pn[request.body.key]  = {
                 msg:request.body.message
-              };
+            };
 
-console.log(person); // should print  Object { name="John"}
- console.log(msg_id);
-
-            rootRef.set(
+            console.log(person); // should print  Object { name="John"}
+             rootRef.set(
               person
             );
-            
+           
             return response.send('success');
         } else {
             console.log( 'failure' );

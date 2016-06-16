@@ -13,6 +13,7 @@ var VendorInfoSchema = new mongoose.Schema({
     deliveryTime:Number,
     minimumOrder:Number,
     rating:Number,
+    uniqueid:String,
     orderAcceptTimings:{Morning:{startTime:String,endTime:String,available:String},
                         Lunch:{startTime:String,endTime:String,available:String},
                         Dinner:{startTime:String,endTime:String,available:String}
