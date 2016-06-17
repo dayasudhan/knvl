@@ -788,21 +788,22 @@ app.post( '/v1/vendor/order', function( request, response ) {
                 instruction:request.body.instruction,
                 tracker:  [{status:"Ordered",time:new Date()}]     });
      
-        console.log(request.body);
+       
         order.save( function( err ) {
             if( !err ) {
                 console.log( 'created' );
-                console.log( order);
+               // console.log( order);
                 console.log( order.hotel.email);
 
-                var message = 'new Order Received :- ' + order_id;  
-
-                console.log( message);
-                VendorInfoModel.find({ 'hotel.email':request.body.hotel.email},function( err, vendor ) {
+                
+                VendorInfoModel.find({ 'hotel.email':order.hotel.email},function( err, vendor ) {
                     if( !err ) {
-                      console.log(vendor.uniqueid);
+                      console.log(vendor[0].uniqueid);
+                     
                       var pn = {};
-                      pn[vendor.uniqueid]  = {
+                      var message = 'new Order Received :- ' + order_id;  
+                      console.log( message);
+                      pn[vendor[0].uniqueid]  = {
                         msg:message
                       };
 
