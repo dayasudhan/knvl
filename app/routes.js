@@ -765,44 +765,6 @@ app.get( '/v1/vendor/order_all', function( request, response ) {
     });
 });
 
-// app.post( '/v1/vendor/order', function( request, response ) {
-
-
-//   var res = getNextSequence('order',function(data) {
-//     var order_id = request.body.hotel.id ;
-//     order_id = order_id + "R";
-//     order_id = order_id + data.sequence;
-//     console.log(order_id);
-// var totalCostl = request.body.bill_value + request.body.hotel.deliveryCharge;
-//         console.log('post order');
-//         var order = new OrderModel({
-//             id:order_id,
-//             hotel:request.body.hotel,
-//             customer: {name: request.body.customer.name, email: request.body.customer.email, 
-//                 phone: request.body.customer.phone,  
-//                 address: request.body.address},
-//                 menu: request.body.menu,
-//                 bill_value:request.body.bill_value,
-//                 deliveryCharge: request.body.hotel.deliveryCharge,
-//                 totalCost:totalCostl,
-//                 current_status:"Ordered",
-//                 tracker:  [{status:"Ordered",time:new Date()}]     });
-     
-//         console.log(request.body);
-//         order.save( function( err ) {
-//             if( !err ) {
-//                 console.log( 'created' );
-//                 console.log( order);
-//                 return response.send( order );
-//             } else {
-//              console.log( 'error' );
-//                 console.log( err );
-//                 return response.send('ERROR');
-//             }
-//         });
-//     });
-// });
-
 app.post( '/v1/vendor/order', function( request, response ) {
   var res = getNextSequence('order',function(data) {
     var order_id = request.body.hotel.id ;
@@ -831,13 +793,33 @@ app.post( '/v1/vendor/order', function( request, response ) {
             if( !err ) {
                 console.log( 'created' );
                 console.log( order);
-                return response.send( order );
-            } else {
-             console.log( 'error' );
-                console.log( err );
-                return response.send('ERROR');
-            }
-        });
+                console.log( order.hotel.email);
+
+                var message = 'new Order Received :- ' + order_id;  
+
+                console.log( message);
+                VendorInfoModel.find({ 'hotel.email':request.body.hotel.email},function( err, vendor ) {
+                    if( !err ) {
+                      console.log(vendor.uniqueid);
+                      var pn = {};
+                      pn[vendor.uniqueid]  = {
+                        msg:message
+                      };
+
+                      console.log(pn); // should print  Object { name="John"}
+                      rootRef.set(pn);
+                    } 
+                    else {
+                      console.log( err );
+                    }
+                    });  
+                  return response.send( order );
+                } else {
+                  console.log( 'error' );
+                  console.log( err );
+                  return response.send('ERROR');
+                }
+            });
     });
 });
 
