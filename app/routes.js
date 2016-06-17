@@ -1149,9 +1149,9 @@ app.post( '/v1/pn/addTofirebase', function( request, response ) {
                 msg:request.body.message
             };
 
-            console.log(person); // should print  Object { name="John"}
+            console.log(pn); // should print  Object { name="John"}
              rootRef.set(
-              person
+              pn
             );
            
             return response.send('success');
