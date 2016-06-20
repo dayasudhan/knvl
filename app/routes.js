@@ -700,10 +700,11 @@ app.get( '/v1/vendor/order/:id', function( request, response ) {
 app.get( '/v1/vendor/order/today/:id', function( request, response ) {
   console.log(request.params.id);
   var start = new Date();
-    start.setHours(0,0,0,0);
-console.log(start);
+    start.setHours(5,30,0,0);
+    console.log(start);
     var end = new Date();
-    end.setHours(23,59,59,999);
+    end.setDate(end.getDate() + 1);
+    end.setHours(4,29,59,999);
     console.log(end);
      return OrderModel.find({  'hotel.email':request.params.id,
                                // 'date': {$gte: start, $lt: end}},
@@ -801,10 +802,10 @@ app.post( '/v1/vendor/order', function( request, response ) {
                       console.log(vendor[0].uniqueid);
                      
                       var pn = {};
-                      var message = 'new Order Received :- ' + order_id;  
-                      console.log( message);
+                       
+                      console.log( order_id);
                       pn[vendor[0].uniqueid]  = {
-                        msg:message
+                        msg:order_id
                       };
 
                       console.log(pn); // should print  Object { name="John"}
