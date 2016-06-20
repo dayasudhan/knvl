@@ -265,8 +265,8 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       console.log(position.coords.latitude);
       console.log(position.coords.longitude);
       var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=";
-      //url = url + position.coords.latitude + ',' + position.coords.longitude + '&sensor=false';
-      url = url + 12.999390499999999 + ',' + 77.55813169999999 + '&sensor=false';
+      url = url + position.coords.latitude + ',' + position.coords.longitude + '&sensor=false';
+      //url = url + 12.999390499999999 + ',' + 77.55813169999999 + '&sensor=false';
       $http.get(url)
         .success(function (data, status, headers, config)
         {
