@@ -122,9 +122,9 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
     $scope.confirmOrder = function() {
       if($scope.isOrderPresent)
       {
-        for (i = 0; i < 5000; i++) {
+       
           $scope.postOrder($scope.orderSummary);
-      }
+      
       }
     }
     $scope.order = function() {
