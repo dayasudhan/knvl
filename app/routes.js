@@ -767,6 +767,7 @@ app.get( '/v1/vendor/order_all', function( request, response ) {
 });
 
 app.post( '/v1/vendor/order', function( request, response ) {
+
   var res = getNextSequence('order',function(data) {
     var order_id = request.body.hotel.id ;
     order_id = order_id + "R";
@@ -1132,11 +1133,12 @@ app.post( '/v1/pn/addTofirebase', function( request, response ) {
             pn[request.body.key]  = {
                 msg:request.body.message
             };
-
             console.log(pn); // should print  Object { name="John"}
              rootRef.set(
               pn
             );
+             var newdata = {'daya':'sudhan'};
+             rootRef.push(newdata);
            
             return response.send('success');
         } else {
