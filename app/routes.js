@@ -1123,8 +1123,8 @@ app.post( '/v1/pn/register', function( request, response ) {
         }
 
 });
-app.post( '/v1/pn/addTofirebase', function( request, response ) {
-    console.log("post v1/pn/addTofirebase");
+app.post( '/v1/pn/vendor/addTofirebase', function( request, response ) {
+    console.log("post v1/pn/vendor/addTofirebase");
     console.log(request.body);
  
     if( request.body.message ) {
@@ -1145,6 +1145,46 @@ app.post( '/v1/pn/addTofirebase', function( request, response ) {
             console.log('success');
             var pn = {};
             pn[request.body.key]  = {
+                update:request.body.update
+            };
+            console.log(pn); // should print  Object { name="John"}
+              rootRef.update(
+               pn
+             );
+           // rootRef.child(request.body.key).set({ first: 'Fred', last: 'Flintstone' });
+            // var newdata = {'newoffer':request.body.message};
+            //  rootRef.push(newdata);
+           
+            return response.send('success');
+        }
+         else {
+            console.log( 'failure' );
+            return response.send('failure');
+        }
+
+});
+app.post( '/v1/pn/customer/addTofirebase', function( request, response ) {
+    console.log("post v1/pn/customer/addTofirebase");
+    console.log(request.body);
+ 
+    if( request.body.message ) {
+            console.log('success');
+            var pn = {};
+            pn['customer']  = {
+                info:request.body.message
+            };
+            console.log(pn); // should print  Object { name="John"}
+              rootRef.update(
+               pn
+             );
+
+            return response.send('success');
+        }
+        else if(request.body.update)
+          {
+            console.log('success');
+            var pn = {};
+            pn['customer']  = {
                 update:request.body.update
             };
             console.log(pn); // should print  Object { name="John"}
