@@ -1137,10 +1137,7 @@ app.post( '/v1/pn/addTofirebase', function( request, response ) {
               rootRef.update(
                pn
              );
-           // rootRef.child(request.body.key).set({ first: 'Fred', last: 'Flintstone' });
-            // var newdata = {'newoffer':request.body.message};
-            //  rootRef.push(newdata);
-           
+
             return response.send('success');
         }
         else if(request.body.update)
