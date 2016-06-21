@@ -700,24 +700,17 @@ app.get( '/v1/vendor/order/:id', function( request, response ) {
 app.get( '/v1/vendor/order/today/:id', function( request, response ) {
   console.log(request.params.id);
   var start = new Date();
-    start.setHours(0,00,0,0);
-    var d2 = new Date ( start );
-    d2.setHours ( start.getHours() - 6 );
-    d2.setHours ( start.getMinutes() + 30 );
-    d2.setDate(d2.getDate() + 1);
+    start.setHours(5,30,0,0);
     console.log(start);
-     console.log(d2);
     var end = new Date();
-   
-    end.setHours(18,29,59,999);
     end.setDate(end.getDate() + 1);
+    end.setHours(4,29,59,999);
     console.log(end);
-    console.log(new Date());
      return OrderModel.find({  'hotel.email':request.params.id,
                                // 'date': {$gte: start, $lt: end}},
                                tracker:{
                             $elemMatch: {
-                                 time:{$gte: d2, $lt: end}
+                                 time:{$gte: start, $lt: end}
                                 }
                             }},
         function( err, order ) {
@@ -780,6 +773,9 @@ app.post( '/v1/vendor/order', function( request, response ) {
     order_id = order_id + "R";
     order_id = order_id + data.sequence;
     console.log(order_id);
+    var indiantime = new Date();
+    indiantime.setHours(indiantime.getHours() + 5);
+    indiantime.setMinutes(indiantime.getMinutes() + 30);
     var dc;
         console.log('post order');
         var order = new OrderModel({
@@ -795,7 +791,7 @@ app.post( '/v1/vendor/order', function( request, response ) {
                 current_status:"Ordered",
                 date:new Date(),
                 instruction:request.body.instruction,
-                tracker:  [{status:"Ordered",time:new Date()}]     });
+                tracker:  [{status:"Ordered",time:indiantime}]     });
      
        
         order.save( function( err ) {
