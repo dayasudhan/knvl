@@ -883,7 +883,12 @@ app.put( '/v1/vendor/order/status/:id', function( request, response ) {
     console.log(request.body);
 
      return OrderModel.update({ '_id':request.params.id},
-        { $addToSet: {tracker: {$each:[{status: request.body.status,  time:new Date(),reason:request.body.reason}] }}},function( err, order ) {
+
+        { 
+          current_status:request.body.status,
+          $addToSet: {tracker: {$each:[{status: request.body.status,  time:new Date(),reason:request.body.reason}] }}
+        },
+          function( err, order ) {
         if( !err ) {
             console.log("no error");
             console.log(order);
