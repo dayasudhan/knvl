@@ -699,12 +699,15 @@ app.get( '/v1/vendor/order/:id', function( request, response ) {
 
 app.get( '/v1/vendor/order/today/:id', function( request, response ) {
   console.log(request.params.id);
-  var start = new Date();
-    start.setHours(5,30,0,0);
+  var indiantime = new Date();
+     indiantime.setHours(indiantime.getHours() + 5);
+     indiantime.setMinutes(indiantime.getMinutes() + 30);
+    var start = indiantime;
+    start.setHours(0,0,0,0);
     console.log(start);
-    var end = new Date();
-    end.setDate(end.getDate() + 1);
-    end.setHours(4,29,59,999);
+    var end = indiantime;
+   
+    end.setHours(23,59,59,999);
     console.log(end);
      return OrderModel.find({  'hotel.email':request.params.id,
                                // 'date': {$gte: start, $lt: end}},
@@ -789,7 +792,7 @@ app.post( '/v1/vendor/order', function( request, response ) {
                 deliveryCharge: request.body.deliverCharge,
                 totalCost:request.body.totalCost,
                 current_status:"Ordered",
-                date:new Date(),
+                date:indiantime,
                 instruction:request.body.instruction,
                 tracker:  [{status:"Ordered",time:indiantime}]     });
      
@@ -884,12 +887,14 @@ app.put( '/v1/vendor/order/status/:id', function( request, response ) {
     console.log('/v1/vendor/order/status/:id');
     console.log(request.params.id);
     console.log(request.body);
-
+    var indiantime = new Date();
+     indiantime.setHours(indiantime.getHours() + 5);
+     indiantime.setMinutes(indiantime.getMinutes() + 30);
      return OrderModel.update({ '_id':request.params.id},
 
         { 
           current_status:request.body.status,
-          $addToSet: {tracker: {$each:[{status: request.body.status,  time:new Date(),reason:request.body.reason}] }}
+          $addToSet: {tracker: {$each:[{status: request.body.status,  time:indiantime,reason:request.body.reason}] }}
         },
           function( err, order ) {
         if( !err ) {
