@@ -1134,11 +1134,11 @@ app.post( '/v1/pn/addTofirebase', function( request, response ) {
                 msg:request.body.message
             };
             console.log(pn); // should print  Object { name="John"}
-            //  rootRef.set(
-            //   pn
-            // );
-            var newdata = {'newoffer':request.body.message};
-             rootRef.push(newdata);
+              rootRef.push(
+               pn
+             );
+            // var newdata = {'newoffer':request.body.message};
+            //  rootRef.push(newdata);
            
             return response.send('success');
         } else {
