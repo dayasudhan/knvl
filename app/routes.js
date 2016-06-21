@@ -706,6 +706,7 @@ app.get( '/v1/vendor/order/today/:id', function( request, response ) {
     end.setDate(end.getDate() + 1);
     end.setHours(4,29,59,999);
     console.log(end);
+    console.log(new Date());
      return OrderModel.find({  'hotel.email':request.params.id,
                                // 'date': {$gte: start, $lt: end}},
                                tracker:{
