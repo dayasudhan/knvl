@@ -702,13 +702,13 @@ app.get( '/v1/vendor/order/today/:id', function( request, response ) {
   var indiantime = new Date();
      indiantime.setHours(indiantime.getHours() + 5);
      indiantime.setMinutes(indiantime.getMinutes() + 30);
-    var start = indiantime;
+    var start = new Date(indiantime);
     start.setHours(0,0,0,0);
-    console.log(start);
-    var end = indiantime;
+    console.log('starts time ' +start);
+    var end = new Date(indiantime);
    
     end.setHours(23,59,59,999);
-    console.log(end);
+    console.log('endtime' + end);
      return OrderModel.find({  'hotel.email':request.params.id,
                                // 'date': {$gte: start, $lt: end}},
                                tracker:{
