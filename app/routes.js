@@ -702,8 +702,8 @@ app.get( '/v1/vendor/order/today/:id', function( request, response ) {
   var start = new Date();
     start.setHours(0,00,0,0);
     var d2 = new Date ( start );
-    d2.setHours ( d1.getHours() - 6 );
-    d2.setHours ( d1.getMinutes() + 30 );
+    d2.setHours ( start.getHours() - 6 );
+    d2.setHours ( start.getMinutes() + 30 );
     console.log(start);
      console.log(d2);
     var end = new Date();
