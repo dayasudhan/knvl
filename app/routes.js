@@ -1131,7 +1131,7 @@ app.post( '/v1/pn/addTofirebase', function( request, response ) {
             console.log('success');
             var pn = {};
             pn[request.body.key]  = {
-                msg:request.body.message
+                info:request.body.message
             };
             console.log(pn); // should print  Object { name="John"}
               rootRef.update(
