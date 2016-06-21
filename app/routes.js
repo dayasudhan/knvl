@@ -1134,9 +1134,10 @@ app.post( '/v1/pn/addTofirebase', function( request, response ) {
                 msg:request.body.message
             };
             console.log(pn); // should print  Object { name="John"}
-              rootRef.push(
+              rootRef.update(
                pn
              );
+           // rootRef.child(request.body.key).set({ first: 'Fred', last: 'Flintstone' });
             // var newdata = {'newoffer':request.body.message};
             //  rootRef.push(newdata);
            
