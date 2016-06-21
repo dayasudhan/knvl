@@ -1127,7 +1127,7 @@ app.post( '/v1/pn/addTofirebase', function( request, response ) {
     console.log("post v1/pn/addTofirebase");
     console.log(request.body);
  
-    if( 1 ) {
+    if( request.body.message ) {
             console.log('success');
             var pn = {};
             pn[request.body.key]  = {
@@ -1142,7 +1142,25 @@ app.post( '/v1/pn/addTofirebase', function( request, response ) {
             //  rootRef.push(newdata);
            
             return response.send('success');
-        } else {
+        }
+        else if(request.body.update)
+          {
+            console.log('success');
+            var pn = {};
+            pn[request.body.key]  = {
+                update:request.body.update
+            };
+            console.log(pn); // should print  Object { name="John"}
+              rootRef.update(
+               pn
+             );
+           // rootRef.child(request.body.key).set({ first: 'Fred', last: 'Flintstone' });
+            // var newdata = {'newoffer':request.body.message};
+            //  rootRef.push(newdata);
+           
+            return response.send('success');
+        }
+         else {
             console.log( 'failure' );
             return response.send('failure');
         }
