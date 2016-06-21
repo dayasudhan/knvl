@@ -700,18 +700,22 @@ app.get( '/v1/vendor/order/:id', function( request, response ) {
 app.get( '/v1/vendor/order/today/:id', function( request, response ) {
   console.log(request.params.id);
   var start = new Date();
-    start.setHours(5,30,0,0);
+    start.setHours(0,00,0,0);
+    var d2 = new Date ( start );
+    d2.setHours ( d1.getHours() - 6 );
+    d2.setHours ( d1.getMinutes() + 30 );
     console.log(start);
+     console.log(d2);
     var end = new Date();
-    end.setDate(end.getDate() + 1);
-    end.setHours(4,29,59,999);
+   
+    end.setHours(18,29,59,999);
     console.log(end);
     console.log(new Date());
      return OrderModel.find({  'hotel.email':request.params.id,
                                // 'date': {$gte: start, $lt: end}},
                                tracker:{
                             $elemMatch: {
-                                 time:{$gte: start, $lt: end}
+                                 time:{$gte: d2, $lt: end}
                                 }
                             }},
         function( err, order ) {
