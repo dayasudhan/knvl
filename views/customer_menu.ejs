@@ -114,9 +114,9 @@
                                       <h3>Delivery Address</h3>
 
                                   </div>
-                                        <div>
+                                        <!--div>
                                          <center> <img src= "/images/google_location.jpg" alt="button"  width="48" height="48" ng-click="getCurrentAddress()"></center>
-                                        </div>
+                                        </div-->
                                           <div class="form-group" name="name">
                                             <input type="text" class="form-control" id="user"  ng-model="user"  placeholder="Enter Name" required>
                                           </div>
@@ -124,7 +124,10 @@
                                             <input type="number" class="form-control" id="inputphone" ng-model="phone" placeholder="Enter Phone Number" required>
                                           </div>
                                           <div class="form-group">
-                                            <input type="text" class="form-control" id="inputflat" ng-model="address" placeholder="Enter House/Flat No" required>
+                                            <input type="text" class="form-control" id="inputflat" ng-model="flat_no" placeholder="Enter House/Flat No" required>
+                                          </div>
+                                          <div class="form-group">
+                                            <input type="text" class="form-control" id="inputflat" ng-model="address" placeholder="Enter Address" required>
                                           </div>
                                           <div class="form-group">
                                             <input type="text" class="form-control" name="inputareaName" ng-model="areaName" placeholder="Enter AreaName"  ng-trim="false" required>
@@ -200,6 +203,7 @@
                                           <label for="address">Address</label>
                                           <p>FlatNo:{{flat_no}}</p>
                                           <p>Address:{{address}}</p>
+                                           <p>AreaName:{{areaName}}</p>
                                            <p>LandMark: {{landmark}}</p>
                                           </div>
 

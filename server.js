@@ -20,8 +20,8 @@ var configDB = require('./config/database.js');
 // configuration ===============================================================
 //mongoose.connect(configDB.url); // connect to our database
 var uristring = 
-  process.env.MONGOLAB_URI || 
-  process.env.MONGOHQ_URL || 
+  process.env.MONGODB_URI ||
+  process.env.MONGOLAB_URL ||
   'mongodb://localhost/messoota';
 
 // mongoose
@@ -32,7 +32,7 @@ mongoose.connect(uristring,function (err, res) {
     console.log ('Succeeded connected to: ' + uristring);
   }
 });
-require('./config/passport')(passport); // pass passport for configuration
+require('./config/passport')(passport); // passport for configuration
 
 // set up our express application
 app.use(morgan('dev')); // log every request to the console

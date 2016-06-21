@@ -3,6 +3,27 @@ var VendorInfoModel = require('../app/models/vendorInfo');
 var CustomerInfoModel = require('../app/models/customerInfo');
 var CoverageAreaModel = require('../app/models/coverageArea');
 var CountersModel = require('../app/models/counters');
+var Firebase = require("firebase");
+Firebase.initializeApp({
+  serviceAccount: {
+  "type": "service_account",
+  "project_id": "project-8598805513533999178",
+  "private_key_id": "82abba7994a0894b4b38ee0c66d05cf80dd99efc",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCGKNGc8VwvoTrX\njusnjmbMAmjTjBJ/2Tu/gzktQxfoY0mIe31NUufw0mnBQYOJakU1FORvw8USn3QM\nNCu8h1UvfhvkUVI/FjAdEcuBh+PFOULqFWYlalK3560qvGlE6xHnftgLQC/LI9R4\nmO0moRLBrQ2Oq2JVUwIE58xiXgw5WyMxnZ4IS1kons5UmutUw3QtRMfvwLHrkV/z\na8oP6XPXeECp7FWrvtF53PYFLRurL1bFQsSNwHFw8su8BhEhjpXXD1SDKyEpnz4E\nr8P2wTS1116mrVkNXWyY0rV7fyBvqeh/oH0AZVOzDCueFkT3Q2eZJcGUnGp9uTCb\nExXNIws/AgMBAAECggEAST2LgYR6cT4x43AQjJ2/HOzL0YGMr+MmLR00X7NbH/Dk\nOfBAra/vE5erSGe9qY0sjxgCxck4kzwdnHP21IuFQ9Iy4+hJYEt6pMQMN4C6Jfdm\nwmhARXjQA7ok3UnSpl82fQzQYQP/k4TR/6xs+0O/+5+/4P1LR41zcr4g5Cq3va9l\n4W37dOgaYCUSprWXFQtD5kztcOYNeyuPGg7IYIL/xBo8mqaH49wAf1SureSJauKK\ndEc8hq4FuR9VAWlISV4GBZ4w6DL+N2KrOFbwBiqbt6IASoh7p6k2H+beExmKCpeG\nUDORBsuMRNsYFvQDmS8q6XwYjX4TVh/Agp7jv+DaEQKBgQDorbsL+f+/GZQQ1+ds\nSMQdhvOLXpO8Oh7eAjTTY3K/UNTKCkEoTkam51Bv4O4b/qIXKbcqRyTfqbW9e/mb\nuY0SK/+2N0XTo3X71jJDRKE+Zls1j2/slaDeiUzRxXIF+J0SIgEV5hPbEGNYdGuK\niDP0Mr82GQ998kyKcMBIqG8yZQKBgQCTmzKhmt7GmwCWnxZlvc1yB1nII2r+L1CT\nVQudMgNyWLAF3XtVXC6mntGhEdzcygvB/AOwusMI60duCgZK/+x0JNdyLKvFkmeT\nh4djfppGSjwtzzW1geBgJQnyWdoBv/q6Z68Ms3NSexTODbfC2qfBpR27oECZr4Hz\n7P45S+Fa0wKBgDfBKYj9JuNL5ccDdVjlNtk8dS94Qj5gTvUz4iSlN+HQJK0lN+fI\nmfV0iDnG1EexBHY4cMOYuKU/rWTySCWgmMU59dRb+kd0a9kkwnaMA3dIX6K99Dvk\nvt+UVuwNO/1iTYEC1O/Cag+cJbIUc5CGgqyJXHhCGQw8+0pRKkI+2iZhAoGAD5Qw\nyteyrZmMfVk7Hu/icCeQdUwvrbZGtdYjDKtLq9TqdyQCMWcyUUmv7GUbP35fsVCs\n/wknLpjOiDGsqlvKlBOTXayTUJ38KpkCVCD3nXWWVmtpSsfza5JdM2QCW27swqHQ\n2vFRuaHd90WBYKJ9VDXeJoBqcQ4SFDGuP1Pf7BsCgYEA0bVl9WMaIAe8V6AtwYjz\nLx1KRQ3mZWwXdEBitciQhnDeutMgaExkwCJHag6VGfOljNe/JtgCEzqWWh0rvFzi\nUn2WZA/kcqByHIQzVqJwhFkVjRzS5/qVrTvZw0xu2HVQD4iV6OHRMS3TeIUbGqOK\ngFYR4uhQAX6sXvXp4uU16bs=\n-----END PRIVATE KEY-----\n",
+  "client_email": "khaanavali@project-8598805513533999178.iam.gserviceaccount.com",
+  "client_id": "110281937967415310229",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/khaanavali%40project-8598805513533999178.iam.gserviceaccount.com"
+},
+  databaseURL: "https://project-8598805513533999178.firebaseio.com"
+});
+
+
+var rootRef = Firebase.database().ref();
+
+
 module.exports = function(app, passport) {
 
 
@@ -80,7 +101,14 @@ app.post('/v1/m/login', function(req, res, next) {
         console.log('post /v1/m/login  3');
       if (err) {
       console.log('post /v1/m/login 4'); 
+      
+
         return next(err); }
+       console.log("store the uniqui id") 
+              storeVendoruniqueId(req,res,function(req,res){
+           console.log("storeVendoruniqueId success");
+           
+        });
       return res.send("1");
     });
     console.log('post /v1/m/login 5');
@@ -431,6 +459,26 @@ console.log(request.params.id);
     });
 }
 
+function storeVendoruniqueId(request,response,callback,param)
+{
+console.log("storeVendorUniquiId");
+console.log(request.params.id);
+ VendorInfoModel.update({ 'hotel.email':request.body.email},
+      {
+        uniqueid:request.body.uniqueid
+      },
+       function( err ) {
+        if( !err ) {
+            console.log( 'storeVendorUniquiId created' );
+            callback(request,response);
+            return ;
+        } else {
+         console.log( 'storeVendorUniquiId error' );
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+}
 
 app.get('/old/login', function(req, res) {
     res.render('login', { user : req.user });
@@ -652,10 +700,11 @@ app.get( '/v1/vendor/order/:id', function( request, response ) {
 app.get( '/v1/vendor/order/today/:id', function( request, response ) {
   console.log(request.params.id);
   var start = new Date();
-    start.setHours(0,0,0,0);
-console.log(start);
+    start.setHours(5,30,0,0);
+    console.log(start);
     var end = new Date();
-    end.setHours(23,59,59,999);
+    end.setDate(end.getDate() + 1);
+    end.setHours(4,29,59,999);
     console.log(end);
      return OrderModel.find({  'hotel.email':request.params.id,
                                // 'date': {$gte: start, $lt: end}},
@@ -717,45 +766,8 @@ app.get( '/v1/vendor/order_all', function( request, response ) {
     });
 });
 
-// app.post( '/v1/vendor/order', function( request, response ) {
-
-
-//   var res = getNextSequence('order',function(data) {
-//     var order_id = request.body.hotel.id ;
-//     order_id = order_id + "R";
-//     order_id = order_id + data.sequence;
-//     console.log(order_id);
-// var totalCostl = request.body.bill_value + request.body.hotel.deliveryCharge;
-//         console.log('post order');
-//         var order = new OrderModel({
-//             id:order_id,
-//             hotel:request.body.hotel,
-//             customer: {name: request.body.customer.name, email: request.body.customer.email, 
-//                 phone: request.body.customer.phone,  
-//                 address: request.body.address},
-//                 menu: request.body.menu,
-//                 bill_value:request.body.bill_value,
-//                 deliveryCharge: request.body.hotel.deliveryCharge,
-//                 totalCost:totalCostl,
-//                 current_status:"Ordered",
-//                 tracker:  [{status:"Ordered",time:new Date()}]     });
-     
-//         console.log(request.body);
-//         order.save( function( err ) {
-//             if( !err ) {
-//                 console.log( 'created' );
-//                 console.log( order);
-//                 return response.send( order );
-//             } else {
-//              console.log( 'error' );
-//                 console.log( err );
-//                 return response.send('ERROR');
-//             }
-//         });
-//     });
-// });
-
 app.post( '/v1/vendor/order', function( request, response ) {
+
   var res = getNextSequence('order',function(data) {
     var order_id = request.body.hotel.id ;
     order_id = order_id + "R";
@@ -778,18 +790,39 @@ app.post( '/v1/vendor/order', function( request, response ) {
                 instruction:request.body.instruction,
                 tracker:  [{status:"Ordered",time:new Date()}]     });
      
-        console.log(request.body);
+       
         order.save( function( err ) {
             if( !err ) {
                 console.log( 'created' );
-                console.log( order);
-                return response.send( order );
-            } else {
-             console.log( 'error' );
-                console.log( err );
-                return response.send('ERROR');
-            }
-        });
+               // console.log( order);
+                console.log( order.hotel.email);
+
+                
+                VendorInfoModel.find({ 'hotel.email':order.hotel.email},function( err, vendor ) {
+                    if( !err ) {
+                      console.log(vendor[0].uniqueid);
+                     
+                      var pn = {};
+                       
+                      console.log( order_id);
+                      pn[vendor[0].uniqueid]  = {
+                        msg:order_id
+                      };
+
+                      console.log(pn); // should print  Object { name="John"}
+                      rootRef.update(pn);
+                    } 
+                    else {
+                      console.log( err );
+                    }
+                    });  
+                  return response.send( order );
+                } else {
+                  console.log( 'error' );
+                  console.log( err );
+                  return response.send('ERROR');
+                }
+            });
     });
 });
 
@@ -1076,6 +1109,100 @@ function getNextSequence(name,result)
     });
 
 }
+app.post( '/v1/pn/register', function( request, response ) {
+    console.log("post v1/pn/register");
+    console.log(request.body);
+ 
+    if( 1 ) {
+            console.log('success');
+            
+            return response.send('success');
+        } else {
+            console.log( 'failure' );
+            return response.send('failure');
+        }
+
+});
+app.post( '/v1/pn/vendor/addTofirebase', function( request, response ) {
+    console.log("post v1/pn/vendor/addTofirebase");
+    console.log(request.body);
+ 
+    if( request.body.message ) {
+            console.log('success');
+            var pn = {};
+            pn[request.body.key]  = {
+                info:request.body.message
+            };
+            console.log(pn); // should print  Object { name="John"}
+              rootRef.update(
+               pn
+             );
+
+            return response.send('success');
+        }
+        else if(request.body.update)
+          {
+            console.log('success');
+            var pn = {};
+            pn[request.body.key]  = {
+                update:request.body.update
+            };
+            console.log(pn); // should print  Object { name="John"}
+              rootRef.update(
+               pn
+             );
+           // rootRef.child(request.body.key).set({ first: 'Fred', last: 'Flintstone' });
+            // var newdata = {'newoffer':request.body.message};
+            //  rootRef.push(newdata);
+           
+            return response.send('success');
+        }
+         else {
+            console.log( 'failure' );
+            return response.send('failure');
+        }
+
+});
+app.post( '/v1/pn/customer/addTofirebase', function( request, response ) {
+    console.log("post v1/pn/customer/addTofirebase");
+    console.log(request.body);
+ 
+    if( request.body.message ) {
+            console.log('success');
+            var pn = {};
+            pn['customer']  = {
+                info:request.body.message
+            };
+            console.log(pn); // should print  Object { name="John"}
+              rootRef.update(
+               pn
+             );
+
+            return response.send('success');
+        }
+        else if(request.body.update)
+          {
+            console.log('success');
+            var pn = {};
+            pn['customer']  = {
+                update:request.body.update
+            };
+            console.log(pn); // should print  Object { name="John"}
+              rootRef.update(
+               pn
+             );
+           // rootRef.child(request.body.key).set({ first: 'Fred', last: 'Flintstone' });
+            // var newdata = {'newoffer':request.body.message};
+            //  rootRef.push(newdata);
+           
+            return response.send('success');
+        }
+         else {
+            console.log( 'failure' );
+            return response.send('failure');
+        }
+
+});
 app.delete( '/v1/admin/counters/:id', function( request, response ) {
   //  ExampleModel.findById( request.params.id, function( err, book ) {
         return CountersModel.remove( { '_id':request.params.id},function( err ) {
