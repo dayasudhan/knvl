@@ -810,7 +810,7 @@ app.post( '/v1/vendor/order', function( request, response ) {
                       };
 
                       console.log(pn); // should print  Object { name="John"}
-                      rootRef.set(pn);
+                      rootRef.update(pn);
                     } 
                     else {
                       console.log( err );
