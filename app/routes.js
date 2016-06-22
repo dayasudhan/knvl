@@ -791,7 +791,7 @@ app.post( '/v1/vendor/order', function( request, response ) {
                 bill_value:request.body.bill_value,
                 deliveryCharge: request.body.deliverCharge,
                 totalCost:request.body.totalCost,
-                current_status:"Ordered",
+                current_status:"ORDERED",
                 date:indiantime,
                 instruction:request.body.instruction,
                 tracker:  [{status:"Ordered",time:indiantime}]     });
@@ -890,8 +890,7 @@ app.put( '/v1/vendor/order/status/:id', function( request, response ) {
     var indiantime = new Date();
      indiantime.setHours(indiantime.getHours() + 5);
      indiantime.setMinutes(indiantime.getMinutes() + 30);
-     return OrderModel.update({ '_id':request.params.id},
-
+     return OrderModel.findOneAndUpdate({ '_id':request.params.id},
         { 
           current_status:request.body.status,
           $addToSet: {tracker: {$each:[{status: request.body.status,  time:indiantime,reason:request.body.reason}] }}
