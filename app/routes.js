@@ -794,7 +794,7 @@ app.post( '/v1/vendor/order', function( request, response ) {
                 current_status:"ORDERED",
                 date:indiantime,
                 instruction:request.body.instruction,
-                tracker:  [{status:"Ordered",time:indiantime}]     });
+                tracker:  [{status:"ORDERED",time:indiantime}]     });
      
        
         order.save( function( err ) {
