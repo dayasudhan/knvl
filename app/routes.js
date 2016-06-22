@@ -899,7 +899,7 @@ app.put( '/v1/vendor/order/status/:id', function( request, response ) {
         if( !err ) {
             console.log("no error");
             console.log(order);
-            return response.send('success');
+            return response.send(order.tracker);
         } else {
             console.log( err );
             return response.send('ERROR');
