@@ -901,7 +901,7 @@ app.put( '/v1/vendor/order/status/:id', function( request, response ) {
             console.log(order);
             var pn = {};
             var stat = {};
-            stat[object.id] = request.body.status;
+            stat[order.id] = request.body.status;
            
               pn['customer']  = stat;
               console.log(pn); // should print  Object { name="John"}
