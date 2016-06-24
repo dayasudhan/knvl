@@ -900,16 +900,14 @@ app.put( '/v1/vendor/order/status/:id', function( request, response ) {
             console.log("no error");
             console.log(order);
             var pn = {};
-            pn['customer']  = {
-                order.id:request.body.status
-            };
-            console.log(pn); // should print  Object { name="John"}
-              rootRef.update(
-               pn
-             );
-
-            return response.send('success');
-        }
+            var stat = {};
+            stat[object.id] = request.body.status;
+           
+              pn['customer']  = stat;
+              console.log(pn); // should print  Object { name="John"}
+                rootRef.update(
+                pn
+              );
             return response.send(order.tracker);
         } else {
             console.log( err );
