@@ -899,6 +899,17 @@ app.put( '/v1/vendor/order/status/:id', function( request, response ) {
         if( !err ) {
             console.log("no error");
             console.log(order);
+            var pn = {};
+            pn['customer']  = {
+                order.id:request.body.status
+            };
+            console.log(pn); // should print  Object { name="John"}
+              rootRef.update(
+               pn
+             );
+
+            return response.send('success');
+        }
             return response.send(order.tracker);
         } else {
             console.log( err );
@@ -1111,7 +1122,7 @@ function getNextSequence(name,result)
             console.log("no error");
             console.log(order);
             ret2 = order;
-            result(order);
+            result(order);order
            // return order;
          
         } else {
