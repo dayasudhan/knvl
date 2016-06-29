@@ -1120,7 +1120,7 @@ function getNextSequence(name,result)
             console.log("no error");
             console.log(order);
             ret2 = order;
-            result(order);order
+            result(order);
            // return order;
          
         } else {
