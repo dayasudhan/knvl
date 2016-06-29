@@ -713,6 +713,7 @@ app.get( '/v1/vendor/order/today/:id', function( request, response ) {
                                // 'date': {$gte: start, $lt: end}},
                                tracker:{
                             $elemMatch: {
+                                 status:"ORDERED",
                                  time:{$gte: start, $lt: end}
                                 }
                             }},
