@@ -699,13 +699,16 @@ app.get( '/v1/vendor/order/:id', function( request, response ) {
 
 app.get( '/v1/vendor/order/today/:id', function( request, response ) {
   console.log(request.params.id);
-  var start = new Date();
-    start.setHours(5,30,0,0);
-    console.log(start);
-    var end = new Date();
-    end.setDate(end.getDate() + 1);
-    end.setHours(4,29,59,999);
-    console.log(end);
+  var indiantime = new Date();
+     indiantime.setHours(indiantime.getHours() + 5);
+     indiantime.setMinutes(indiantime.getMinutes() + 30);
+    var start = new Date(indiantime);
+    start.setHours(0,0,0,0);
+    console.log('starts time ' +start);
+    var end = new Date(indiantime);
+   
+    end.setHours(23,59,59,999);
+    console.log('endtime' + end);
      return OrderModel.find({  'hotel.email':request.params.id,
                                // 'date': {$gte: start, $lt: end}},
                                tracker:{
@@ -773,6 +776,9 @@ app.post( '/v1/vendor/order', function( request, response ) {
     order_id = order_id + "R";
     order_id = order_id + data.sequence;
     console.log(order_id);
+    var indiantime = new Date();
+    indiantime.setHours(indiantime.getHours() + 5);
+    indiantime.setMinutes(indiantime.getMinutes() + 30);
     var dc;
         console.log('post order');
         var order = new OrderModel({
@@ -785,10 +791,10 @@ app.post( '/v1/vendor/order', function( request, response ) {
                 bill_value:request.body.bill_value,
                 deliveryCharge: request.body.deliverCharge,
                 totalCost:request.body.totalCost,
-                current_status:"Ordered",
-                date:new Date(),
+                current_status:"ORDERED",
+                date:indiantime,
                 instruction:request.body.instruction,
-                tracker:  [{status:"Ordered",time:new Date()}]     });
+                tracker:  [{status:"ORDERED",time:indiantime}]     });
      
        
         order.save( function( err ) {
@@ -881,13 +887,28 @@ app.put( '/v1/vendor/order/status/:id', function( request, response ) {
     console.log('/v1/vendor/order/status/:id');
     console.log(request.params.id);
     console.log(request.body);
-
-     return OrderModel.update({ '_id':request.params.id},
-        { $addToSet: {tracker: {$each:[{status: request.body.status,  time:new Date(),reason:request.body.reason}] }}},function( err, order ) {
+    var indiantime = new Date();
+     indiantime.setHours(indiantime.getHours() + 5);
+     indiantime.setMinutes(indiantime.getMinutes() + 30);
+     return OrderModel.findOneAndUpdate({ '_id':request.params.id},
+        { 
+          current_status:request.body.status,
+          $addToSet: {tracker: {$each:[{status: request.body.status,  time:indiantime,reason:request.body.reason}] }}
+        },
+          function( err, order ) {
         if( !err ) {
             console.log("no error");
             console.log(order);
-            return response.send('success');
+            var pn = {};
+            var stat = {};
+            stat[order.id] = 'Order ' + order.id +' - '+request.body.status;
+           
+              pn['customer']  = stat;
+              console.log(pn); // should print  Object { name="John"}
+                rootRef.update(
+                pn
+              );
+            return response.send(order.tracker);
         } else {
             console.log( err );
             return response.send('ERROR');

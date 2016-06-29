@@ -15,11 +15,11 @@ app = angular.module("vendorModule", []);
           var timestamp = item._id.toString().substring(0,8);
           item.date = new Date( parseInt( timestamp, 16 ) * 1000 );
           item.statusArrayList =[
-                      { id: 1, name: 'Ordered',disabled:true},
-                      { id: 2, name: 'Accepted', disabled: false },
-                      { id: 3, name: 'Delivered', disabled: false },
-                      { id: 4, name: 'Cancelled', disabled: false },
-                      { id: 5, name: 'Rejected', disabled: false }
+                      { id: 1, name: 'ORDERED',disabled:true},
+                      { id: 2, name: 'ACCEPTED', disabled: false },
+                      { id: 3, name: 'DELIVERED', disabled: false },
+                      { id: 4, name: 'CANCELLLED', disabled: false },
+                      { id: 5, name: 'REJECTED', disabled: false }
                   ];
           item.DisabledStatus = [];          
           angular.forEach(item.tracker,function(st)
