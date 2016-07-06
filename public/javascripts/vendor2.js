@@ -162,6 +162,30 @@ $scope.trackerUpdateStatus = function(param1)
   });
   app.controller("DetailsController", function ($scope, $http, jsonFilter)
   {
+      $scope.addLogo = function (param,files) {
+      console.log("addLogo");
+      var fd = new FormData();
+      console.log(files[0]);
+      console.log($scope.hotelId);
+    //Take the first selected file
+      fd.append("file", files[0]);
+      
+      var url4 = "/v1/vendor/logo/";
+      url4 = url4 + $scope.hotelId;
+      $http.post(url4, fd, {
+        withCredentials: true,
+        headers: {'Content-Type': undefined , 'enctype': 'multipart/form-data' },
+        transformRequest: angular.identity
+    }).success(function (data, status, headers, config)
+        {
+            console.log("addLogo success");
+        })
+        .error(function (data, status, headers, config)
+        {
+          console.log("addLogo error");
+        });
+         
+    };
       $scope.addDetails = function (param) {
       console.log("addDetails 1");
       var deliverAreas =  [];
