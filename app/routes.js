@@ -1,9 +1,19 @@
+
 var OrderModel = require('../app/models/vendorOrder');
 var VendorInfoModel = require('../app/models/vendorInfo');
 var CustomerInfoModel = require('../app/models/customerInfo');
 var CoverageAreaModel = require('../app/models/coverageArea');
 var CountersModel = require('../app/models/counters');
 var Firebase = require("firebase");
+var multer = require('multer');
+var path = require('path');
+var options = multer.diskStorage({ destination : 'public/images/logo/' ,
+  filename: function (req, file, cb) {
+    cb(null, req.params.id + path.extname(file.originalname));
+  }
+});
+var upload = multer({ storage: options });
+
 Firebase.initializeApp({
   serviceAccount: {
   "type": "service_account",
@@ -414,6 +424,32 @@ app.get( '/v1/vendor/info/:id', function( request, response ) {
         }
     });
 });
+
+app.post( '/v1/vendor/logo/:id', upload.single('file'),function( req, res ) {
+  console.log(req.params.id);
+  console.log(req.files);
+  console.log(req.file);
+  console.log(req.file.path);
+  console.log("VendorLogo post");
+  console.log(req.body);
+  VendorInfoModel.update({ 'hotel.id':req.params.id},
+      {
+        $set: { "hotel.logo": req.file.path } ,
+       
+      },
+       function( err ) {
+        if( !err ) {
+            console.log( 'updated logo created' );
+           
+            return res.send('created');;
+        } else {
+         console.log( 'updated logo error' );
+            console.log( err );
+            return res.send('ERROR');
+        }
+    });
+});
+
 app.post( '/v1/vendor/info/:id', function( req, res ) {
 
    console.log("VendorInfo post");
@@ -428,6 +464,7 @@ function storeVendorInfo(request,response,callback,param)
 {
 console.log("storeVendorInfo");
 console.log(request.params.id);
+
  VendorInfoModel.update({ 'hotel.email':request.params.id},
       {
         hotel:{name:request.body.Name,email:request.params.id, id:request.body.id},

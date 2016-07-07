@@ -17,6 +17,10 @@ var session      = require('express-session');
 
 var configDB = require('./config/database.js');
 
+
+var bodyParser = require('body-parser');
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 // configuration ===============================================================
 //mongoose.connect(configDB.url); // connect to our database
 var uristring = 
