@@ -450,6 +450,27 @@ app.post( '/v1/vendor/logo/:id', upload.single('file'),function( req, res ) {
     });
 });
 
+app.post( '/v1/vendor/isopen/:id', function( req, res ) {
+  console.log('/v1/vendor/isopen/:id');
+  console.log(req.params.id);
+  console.log(req.body.isopen);
+  VendorInfoModel.update({ 'hotel.id':req.params.id},
+      {
+        $set: { isOpen: req.body.isopen } 
+      },
+       function( err ) {
+        if( !err ) {
+            console.log( 'updated isopen created' );
+           
+            return res.send('created');;
+        } else {
+         console.log( 'updated logo isopen' );
+            console.log( err );
+            return res.send('ERROR');
+        }
+    });
+});
+
 app.post( '/v1/vendor/info/:id', function( req, res ) {
 
    console.log("VendorInfo post");
@@ -480,8 +501,8 @@ console.log(request.params.id);
         deliverCharge: request.body.deliverCharge,
         deliveryTime: request.body.deliveryTime,
         minimumOrder: request.body.minimumOrder,
-        deliverAreas:request.body.deliverareas,
-         orderAcceptTimings:request.body.orderAcceptTimings
+        isOpen:1,
+        orderAcceptTimings:request.body.orderAcceptTimings
       },
        function( err ) {
         if( !err ) {
