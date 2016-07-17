@@ -319,7 +319,7 @@ if($scope.morningSupportTime  == 'Yes')
            cityCoverage.citys = objCity;
            $scope.cityCoverage = cityCoverage;
            $scope.selectedCity = 0;
-           $scope.hotelcity = $scope.cityCoverage[selectedCity];
+           $scope.hotelcity = $scope.cityCoverage[$scope.selectedCity];
       console.log($scope.cityCoverage);
         })
         .error(function (data, status, headers, config)

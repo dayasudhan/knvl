@@ -500,6 +500,7 @@ console.log(request.params.id);
         deliverRange: request.body.deliverRange,
         deliverCharge: request.body.deliverCharge,
         deliveryTime: request.body.deliveryTime,
+        deliverAreas:request.body.deliverareas,
         minimumOrder: request.body.minimumOrder,
         isOpen:1,
         orderAcceptTimings:request.body.orderAcceptTimings
