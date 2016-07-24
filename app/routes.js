@@ -837,6 +837,7 @@ app.post( '/v1/vendor/order', function( request, response ) {
     order_id = order_id + data.sequence;
     console.log(order_id);
     var indiantime = new Date();
+
     indiantime.setHours(indiantime.getHours() + 5);
     indiantime.setMinutes(indiantime.getMinutes() + 30);
     var dc;
