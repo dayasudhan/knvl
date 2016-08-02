@@ -471,6 +471,28 @@ app.post( '/v1/vendor/isopen/:id', function( req, res ) {
     });
 });
 
+app.post( '/v1/vendor/review/:id', function( req, res ) {
+  console.log('/v1/vendor/review/:id');
+  console.log(req.params.id);
+  console.log(req.body.rating);
+  console.log(req.body.reviewcomment);
+  VendorInfoModel.update({ 'hotel.id':req.params.id},
+      {
+        
+      },
+       function( err ) {
+        if( !err ) {
+            console.log( 'updated vendor review created' );
+           
+            return res.send('created');;
+        } else {
+         console.log( 'updated vendor review created' );
+            console.log( err );
+            return res.send('ERROR');
+        }
+    });
+});
+
 app.post( '/v1/vendor/info/:id', function( req, res ) {
 
    console.log("VendorInfo post");
