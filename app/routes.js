@@ -7,6 +7,8 @@ var CountersModel = require('../app/models/counters');
 var Firebase = require("firebase");
 var multer = require('multer');
 var path = require('path');
+var Client = require('node-rest-client').Client;
+var client = new Client();
 var options = multer.diskStorage({ destination : 'public/images/logo/' ,
   filename: function (req, file, cb) {
     cb(null, req.params.id + path.extname(file.originalname));
@@ -493,6 +495,48 @@ app.post( '/v1/vendor/review/:id', function( req, res ) {
     });
 });
 
+app.post( '/v1/vendor/otp/register', function( req, res ) {
+    console.log('/v1/vendor/otp/register');
+   
+    console.log(req.body.phoneNumber);
+    console.log(req.body.name);
+    console.log(req.body.email);
+    console.log(req.body.deciveId);
+    // client.get("http://kuruva.herokuapp.com/v1/admin/coverageArea", 
+    //   function (data, response) {
+    //     // parsed response body as js object 
+    //     console.log(data);
+    //     // raw response 
+    //     console.log(response);
+    //     return res.send("Success");
+    // });
+  return res.send("Success");
+
+});
+
+app.post( '/v1/vendor/otp/confirm', function( req, res ) {
+    console.log('/v1/vendor/otp/confirm');
+   
+    console.log(req.body.phoneNumber);
+    console.log(req.body.otpText);
+    // client.get("http://kuruva.herokuapp.com/v1/admin/coverageArea", 
+    //   function (data, response) {
+    //     // parsed response body as js object 
+    //     console.log(data);
+    //     // raw response 
+    //     console.log(response);
+    //      return res.send("Success");
+    // });
+    if (req.body.otpText != "OTP") {
+      return res.send("Success");
+    }
+    else
+    {
+       return res.send("error");
+    }
+ 
+
+});
 app.post( '/v1/vendor/info/:id', function( req, res ) {
 
    console.log("VendorInfo post");
