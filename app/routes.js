@@ -501,7 +501,7 @@ app.post( '/v1/vendor/otp/register', function( req, res ) {
     console.log(req.body.phoneNumber);
     console.log(req.body.name);
     console.log(req.body.email);
-    console.log(req.body.deciveId);
+    console.log(req.body.deviceId);
     // client.get("http://kuruva.herokuapp.com/v1/admin/coverageArea", 
     //   function (data, response) {
     //     // parsed response body as js object 
