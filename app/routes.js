@@ -4,6 +4,7 @@ var VendorInfoModel = require('../app/models/vendorInfo');
 var CustomerInfoModel = require('../app/models/customerInfo');
 var CoverageAreaModel = require('../app/models/coverageArea');
 var CountersModel = require('../app/models/counters');
+var OtpModel = require('../app/models/otp');
 var Firebase = require("firebase");
 var multer = require('multer');
 var path = require('path');
@@ -502,41 +503,64 @@ app.post( '/v1/vendor/otp/register', function( req, res ) {
     console.log(req.body.name);
     console.log(req.body.email);
     console.log(req.body.deviceId);
-    // client.get("http://kuruva.herokuapp.com/v1/admin/coverageArea", 
-    //   function (data, response) {
-    //     // parsed response body as js object 
-    //     console.log(data);
-    //     // raw response 
-    //     console.log(response);
-    //     return res.send("Success");
-    // });
-  return res.send("Success");
+    var otpnum = Math.random() * (9999 - 1000) + 1000;
+    otpnum = Math.round(otpnum);
+    console.log(req.body.phoneNumber);
+     return OtpModel.findOneAndUpdate({ '_id':req.body.phoneNumber},
+                { otpnumber:otpnum },
+      function( err,otp ) {
+            if( !err ) 
+            {
+                console.log( 'otp created' );
+                console.log(otp);
+                var otpurl = "https://www.smsgatewayhub.com/api/mt/SendSMS?APIKey=mhgGNz6lk0ytziomd49mcQ&senderid=WEBSMS&channel=2&DCS=0&flashsms=0&route=1";
+                //&number=919566229075&text=test message";
+                otpurl  = otpurl + "&number=" +  req.body.phoneNumber;
+                otpurl  = otpurl + "&text=" +  "Please use this OTP for registering into Khaanavali : " + otpnum;
+                console.log(otpurl);
+                client.get(otpurl, 
+                function (data, response) {
+                    console.log(data);
+                    return res.send("Success");
+                });
+              return res.send("Success");
+            } 
+            else 
+            {
+                  console.log( 'error' );
+                  console.log( err );
+                  return res.send('ERROR');
+              }
+            });
 
 });
 
 app.post( '/v1/vendor/otp/confirm', function( req, res ) {
     console.log('/v1/vendor/otp/confirm');
-   
     console.log(req.body.phoneNumber);
     console.log(req.body.otpText);
-    // client.get("http://kuruva.herokuapp.com/v1/admin/coverageArea", 
-    //   function (data, response) {
-    //     // parsed response body as js object 
-    //     console.log(data);
-    //     // raw response 
-    //     console.log(response);
-    //      return res.send("Success");
-    // });
-    if (req.body.otpText != "OTP") {
-      return res.send("Success");
-    }
-    else
-    {
-       return res.send("error");
-    }
- 
-
+    
+    return OtpModel.find({ '_id':req.body.phoneNumber},function( err, otpInfo ) {
+        if( !err ) {
+            console.log(otpInfo);
+            console.log(otpInfo[0].otpnumber);
+            if(otpInfo[0].otpnumber == req.body.otpText)
+            {
+                return res.send("Success");
+            }
+            else
+            {
+                return res.send("Error");
+            }
+        }
+        else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
 });
+
+
 app.post( '/v1/vendor/info/:id', function( req, res ) {
 
    console.log("VendorInfo post");
@@ -897,7 +921,7 @@ app.get( '/v1/vendor/order_all', function( request, response ) {
 
 app.post( '/v1/vendor/order', function( request, response ) {
 
-  var res = getNextSequence('order',function(data) {
+  var res = +('order',function(data) {
     var order_id = request.body.hotel.id ;
     order_id = order_id + "R";
     order_id = order_id + data.sequence;
