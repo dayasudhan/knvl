@@ -966,7 +966,7 @@ app.get( '/v1/vendor/order_all', function( request, response ) {
 
 app.post( '/v1/vendor/order', function( request, response ) {
 
-  var res = +('order',function(data) {
+  var res = getNextSequence('order',function(data) {
     var order_id = request.body.hotel.id ;
     order_id = order_id + "R";
     order_id = order_id + data.sequence;
