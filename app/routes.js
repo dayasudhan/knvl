@@ -508,49 +508,70 @@ app.post( '/v1/vendor/otp/register', function( req, res ) {
     var otpnum = Math.random() * (9999 - 1000) + 1000;
     otpnum = Math.round(otpnum);
     console.log(req.body.phoneNumber);
+    console.log(otpnum);
      return OtpModel.findOneAndUpdate({ '_id':req.body.phoneNumber},
-                { otpnumber:otpnum },
+                { 'otpnumber':otpnum },
       function( err,otp ) {
-            if( !err ) 
+            if(err){
+              console.log( 'err findOneAndUpdate' );
+              return res.json(err);
+            }
+            else if( otp == null ) 
             {
-                console.log( 'otp created' );
-                console.log(otp);
-                // var otpurl = "https://www.smsgatewayhub.com/api/mt/SendSMS?APIKey=mhgGNz6lk0ytziomd49mcQ&senderid=WEBSMS&channel=2&DCS=0&flashsms=0&route=1";
-                // //&number=919566229075&text=test message";
-                // otpurl  = otpurl + "&number=" +  req.body.phoneNumber;
-                // otpurl  = otpurl + "&text=" +  "Your one time password for khaanavali is : " + otpnum;
-                // console.log(otpurl);
-                // client.get(otpurl, 
-                // function (data, response) {
-                //     console.log(data);
-                //     return res.send("Success");
-                // });
-              return res.send("Success");
+               console.log( 'new otp created - otp null' );
+               var otpModel = new OtpModel(
+                { '_id':req.body.phoneNumber,
+                'otpnumber':otpnum });
+                otpModel.save( function( err ) {
+                      if( !err ) 
+                      {
+                            console.log( 'new otp created' );
+                            var otpurl = "https://www.smsgatewayhub.com/api/mt/SendSMS?APIKey=mhgGNz6lk0ytziomd49mcQ&senderid=WEBSMS&channel=2&DCS=0&flashsms=0&route=1";
+                            //&number=919566229075&text=test message";
+                            otpurl  = otpurl + "&number=" +  req.body.phoneNumber;
+                            otpurl  = otpurl + "&text=" +  "Your one time password for khaanavali is : " + otpnum;
+                            console.log(otpurl);
+                            client.get(otpurl, 
+                            function (data, response) {
+                                console.log(data);
+                                return res.send("Success");
+                            });
+                            return res.send( "Success" );
+                        } else {
+                         console.log( 'error' );
+                            console.log( err );
+                            return res.send('ERROR');
+                        }
+                    });
+
+                  return res.send("Success");
             } 
             else 
             {
-                  console.log( 'error' );
-                  console.log( err );
-                  return res.send('ERROR');
+                console.log( 'old number new otp created' );
+                console.log(otp);
+                var otpurl = "https://www.smsgatewayhub.com/api/mt/SendSMS?APIKey=mhgGNz6lk0ytziomd49mcQ&senderid=WEBSMS&channel=2&DCS=0&flashsms=0&route=1";
+                //&number=919566229075&text=test message";
+                otpurl  = otpurl + "&number=" +  req.body.phoneNumber;
+                otpurl  = otpurl + "&text=" +  "Your one time password for khaanavali is : " + otpnum;
+                console.log(otpurl);
+                client.get(otpurl, 
+                function (data, response) {
+                    console.log(data);
+                    return res.send("Success");
+                });
               }
             });
 
 });
 app.get( '/v1/vendor/otp/all', function( req, res ) {
     console.log('/v1/vendor/otp/confirm');
-    console.log(req.body.phoneNumber);
-    console.log(req.body.otpText);
-    
-    return OtpModel.find({},function( err, otpInfo ) {
+    return OtpModel.find(function( err, otpInfo ) {
         if( !err ) {
-            console.log(otpInfo);
-
-                return res.send(otpInfo);
-
-        }
-        else {
+            return res.send( otpInfo );
+        } else {
             console.log( err );
-            return response.send('ERROR');
+            return res.send('ERROR');
         }
     });
 });
