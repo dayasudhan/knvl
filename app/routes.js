@@ -536,7 +536,24 @@ app.post( '/v1/vendor/otp/register', function( req, res ) {
             });
 
 });
+app.get( '/v1/vendor/otp/all', function( req, res ) {
+    console.log('/v1/vendor/otp/confirm');
+    console.log(req.body.phoneNumber);
+    console.log(req.body.otpText);
+    
+    return OtpModel.find({},function( err, otpInfo ) {
+        if( !err ) {
+            console.log(otpInfo);
 
+                return res.send(otpInfo);
+
+        }
+        else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+});
 app.post( '/v1/vendor/otp/confirm', function( req, res ) {
     console.log('/v1/vendor/otp/confirm');
     console.log(req.body.phoneNumber);
@@ -545,8 +562,13 @@ app.post( '/v1/vendor/otp/confirm', function( req, res ) {
     return OtpModel.find({ '_id':req.body.phoneNumber},function( err, otpInfo ) {
         if( !err ) {
             console.log(otpInfo);
-            console.log(otpInfo[0].otpnumber);
-            if(otpInfo[0].otpnumber == req.body.otpText)
+            console.log(otpInfo.otpnumber);
+            //console.log(otpInfo[0].otpnumber);
+            if(otpInfo.otpnumber == req.body.otpText)
+            {
+                return res.send("Success");
+            }
+            else if(otpInfo[0].otpnumber == req.body.otpText)
             {
                 return res.send("Success");
             }
