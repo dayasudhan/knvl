@@ -515,16 +515,16 @@ app.post( '/v1/vendor/otp/register', function( req, res ) {
             {
                 console.log( 'otp created' );
                 console.log(otp);
-                var otpurl = "https://www.smsgatewayhub.com/api/mt/SendSMS?APIKey=mhgGNz6lk0ytziomd49mcQ&senderid=WEBSMS&channel=2&DCS=0&flashsms=0&route=1";
-                //&number=919566229075&text=test message";
-                otpurl  = otpurl + "&number=" +  req.body.phoneNumber;
-                otpurl  = otpurl + "&text=" +  "Your one time password for khaanavali is : " + otpnum;
-                console.log(otpurl);
-                client.get(otpurl, 
-                function (data, response) {
-                    console.log(data);
-                    return res.send("Success");
-                });
+                // var otpurl = "https://www.smsgatewayhub.com/api/mt/SendSMS?APIKey=mhgGNz6lk0ytziomd49mcQ&senderid=WEBSMS&channel=2&DCS=0&flashsms=0&route=1";
+                // //&number=919566229075&text=test message";
+                // otpurl  = otpurl + "&number=" +  req.body.phoneNumber;
+                // otpurl  = otpurl + "&text=" +  "Your one time password for khaanavali is : " + otpnum;
+                // console.log(otpurl);
+                // client.get(otpurl, 
+                // function (data, response) {
+                //     console.log(data);
+                //     return res.send("Success");
+                // });
               return res.send("Success");
             } 
             else 
