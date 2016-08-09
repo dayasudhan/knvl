@@ -456,10 +456,12 @@ app.post( '/v1/vendor/logo/:id', upload.single('file'),function( req, res ) {
 app.post( '/v1/vendor/isopen/:id', function( req, res ) {
   console.log('/v1/vendor/isopen/:id');
   console.log(req.params.id);
-  console.log(req.body.isopen);
+
+  var isopen = parseInt(req.body.isopen);
+  console.log(isopen);
   VendorInfoModel.update({ 'hotel.email':req.params.id},
       {
-        $set: { isOpen: req.body.isopen } 
+        $set: { isOpen: isopen } 
       },
        function( err ) {
         if( !err ) {
