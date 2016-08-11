@@ -16,7 +16,8 @@ var options = multer.diskStorage({ destination : 'public/images/logo/' ,
   }
 });
 var upload = multer({ storage: options });
-
+var securecustomerkey = 'EjR7tUPWx7WhsVs9FuVO6veFxFISIgIxhFZh6dM66rs';
+var securevendorkey = 'ORql2BHQq9ku8eUX2bGHjFmurqG84x2rkDQUNq9Peelw';
 Firebase.initializeApp({
   serviceAccount: {
   "type": "service_account",
@@ -1134,6 +1135,7 @@ app.post( '/v1/vendor/menu/:id', function( request, response ) {
 app.post( '/v1/admin/coverageArea', function( request, response ) {
      console.log("post /v1/admin/coverageArea");
      console.log(request.body);
+
      //var dd = {'cityName':"dvg",'subAreas':[{'name':"rajajinagar"},{'name':"vijaynagar"}]};
      var dd = {'cityName':request.body.cityName};
       var coverageArea = new CoverageAreaModel(
@@ -1154,6 +1156,7 @@ app.post( '/v1/admin/coverageArea', function( request, response ) {
 
 app.put( '/v1/admin/coverageArea', function( request, response ) {
      console.log("v1/admin/coverageArea");
+     console.log(request.headers);
      console.log(request.body);
      console.log(request.body.cityName);
       console.log(request.body.areaName);
@@ -1175,6 +1178,15 @@ app.put( '/v1/admin/coverageArea', function( request, response ) {
 
 app.get( '/v1/admin/coverageArea', function( request, response ) {
     console.log("/v1/admin/coverageArea");
+    console.log(request.headers);
+    // if(request.headers.securekey != securevendorkey || 
+    //   request.headers.version != '1' || 
+    //   request.headers.client != 'bhoomika'
+    //   )
+    // {
+    //   console.log("security not passed");
+    //   return response.send("Not aunthiticated").status(403);
+    // }
     return CoverageAreaModel.find(function( err, order ) {
         if( !err ) {
             console.log("no error");
