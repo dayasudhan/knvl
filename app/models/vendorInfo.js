@@ -8,7 +8,7 @@ var VendorInfoSchema = new mongoose.Schema({
     vegornoveg: String,
     speciality:String,
     deliverRange: Number,
-    deliverAreas:[{name:String}],
+    deliverAreas:[{name:String,isBulkAreaOnly:Number}],
     deliverCharge:Number,
     deliveryTime:Number,
     minimumOrder:Number,
@@ -18,7 +18,12 @@ var VendorInfoSchema = new mongoose.Schema({
     orderAcceptTimings:{Morning:{startTime:String,endTime:String,available:String},
                         Lunch:{startTime:String,endTime:String,available:String},
                         Dinner:{startTime:String,endTime:String,available:String}
-                            }
+                            },
+    isBulkVendor:Number,
+    bulkdeliverCharge:Number,
+    bulkdeliverRange: Number,
+    bulkminimumOrder:Number,
+    bulkdeliveryTime:Number
     });
 
 //Model

@@ -188,40 +188,73 @@ $scope.trackerUpdateStatus = function(param1)
     };
       $scope.addDetails = function (param) {
       console.log("addDetails 1");
+
+      var bulktype = 0;
+      if($scope.isBulkVendor == 'nonBulkType')
+      {
+          bulktype =  0;
+      }
+      else if($scope.isBulkVendor == 'BulkType')
+      {
+          bulktype  = 2;
+      }
+      else
+      {
+          bulktype = 1;
+      }
+
       var deliverAreas =  [];
+      if(bulktype ==0 || bulktype ==1)
+      {
         angular.forEach($scope.deliverareas, function(item) {
            var obj = new Object();
             obj.name = item;
+            obj.isBulkAreaOnly = 0;
             deliverAreas.push(obj);
         })
-        $scope.hotelcity = $scope.cityCoverage.citys[$scope.selectedCity]
+      }
+      if(bulktype ==2 || bulktype ==1)
+      {
+        angular.forEach($scope.bulkdeliverareas, function(item) {
+           var obj = new Object();
+            obj.name = item;
+            obj.isBulkAreaOnly = 1;
+            deliverAreas.push(obj);
+        })
+      }
+      
+
+      $scope.hotelcity = $scope.cityCoverage.citys[$scope.selectedCity]
       console.log($scope.hotelcity);
       console.log($scope.deliverareas);
       console.log($scope.morningSupportTime);
       console.log($scope.morningstarttime);
       console.log($scope.morningendtime);
      
-  var mornstartTimevalue = "",mornendTimevalue = "",lunchstartTimevalue="",lunchendTimevalue="",dinnerendTimevalue="",dinnerstartTimevalue="";
-if($scope.morningSupportTime  == 'Yes')
-{
-       mornstartTimevalue = ($scope.morningstarttime.getHours()) + ':' + ($scope.morningstarttime.getMinutes());
-      mornendTimevalue = ($scope.morningendtime.getHours()) + ':' + ($scope.morningendtime.getMinutes());
- }
- if($scope.lunchSupportTime  == 'Yes')  
- {  
-      lunchstartTimevalue = ($scope.lunchstarttime.getHours()) + ':' + ($scope.lunchstarttime.getMinutes());
-      lunchendTimevalue = ($scope.lunchendtime.getHours()) + ':' + ($scope.lunchendtime.getMinutes());
-  }
-  if($scope.dinnerSupportTime  == 'Yes')
-  {  
-      dinnerendTimevalue = ($scope.dinnerendtime.getHours()) + ':' + ($scope.dinnerendtime.getMinutes());
-      dinnerstartTimevalue = ($scope.dinnerstarttime.getHours()) + ':' + ($scope.dinnerstarttime.getMinutes());
-  }
+    var mornstartTimevalue = "",mornendTimevalue = "",lunchstartTimevalue="",lunchendTimevalue="",dinnerendTimevalue="",dinnerstartTimevalue="";
+    if($scope.morningSupportTime  == 'Yes')
+    {
+           mornstartTimevalue = ($scope.morningstarttime.getHours()) + ':' + ($scope.morningstarttime.getMinutes());
+          mornendTimevalue = ($scope.morningendtime.getHours()) + ':' + ($scope.morningendtime.getMinutes());
+     }
+     if($scope.lunchSupportTime  == 'Yes')  
+     {  
+          lunchstartTimevalue = ($scope.lunchstarttime.getHours()) + ':' + ($scope.lunchstarttime.getMinutes());
+          lunchendTimevalue = ($scope.lunchendtime.getHours()) + ':' + ($scope.lunchendtime.getMinutes());
+      }
+      if($scope.dinnerSupportTime  == 'Yes')
+      {  
+          dinnerendTimevalue = ($scope.dinnerendtime.getHours()) + ':' + ($scope.dinnerendtime.getMinutes());
+          dinnerstartTimevalue = ($scope.dinnerstarttime.getHours()) + ':' + ($scope.dinnerstarttime.getMinutes());
+      }
       var orderAcceptTimingsValue = {Morning:{startTime:mornstartTimevalue,endTime:mornendTimevalue,available:$scope.morningSupportTime},
                         Lunch:{startTime:lunchstartTimevalue,endTime:lunchendTimevalue,available:$scope.lunchSupportTime},
                         Dinner:{startTime:dinnerstartTimevalue,endTime:dinnerendTimevalue,available:$scope.dinnerSupportTime}
                             }
       console.log(orderAcceptTimingsValue);
+
+
+
       var url = "/v1/vendor/info/";
       url = url + param;
       var postData={Name:$scope.hotelName, username: param, id:$scope.hotelId,
@@ -229,13 +262,21 @@ if($scope.morningSupportTime  == 'Yes')
         Address2:"", street :"",Landmark:$scope.hotelLandmark, 
         Areaname:$scope.hotelAreaname, 
         City:$scope.hotelcity, zip:$scope.hotelzip,latitude:$scope.latitude, longitude:$scope.longitude, logo:"",
-         vegornonveg:$scope.vegornonveg, speciality: $scope.speciality , 
+         vegornonveg:$scope.vegornonveg, 
+         speciality: $scope.speciality , 
          deliverRange:$scope.deliverRange,
          deliverCharge:$scope.deliverCharge,
          deliveryTime:$scope.deliveryTime,
          minimumOrder:$scope.minimumOrder,
          orderAcceptTimings:orderAcceptTimingsValue,
-         deliverareas:deliverAreas};
+         deliverareas:deliverAreas,
+         isBulkVendor:bulktype,
+         bulkdeliverCharge:$scope.bulkdeliverCharge,
+         bulkdeliverRange: $scope.bulkdeliverRange,
+         bulkminimumOrder:$scope.bulkminimumOrder,
+         bulkdeliveryTime:$scope.bulkdeliveryTime
+
+       };
 
       $http.post(url,postData)
         .success(function (data, status, headers, config)
@@ -282,6 +323,12 @@ if($scope.morningSupportTime  == 'Yes')
             $scope.deliverCharge = data[0].deliverCharge;
             $scope.deliveryTime = data[0].deliveryTime;
 
+            $scope.isBulkVendor = data[0].isBulkVendor;
+            $scope.bulkdeliverCharge = data[0].bulkdeliverCharge;
+            $scope.bulkdeliverRange = data[0].bulkdeliverRange;
+            $scope.bulkminimumOrder = data[0].bulkminimumOrder;
+            $scope.bulkdeliveryTime
+
         })
         .error(function (data, status, headers, config)
         {
@@ -306,12 +353,22 @@ if($scope.morningSupportTime  == 'Yes')
             var obj2 = new Object();
             obj2 = city.cityName;
              var subAreaCoverage =  [];
+             var bulksubAreaCoverage =  [];
              angular.forEach(city.subAreas, function(area) {
-             //  var obj2 = new Object();
-              // obj2.subAreaName = area.name;
-               subAreaCoverage.push(area.name);
+               if(area.isBulkAreaOnly == null || area.isBulkAreaOnly == 0)
+               {
+                     subAreaCoverage.push(area.name);
+               }
+               else
+               {
+                    bulksubAreaCoverage.push(area.name);
+               }
              });
+
              obj.subAreas = subAreaCoverage;
+             obj.bulkSubAreas = bulksubAreaCoverage;
+             console.log("subAreas" ,subAreaCoverage);
+              console.log("bulksubAreaCoverage" ,bulksubAreaCoverage);
              cityCoverage.push(obj);
               objCity.push(obj2)
           });

@@ -208,6 +208,18 @@
                         <input type="text" class="form-control"  name="phone" placeholder="0" ng-model = "hotelphone" required>
                       </div>
                     </div>
+
+                    <div class="form-group">
+                      <label for="inputEmail3"  class="col-sm-2 control-label">DeliveryType</label>
+                      <div class="col-sm-10">
+                          <select class="form-control select2" style="width: 100%;" ng-model = "isBulkVendor" required>
+                            <option>nonBulkType</option>
+                            <option>BulkType</option>
+                            <option>Both</option>
+
+                          </select>
+                      </div>
+                    </div>
                     <div class="form-group">
                       <label for="inputdeliverrange"  class="col-sm-2 control-label">Delivery Range in KM's</label>
                       <div class="col-sm-10">
@@ -354,6 +366,53 @@
                       </div>
                                 
                     </div>
+
+
+
+
+                    <div class="form-group">
+                      <label for="inputdeliverrange"  class="col-sm-2 control-label">Bulk Delivery Range in KM's</label>
+                      <div class="col-sm-10">
+                        <input type="number" class="form-control"  name="bulkdeliverRange" placeholder="3" ng-model 
+                        = "bulkdeliverRange" 
+                        min="1" max="100"
+                        required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputdeliverrange"  class="col-sm-2 control-label">Bulk Delivery Time in minutes</label>
+                      <div class="col-sm-10">
+                        <input type="number" class="form-control"  name="bulkdeliveryTime" 
+                        min="0" max="600"
+                        placeholder="60" ng-model = "bulkdeliveryTime" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputdeliverrange"  class="col-sm-2 control-label">Bulk Delivery Charge in Rupees's</label>
+                      <div class="col-sm-10">
+                        <input type="number" class="form-control"  name="bulkdeliverCharge" 
+                        min="0" max="2000"
+                        placeholder="0" ng-model = "bulkdeliverCharge" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputdeliverrange"  class="col-sm-2 control-label">Bulk Minimum Order in Rupees's</label>
+                      <div class="col-sm-10">
+                        <input type="number" class="form-control"  name="bulkminimumOrder" 
+                       
+                        placeholder="0" ng-model = "bulkminimumOrder" required>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputdeliverareas"  class="col-sm-2 control-label">Bulk Deliver Areas Covered</label>
+                      <div class="col-sm-10">
+                          <select multiple class="form-control select2" style="width: 100%;" ng-model = "bulkdeliverareas" ng-options="o for o in cityCoverage[selectedCity].bulkSubAreas track by o"  required>
+                        </select>
+                      </div>
+                    </div>
+
+
 
                   </div><!-- /.box-body -->
                   <div class="box-footer">

@@ -640,7 +640,12 @@ console.log(request.params.id);
         deliverAreas:request.body.deliverareas,
         minimumOrder: request.body.minimumOrder,
         isOpen:1,
-        orderAcceptTimings:request.body.orderAcceptTimings
+        orderAcceptTimings:request.body.orderAcceptTimings,
+        isBulkVendor:request.body.isBulkVendor,
+        bulkdeliverCharge:request.body.bulkdeliverCharge,
+        bulkdeliverRange: request.body.bulkdeliverRange,
+        bulkminimumOrder:request.body.bulkminimumOrder,
+        bulkdeliveryTime:request.body.bulkdeliveryTime
       },
        function( err ) {
         if( !err ) {
@@ -760,12 +765,22 @@ app.get( '/v1/vendor/area', function( request, response ) {
 });
 app.get( '/v1/vendor/delieveryareas', function( request, response ) {
     console.log("GET --/v1/vendor/delieveryareas/");
-    console.log(request.query);//find( { price: { $ne: 1.99, $exists: true } } )
+    console.log(request.query);
+
+    var isbulkrequest = parseInt(request.query.isbulkrequest);
+    console.log(request.query);
+
+  if(isbulkrequest == 1)
+  {
+    console.log("isbulkrequest == 1");
+// time:{$gte: start, $lt: end}
     return VendorInfoModel.find(
         { 
+            isBulkVendor:{ $gte: 1 } ,
             deliverAreas:{
                             $elemMatch: {
                                  name: request.query.areaName
+                                 // isBulkAreaOnly: 1
                                 }
                             } 
         },
@@ -778,6 +793,29 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
             return response.send('ERROR');
         }
     });
+  }
+  else    
+  {
+    console.log("isbulkrequest == else");
+    return VendorInfoModel.find(
+        {   isBulkVendor:{ $lte: 1 } ,
+            deliverAreas:{
+                            $elemMatch: {
+                                 name: request.query.areaName
+                                 //isBulkAreaOnly: 0
+                                }
+                            } 
+        },
+        function( err, vendor ) {
+        if( !err ) {
+            console.log(vendor);
+            return response.send( vendor );
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+  }
 });
 app.get( '/v1/vendor/account/all', function( request, response ) {
     return VendorInfoModel.find(function( err, order ) {
@@ -1157,14 +1195,16 @@ app.post( '/v1/admin/coverageArea', function( request, response ) {
 
 app.put( '/v1/admin/coverageArea', function( request, response ) {
      console.log("v1/admin/coverageArea");
-     console.log(request.headers);
+     //console.log(request.headers);
      console.log(request.body);
      console.log(request.body.cityName);
      console.log(request.body.areaName);
      console.log(request.body.isBulkAreaOnly);
-     var dd = {'name':"tilaknagar"};
+
+    var isbulk = parseInt(request.body.isBulkAreaOnly);
+    console.log('request.body.isBulkAreaOnly' ,isbulk);
         return CoverageAreaModel.update({ 'cityName':request.body.cityName},
-            { $addToSet: {'subAreas': {$each:[{name: request.body.areaName}] }}},
+            { $addToSet: {'subAreas': {$each:[{name: request.body.areaName, isBulkAreaOnly: isbulk}] }}},
             function( err, order ) 
              {
         if( !err ) {
@@ -1180,7 +1220,7 @@ app.put( '/v1/admin/coverageArea', function( request, response ) {
 
 app.get( '/v1/admin/coverageArea', function( request, response ) {
     console.log("/v1/admin/coverageArea");
-    console.log(request.headers);
+    //console.log(request.headers);
     // if(request.headers.securekey != securevendorkey || 
     //   request.headers.version != '1' || 
     //   request.headers.client != 'bhoomika'
@@ -1189,6 +1229,7 @@ app.get( '/v1/admin/coverageArea', function( request, response ) {
     //   console.log("security not passed");
     //   return response.send("Not aunthiticated").status(403);
     // }
+
     return CoverageAreaModel.find(function( err, order ) {
         if( !err ) {
             console.log("no error");
