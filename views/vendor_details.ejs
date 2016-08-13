@@ -407,7 +407,7 @@
                     <div class="form-group">
                       <label for="inputdeliverareas"  class="col-sm-2 control-label">Bulk Deliver Areas Covered</label>
                       <div class="col-sm-10">
-                          <select multiple class="form-control select2" style="width: 100%;" ng-model = "bulkdeliverareas" ng-options="o for o in cityCoverage[selectedCity].bulkSubAreas track by o"  required>
+                          <select multiple class="form-control select2" style="width: 100%;" ng-model = "bulkdeliverareas" ng-options="o for o in cityCoverage[selectedCity].subAreas track by o"  required="">
                         </select>
                       </div>
                     </div>

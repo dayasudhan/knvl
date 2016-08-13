@@ -186,6 +186,7 @@ $scope.trackerUpdateStatus = function(param1)
         });
          
     };
+
       $scope.addDetails = function (param) {
       console.log("addDetails 1");
 
@@ -213,16 +214,39 @@ $scope.trackerUpdateStatus = function(param1)
             deliverAreas.push(obj);
         })
       }
+
       if(bulktype ==2 || bulktype ==1)
       {
         angular.forEach($scope.bulkdeliverareas, function(item) {
+
            var obj = new Object();
             obj.name = item;
-            obj.isBulkAreaOnly = 1;
-            deliverAreas.push(obj);
+
+            console.log(item,"2");
+            var exist = 0;
+            for (var i = 0; i < deliverAreas.length; i++) {
+                if (deliverAreas[i].name === item) {
+                  console.log("present 1");
+                   exist = 1;
+                }
+            }
+          
+
+            if(exist === 1)
+            {
+              console.log("present 2");
+             
+            }
+            else
+            {
+              console.log("present 3");
+              obj.isBulkAreaOnly = 1;
+              deliverAreas.push(obj);
+            }
         })
       }
       
+      console.log("deliverAreas",deliverAreas);
 
       $scope.hotelcity = $scope.cityCoverage.citys[$scope.selectedCity]
       console.log($scope.hotelcity);
@@ -353,22 +377,23 @@ $scope.trackerUpdateStatus = function(param1)
             var obj2 = new Object();
             obj2 = city.cityName;
              var subAreaCoverage =  [];
-             var bulksubAreaCoverage =  [];
+             //var bulksubAreaCoverage =  [];
              angular.forEach(city.subAreas, function(area) {
-               if(area.isBulkAreaOnly == null || area.isBulkAreaOnly == 0)
-               {
-                     subAreaCoverage.push(area.name);
-               }
-               else
-               {
-                    bulksubAreaCoverage.push(area.name);
-               }
+               // if(area.isBulkAreaOnly == null || area.isBulkAreaOnly == 0)
+               // {
+               //       subAreaCoverage.push(area.name);
+               // }
+               // else
+               // {
+               //      bulksubAreaCoverage.push(area.name);
+               // }
+               subAreaCoverage.push(area.name);
              });
 
              obj.subAreas = subAreaCoverage;
-             obj.bulkSubAreas = bulksubAreaCoverage;
+             //obj.bulkSubAreas = bulksubAreaCoverage;
              console.log("subAreas" ,subAreaCoverage);
-              console.log("bulksubAreaCoverage" ,bulksubAreaCoverage);
+             // console.log("bulksubAreaCoverage" ,bulksubAreaCoverage);
              cityCoverage.push(obj);
               objCity.push(obj2)
           });
