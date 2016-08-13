@@ -1161,7 +1161,7 @@ app.post( '/v1/vendor/menu/:id', function( request, response ) {
      console.log(request.params.id);
 
      return VendorInfoModel.update({ 'hotel.email':request.params.id},
-        { $addToSet: {menu: {$each:[{name: request.body.fooditem,  price:request.body.foodprice,availability:1}] }}},function( err, order ) {
+        { $addToSet: {menu: {$each:[{name: request.body.fooditem,  price:request.body.foodprice,availability:1,timings:7}] }}},function( err, order ) {
         if( !err ) {
             console.log("no error");
             console.log(order);
