@@ -1010,6 +1010,7 @@ app.post( '/v1/vendor/order', function( request, response ) {
     var order_id = request.body.hotel.id ;
     order_id = order_id + "R";
     order_id = order_id + data.sequence;
+    console.log('ordertype: - 'request.body.ordertype);
     console.log(order_id);
     var indiantime = new Date();
 
@@ -1030,6 +1031,7 @@ app.post( '/v1/vendor/order', function( request, response ) {
                 current_status:"ORDERED",
                 date:indiantime,
                 instruction:request.body.instruction,
+                ordertype:request.body.ordertype,
                 tracker:  [{status:"ORDERED",time:indiantime}]     });
      
        
@@ -1261,7 +1263,7 @@ app.delete( '/v1/admin/coverageAreaAll', function( request, response ) {
 
 app.get( '/v1/vendor/menu/:id', function( request, response ) {
   // OrderModel.findById( request.params.id, function( err, book ) 
-     console.log("get /vendor/menu/");
+  console.log("get /vendor/menu/");
   console.log(request.params.id);
    console.log(request.body);
      console.log(request.params.id);
