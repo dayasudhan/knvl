@@ -1165,6 +1165,7 @@ app.post( '/v1/vendor/menu/:id', function( request, response ) {
         if( !err ) {
             console.log("no error");
             console.log(order);
+            return response.send('Success');
         } else {
             console.log( err );
             return response.send('ERROR');
@@ -1265,8 +1266,7 @@ app.get( '/v1/vendor/menu/:id', function( request, response ) {
   // OrderModel.findById( request.params.id, function( err, book ) 
   console.log("get /vendor/menu/");
   console.log(request.params.id);
-   console.log(request.body);
-     console.log(request.params.id);
+
    // return OrderModel.find({ customer:{email:'daya@gmail.com'}},function( err, order ) {
      return VendorInfoModel.find({ 'hotel.email':request.params.id},function( err, vendorinfo ) {
         if( !err ) {
