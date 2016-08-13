@@ -4,16 +4,20 @@ var VendorInfoModel = require('../app/models/vendorInfo');
 var CustomerInfoModel = require('../app/models/customerInfo');
 var CoverageAreaModel = require('../app/models/coverageArea');
 var CountersModel = require('../app/models/counters');
+var OtpModel = require('../app/models/otp');
 var Firebase = require("firebase");
 var multer = require('multer');
 var path = require('path');
+var Client = require('node-rest-client').Client;
+var client = new Client();
 var options = multer.diskStorage({ destination : 'public/images/logo/' ,
   filename: function (req, file, cb) {
     cb(null, req.params.id + path.extname(file.originalname));
   }
 });
 var upload = multer({ storage: options });
-
+var securecustomerkey = 'EjR7tUPWx7WhsVs9FuVO6veFxFISIgIxhFZh6dM66rs';
+var securevendorkey = 'ORql2BHQq9ku8eUX2bGHjFmurqG84x2rkDQUNq9Peelw';
 Firebase.initializeApp({
   serviceAccount: {
   "type": "service_account",
@@ -450,6 +454,160 @@ app.post( '/v1/vendor/logo/:id', upload.single('file'),function( req, res ) {
     });
 });
 
+app.post( '/v1/vendor/isopen/:id', function( req, res ) {
+  console.log('/v1/vendor/isopen/:id');
+  console.log(req.params.id);
+ console.log(req.body.isopen);
+  var isopen = parseInt(req.body.isopen);
+  console.log(isopen);
+  VendorInfoModel.update({ 'hotel.email':req.params.id},
+      {
+        $set: { isOpen: isopen } 
+      },
+       function( err ) {
+        if( !err ) {
+            console.log( 'updated isopen created' );
+           
+            return res.send('created');;
+        } else {
+         console.log( 'updated logo isopen' );
+            console.log( err );
+            return res.send('ERROR');
+        }
+    });
+});
+
+app.post( '/v1/vendor/review/:id', function( req, res ) {
+  console.log('/v1/vendor/review/:id');
+  console.log(req.params.id);
+  console.log(req.body.rating);
+  console.log(req.body.reviewcomment);
+  VendorInfoModel.update({ 'hotel.id':req.params.id},
+      {
+        
+      },
+       function( err ) {
+        if( !err ) {
+            console.log( 'updated vendor review created' );
+           
+            return res.send('created');;
+        } else {
+         console.log( 'updated vendor review created' );
+            console.log( err );
+            return res.send('ERROR');
+        }
+    });
+});
+
+app.post( '/v1/vendor/otp/register', function( req, res ) {
+    console.log('/v1/vendor/otp/register');
+   
+    console.log(req.body.phoneNumber);
+    console.log(req.body.name);
+    console.log(req.body.email);
+    console.log(req.body.deviceId);
+    var otpnum = Math.random() * (9999 - 1000) + 1000;
+    otpnum = Math.round(otpnum);
+    console.log(req.body.phoneNumber);
+    console.log(otpnum);
+
+    return OtpModel.findOneAndUpdate({ '_id':req.body.phoneNumber},
+                { 'otpnumber':otpnum },
+      function( err,otp ) {
+            if(err){
+              console.log( 'err findOneAndUpdate' );
+              return res.json(err);
+            }
+            else if( otp == null ) 
+            {
+               console.log( 'new otp created - otp null' );
+               var otpModel = new OtpModel(
+                { '_id':req.body.phoneNumber,
+                'otpnumber':otpnum });
+                otpModel.save( function( err ) {
+                      if( !err ) 
+                      {
+                            console.log( 'new otp created' );
+                            var otpurl = "https://www.smsgatewayhub.com/api/mt/SendSMS?APIKey=mhgGNz6lk0ytziomd49mcQ&senderid=WEBSMS&channel=2&DCS=0&flashsms=0&route=1";
+                            //&number=919566229075&text=test message";
+                            otpurl  = otpurl + "&number=" +  req.body.phoneNumber;
+                            otpurl  = otpurl + "&text=" +  "Your one time password for khaanavali is : " + otpnum;
+                            console.log(otpurl);
+                            client.get(otpurl, 
+                            function (data, response) {
+                                console.log(data);
+                                return res.send("Success");
+                            });
+                            return res.send( "Success" );
+                        } else {
+                         console.log( 'error' );
+                            console.log( err );
+                            return res.send('ERROR');
+                        }
+                    });
+
+                  return res.send("Success");
+            } 
+            else 
+            {
+                console.log( 'old number new otp created' );
+                console.log(otp);
+                var otpurl = "https://www.smsgatewayhub.com/api/mt/SendSMS?APIKey=mhgGNz6lk0ytziomd49mcQ&senderid=WEBSMS&channel=2&DCS=0&flashsms=0&route=1";
+                //&number=919566229075&text=test message";
+                otpurl  = otpurl + "&number=" +  req.body.phoneNumber;
+                otpurl  = otpurl + "&text=" +  "Your one time password for khaanavali is : " + otpnum;
+                console.log(otpurl);
+                client.get(otpurl, 
+                function (data, response) {
+                    console.log(data);
+                    return res.send("Success");
+                });
+              }
+            });
+
+});
+app.get( '/v1/vendor/otp/all', function( req, res ) {
+    console.log('/v1/vendor/otp/confirm');
+    return OtpModel.find(function( err, otpInfo ) {
+        if( !err ) {
+            return res.send( otpInfo );
+        } else {
+            console.log( err );
+            return res.send('ERROR');
+        }
+    });
+});
+app.post( '/v1/vendor/otp/confirm', function( req, res ) {
+    console.log('/v1/vendor/otp/confirm');
+    console.log(req.body.phoneNumber);
+    console.log(req.body.otpText);
+
+    return OtpModel.find({ '_id':req.body.phoneNumber},function( err, otpInfo ) {
+        if( !err ) {
+            console.log(otpInfo);
+            console.log(otpInfo.otpnumber);
+            //console.log(otpInfo[0].otpnumber);
+            if(otpInfo.otpnumber == req.body.otpText)
+            {
+                return res.send("Success");
+            }
+            else if(otpInfo[0].otpnumber == req.body.otpText)
+            {
+                return res.send("Success");
+            }
+            else
+            {
+                return res.send("Error");
+            }
+        }
+        else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+});
+
+
 app.post( '/v1/vendor/info/:id', function( req, res ) {
 
    console.log("VendorInfo post");
@@ -479,9 +637,15 @@ console.log(request.params.id);
         deliverRange: request.body.deliverRange,
         deliverCharge: request.body.deliverCharge,
         deliveryTime: request.body.deliveryTime,
-        minimumOrder: request.body.minimumOrder,
         deliverAreas:request.body.deliverareas,
-         orderAcceptTimings:request.body.orderAcceptTimings
+        minimumOrder: request.body.minimumOrder,
+        isOpen:1,
+        orderAcceptTimings:request.body.orderAcceptTimings,
+        isBulkVendor:request.body.isBulkVendor,
+        bulkdeliverCharge:request.body.bulkdeliverCharge,
+        bulkdeliverRange: request.body.bulkdeliverRange,
+        bulkminimumOrder:request.body.bulkminimumOrder,
+        bulkdeliveryTime:request.body.bulkdeliveryTime
       },
        function( err ) {
         if( !err ) {
@@ -601,12 +765,22 @@ app.get( '/v1/vendor/area', function( request, response ) {
 });
 app.get( '/v1/vendor/delieveryareas', function( request, response ) {
     console.log("GET --/v1/vendor/delieveryareas/");
-    console.log(request.query);//find( { price: { $ne: 1.99, $exists: true } } )
+    console.log(request.query);
+
+    var isbulkrequest = parseInt(request.query.isbulkrequest);
+    console.log(request.query);
+
+  if(isbulkrequest == 1)
+  {
+    console.log("isbulkrequest == 1");
+// time:{$gte: start, $lt: end}
     return VendorInfoModel.find(
         { 
+            isBulkVendor:{ $gte: 1 } ,
             deliverAreas:{
                             $elemMatch: {
                                  name: request.query.areaName
+                                 // isBulkAreaOnly: 1
                                 }
                             } 
         },
@@ -619,6 +793,29 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
             return response.send('ERROR');
         }
     });
+  }
+  else    
+  {
+    console.log("isbulkrequest == else");
+    return VendorInfoModel.find(
+        {   isBulkVendor:{ $lte: 1 } ,
+            deliverAreas:{
+                            $elemMatch: {
+                                 name: request.query.areaName
+                                 //isBulkAreaOnly: 0
+                                }
+                            } 
+        },
+        function( err, vendor ) {
+        if( !err ) {
+            console.log(vendor);
+            return response.send( vendor );
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+  }
 });
 app.get( '/v1/vendor/account/all', function( request, response ) {
     return VendorInfoModel.find(function( err, order ) {
@@ -813,8 +1010,10 @@ app.post( '/v1/vendor/order', function( request, response ) {
     var order_id = request.body.hotel.id ;
     order_id = order_id + "R";
     order_id = order_id + data.sequence;
+    console.log('ordertype: - ',request.body.ordertype);
     console.log(order_id);
     var indiantime = new Date();
+
     indiantime.setHours(indiantime.getHours() + 5);
     indiantime.setMinutes(indiantime.getMinutes() + 30);
     var dc;
@@ -832,6 +1031,7 @@ app.post( '/v1/vendor/order', function( request, response ) {
                 current_status:"ORDERED",
                 date:indiantime,
                 instruction:request.body.instruction,
+                ordertype:request.body.ordertype,
                 tracker:  [{status:"ORDERED",time:indiantime}]     });
      
        
@@ -965,6 +1165,7 @@ app.post( '/v1/vendor/menu/:id', function( request, response ) {
         if( !err ) {
             console.log("no error");
             console.log(order);
+            return response.send('Success');
         } else {
             console.log( err );
             return response.send('ERROR');
@@ -976,6 +1177,7 @@ app.post( '/v1/vendor/menu/:id', function( request, response ) {
 app.post( '/v1/admin/coverageArea', function( request, response ) {
      console.log("post /v1/admin/coverageArea");
      console.log(request.body);
+
      //var dd = {'cityName':"dvg",'subAreas':[{'name':"rajajinagar"},{'name':"vijaynagar"}]};
      var dd = {'cityName':request.body.cityName};
       var coverageArea = new CoverageAreaModel(
@@ -996,12 +1198,16 @@ app.post( '/v1/admin/coverageArea', function( request, response ) {
 
 app.put( '/v1/admin/coverageArea', function( request, response ) {
      console.log("v1/admin/coverageArea");
+     //console.log(request.headers);
      console.log(request.body);
      console.log(request.body.cityName);
-      console.log(request.body.areaName);
-     var dd = {'name':"tilaknagar"};
+     console.log(request.body.areaName);
+     console.log(request.body.isBulkAreaOnly);
+
+    var isbulk = parseInt(request.body.isBulkAreaOnly);
+    console.log('request.body.isBulkAreaOnly' ,isbulk);
         return CoverageAreaModel.update({ 'cityName':request.body.cityName},
-            { $addToSet: {'subAreas': {$each:[{name: request.body.areaName}] }}},
+            { $addToSet: {'subAreas': {$each:[{name: request.body.areaName, isBulkAreaOnly: isbulk}] }}},
             function( err, order ) 
              {
         if( !err ) {
@@ -1017,6 +1223,16 @@ app.put( '/v1/admin/coverageArea', function( request, response ) {
 
 app.get( '/v1/admin/coverageArea', function( request, response ) {
     console.log("/v1/admin/coverageArea");
+    //console.log(request.headers);
+    // if(request.headers.securekey != securevendorkey || 
+    //   request.headers.version != '1' || 
+    //   request.headers.client != 'bhoomika'
+    //   )
+    // {
+    //   console.log("security not passed");
+    //   return response.send("Not aunthiticated").status(403);
+    // }
+
     return CoverageAreaModel.find(function( err, order ) {
         if( !err ) {
             console.log("no error");
@@ -1048,10 +1264,9 @@ app.delete( '/v1/admin/coverageAreaAll', function( request, response ) {
 
 app.get( '/v1/vendor/menu/:id', function( request, response ) {
   // OrderModel.findById( request.params.id, function( err, book ) 
-     console.log("get /vendor/menu/");
+  console.log("get /vendor/menu/");
   console.log(request.params.id);
-   console.log(request.body);
-     console.log(request.params.id);
+
    // return OrderModel.find({ customer:{email:'daya@gmail.com'}},function( err, order ) {
      return VendorInfoModel.find({ 'hotel.email':request.params.id},function( err, vendorinfo ) {
         if( !err ) {

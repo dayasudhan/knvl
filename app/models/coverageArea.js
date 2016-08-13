@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var CoverageAreaSchema = new mongoose.Schema({
     cityName:String,
     id:String,
-    subAreas:[{name:String}]
+    subAreas:[{name:String, isBulkAreaOnly:Number}]
     });
 
 //Model

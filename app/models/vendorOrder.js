@@ -14,7 +14,8 @@ var OrderSchema = new mongoose.Schema({
     bill_value:Number,
     deliveryCharge: Number,
     totalCost:Number,
-    id:String
+    id:String,
+    ordertype:Number
 });
 
 //Model
