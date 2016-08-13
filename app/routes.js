@@ -1010,7 +1010,7 @@ app.post( '/v1/vendor/order', function( request, response ) {
     var order_id = request.body.hotel.id ;
     order_id = order_id + "R";
     order_id = order_id + data.sequence;
-    console.log('ordertype: - 'request.body.ordertype);
+    console.log('ordertype: - ',request.body.ordertype);
     console.log(order_id);
     var indiantime = new Date();
 
