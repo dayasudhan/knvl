@@ -352,7 +352,18 @@ app.get('/p/admin_order', function (req, res) {
 
 
 app.post('/signup', function(req, res, next) {
-
+console.log(req.body);
+if(req.body.password != req.body.password2)
+{
+   
+console.log("password mimatchmatch");
+   return res.send('ERROR');
+}
+else
+{
+  console.log("password match");
+}
+console.log('/signup');
   passport.authenticate('local-signup', function(err, user, info) {
    console.log(req.body);
     if (err) { return next(err); }
