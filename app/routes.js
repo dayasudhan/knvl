@@ -1172,7 +1172,7 @@ app.post( '/v1/vendor/menu/:id', function( request, response ) {
      console.log(request.params.id);
 
      return VendorInfoModel.update({ 'hotel.email':request.params.id},
-        { $addToSet: {menu: {$each:[{name: request.body.fooditem,  price:request.body.foodprice,availability:1,timings:7}] }}},function( err, order ) {
+        { $addToSet: {menu: {$each:[{name: request.body.fooditem,  price:request.body.foodprice,availability:1,timings:request.body.timings}] }}},function( err, order ) {
         if( !err ) {
             console.log("no error");
             console.log(order);
@@ -1277,15 +1277,50 @@ app.get( '/v1/vendor/menu/:id', function( request, response ) {
   // OrderModel.findById( request.params.id, function( err, book ) 
   console.log("get /vendor/menu/");
   console.log(request.params.id);
+  var indiantime = new Date();
+  indiantime.setHours(indiantime.getHours() + 5);
+  indiantime.setMinutes(indiantime.getMinutes() + 30);
+  var current_time = 0;
+  var binaryValueofTime = [];
+  if(indiantime.getHours() < 11)
+  {
+    current_time = 1;
+    console.log("Morning");
+    console.log(indiantime);
+    binaryValueofTime.push(1);
+  }
+  else if (indiantime.getHours() < 16)
+  {
+      current_time = 2;
+      console.log(indiantime);
+      console.log("Lunch");
+      binaryValueofTime.push(1);
+  }
+  else
+  {
+      current_time = 4;
+      console.log(indiantime);
+      console.log("Dinner");
+  }
+  console.log(current_time);
 
-   // return OrderModel.find({ customer:{email:'daya@gmail.com'}},function( err, order ) {
-     return VendorInfoModel.find({ 'hotel.email':request.params.id},function( err, vendorinfo ) {
+     return VendorInfoModel.find({ 'hotel.email':request.params.id                               },
+      function( err, vendorinfo ) {
         if( !err ) {
              console.log("no error");
+             var menu_array ;
             if(vendorinfo.length > 0)
-              return response.send( vendorinfo[0].menu );
+              menu_array = vendorinfo[0].menu;
             else
-              return response.send( vendorinfo );
+              menu_array =  vendorinfo ;
+            var new_menu_array = [];
+            for (var i = 0; i < menu_array.length; i++) {
+                  if(menu_array[i].timings & current_time)
+                  {
+                    new_menu_array.push(menu_array[i]);
+                  }
+              }
+            return response.send(new_menu_array);
         } else {
             console.log( err );
             return response.send('ERROR');
