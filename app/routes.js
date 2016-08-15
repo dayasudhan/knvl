@@ -1313,14 +1313,14 @@ app.get( '/v1/vendor/menu/:id', function( request, response ) {
               menu_array = vendorinfo[0].menu;
             else
               menu_array =  vendorinfo ;
-            var new_menu_array = [];
-            for (var i = 0; i < menu_array.length; i++) {
-                  if(menu_array[i].timings & current_time)
-                  {
-                    new_menu_array.push(menu_array[i]);
-                  }
-              }
-            return response.send(new_menu_array);
+            // var new_menu_array = [];
+            // for (var i = 0; i < menu_array.length; i++) {
+            //       if(menu_array[i].timings & current_time)
+            //       {
+            //         new_menu_array.push(menu_array[i]);
+            //       }
+            //   }
+            return response.send(menu_array);
         } else {
             console.log( err );
             return response.send('ERROR');
