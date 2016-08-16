@@ -18,6 +18,11 @@ var options = multer.diskStorage({ destination : 'public/images/logo/' ,
 var upload = multer({ storage: options });
 var securecustomerkey = 'EjR7tUPWx7WhsVs9FuVO6veFxFISIgIxhFZh6dM66rs';
 var securevendorkey = 'ORql2BHQq9ku8eUX2bGHjFmurqG84x2rkDQUNq9Peelw';
+var adminkey = 'tk0M6HKn0uzL%2FcWMnq3jkeF7Ao%2BtdWyYEJqPDl0P6Ac';
+var version_value_1 = '1';
+var client_key_vendor = 'tunga';
+var client_key_customer = 'bhoomika';
+var client_key_admin = 'gajanuru';
 Firebase.initializeApp({
   serviceAccount: {
   "type": "service_account",
@@ -467,8 +472,17 @@ app.post( '/v1/vendor/logo/:id', upload.single('file'),function( req, res ) {
 
 app.post( '/v1/vendor/isopen/:id', function( req, res ) {
   console.log('/v1/vendor/isopen/:id');
+    console.log(req.headers);
+     if((req.headers.securekey != securevendorkey || 
+       req.headers.version != version_value_1 || req.headers.client != client_key_vendor) && 
+      (req.headers.securekey != adminkey || req.headers.client != client_key_admin) 
+       )
+     {
+       console.log("security not passed");
+       return res.send("Not aunthiticated").status(403);
+     }
   console.log(req.params.id);
- console.log(req.body.isopen);
+  console.log(req.body.isopen);
   var isopen = parseInt(req.body.isopen);
   console.log(isopen);
   VendorInfoModel.update({ 'hotel.email':req.params.id},
@@ -481,7 +495,7 @@ app.post( '/v1/vendor/isopen/:id', function( req, res ) {
            
             return res.send('created');;
         } else {
-         console.log( 'updated logo isopen' );
+         console.log( 'updated isopen error' );
             console.log( err );
             return res.send('ERROR');
         }
@@ -867,8 +881,7 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
                     if(menu_array[i].timings & current_time)
                     {
                       new_menu_array.push(menu_array[i]);
-                    }
-              }
+                    }              }
               vendor[j].menu = new_menu_array;
             }
              console.log("old vendor", vendor);
@@ -984,6 +997,15 @@ return CustomerInfoModel.findOneAndUpdate({ 'id':request.params.id},
 
 app.get( '/v1/vendor/order/:id', function( request, response ) {
   console.log(request.params.id);
+     console.log(request.headers);
+     if((request.headers.securekey != securevendorkey || 
+       request.headers.version != version_value_1 || request.headers.client != client_key_vendor) && 
+      (request.headers.securekey != adminkey || request.headers.client != client_key_admin) 
+       )
+     {
+       console.log("security not passed");
+       return response.send("Not aunthiticated").status(403);
+     }
      return OrderModel.find({ 'hotel.email':request.params.id},function( err, order ) {
         if( !err ) {
             return response.send( order );
@@ -997,6 +1019,15 @@ app.get( '/v1/vendor/order/:id', function( request, response ) {
 
 app.get( '/v1/vendor/order/today/:id', function( request, response ) {
   console.log(request.params.id);
+       console.log(request.headers);
+     if((request.headers.securekey != securevendorkey || 
+       request.headers.version != version_value_1 || request.headers.client != client_key_vendor) && 
+      (request.headers.securekey != adminkey || request.headers.client != client_key_admin) 
+       )
+     {
+       console.log("security not passed");
+       return response.send("Not aunthiticated").status(403);
+     }
   var indiantime = new Date();
      indiantime.setHours(indiantime.getHours() + 5);
      indiantime.setMinutes(indiantime.getMinutes() + 30);
@@ -1042,7 +1073,18 @@ app.get( '/v1/vendor/order_by_id/:id', function( request, response ) {
 
 
 app.delete( '/v1/vendor/order/:id', function( request, response ) {
-
+    console.log('/v1/vendor/order/status/:id');
+    console.log(request.params.id);
+    console.log(request.body);
+     console.log(request.headers);
+     if((request.headers.securekey != securevendorkey || 
+       request.headers.version != version_value_1 || request.headers.client != client_key_vendor) && 
+      (request.headers.securekey != adminkey || request.headers.client != client_key_admin) 
+       )
+     {
+       console.log("security not passed");
+       return response.send("Not aunthiticated").status(403);
+     }
         return OrderModel.remove( { 'hotel.email':request.params.id},function( err ) {
             if( !err ) {
                 console.log( 'orders removed' );
@@ -1185,6 +1227,18 @@ app.post( '/v1/vendor/order', function( request, response ) {
 });
 
 app.get( '/v1/vendor/order/summary/:id', function( request, res ) {
+      console.log('/v1/vendor/order/status/:id');
+    console.log(request.params.id);
+    console.log(request.body);
+     console.log(request.headers);
+     if((request.headers.securekey != securevendorkey || 
+       request.headers.version != version_value_1 || request.headers.client != client_key_vendor) && 
+      (request.headers.securekey != adminkey || request.headers.client != client_key_admin) 
+       )
+     {
+       console.log("security not passed");
+       return response.send("Not aunthiticated").status(403);
+     }
    OrderModel.aggregate(
    [
     {$match: { 'hotel.email': request.params.id } },
@@ -1239,6 +1293,15 @@ app.put( '/v1/vendor/order/status/:id', function( request, response ) {
     console.log('/v1/vendor/order/status/:id');
     console.log(request.params.id);
     console.log(request.body);
+     console.log(request.headers);
+     if((request.headers.securekey != securevendorkey || 
+       request.headers.version != version_value_1 || request.headers.client != client_key_vendor) && 
+      (request.headers.securekey != adminkey || request.headers.client != client_key_admin) 
+       )
+     {
+       console.log("security not passed");
+       return response.send("Not aunthiticated").status(403);
+     }
     var indiantime = new Date();
      indiantime.setHours(indiantime.getHours() + 5);
      indiantime.setMinutes(indiantime.getMinutes() + 30);
@@ -1273,7 +1336,15 @@ app.post( '/v1/vendor/menu/:id', function( request, response ) {
      console.log("post /vendor/menu/");
      console.log(request.body);
      console.log(request.params.id);
-
+     console.log(request.headers);
+     if((request.headers.securekey != securevendorkey || 
+       request.headers.version != version_value_1 || request.headers.client != client_key_vendor) && 
+      (request.headers.securekey != adminkey || request.headers.client != client_key_admin) 
+       )
+     {
+       console.log("security not passed");
+       return response.send("Not aunthiticated").status(403);
+     }
      return VendorInfoModel.update({ 'hotel.email':request.params.id},
         { $addToSet: {menu: {$each:[{name: request.body.fooditem,  price:request.body.foodprice,availability:1,timings:request.body.timings}] }}},function( err, order ) {
         if( !err ) {
@@ -1380,7 +1451,14 @@ app.get( '/v1/vendor/menu/:id', function( request, response ) {
 
   console.log("get /vendor/menu/");
   console.log(request.params.id);
-
+     if((request.headers.securekey != securevendorkey || 
+       request.headers.version != version_value_1 || request.headers.client != client_key_vendor) && 
+      (request.headers.securekey != adminkey || request.headers.client != client_key_admin) 
+       )
+     {
+       console.log("security not passed");
+       return response.send("Not aunthiticated").status(403);
+     }
      return VendorInfoModel.find({ 'hotel.email':request.params.id                               },
       function( err, vendorinfo ) {
         if( !err ) {
@@ -1417,6 +1495,15 @@ app.delete( '/v1/vendor/unregister/:id', function( request, response ) {
 //Delete a menu item
 app.delete( '/v1/vendor/menu/item/:id/:fooditem', function( request, response ) {
      console.log('delete /v1/vendor/menu/item/');
+     console.log(request.headers);
+     if((request.headers.securekey != securevendorkey || 
+       request.headers.version != version_value_1 || request.headers.client != client_key_vendor) && 
+      (request.headers.securekey != adminkey || request.headers.client != client_key_admin) 
+       )
+     {
+       console.log("security not passed");
+       return response.send("Not aunthiticated").status(403);
+     }
      console.log(request.params.id);
       console.log(request.params.fooditem);
         return VendorInfoModel.update( { 'hotel.email':request.params.id},{ $pull: {menu: {"name": request.params.fooditem }}},function( err ) {
