@@ -1015,6 +1015,54 @@ app.get( '/v1/vendor/order_all', function( request, response ) {
     });
 });
 
+function sendOrderReceivedSmstoVendor(order,phone,order_id)
+{
+                var menuItms = "";
+                for(var i = 0; i < order.menu.length ; i++)
+                {
+                  menuItms = menuItms + order.menu[i].name + "(" + 
+                              order.menu[i].no_of_order + ") ";
+                }
+                console.log("menuItms",menuItms);
+                var customerAddress = "";
+                if(order.customer.address.addressLine1 != null)
+                {
+                  customerAddress = customerAddress + order.customer.address.addressLine1 + "\n";
+                }
+                if(order.customer.address.areaName != null)
+                {
+                  customerAddress = customerAddress + order.customer.address.areaName + "\n";
+                }
+                if(order.customer.address.addressLine2 != null)
+                {
+                  customerAddress = customerAddress + order.customer.address.addressLine2 + "\n";
+                }
+                if(order.customer.address.LandMark != null)
+                {
+                  customerAddress = customerAddress + order.customer.address.LandMark + "\n";
+                }
+
+                if(order.customer.address.street != null)
+                {
+                  customerAddress = customerAddress + order.customer.address.street + "\n";
+                }
+                var order_sms = "";
+                order_sms = order_sms + "OrderID:" + order_id + "\n";
+                order_sms = order_sms + "Name:" + order.customer.name + "\n";
+                order_sms = order_sms + "Phone:" + order.customer.phone + "\n";
+                order_sms = order_sms + "Address:" + customerAddress;
+                order_sms = order_sms + "Menu:" + menuItms + "\n";
+                order_sms = order_sms + "Total Rs." + order.totalCost;
+                console.log("order_sms",order_sms);
+                var orderurl = "https://www.smsgatewayhub.com/api/mt/SendSMS?APIKey=mhgGNz6lk0ytziomd49mcQ&senderid=WEBSMS&channel=2&DCS=0&flashsms=0&route=1";
+                            orderurl  = orderurl + "&number=" +  phone;
+                            orderurl  = orderurl + "&text=" +  order_sms;
+                            console.log(orderurl);
+                            client.get(orderurl, 
+                            function (data, response) {
+                                console.log(data);
+                            });
+}
 app.post( '/v1/vendor/order', function( request, response ) {
 
   var res = getNextSequence('order',function(data) {
@@ -1044,32 +1092,34 @@ app.post( '/v1/vendor/order', function( request, response ) {
                 instruction:request.body.instruction,
                 ordertype:request.body.ordertype,
                 tracker:  [{status:"ORDERED",time:indiantime}]     });
-     
        
         order.save( function( err ) {
             if( !err ) {
                 console.log( 'created' );
-               // console.log( order);
                 console.log( order.hotel.email);
-
-                
-                VendorInfoModel.find({ 'hotel.email':order.hotel.email},function( err, vendor ) {
-                    if( !err ) {
-                      console.log(vendor[0].uniqueid);
-                     
-                      var pn = {};
+                VendorInfoModel.find({ 'hotel.email':order.hotel.email},
+                  function( err, vendor ) {
+                      if( !err ) {
+                       //update the pn 
+                        console.log(vendor[0].uniqueid);
                        
-                      console.log( order_id);
-                      pn[vendor[0].uniqueid]  = {
-                        msg:order_id
-                      };
+                        var pn = {};
+                         
+                        console.log( order_id);
+                        pn[vendor[0].uniqueid]  = {
+                          msg:order_id
+                        };
 
-                      console.log(pn); // should print  Object { name="John"}
-                      rootRef.update(pn);
-                    } 
-                    else {
-                      console.log( err );
-                    }
+                        console.log(pn); // should print  Object { name="John"}
+                        rootRef.update(pn);
+
+                         console.log(vendor[0].phone);
+                         sendOrderReceivedSmstoVendor(order,vendor[0].phone,order_id); 
+
+                      } 
+                      else {
+                        console.log( err );
+                      }
                     });  
                   return response.send( order );
                 } else {
