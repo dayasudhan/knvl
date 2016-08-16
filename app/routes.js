@@ -780,11 +780,35 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
 
     var isbulkrequest = parseInt(request.query.isbulkrequest);
     console.log(request.query);
-
+   var indiantime = new Date();
+   indiantime.setHours(indiantime.getHours() + 5);
+   indiantime.setMinutes(indiantime.getMinutes() + 30);
+  var current_time = 0;
+  var binaryValueofTime = [];
+  if(indiantime.getHours() < 11)
+  {
+    current_time = 1;
+    console.log("Morning");
+    console.log(indiantime);
+    binaryValueofTime.push(1);
+  }
+  else if (indiantime.getHours() < 16)
+  {
+      current_time = 2;
+      console.log(indiantime);
+      console.log("Lunch");
+      binaryValueofTime.push(1);
+  }
+  else
+  {
+      current_time = 4;
+      console.log(indiantime);
+      console.log("Dinner");
+  }
+  console.log(current_time);
   if(isbulkrequest == 1)
   {
     console.log("isbulkrequest == 1");
-// time:{$gte: start, $lt: end}
     return VendorInfoModel.find(
         { 
             isBulkVendor:{ $gte: 1 } ,
@@ -797,7 +821,21 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
         },
         function( err, vendor ) {
         if( !err ) {
-            console.log(vendor);
+            console.log("old vendor", vendor);
+            console.log("vendor.length",vendor.length);
+            for (var j = 0; j < vendor.length; j++) {
+              var menu_array ;
+              menu_array = vendor[j].menu;
+              var new_menu_array = [];
+              for (var i = 0; i < menu_array.length; i++) {
+                    if(menu_array[i].timings & current_time)
+                    {
+                      new_menu_array.push(menu_array[i]);
+                    }
+              }
+              vendor[j].menu = new_menu_array;
+            }
+             console.log("old vendor", vendor);
             return response.send( vendor );
         } else {
             console.log( err );
@@ -813,13 +851,28 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
             deliverAreas:{
                             $elemMatch: {
                                  name: request.query.areaName
-                                 //isBulkAreaOnly: 0
                                 }
                             } 
         },
         function( err, vendor ) {
         if( !err ) {
             console.log(vendor);
+
+             console.log("vendor.length",vendor.length);
+            for (var j = 0; j < vendor.length; j++) {
+              var menu_array ;
+              menu_array = vendor[j].menu;
+              var new_menu_array = [];
+              for (var i = 0; i < menu_array.length; i++) {
+                    if(menu_array[i].timings & current_time)
+                    {
+                      new_menu_array.push(menu_array[i]);
+                    }
+              }
+              vendor[j].menu = new_menu_array;
+            }
+             console.log("old vendor", vendor);
+
             return response.send( vendor );
         } else {
             console.log( err );
@@ -1324,35 +1377,9 @@ app.delete( '/v1/admin/coverageAreaAll', function( request, response ) {
 
 
 app.get( '/v1/vendor/menu/:id', function( request, response ) {
-  // OrderModel.findById( request.params.id, function( err, book ) 
+
   console.log("get /vendor/menu/");
   console.log(request.params.id);
-  var indiantime = new Date();
-  indiantime.setHours(indiantime.getHours() + 5);
-  indiantime.setMinutes(indiantime.getMinutes() + 30);
-  var current_time = 0;
-  var binaryValueofTime = [];
-  if(indiantime.getHours() < 11)
-  {
-    current_time = 1;
-    console.log("Morning");
-    console.log(indiantime);
-    binaryValueofTime.push(1);
-  }
-  else if (indiantime.getHours() < 16)
-  {
-      current_time = 2;
-      console.log(indiantime);
-      console.log("Lunch");
-      binaryValueofTime.push(1);
-  }
-  else
-  {
-      current_time = 4;
-      console.log(indiantime);
-      console.log("Dinner");
-  }
-  console.log(current_time);
 
      return VendorInfoModel.find({ 'hotel.email':request.params.id                               },
       function( err, vendorinfo ) {
@@ -1363,20 +1390,13 @@ app.get( '/v1/vendor/menu/:id', function( request, response ) {
               menu_array = vendorinfo[0].menu;
             else
               menu_array =  vendorinfo ;
-            // var new_menu_array = [];
-            // for (var i = 0; i < menu_array.length; i++) {
-            //       if(menu_array[i].timings & current_time)
-            //       {
-            //         new_menu_array.push(menu_array[i]);
-            //       }
-            //   }
             return response.send(menu_array);
         } else {
             console.log( err );
             return response.send('ERROR');
         }
     });
- // });
+
 });
 
 //unregister a book
