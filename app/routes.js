@@ -434,6 +434,7 @@ function registerVendor(req, res, next) {
 
 app.get( '/v1/vendor/info/:id', function( request, response ) {
     console.log("GET --/v1/vendor/info/");
+
     return VendorInfoModel.find({ 'hotel.email':request.params.id},function( err, vendor ) {
         if( !err ) {
             console.log(vendor);
@@ -504,6 +505,15 @@ app.post( '/v1/vendor/isopen/:id', function( req, res ) {
 
 app.post( '/v1/vendor/review/:id', function( req, res ) {
   console.log('/v1/vendor/review/:id');
+  console.log(request.headers);
+ if((request.headers.securekey != securecustomerkey || 
+   request.headers.version != version_value_1 || request.headers.client != client_key_customer ) && 
+  (request.headers.securekey != adminkey || request.headers.client != client_key_admin) 
+   )
+ {
+   console.log("security not passed");
+   return response.send("Not aunthiticated").status(403);
+ }
   console.log(req.params.id);
   console.log(req.body.rating);
   console.log(req.body.reviewcomment);
@@ -1160,6 +1170,15 @@ function sendOrderReceivedSmstoVendor(order,phone,order_id)
 }
 app.post( '/v1/vendor/order', function( request, response ) {
 
+     console.log(request.headers);
+     if((request.headers.securekey != securecustomerkey || 
+       request.headers.version != version_value_1 || request.headers.client != client_key_customer ) && 
+      (request.headers.securekey != adminkey || request.headers.client != client_key_admin) 
+       )
+     {
+       console.log("security not passed");
+       return response.send("Not aunthiticated").status(403);
+     }
   var res = getNextSequence('order',function(data) {
     var order_id = request.body.hotel.id ;
     order_id = order_id + "R";
