@@ -352,7 +352,18 @@ app.get('/p/admin_order', function (req, res) {
 
 
 app.post('/signup', function(req, res, next) {
-
+console.log(req.body);
+if(req.body.password != req.body.password2)
+{
+   
+console.log("password mimatchmatch");
+   return res.send('ERROR');
+}
+else
+{
+  console.log("password match");
+}
+console.log('/signup');
   passport.authenticate('local-signup', function(err, user, info) {
    console.log(req.body);
     if (err) { return next(err); }
@@ -769,11 +780,35 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
 
     var isbulkrequest = parseInt(request.query.isbulkrequest);
     console.log(request.query);
-
+   var indiantime = new Date();
+   indiantime.setHours(indiantime.getHours() + 5);
+   indiantime.setMinutes(indiantime.getMinutes() + 30);
+  var current_time = 0;
+  var binaryValueofTime = [];
+  if(indiantime.getHours() < 11)
+  {
+    current_time = 1;
+    console.log("Morning");
+    console.log(indiantime);
+    binaryValueofTime.push(1);
+  }
+  else if (indiantime.getHours() < 16)
+  {
+      current_time = 2;
+      console.log(indiantime);
+      console.log("Lunch");
+      binaryValueofTime.push(1);
+  }
+  else
+  {
+      current_time = 4;
+      console.log(indiantime);
+      console.log("Dinner");
+  }
+  console.log(current_time);
   if(isbulkrequest == 1)
   {
     console.log("isbulkrequest == 1");
-// time:{$gte: start, $lt: end}
     return VendorInfoModel.find(
         { 
             isBulkVendor:{ $gte: 1 } ,
@@ -786,7 +821,21 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
         },
         function( err, vendor ) {
         if( !err ) {
-            console.log(vendor);
+            console.log("old vendor", vendor);
+            console.log("vendor.length",vendor.length);
+            for (var j = 0; j < vendor.length; j++) {
+              var menu_array ;
+              menu_array = vendor[j].menu;
+              var new_menu_array = [];
+              for (var i = 0; i < menu_array.length; i++) {
+                    if(menu_array[i].timings & current_time)
+                    {
+                      new_menu_array.push(menu_array[i]);
+                    }
+              }
+              vendor[j].menu = new_menu_array;
+            }
+             console.log("old vendor", vendor);
             return response.send( vendor );
         } else {
             console.log( err );
@@ -802,13 +851,28 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
             deliverAreas:{
                             $elemMatch: {
                                  name: request.query.areaName
-                                 //isBulkAreaOnly: 0
                                 }
                             } 
         },
         function( err, vendor ) {
         if( !err ) {
             console.log(vendor);
+
+             console.log("vendor.length",vendor.length);
+            for (var j = 0; j < vendor.length; j++) {
+              var menu_array ;
+              menu_array = vendor[j].menu;
+              var new_menu_array = [];
+              for (var i = 0; i < menu_array.length; i++) {
+                    if(menu_array[i].timings & current_time)
+                    {
+                      new_menu_array.push(menu_array[i]);
+                    }
+              }
+              vendor[j].menu = new_menu_array;
+            }
+             console.log("old vendor", vendor);
+
             return response.send( vendor );
         } else {
             console.log( err );
@@ -1004,6 +1068,54 @@ app.get( '/v1/vendor/order_all', function( request, response ) {
     });
 });
 
+function sendOrderReceivedSmstoVendor(order,phone,order_id)
+{
+                var menuItms = "";
+                for(var i = 0; i < order.menu.length ; i++)
+                {
+                  menuItms = menuItms + order.menu[i].name + "(" + 
+                              order.menu[i].no_of_order + ") ";
+                }
+                console.log("menuItms",menuItms);
+                var customerAddress = "";
+                if(order.customer.address.addressLine1 != null)
+                {
+                  customerAddress = customerAddress + order.customer.address.addressLine1 + "\n";
+                }
+                if(order.customer.address.areaName != null)
+                {
+                  customerAddress = customerAddress + order.customer.address.areaName + "\n";
+                }
+                if(order.customer.address.addressLine2 != null)
+                {
+                  customerAddress = customerAddress + order.customer.address.addressLine2 + "\n";
+                }
+                if(order.customer.address.LandMark != null)
+                {
+                  customerAddress = customerAddress + order.customer.address.LandMark + "\n";
+                }
+
+                if(order.customer.address.street != null)
+                {
+                  customerAddress = customerAddress + order.customer.address.street + "\n";
+                }
+                var order_sms = "";
+                order_sms = order_sms + "OrderID:" + order_id + "\n";
+                order_sms = order_sms + "Name:" + order.customer.name + "\n";
+                order_sms = order_sms + "Phone:" + order.customer.phone + "\n";
+                order_sms = order_sms + "Address:" + customerAddress;
+                order_sms = order_sms + "Menu:" + menuItms + "\n";
+                order_sms = order_sms + "Total Rs." + order.totalCost;
+                console.log("order_sms",order_sms);
+                var orderurl = "https://www.smsgatewayhub.com/api/mt/SendSMS?APIKey=mhgGNz6lk0ytziomd49mcQ&senderid=WEBSMS&channel=2&DCS=0&flashsms=0&route=1";
+                            orderurl  = orderurl + "&number=" +  phone;
+                            orderurl  = orderurl + "&text=" +  order_sms;
+                            console.log(orderurl);
+                            client.get(orderurl, 
+                            function (data, response) {
+                                console.log(data);
+                            });
+}
 app.post( '/v1/vendor/order', function( request, response ) {
 
   var res = getNextSequence('order',function(data) {
@@ -1033,32 +1145,34 @@ app.post( '/v1/vendor/order', function( request, response ) {
                 instruction:request.body.instruction,
                 ordertype:request.body.ordertype,
                 tracker:  [{status:"ORDERED",time:indiantime}]     });
-     
        
         order.save( function( err ) {
             if( !err ) {
                 console.log( 'created' );
-               // console.log( order);
                 console.log( order.hotel.email);
-
-                
-                VendorInfoModel.find({ 'hotel.email':order.hotel.email},function( err, vendor ) {
-                    if( !err ) {
-                      console.log(vendor[0].uniqueid);
-                     
-                      var pn = {};
+                VendorInfoModel.find({ 'hotel.email':order.hotel.email},
+                  function( err, vendor ) {
+                      if( !err ) {
+                       //update the pn 
+                        console.log(vendor[0].uniqueid);
                        
-                      console.log( order_id);
-                      pn[vendor[0].uniqueid]  = {
-                        msg:order_id
-                      };
+                        var pn = {};
+                         
+                        console.log( order_id);
+                        pn[vendor[0].uniqueid]  = {
+                          msg:order_id
+                        };
 
-                      console.log(pn); // should print  Object { name="John"}
-                      rootRef.update(pn);
-                    } 
-                    else {
-                      console.log( err );
-                    }
+                        console.log(pn); // should print  Object { name="John"}
+                        rootRef.update(pn);
+
+                         console.log(vendor[0].phone);
+                         sendOrderReceivedSmstoVendor(order,vendor[0].phone,order_id); 
+
+                      } 
+                      else {
+                        console.log( err );
+                      }
                     });  
                   return response.send( order );
                 } else {
@@ -1161,7 +1275,7 @@ app.post( '/v1/vendor/menu/:id', function( request, response ) {
      console.log(request.params.id);
 
      return VendorInfoModel.update({ 'hotel.email':request.params.id},
-        { $addToSet: {menu: {$each:[{name: request.body.fooditem,  price:request.body.foodprice,availability:1,timings:7}] }}},function( err, order ) {
+        { $addToSet: {menu: {$each:[{name: request.body.fooditem,  price:request.body.foodprice,availability:1,timings:request.body.timings}] }}},function( err, order ) {
         if( !err ) {
             console.log("no error");
             console.log(order);
@@ -1263,24 +1377,26 @@ app.delete( '/v1/admin/coverageAreaAll', function( request, response ) {
 
 
 app.get( '/v1/vendor/menu/:id', function( request, response ) {
-  // OrderModel.findById( request.params.id, function( err, book ) 
+
   console.log("get /vendor/menu/");
   console.log(request.params.id);
 
-   // return OrderModel.find({ customer:{email:'daya@gmail.com'}},function( err, order ) {
-     return VendorInfoModel.find({ 'hotel.email':request.params.id},function( err, vendorinfo ) {
+     return VendorInfoModel.find({ 'hotel.email':request.params.id                               },
+      function( err, vendorinfo ) {
         if( !err ) {
              console.log("no error");
+             var menu_array ;
             if(vendorinfo.length > 0)
-              return response.send( vendorinfo[0].menu );
+              menu_array = vendorinfo[0].menu;
             else
-              return response.send( vendorinfo );
+              menu_array =  vendorinfo ;
+            return response.send(menu_array);
         } else {
             console.log( err );
             return response.send('ERROR');
         }
     });
- // });
+
 });
 
 //unregister a book
