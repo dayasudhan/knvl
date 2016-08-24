@@ -317,10 +317,13 @@ $scope.trackerUpdateStatus = function(param1)
         .success(function (data, status, headers, config)
         {
             console.log("addDetails success");
+            alert("addDetails success");
+
         })
         .error(function (data, status, headers, config)
         {
           console.log("addDetails error");
+           alert("addDetails error");
         });
     };
 

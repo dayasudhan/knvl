@@ -1008,7 +1008,8 @@ return CustomerInfoModel.findOneAndUpdate({ 'id':request.params.id},
 
 app.get( '/v1/vendor/order/:id', function( request, response ) {
   console.log(request.params.id);
- 	if(checkVendorApiAunthaticated(request,1) == false && checkVendorApiAunthaticated(request,2) == false)
+  console.log(request.headers);
+ 	if((checkVendorApiAunthaticated(request,1) == false) && (checkVendorApiAunthaticated(request,2)) == false)
 	{
 		return response.send("Not aunthiticated").status(403);
 	}
@@ -1490,6 +1491,7 @@ app.get( '/v1/vendor/menu/:id', function( request, response ) {
 
   console.log("get /vendor/menu/");
   console.log(request.params.id);
+  console.log(request.headers);
 	if(checkVendorApiAunthaticated(request,1) == false)
 	{
 		return response.send("Not aunthiticated").status(403);
