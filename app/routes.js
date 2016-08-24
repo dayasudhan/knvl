@@ -358,7 +358,10 @@ app.get('/p/admin_order', function (req, res) {
     console.log(req.user);
     res.render('admin_order', { user : req.user });
 });
-
+app.get('/p/admin_order_today', function (req, res) {
+    console.log(req.user);
+    res.render('admin_order_today', { user : req.user });
+});
 
 app.post('/signup', function(req, res, next) {
 console.log(req.body);
@@ -624,9 +627,9 @@ app.get( '/v1/vendor/otp/all', function( req, res ) {
 });
 app.post( '/v1/vendor/otp/confirm', function( req, res ) {
     console.log('/v1/vendor/otp/confirm');
-   	if(checkVendorApiAunthaticated(request,2) == false)
+   	if(checkVendorApiAunthaticated(req,2) == false)
 	{
-		return response.send("Not aunthiticated").status(403);
+		return res.send("Not aunthiticated").status(403);
 	}
     console.log(req.body.phoneNumber);
     console.log(req.body.otpText);
@@ -658,7 +661,10 @@ app.post( '/v1/vendor/otp/confirm', function( req, res ) {
 
 
 app.post( '/v1/vendor/info/:id', function( req, res ) {
-
+if(checkVendorApiAunthaticated(req,1) == false)
+{
+	return res.send("Not aunthiticated").status(403);
+}
   console.log("VendorInfo post");
   console.log(req.body);
             storeVendorInfo(req,res,function(req,res){

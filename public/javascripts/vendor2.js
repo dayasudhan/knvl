@@ -1,12 +1,20 @@
 app = angular.module("vendorModule", []);
+ var config = {	    		  
+ 		  headers: {
+    		    'securekey': 'RN4CDXkqltLF%2FWloegKujIhiaSWBrgCzQXqI9cyWpT0',
+			    'client':'pickcock',
+			    'version':'1'
+			  }
+   };
   app.controller("mainController", function ($scope, $http, jsonFilter)
   {
   		 $scope.total2 = 123;
+
   	  $scope.getOrders = function (param) {
       console.log("getOrders");
       var url = "/v1/vendor/order/";
       url = url + param;
-      $http.get(url)
+      $http.get(url,config)
         .success(function (data, status, headers, config)
         {
           $scope.orderlist = data;
@@ -63,7 +71,7 @@ $scope.trackerUpdateStatus = function(param1)
       console.log("getOrdersummary");
       var url2 = "/v1/vendor/order/summary/";
       url2 = url2 + param;
-      $http.get(url2)
+      $http.get(url2,config)
         .success(function (data, status, headers, config)
         {
           $scope.orderSummarylist = data;
@@ -106,7 +114,7 @@ $scope.trackerUpdateStatus = function(param1)
       console.log("getmenulist");
       var url3 = "/v1/vendor/menu/";
       url3 = url3 + param;
-      $http.get(url3)
+      $http.get(url3,config)
         .success(function (data, status, headers, config)
         {
           $scope.menuList = data;
@@ -123,7 +131,7 @@ $scope.trackerUpdateStatus = function(param1)
        console.log(foodmenu);
       var url4 = "/v1/vendor/menu/item/";
       url4 = url4 + param + "/" + foodmenu.name;
-      $http.delete(url4,$scope.selection)
+      $http.delete(url4,config,$scope.selection)
         .success(function (data, status, headers, config)
         {
            console.log("success add");
@@ -143,8 +151,11 @@ $scope.trackerUpdateStatus = function(param1)
        console.log( $scope.fooditem);
       var url4 = "/v1/vendor/menu/";
       url4 = url4 + param;
-      var postData={fooditem:$scope.fooditem,foodprice:$scope.foodprice};
-      $http.post(url4,postData)
+      var postData={fooditem:$scope.fooditem,
+    		  foodprice:$scope.foodprice,
+       		  timings:$scope.timings};
+
+      $http.post(url4,postData,config)
         .success(function (data, status, headers, config)
         {
            console.log("success add");
@@ -302,7 +313,7 @@ $scope.trackerUpdateStatus = function(param1)
 
        };
 
-      $http.post(url,postData)
+      $http.post(url,postData,config)
         .success(function (data, status, headers, config)
         {
             console.log("addDetails success");
@@ -324,7 +335,7 @@ $scope.trackerUpdateStatus = function(param1)
       //   Address2:"", street :"",Landmark:$scope.hotelLandmark, Areaname:$scope.hotelAreaname, 
       //   City:$scope.hotelcity, zip:$scope.hotelzip,latitude:$scope.latitude, longitude:$scope.longitude, logo:"",
       //    vegornonveg:$scope.vegornonveg, speciality: $scope.speciality , deliverrange:$scope.deliverrange,deliverareas:$scope.deliverareas};
-      $http.get(url)
+      $http.get(url,config)
         .success(function (data, status, headers, config)
         {
             console.log("getDetails success");
@@ -364,7 +375,7 @@ $scope.trackerUpdateStatus = function(param1)
     $scope.getCityCoverage = function(){
       console.log("getCityCoverage");
       var url = "/v1/admin/coverageArea";
-      $http.get(url)
+      $http.get(url,config)
         .success(function (data, status, headers, config)
         {
           console.log("response");
