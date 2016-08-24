@@ -40,6 +40,8 @@ Firebase.initializeApp({
 });
 
 
+
+
 var rootRef = Firebase.database().ref();
 
 
@@ -434,7 +436,13 @@ function registerVendor(req, res, next) {
 
 app.get( '/v1/vendor/info/:id', function( request, response ) {
     console.log("GET --/v1/vendor/info/");
-
+    if((request.headers.securekey != securevendorkey || 
+    		request.headers.version != version_value_1 || request.headers.client != client_key_vendor) && 
+    	      (request.headers.securekey != adminkey || request.headers.client != client_key_admin))
+	 {
+    	console.log("security not passed");
+    	return response.send("Not aunthiticated").status(403);
+	 }
     return VendorInfoModel.find({ 'hotel.email':request.params.id},function( err, vendor ) {
         if( !err ) {
             console.log(vendor);
@@ -506,14 +514,14 @@ app.post( '/v1/vendor/isopen/:id', function( req, res ) {
 app.post( '/v1/vendor/review/:id', function( req, res ) {
   console.log('/v1/vendor/review/:id');
   console.log(request.headers);
- if((request.headers.securekey != securecustomerkey || 
-   request.headers.version != version_value_1 || request.headers.client != client_key_customer ) && 
-  (request.headers.securekey != adminkey || request.headers.client != client_key_admin) 
+ if((req.headers.securekey != securecustomerkey || 
+		 req.headers.version != version_value_1 || req.headers.client != client_key_customer ) && 
+  (req.headers.securekey != adminkey || req.headers.client != client_key_admin) 
    )
- {
-   console.log("security not passed");
-   return response.send("Not aunthiticated").status(403);
- }
+	{
+	 	console.log("security not passed");
+	 	return res.send("Not aunthiticated").status(403);
+	}
   console.log(req.params.id);
   console.log(req.body.rating);
   console.log(req.body.reviewcomment);
@@ -536,7 +544,14 @@ app.post( '/v1/vendor/review/:id', function( req, res ) {
 
 app.post( '/v1/vendor/otp/register', function( req, res ) {
     console.log('/v1/vendor/otp/register');
-   
+    if((req.headers.securekey != securecustomerkey || 
+   		 req.headers.version != version_value_1 || req.headers.client != client_key_customer ) && 
+     (req.headers.securekey != adminkey || req.headers.client != client_key_admin) 
+      )
+   	{
+   	 	console.log("security not passed");
+   	 	return res.send("Not aunthiticated").status(403);
+   	}
     console.log(req.body.phoneNumber);
     console.log(req.body.name);
     console.log(req.body.email);
@@ -603,6 +618,11 @@ app.post( '/v1/vendor/otp/register', function( req, res ) {
 });
 app.get( '/v1/vendor/otp/all', function( req, res ) {
     console.log('/v1/vendor/otp/confirm');
+    if(req.headers.securekey != adminkey || req.headers.client != client_key_admin)
+   	{
+   	 	console.log("security not passed");
+   	 	return res.send("Not aunthiticated").status(403);
+   	}
     return OtpModel.find(function( err, otpInfo ) {
         if( !err ) {
             return res.send( otpInfo );
@@ -614,6 +634,14 @@ app.get( '/v1/vendor/otp/all', function( req, res ) {
 });
 app.post( '/v1/vendor/otp/confirm', function( req, res ) {
     console.log('/v1/vendor/otp/confirm');
+    if((req.headers.securekey != securecustomerkey || 
+      		 req.headers.version != version_value_1 || req.headers.client != client_key_customer ) && 
+        (req.headers.securekey != adminkey || req.headers.client != client_key_admin) 
+         )
+  	{
+  	 	console.log("security not passed");
+  	 	return res.send("Not aunthiticated").status(403);
+  	}
     console.log(req.body.phoneNumber);
     console.log(req.body.otpText);
 
@@ -645,7 +673,7 @@ app.post( '/v1/vendor/otp/confirm', function( req, res ) {
 
 app.post( '/v1/vendor/info/:id', function( req, res ) {
 
-   console.log("VendorInfo post");
+  console.log("VendorInfo post");
   console.log(req.body);
             storeVendorInfo(req,res,function(req,res){
            console.log("storeVendorInfo success");
@@ -765,41 +793,18 @@ app.get('/ping', function(req, res){
     res.status(200).send("pong!");
 });
 
-app.get( '/v1/vendor/test', function( request, response ) {
-   
-            return response.send( "vendor" );
-   });
 
-app.get( '/v1/vendor/city', function( request, response ) {
-    console.log("GET --/v1/vendor/city/");
-    console.log(request.query);
-    return VendorInfoModel.find({ 'address.city':request.query.city},function( err, vendor ) {
-        if( !err ) {
-            console.log(vendor);
-            return response.send( vendor );
-        } else {
-            console.log( err );
-            return response.send('ERROR');
-        }
-    });
-});
-app.get( '/v1/vendor/area', function( request, response ) {
-    console.log("GET --/v1/vendor/area/");
-    console.log(request.query);//find( { price: { $ne: 1.99, $exists: true } } )
-    return VendorInfoModel.find(
-        { 'address.areaName':request.query.areaName},
-        function( err, vendor ) {
-        if( !err ) {
-            console.log(vendor);
-            return response.send( vendor );
-        } else {
-            console.log( err );
-            return response.send('ERROR');
-        }
-    });
-});
 app.get( '/v1/vendor/delieveryareas', function( request, response ) {
     console.log("GET --/v1/vendor/delieveryareas/");
+    if((request.headers.securekey != securecustomerkey || 
+    		request.headers.version != version_value_1 || request.headers.client != client_key_customer ) && 
+        (request.headers.securekey != adminkey || request.headers.client != client_key_admin) 
+         )
+  	{
+  	 	console.log("security not passed");
+  	 	return response.send("Not aunthiticated").status(403);
+  	}
+
     console.log(request.query);
 
     var isbulkrequest = parseInt(request.query.isbulkrequest);
@@ -1380,6 +1385,11 @@ app.post( '/v1/vendor/menu/:id', function( request, response ) {
 
 app.post( '/v1/admin/coverageArea', function( request, response ) {
      console.log("post /v1/admin/coverageArea");
+     if(request.headers.securekey != adminkey || request.headers.client != client_key_admin)
+     {
+    	 console.log("security not passed");
+    	 return response.send("Not aunthiticated").status(403);
+     }
      console.log(request.body);
 
      //var dd = {'cityName':"dvg",'subAreas':[{'name':"rajajinagar"},{'name':"vijaynagar"}]};
@@ -1402,7 +1412,11 @@ app.post( '/v1/admin/coverageArea', function( request, response ) {
 
 app.put( '/v1/admin/coverageArea', function( request, response ) {
      console.log("v1/admin/coverageArea");
-     //console.log(request.headers);
+     if(request.headers.securekey != adminkey || request.headers.client != client_key_admin)
+     {
+    	 console.log("security not passed");
+    	 return response.send("Not aunthiticated").status(403);
+     }
      console.log(request.body);
      console.log(request.body.cityName);
      console.log(request.body.areaName);
@@ -1427,16 +1441,11 @@ app.put( '/v1/admin/coverageArea', function( request, response ) {
 
 app.get( '/v1/admin/coverageArea', function( request, response ) {
     console.log("/v1/admin/coverageArea");
-    //console.log(request.headers);
-    // if(request.headers.securekey != securevendorkey || 
-    //   request.headers.version != '1' || 
-    //   request.headers.client != 'bhoomika'
-    //   )
-    // {
-    //   console.log("security not passed");
-    //   return response.send("Not aunthiticated").status(403);
-    // }
-
+    if(request.headers.securekey != adminkey || request.headers.client != client_key_admin)
+    {
+    	console.log("security not passed");
+    	return response.send("Not aunthiticated").status(403);
+    }
     return CoverageAreaModel.find(function( err, order ) {
         if( !err ) {
             console.log("no error");
@@ -1452,11 +1461,15 @@ app.get( '/v1/admin/coverageArea', function( request, response ) {
 //Delete a book
 app.delete( '/v1/admin/coverageAreaAll', function( request, response ) {
     console.log("/v1/admin/coverageArea");
-  //  ExampleModel.findById( request.params.id, function( err, book ) {
+    if(request.headers.securekey != adminkey || request.headers.client != client_key_admin)
+    {
+   	 console.log("security not passed");
+   	 return response.send("Not aunthiticated").status(403);
+    }
         return CoverageAreaModel.remove( {},function( err ) {
             if( !err ) {
                 console.log( 'Book removed' );
-                return response.send( '' );
+                return response.send( 'Delete SUCCESS' );
             } else {
                 console.log( err );
                 return response.send('ERROR');
@@ -1605,6 +1618,68 @@ function getNextSequence(name,result)
     });
 
 }
+
+
+function checkVendorApiAunthaticated(request,type,result)
+{
+	console.log("checkVendorApiAunthaticated 1");
+	console.log(request.headers);
+	console.log(request.headers.version);
+	var version = parseInt(request.headers.version);
+	console.log(version);
+	var ret = false; 
+	if(request.headers.securekey == adminkey && request.headers.client == client_key_admin)
+	{
+		console.log("checkVendorApiAunthaticated admin");
+		ret = true;
+	}
+	else if(type == 1)
+	{
+		console.log("checkVendorApiAunthaticated vendor");
+		if(request.headers.securekey == securevendorkey &&
+			      request.headers.version == version_value_1 && 
+			      request.headers.client == client_key_vendor)
+		{
+			console.log("checkVendorApiAunthaticated vendor pass");
+			ret = true;
+		}
+	}
+	else if(type == 2)
+	{
+		console.log("checkVendorApiAunthaticated cust");
+		if(request.headers.securekey == securecustomerkey &&
+			      request.headers.version == version_value_1 && 
+			      request.headers.client == client_key_customer)
+		{
+			console.log("checkVendorApiAunthaticated cust pass");
+			ret = true;
+		}
+	}
+	else
+	{
+		console.log("checkVendorApiAunthaticated not auth");
+		ret = false;
+	}
+	
+	result(ret);
+}
+app.get( '/v1/admin/api/test', function( request, response )
+{
+	console.log("test 1");
+    checkVendorApiAunthaticated(request,2,function(isAunthiticated) {
+	if(isAunthiticated == true)
+	{
+		console.log("test 2");
+		return response.send("aunthiticated").status(200);
+	}
+	else
+	{
+		console.log("test 3");
+		return response.send("Not aunthiticated").status(403);
+	}
+	console.log("test 4");
+ });
+});
 app.post( '/v1/pn/register', function( request, response ) {
     console.log("post v1/pn/register");
     console.log(request.body);
