@@ -542,10 +542,10 @@ app.post( '/v1/vendor/review/:id', function( req, res ) {
 
 app.post( '/v1/vendor/otp/register', function( req, res ) {
     console.log('/v1/vendor/otp/register');
-   	if(checkVendorApiAunthaticated(request,2) == false)
-	{
-		return response.send("Not aunthiticated").status(403);
-	}
+ //   	if(checkVendorApiAunthaticated(request,2) == false)
+	// {
+	// 	return response.send("Not aunthiticated").status(403);
+	// }
     console.log(req.body.phoneNumber);
     console.log(req.body.name);
     console.log(req.body.email);
@@ -627,10 +627,10 @@ app.get( '/v1/vendor/otp/all', function( req, res ) {
 });
 app.post( '/v1/vendor/otp/confirm', function( req, res ) {
     console.log('/v1/vendor/otp/confirm');
-   	if(checkVendorApiAunthaticated(req,2) == false)
-	{
-		return res.send("Not aunthiticated").status(403);
-	}
+ //   	if(checkVendorApiAunthaticated(req,2) == false)
+	// {
+	// 	return res.send("Not aunthiticated").status(403);
+	// }
     console.log(req.body.phoneNumber);
     console.log(req.body.otpText);
 
