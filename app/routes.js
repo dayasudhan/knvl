@@ -542,10 +542,10 @@ app.post( '/v1/vendor/review/:id', function( req, res ) {
 
 app.post( '/v1/vendor/otp/register', function( req, res ) {
     console.log('/v1/vendor/otp/register');
- //   	if(checkVendorApiAunthaticated(request,2) == false)
-	// {
-	// 	return response.send("Not aunthiticated").status(403);
-	// }
+   	if(checkVendorApiAunthaticated(req,2) == false)
+	  {
+		  return res.send("Not aunthiticated").status(403);
+	  }
     console.log(req.body.phoneNumber);
     console.log(req.body.name);
     console.log(req.body.email);
@@ -627,10 +627,10 @@ app.get( '/v1/vendor/otp/all', function( req, res ) {
 });
 app.post( '/v1/vendor/otp/confirm', function( req, res ) {
     console.log('/v1/vendor/otp/confirm');
- //   	if(checkVendorApiAunthaticated(req,2) == false)
-	// {
-	// 	return res.send("Not aunthiticated").status(403);
-	// }
+    if(checkVendorApiAunthaticated(req,2) == false)
+	  {
+	 	 return res.send("Not aunthiticated").status(403);
+	  }
     console.log(req.body.phoneNumber);
     console.log(req.body.otpText);
 
@@ -1397,7 +1397,7 @@ app.post( '/v1/vendor/menu/:id', function( request, response ) {
 
 
 app.post( '/v1/admin/coverageArea', function( request, response ) {
-  	if(checkVendorApiAunthaticated(request,0) == false)
+  if(checkVendorApiAunthaticated(request,0) == false)
 	{
 		return response.send("Not aunthiticated").status(403);
 	}
@@ -1450,9 +1450,9 @@ app.put( '/v1/admin/coverageArea', function( request, response ) {
 app.get( '/v1/admin/coverageArea', function( request, response ) {
     console.log("/v1/admin/coverageArea");
   	if(checkVendorApiAunthaticated(request,2) == false)
-	{
-		return response.send("Not aunthiticated").status(403);
-	}
+  	{
+  		return response.send("Not aunthiticated").status(403);
+  	}
 	    return CoverageAreaModel.find(function( err, order ) {
 	        if( !err ) {
 	            console.log("no error");
@@ -1639,46 +1639,46 @@ function checkVendorApiAunthaticated(request,type)
 	console.log(request.headers.version);
 	var version = parseInt(request.headers.version);
 	console.log(version);
-	var ret = true; 
-	// if(request.headers.securekey == secureadminkey && request.headers.client == client_key_admin)
-	// {
-	// 	console.log("checkVendorApiAunthaticated admin");
-	// 	ret = true;
-	// }
-	// else if(request.headers.securekey == securewebkey &&
-	// 	      request.headers.version == version_value_1 && 
-	// 	      request.headers.client == client_key_web)
-	// {
-	// 	console.log("checkVendorApiAunthaticated web pass");
-	// 	ret = true;
-	// }
-	// else if(type == 1)
-	// {
-	// 	console.log("checkVendorApiAunthaticated vendor");
-	// 	if(request.headers.securekey == securevendorkey &&
-	// 		      request.headers.version == version_value_1 && 
-	// 		      request.headers.client == client_key_vendor)
-	// 	{
-	// 		console.log("checkVendorApiAunthaticated vendor pass");
-	// 		ret = true;
-	// 	}
-	// }
-	// else if(type == 2)
-	// {
-	// 	console.log("checkVendorApiAunthaticated cust");
-	// 	if(request.headers.securekey == securecustomerkey &&
-	// 		      request.headers.version == version_value_1 && 
-	// 		      request.headers.client == client_key_customer)
-	// 	{
-	// 		console.log("checkVendorApiAunthaticated cust pass");
-	// 		ret = true;
-	// 	}
-	// }
-	// else
-	// {
-	// 	console.log("checkVendorApiAunthaticated not auth");
-	// 	ret = false;
-	// }
+	var ret = false; 
+	if(request.headers.securekey == secureadminkey && request.headers.client == client_key_admin)
+	{
+		console.log("checkVendorApiAunthaticated admin");
+		ret = true;
+	}
+	else if(request.headers.securekey == securewebkey &&
+		      request.headers.version == version_value_1 && 
+		      request.headers.client == client_key_web)
+	{
+		console.log("checkVendorApiAunthaticated web pass");
+		ret = true;
+	}
+	else if(type == 1)
+	{
+		console.log("checkVendorApiAunthaticated vendor");
+		if(request.headers.securekey == securevendorkey &&
+			      request.headers.version == version_value_1 && 
+			      request.headers.client == client_key_vendor)
+		{
+			console.log("checkVendorApiAunthaticated vendor pass");
+			ret = true;
+		}
+	}
+	else if(type == 2)
+	{
+		console.log("checkVendorApiAunthaticated cust");
+		if(request.headers.securekey == securecustomerkey &&
+			      request.headers.version == version_value_1 && 
+			      request.headers.client == client_key_customer)
+		{
+			console.log("checkVendorApiAunthaticated cust pass");
+			ret = true;
+		}
+	}
+	else
+	{
+		console.log("checkVendorApiAunthaticated not auth");
+		ret = false;
+	}
 	return ret;
 }
 app.get( '/v1/admin/api/test', function( request, response )
