@@ -821,13 +821,13 @@ function googleDistanceMeasure(googledistanceurl,vendor,index,callback)
 app.get( '/v1/vendor/deliveryareasbygps', function( request, response ) {
     console.log("GET --/v1/vendor/deliveryareasbygps");
 
-    // if(checkVendorApiAunthaticated(request,2) == false)
-    // {
-    //   return response.send("Not aunthiticated").status(403);
-    // }
+    if(checkVendorApiAunthaticated(request,2) == false)
+    {
+      return response.send("Not aunthiticated").status(403);
+    }
     console.log(request.query);
 
-  var isbulkrequest = parseInt(1);
+  var isbulkrequest = parseInt(request.query.isbulkrequest);
 
    var indiantime = new Date();
    indiantime.setHours(indiantime.getHours() + 5);
@@ -880,17 +880,25 @@ app.get( '/v1/vendor/deliveryareasbygps', function( request, response ) {
             googleDistanceMeasure(googledistanceurl,vendor[j],j,function(data,index)
             {
               i++;
-          // //    console.log(index ," ",i, " callback data " , data);
-          //     console.log("vendor.length-" ,vendor.length);
-          //     console.log("index- " ,index);
-          //     console.log("i-" ,i);
-
               if(data !=null)
               {
                 vendor2.push(data);
               }
               if(i == (vendor.length))
               {
+                            for (var k = 0; k < vendor2.length; k++) {
+                              var menu_array ;
+                              menu_array = vendor2[k].menu;
+                              var new_menu_array = [];
+                              for (var ii = 0; ii < menu_array.length; ii++) {
+                                console.log(current_time);
+                                    if(menu_array[ii].timings & current_time)
+                                    {
+                                      new_menu_array.push(menu_array[ii]);
+                                    }              
+                                  }
+                              vendor2[k].menu = new_menu_array;
+                            }
                  return response.send( vendor2 );
               }
             });
@@ -904,42 +912,67 @@ app.get( '/v1/vendor/deliveryareasbygps', function( request, response ) {
         }
     });
   }
-  // else    
-  // {
-  //   console.log("isbulkrequest == else");
-  //   return VendorInfoModel.find(
-  //       {   isBulkVendor:{ $lte: 1 } ,
-  //           deliverAreas:{
-  //                           $elemMatch: {
-  //                                name: request.query.areaName
-  //                               }
-  //                           } 
-  //       },
-  //       function( err, vendor ) {
-  //       if( !err ) {
-  //           console.log(vendor);
+  else    
+  {
+    console.log("isbulkrequest == else");
+    return VendorInfoModel.find(
+        {   isBulkVendor:{ $lte: 1 } ,
+            deliverAreas:{
+                            $elemMatch: {
+                                 name: request.query.areaName
+                                }
+                            } 
+        },
+        function( err, vendor ) {
+         if( !err ) {
+            //console.log("old vendor", vendor);
+            console.log("vendor.length",vendor.length);
+            var vendor2 =[];
+            var i  = 0;
+            for (var j = 0; j < vendor.length; j++) {
+            var googledistanceurl = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&key=AIzaSyA0ZqdBPzMZZBJ3O8bc5p-HtlQptpHIxJE";
+            googledistanceurl = googledistanceurl + "&origins=" + request.query.latitude + "," + request.query.longitude;
+            googledistanceurl = googledistanceurl + "&destinations=" + vendor[j].address.latitude + "," + vendor[j].address.longitude;
+            //&origins=12.9677,77.536&destinations=12.9568,77.5308";
 
-  //            console.log("vendor.length",vendor.length);
-  //           for (var j = 0; j < vendor.length; j++) {
-  //             var menu_array ;
-  //             menu_array = vendor[j].menu;
-  //             var new_menu_array = [];
-  //             for (var i = 0; i < menu_array.length; i++) {
-  //                   if(menu_array[i].timings & current_time)
-  //                   {
-  //                     new_menu_array.push(menu_array[i]);
-  //                   }              }
-  //             vendor[j].menu = new_menu_array;
-  //           }
-  //            console.log("old vendor", vendor);
-
-  //           return response.send( vendor );
-  //       } else {
-  //           console.log( err );
-  //           return response.send('ERROR');
-  //       }
-  //   });
-  // }
+            var deliverRange = vendor[j].deliverRange;
+            console.log("deliverRange " , deliverRange);
+            console.log(googledistanceurl);
+            googleDistanceMeasure(googledistanceurl,vendor[j],j,function(data,index)
+            {
+              i++;
+              if(data !=null)
+              {
+                vendor2.push(data);
+              }
+             if(i == (vendor.length))
+              {
+                            for (var k = 0; k < vendor2.length; k++) {
+                              var menu_array ;
+                              menu_array = vendor2[k].menu;
+                              var new_menu_array = [];
+                              for (var ii = 0; ii < menu_array.length; ii++) {
+                                console.log(current_time);
+                                    if(menu_array[ii].timings & current_time)
+                                    {
+                                      new_menu_array.push(menu_array[ii]);
+                                    }              
+                                  }
+                              vendor2[k].menu = new_menu_array;
+                            }
+                 return response.send( vendor2 );
+              }
+            });
+            }
+            
+            // console.log("old vendor", vendor);
+           // return response.send( vendor2 );
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+  }
 });
 
 
