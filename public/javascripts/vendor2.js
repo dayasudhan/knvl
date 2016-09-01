@@ -1,7 +1,7 @@
 app = angular.module("vendorModule", []);
  var config = {	    		  
  		  headers: {
-    		    'securekey': 'RN4CDXkqltLF%2FWloegKujIhiaSWBrgCzQXqI9cyWpT0',
+    		  'securekey': 'RN4CDXkqltLF%2FWloegKujIhiaSWBrgCzQXqI9cyWpT0',
 			    'client':'pickcock',
 			    'version':'1'
 			  }
