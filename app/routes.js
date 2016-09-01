@@ -1096,10 +1096,10 @@ app.get( '/v1/vendor/order/today/:id', function( request, response ) {
 
 app.get( '/v1/vendor/order_by_id/:id', function( request, response ) {
      console.log('/v1/vendor/order_by_id/:id');
-	if(checkVendorApiAunthaticated(request,2) == false)
-	{
-		return response.send("Not aunthiticated").status(403);
-	}
+	// if(checkVendorApiAunthaticated(request,2) == false)
+	// {
+	// 	return response.send("Not aunthiticated").status(403);
+	// }
      console.log(request.params.id);
      return OrderModel.find({ 'id':request.params.id},function( err, order ) {
         if( !err ) {
