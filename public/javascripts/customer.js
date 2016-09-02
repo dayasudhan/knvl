@@ -1,4 +1,11 @@
 var customerApp =angular.module("mainModule", ['ui.router']);
+ var config = {           
+      headers: {
+          'securekey': 'RN4CDXkqltLF%2FWloegKujIhiaSWBrgCzQXqI9cyWpT0',
+          'client':'pickcock',
+          'version':'1'
+        }
+   };
 customerApp.config( function ($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/');
   $stateProvider
@@ -29,7 +36,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       console.log($scope.areaName);
        console.log($scope.city);
       url = url +  "city=" +$scope.city + "&areaName="+$scope.areaName;
-      $http.get(url)
+      $http.get(url,config)
         .success(function (data, status, headers, config)
         {
           $scope.hotellist = data;
@@ -46,7 +53,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
      var url = "/v1/vendor/delieveryareas?";
       console.log($scope.search_areaname);
       url = url +  "city=" +$scope.cityCoverage.citys[$scope.selectedCity] + "&areaName="+$scope.search_areaname;
-      $http.get(url)
+      $http.get(url,config)
         .success(function (data, status, headers, config)
         {
           $scope.hotellist = data;
@@ -61,7 +68,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
        console.log($scope.orderId);
       var url = "/v1/vendor/order_by_id/";
       url = url + $scope.orderId;
-      $http.get(url)
+      $http.get(url,config)
         .success(function (data, status, headers, config)
         {
           console.log(data);
@@ -78,7 +85,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       console.log("postOrder");
       console.log(ordarr);
       var url = "/v1/vendor/order";
-      $http.post(url, ordarr)
+      $http.post(url, ordarr,config)
         .success(function (data, status, headers)
         {
           console.log("Success in postorder");
@@ -214,7 +221,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
     $scope.getCityCoverage = function(){
       console.log("getCityCoverage");
       var url = "/v1/admin/coverageArea";
-      $http.get(url)
+      $http.get(url,config)
         .success(function (data, status, headers, config)
         {
           console.log("response");

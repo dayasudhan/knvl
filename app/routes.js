@@ -542,10 +542,10 @@ app.post( '/v1/vendor/review/:id', function( req, res ) {
 
 app.post( '/v1/vendor/otp/register', function( req, res ) {
     console.log('/v1/vendor/otp/register');
-   	if(checkVendorApiAunthaticated(request,2) == false)
-	{
-		return response.send("Not aunthiticated").status(403);
-	}
+   	if(checkVendorApiAunthaticated(req,2) == false)
+	  {
+		  return res.send("Not aunthiticated").status(403);
+	  }
     console.log(req.body.phoneNumber);
     console.log(req.body.name);
     console.log(req.body.email);
@@ -627,10 +627,10 @@ app.get( '/v1/vendor/otp/all', function( req, res ) {
 });
 app.post( '/v1/vendor/otp/confirm', function( req, res ) {
     console.log('/v1/vendor/otp/confirm');
-   	if(checkVendorApiAunthaticated(req,2) == false)
-	{
-		return res.send("Not aunthiticated").status(403);
-	}
+    if(checkVendorApiAunthaticated(req,2) == false)
+	  {
+	 	 return res.send("Not aunthiticated").status(403);
+	  }
     console.log(req.body.phoneNumber);
     console.log(req.body.otpText);
 
@@ -784,6 +784,198 @@ app.get('/old/logout', function(req, res, next) {
 app.get('/ping', function(req, res){
     res.status(200).send("pong!");
 });
+
+function googleDistanceMeasure(googledistanceurl,vendor,index,callback)
+{
+            client.get(googledistanceurl, function (data, response) {
+              //  console.log(data);
+                if("elements" in data.rows[0])
+                {
+                //  console.log(data.rows[0].elements[0]);
+                  if("distance" in data.rows[0].elements[0])
+                  {
+                     // console.log(data.rows[0].elements[0].distance.value);
+                      var dist = data.rows[0].elements[0].distance.value /1000;
+                      console.log("dist--",dist);
+                      console.log("deliverrange--", vendor.deliverRange);
+                       if( dist <= vendor.deliverRange)
+                       {
+                        
+                         callback(vendor,index);
+                      }
+                      else
+                      {
+                        callback(null,index);
+                      }
+
+
+                  }
+                  else
+                      {
+                        callback(null,index);
+                      }
+
+                }
+            });
+}
+app.get( '/v1/vendor/deliveryareasbygps', function( request, response ) {
+    console.log("GET --/v1/vendor/deliveryareasbygps");
+
+    if(checkVendorApiAunthaticated(request,2) == false)
+    {
+      return response.send("Not aunthiticated").status(403);
+    }
+    console.log(request.query);
+
+  var isbulkrequest = parseInt(request.query.isbulkrequest);
+
+   var indiantime = new Date();
+   indiantime.setHours(indiantime.getHours() + 5);
+   indiantime.setMinutes(indiantime.getMinutes() + 30);
+  var current_time = 0;
+  var binaryValueofTime = [];
+  if(indiantime.getHours() < 11)
+  {
+    current_time = 1;
+    console.log("Morning");
+    console.log(indiantime);
+    binaryValueofTime.push(1);
+  }
+  else if (indiantime.getHours() < 16)
+  {
+      current_time = 2;
+      console.log(indiantime);
+      console.log("Lunch");
+      binaryValueofTime.push(1);
+  }
+  else
+  {
+      current_time = 4;
+      console.log(indiantime);
+      console.log("Dinner");
+  }
+  console.log(current_time);
+  if(isbulkrequest == 1)
+  {
+    console.log("isbulkrequest == 1");
+    return VendorInfoModel.find(
+        { 
+            isBulkVendor:{ $gte: 1 } ,
+        },
+        function( err, vendor ) {
+        if( !err ) {
+            //console.log("old vendor", vendor);
+            console.log("vendor.length",vendor.length);
+            var vendor2 =[];
+            var i  = 0;
+            for (var j = 0; j < vendor.length; j++) {
+            var googledistanceurl = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&key=AIzaSyA0ZqdBPzMZZBJ3O8bc5p-HtlQptpHIxJE";
+            googledistanceurl = googledistanceurl + "&origins=" + request.query.latitude + "," + request.query.longitude;
+            googledistanceurl = googledistanceurl + "&destinations=" + vendor[j].address.latitude + "," + vendor[j].address.longitude;
+            //&origins=12.9677,77.536&destinations=12.9568,77.5308";
+
+            var deliverRange = vendor[j].deliverRange;
+            console.log("deliverRange " , deliverRange);
+            console.log(googledistanceurl);
+            googleDistanceMeasure(googledistanceurl,vendor[j],j,function(data,index)
+            {
+              i++;
+              if(data !=null)
+              {
+                vendor2.push(data);
+              }
+              if(i == (vendor.length))
+              {
+                            for (var k = 0; k < vendor2.length; k++) {
+                              var menu_array ;
+                              menu_array = vendor2[k].menu;
+                              var new_menu_array = [];
+                              for (var ii = 0; ii < menu_array.length; ii++) {
+                                console.log(current_time);
+                                    if(menu_array[ii].timings & current_time)
+                                    {
+                                      new_menu_array.push(menu_array[ii]);
+                                    }              
+                                  }
+                              vendor2[k].menu = new_menu_array;
+                            }
+                 return response.send( vendor2 );
+              }
+            });
+            }
+            
+            // console.log("old vendor", vendor);
+           // return response.send( vendor2 );
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+  }
+  else    
+  {
+    console.log("isbulkrequest == else");
+    return VendorInfoModel.find(
+        {   isBulkVendor:{ $lte: 1 } ,
+            deliverAreas:{
+                            $elemMatch: {
+                                 name: request.query.areaName
+                                }
+                            } 
+        },
+        function( err, vendor ) {
+         if( !err ) {
+            //console.log("old vendor", vendor);
+            console.log("vendor.length",vendor.length);
+            var vendor2 =[];
+            var i  = 0;
+            for (var j = 0; j < vendor.length; j++) {
+            var googledistanceurl = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&key=AIzaSyA0ZqdBPzMZZBJ3O8bc5p-HtlQptpHIxJE";
+            googledistanceurl = googledistanceurl + "&origins=" + request.query.latitude + "," + request.query.longitude;
+            googledistanceurl = googledistanceurl + "&destinations=" + vendor[j].address.latitude + "," + vendor[j].address.longitude;
+            //&origins=12.9677,77.536&destinations=12.9568,77.5308";
+
+            var deliverRange = vendor[j].deliverRange;
+            console.log("deliverRange " , deliverRange);
+            console.log(googledistanceurl);
+            googleDistanceMeasure(googledistanceurl,vendor[j],j,function(data,index)
+            {
+              i++;
+              if(data !=null)
+              {
+                vendor2.push(data);
+              }
+             if(i == (vendor.length))
+              {
+                            for (var k = 0; k < vendor2.length; k++) {
+                              var menu_array ;
+                              menu_array = vendor2[k].menu;
+                              var new_menu_array = [];
+                              for (var ii = 0; ii < menu_array.length; ii++) {
+                                console.log(current_time);
+                                    if(menu_array[ii].timings & current_time)
+                                    {
+                                      new_menu_array.push(menu_array[ii]);
+                                    }              
+                                  }
+                              vendor2[k].menu = new_menu_array;
+                            }
+                 return response.send( vendor2 );
+              }
+            });
+            }
+            
+            // console.log("old vendor", vendor);
+           // return response.send( vendor2 );
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+  }
+});
+
+
 
 
 app.get( '/v1/vendor/delieveryareas', function( request, response ) {
@@ -1008,7 +1200,8 @@ return CustomerInfoModel.findOneAndUpdate({ 'id':request.params.id},
 
 app.get( '/v1/vendor/order/:id', function( request, response ) {
   console.log(request.params.id);
- 	if(checkVendorApiAunthaticated(request,1) == false && checkVendorApiAunthaticated(request,2) == false)
+  console.log(request.headers);
+ 	if((checkVendorApiAunthaticated(request,1) == false) && (checkVendorApiAunthaticated(request,2)) == false)
 	{
 		return response.send("Not aunthiticated").status(403);
 	}
@@ -1095,10 +1288,10 @@ app.get( '/v1/vendor/order/today/:id', function( request, response ) {
 
 app.get( '/v1/vendor/order_by_id/:id', function( request, response ) {
      console.log('/v1/vendor/order_by_id/:id');
-	if(checkVendorApiAunthaticated(request,2) == false)
-	{
-		return response.send("Not aunthiticated").status(403);
-	}
+	// if(checkVendorApiAunthaticated(request,2) == false)
+	// {
+	// 	return response.send("Not aunthiticated").status(403);
+	// }
      console.log(request.params.id);
      return OrderModel.find({ 'id':request.params.id},function( err, order ) {
         if( !err ) {
@@ -1396,7 +1589,7 @@ app.post( '/v1/vendor/menu/:id', function( request, response ) {
 
 
 app.post( '/v1/admin/coverageArea', function( request, response ) {
-  	if(checkVendorApiAunthaticated(request,0) == false)
+  if(checkVendorApiAunthaticated(request,0) == false)
 	{
 		return response.send("Not aunthiticated").status(403);
 	}
@@ -1449,9 +1642,9 @@ app.put( '/v1/admin/coverageArea', function( request, response ) {
 app.get( '/v1/admin/coverageArea', function( request, response ) {
     console.log("/v1/admin/coverageArea");
   	if(checkVendorApiAunthaticated(request,2) == false)
-	{
-		return response.send("Not aunthiticated").status(403);
-	}
+  	{
+  		return response.send("Not aunthiticated").status(403);
+  	}
 	    return CoverageAreaModel.find(function( err, order ) {
 	        if( !err ) {
 	            console.log("no error");
@@ -1490,6 +1683,7 @@ app.get( '/v1/vendor/menu/:id', function( request, response ) {
 
   console.log("get /vendor/menu/");
   console.log(request.params.id);
+  console.log(request.headers);
 	if(checkVendorApiAunthaticated(request,1) == false)
 	{
 		return response.send("Not aunthiticated").status(403);

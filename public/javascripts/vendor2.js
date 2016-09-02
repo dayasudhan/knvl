@@ -1,7 +1,7 @@
 app = angular.module("vendorModule", []);
  var config = {	    		  
  		  headers: {
-    		    'securekey': 'RN4CDXkqltLF%2FWloegKujIhiaSWBrgCzQXqI9cyWpT0',
+    		  'securekey': 'RN4CDXkqltLF%2FWloegKujIhiaSWBrgCzQXqI9cyWpT0',
 			    'client':'pickcock',
 			    'version':'1'
 			  }
@@ -317,10 +317,13 @@ $scope.trackerUpdateStatus = function(param1)
         .success(function (data, status, headers, config)
         {
             console.log("addDetails success");
+            alert("addDetails success");
+
         })
         .error(function (data, status, headers, config)
         {
           console.log("addDetails error");
+           alert("addDetails error");
         });
     };
 
