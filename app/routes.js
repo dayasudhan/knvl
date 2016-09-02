@@ -892,7 +892,7 @@ app.get( '/v1/vendor/deliveryareasbygps', function( request, response ) {
                               var new_menu_array = [];
                               for (var ii = 0; ii < menu_array.length; ii++) {
                                 console.log(current_time);
-                                    if(menu_array[ii].timings & current_time)
+                                    if((menu_array[ii].timings & current_time) && (menu_array[ii].availability == 1))
                                     {
                                       new_menu_array.push(menu_array[ii]);
                                     }              
@@ -953,7 +953,7 @@ app.get( '/v1/vendor/deliveryareasbygps', function( request, response ) {
                               var new_menu_array = [];
                               for (var ii = 0; ii < menu_array.length; ii++) {
                                 console.log(current_time);
-                                    if(menu_array[ii].timings & current_time)
+                                if((menu_array[ii].timings & current_time) && (menu_array[ii].availability == 1))
                                     {
                                       new_menu_array.push(menu_array[ii]);
                                     }              
@@ -1037,7 +1037,7 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
               menu_array = vendor[j].menu;
               var new_menu_array = [];
               for (var i = 0; i < menu_array.length; i++) {
-                    if(menu_array[i].timings & current_time)
+                    iif((menu_array[i].timings & current_time) && (menu_array[i].availability == 1))
                     {
                       new_menu_array.push(menu_array[i]);
                     }
@@ -1073,7 +1073,7 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
               menu_array = vendor[j].menu;
               var new_menu_array = [];
               for (var i = 0; i < menu_array.length; i++) {
-                    if(menu_array[i].timings & current_time)
+            	  if((menu_array[i].timings & current_time) && (menu_array[i].availability == 1))
                     {
                       new_menu_array.push(menu_array[i]);
                     }              }
