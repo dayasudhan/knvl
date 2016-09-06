@@ -134,6 +134,21 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       
       }
     }
+   $scope.phonenumber = function(inputtxt)  
+    {  
+      console.log("phonenumber 1 ",inputtxt);
+   
+        var phoneno = /^\d{10}$/;  
+        if(phoneno.test(inputtxt))  
+        {  
+            return true;  
+        }  
+        else  
+        {  
+           
+           return false;  
+        }  
+      } 
     $scope.order = function() {
 
       console.log("order function 1");
@@ -156,12 +171,31 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
           }
         });
         console.log("order function 34523");
-       if($scope.isOrderPresent == false)
+       if(!$scope.phonenumber($scope.phone))
+       {
+        console.log("phonenumber 2");
+            $window.alert("Invalid Phone Number");
+       }
+       else if($scope.isOrderPresent == false)
        {
          console.log("order function 345");
+
          $window.alert("no items selected");
 
          $scope.showModal =false;
+       }
+       else if(total_price < $scope.hotel.minimumOrder)
+       {
+         var minimum_order= "Minimum Order for this Hotel is Rs.";
+         minimum_order = minimum_order + $scope.hotel.minimumOrder + " Kindly add more items";
+         $window.alert(minimum_order);
+          $scope.showModal =false;
+          $scope.isOrderPresent == false;
+       }
+       else
+       {
+        console.log("order function else");
+        $('#myModal').modal()
        }
        var totalCost = $scope.hotel.deliverCharge +  total_price;
         var ordarr = {
