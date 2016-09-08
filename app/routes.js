@@ -441,7 +441,7 @@ function registerVendor(req, res, next) {
 
 app.get( '/v1/vendor/info/:id', function( request, response ) {
     console.log("GET --/v1/vendor/info/");
-   	if(checkVendorApiAunthaticated(request,1) == false)
+   	if(checkVendorApiAunthaticated(request,1) == false && request.isAuthenticated() == false)
 	{
 		return response.send("Not aunthiticated").status(403);
 	}
@@ -661,7 +661,7 @@ app.post( '/v1/vendor/otp/confirm', function( req, res ) {
 
 
 app.post( '/v1/vendor/info/:id', function( req, res ) {
-if(checkVendorApiAunthaticated(req,1) == false)
+if(checkVendorApiAunthaticated(req,1) == false && req.isAuthenticated() == false)
 {
 	return res.send("Not aunthiticated").status(403);
 }
@@ -1201,7 +1201,7 @@ return CustomerInfoModel.findOneAndUpdate({ 'id':request.params.id},
 app.get( '/v1/vendor/order/:id', function( request, response ) {
   console.log(request.params.id);
   console.log(request.headers);
- 	if((checkVendorApiAunthaticated(request,1) == false) && (checkVendorApiAunthaticated(request,2)) == false)
+ 	if((checkVendorApiAunthaticated(request,1) == false) && (checkVendorApiAunthaticated(request,2)) == false && request.isAuthenticated() == false)
 	{
 		return response.send("Not aunthiticated").status(403);
 	}
@@ -1465,7 +1465,7 @@ app.post( '/v1/vendor/order', function( request, response ) {
 
 app.get( '/v1/vendor/order/summary/:id', function( request, res ) {
       console.log('/v1/vendor/order/status/:id');
-  	if(checkVendorApiAunthaticated(request,1) == false)
+  	if(checkVendorApiAunthaticated(request,1) == false && request.isAuthenticated() == false)
 	{
 		return response.send("Not aunthiticated").status(403);
 	}
@@ -1621,7 +1621,7 @@ app.put( '/v1/admin/coverageArea', function( request, response ) {
 
 app.get( '/v1/admin/coverageArea', function( request, response ) {
     console.log("/v1/admin/coverageArea");
-  	if(checkVendorApiAunthaticated(request,2) == false)
+  	if(checkVendorApiAunthaticated(request,2) == false && request.isAuthenticated() == false)
   	{
   		return response.send("Not aunthiticated").status(403);
   	}
@@ -1659,32 +1659,7 @@ app.delete( '/v1/admin/coverageAreaAll', function( request, response ) {
 });
 
 
-app.get( '/v1/vendor/menu/:id', function( request, response ) {
 
-  console.log("get /vendor/menu/");
-  console.log(request.params.id);
-  console.log(request.headers);
-	if(checkVendorApiAunthaticated(request,1) == false)
-	{
-		return response.send("Not aunthiticated").status(403);
-	}
-     return VendorInfoModel.find({ 'hotel.email':request.params.id                               },
-      function( err, vendorinfo ) {
-        if( !err ) {
-             console.log("no error");
-             var menu_array ;
-            if(vendorinfo.length > 0)
-              menu_array = vendorinfo[0].menu;
-            else
-              menu_array =  vendorinfo ;
-            return response.send(menu_array);
-        } else {
-            console.log( err );
-            return response.send('ERROR');
-        }
-    });
-
-});
 
 //unregister a book
 app.delete( '/v1/vendor/unregister/:id', function( request, response ) {
@@ -1704,14 +1679,66 @@ app.delete( '/v1/vendor/unregister/:id', function( request, response ) {
     //});
 });
 
+app.get( '/v1/vendor/menu/:id', function( request, response ) {
+
+  console.log("get /vendor/menu/");
+  console.log(request.params.id);
+  console.log(request.headers);
+
+  if(checkVendorApiAunthaticated(request,1) == false && request.isAuthenticated() == false)
+  {
+    return response.send("Not aunthiticated").status(403);
+  }
+     return VendorInfoModel.find({ 'hotel.email':request.params.id                               },
+      function( err, vendorinfo ) {
+        if( !err ) {
+             console.log("no error");
+             var menu_array ;
+            if(vendorinfo.length > 0)
+              menu_array = vendorinfo[0].menu;
+            else
+              menu_array =  vendorinfo ;
+            return response.send(menu_array);
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+
+});
+
+app.post( '/v1/vendor/menu', function( request, response ) {
+    console.log("post /vendor/menu/");
+    console.log(request.body);
+    console.log(request.user);
+    console.log(request.user.local.email);
+    console.log(" outside aunthiticated");
+  if(checkVendorApiAunthaticated(request,1) == false &&  request.isAuthenticated() == false)
+  {
+   return response.send("Not aunthiticated").status(403);
+  }
+    return VendorInfoModel.update({ 'hotel.email':request.user.local.email},
+       { $addToSet: {menu: {$each:[{name: request.body.fooditem,  price:request.body.foodprice,availability:1,timings:request.body.timings}] }}},function( err, order ) {
+       if( !err ) {
+           console.log("no error");
+           console.log(order);
+           return response.send('Success');
+       } else {
+           console.log( err );
+           return response.send('ERROR');
+       }
+   });
+});
+
+
 //Delete a menu item
 app.delete( '/v1/vendor/menu/item/:id/:fooditem', function( request, response ) {
      console.log('delete /v1/vendor/menu/item/');
      console.log(request.headers);
-   	if(checkVendorApiAunthaticated(request,1) == false)
-	{
-		return response.send("Not aunthiticated").status(403);
-	}
+   	if(checkVendorApiAunthaticated(request,1) == false &&  request.isAuthenticated() == false)
+  	{
+  		return response.send("Not aunthiticated").status(403);
+  	}
      console.log(request.params.id);
       console.log(request.params.fooditem);
         return VendorInfoModel.update( { 'hotel.email':request.params.id},{ $pull: {menu: {"name": request.params.fooditem }}},function( err ) {
@@ -1726,29 +1753,12 @@ app.delete( '/v1/vendor/menu/item/:id/:fooditem', function( request, response ) 
     //});
 });
 
-app.post( '/v1/vendor/menu/:id', function( request, response ) {
-    console.log("post /vendor/menu/");
-	if(checkVendorApiAunthaticated(request,1) == false)
-	{
-		return response.send("Not aunthiticated").status(403);
-	}
-    return VendorInfoModel.update({ 'hotel.email':request.params.id},
-       { $addToSet: {menu: {$each:[{name: request.body.fooditem,  price:request.body.foodprice,availability:1,timings:request.body.timings}] }}},function( err, order ) {
-       if( !err ) {
-           console.log("no error");
-           console.log(order);
-           return response.send('Success');
-       } else {
-           console.log( err );
-           return response.send('ERROR');
-       }
-   });
-});
+
 //update a menu item
 app.post( '/v1/vendor/menu/item/:id', function( request, response ) {
      console.log('update /v1/vendor/menu/item/');
 
-   	if(checkVendorApiAunthaticated(request,1) == false)
+  if(checkVendorApiAunthaticated(request,1) == false)
 	{
 		return response.send("Not aunthiticated").status(403);
 	}
@@ -2028,7 +2038,14 @@ app.delete( '/v1/admin/counters/:id', function( request, response ) {
 // route middleware to ensure user is logged in
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
+    {
+      console.log("isLoggedIn");
         return next();
+    }
+    else
+    {
+       console.log("not loggedin isLoggedIn");
+    }
 
     res.redirect('/');
 }
