@@ -100,7 +100,7 @@ app.get('/vendor_logout', function(req, res) {
         // LOGIN ===============================
         // show the login form
         app.get('/login', function(req, res) {
-            res.render('login.ejs', { message: req.flash('loginMessage') });
+            res.render('customer_login.ejs', { message: req.flash('loginMessage') });
         });
 
         // process the login form
@@ -365,48 +365,160 @@ app.get('/p/admin_order_today', function (req, res) {
 
 app.post('/signup', function(req, res, next) {
 console.log(req.body);
-if(req.body.password != req.body.password2)
-{
-   
-console.log("password mimatchmatch");
-   return res.send('ERROR');
-}
-else
-{
-  console.log("password match");
-}
-console.log('/signup');
-  passport.authenticate('local-signup', function(err, user, info) {
-   console.log(req.body);
-    if (err) { return next(err); }
-    if (!user) { 
-        var redirect_url = '/';
-            if(req.body.role == 'customer')
-            {
-                redirect_url = '/signup';
-            }
-            else if(req.body.role == 'vendor') 
-            {
-                redirect_url = '/p/vendor_signup';
-            } 
-            return res.redirect(redirect_url); 
-     }
-    req.logIn(user, function(err) {
+  if(req.body.password != req.body.password2)
+  {
+     
+  console.log("password mimatchmatch");
+     return res.send('ERROR');
+  }
+  else
+  {
+    console.log("password match");
+  }
+  console.log('/signup');
+    passport.authenticate('local-signup', function(err, user, info) {
+     console.log(req.body);
       if (err) { return next(err); }
-      console.log(req.body.role);
-      var redirect_url;
-      if(req.body.role == 'customer')
-        redirect_url = '/';
-       else if(req.body.role == 'vendor') 
-       {
-        redirect_url = '/p/vendor_details';
-        registerVendor(req, res, next);
+      if (!user) { 
+          var redirect_url = '/';
+              if(req.body.role == 'customer')
+              {
+                  redirect_url = '/signup';
+              }
+              else if(req.body.role == 'vendor') 
+              {
+                  redirect_url = '/p/vendor_signup';
+              } 
+              return res.redirect(redirect_url); 
+       }
+      req.logIn(user, function(err) {
+        if (err) { return next(err); }
+        console.log(req.body.role);
+        var redirect_url;
+        if(req.body.role == 'customer')
+        {
+          redirect_url = '/';
+          registerCustomer(req, res, next);
         }
-      return res.redirect(redirect_url);
+        else if(req.body.role == 'vendor') 
+        {
+          redirect_url = '/p/vendor_details';
+          registerVendor(req, res, next);
+        }
+        return res.redirect(redirect_url);
+      });
+    })(req, res, next);
+});
+function registerCustomer(req, res, next) {
+  console.log("/registerCustomer");
+  var cus_id = "C";
+  var res = getNextSequence('customer',function(data) {
+
+    cus_id = cus_id + data.sequence;
+    console.log(hotel_id);
+
+      var customerInfo = new CustomerInfoModel({
+        email:req.body.email2,
+        id:cus_id,
+        phone:req.body.email,
+
+
+      });
+      customerInfo.save( function( err ) {
+        if( !err ) {
+              console.log( 'registerCustomer created' );
+              console.log(req.body.email);
+                  req.session.save(function (err) {
+                    if (err) {
+                        console.log( 'registerCustomer save error' );
+                      return next(err);
+                    }
+                    console.log( 'registerCustomer save complete' );
+                  });
+              return ;
+              } else {
+                console.log( 'registerCustomer error' );
+                console.log( err );
+                return response.send('ERROR');
+              }
+        });
     });
-  })(req, res, next);
+};
+
+app.get( '/v1/customer', function( request, response ) {
+    console.log(request.user.local);
+     console.log(request.user.local.email);
+  
+     return CustomerInfoModel.find({ 'id':request.user.local.email},function( err, customerInfo ) {
+        if( !err ) {
+            return response.send( customerInfo );
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+ // });
 });
 
+app.post( '/v1/customer/:id', function( request, response ) {
+
+console.log(request.body);
+
+return CustomerInfoModel.findOneAndUpdate({ 'id':request.params.id},
+
+        {
+                id:request.params.id,
+                phone:request.body.phone,
+                vegornonveg:"veg",
+                speciality:"",
+               address:{addressLine1:request.body.Address1,addressLine2:request.body.Address2,
+                street:request.body.street, LandMark:request.body.Landmark, 
+                areaName:request.body.Areaname,city:request.body.City, zip:request.body.zip, 
+                latitude:request.body.latitude,longitude:request.body.longitude }
+            },
+           
+
+    function( err,customer ) {
+        if( !err ) {
+                if(customer == null)
+                {
+                    console.log( "empty" );
+                                        var customer = new CustomerInfoModel({
+                        id:request.params.id,
+                        phone:request.body.phone,
+                        vegornonveg:"veg",
+                        speciality:"",
+                       address:{addressLine1:request.body.Address1,addressLine2:request.body.Address2,
+                        street:request.body.street, LandMark:request.body.Landmark, 
+                        areaName:request.body.Areaname,city:request.body.City, zip:request.body.zip, 
+                        latitude:request.body.latitude,longitude:request.body.longitude }
+                    });
+                 
+                    console.log(request.body);
+                    customer.save( function( err ) {
+                        if( !err ) {
+                            console.log( 'created' );
+                            return response.send( customer );
+                        } else {
+                         console.log( 'error' );
+                            console.log( err );
+                            return response.send('ERROR');
+                        }
+                    });
+                   
+                }
+                
+                    return  response.send(customer);
+               
+            
+
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+
+});
 function registerVendor(req, res, next) {
   console.log("/registerVendor");
   var hotel_id = "H";
@@ -506,12 +618,9 @@ app.post( '/v1/vendor/isopen/:id', function( req, res ) {
            
             return res.send('created');;
         } else {
-         console.log( 'updated isopen error' );
-            console.log( err );
-            return res.send('ERROR');
-        }
-    });
-});
+
+
+
 
 app.post( '/v1/vendor/review/:id', function( req, res ) {
   console.log('/v1/vendor/review/:id');
@@ -736,6 +845,25 @@ console.log(request.params.id);
     });
 }
 
+
+
+//unregister a book
+app.delete( '/v1/vendor/unregister/:id', function( request, response ) {
+    if(checkVendorApiAunthaticated(request,0) == false)
+  {
+    return response.send("Not aunthiticated").status(403);
+  }
+        return VendorInfoModel.remove( { 'hotel.email':request.params.id},function( err ) {
+            if( !err ) {
+                console.log( 'Book removed' );
+                return response.send( '' );
+            } else {
+                console.log( err );
+                return response.send('ERROR');
+            }
+        });
+    //});
+});
 app.get('/old/login', function(req, res) {
     res.render('login', { user : req.user });
 });
@@ -1121,79 +1249,6 @@ app.get( '/v1/admin/account/:id', function( request, response ) {
         }
     });
  // });
-});
-app.get( '/v1/customer', function( request, response ) {
-    console.log(request.user.local);
-     console.log(request.user.local.email);
-  
-     return CustomerInfoModel.find({ 'id':request.user.local.email},function( err, customerInfo ) {
-        if( !err ) {
-            return response.send( customerInfo );
-        } else {
-            console.log( err );
-            return response.send('ERROR');
-        }
-    });
- // });
-});
-app.post( '/v1/customer/:id', function( request, response ) {
-
-console.log(request.body);
-
-return CustomerInfoModel.findOneAndUpdate({ 'id':request.params.id},
-
-        {
-                id:request.params.id,
-                phone:request.body.phone,
-                vegornonveg:"veg",
-                speciality:"",
-               address:{addressLine1:request.body.Address1,addressLine2:request.body.Address2,
-                street:request.body.street, LandMark:request.body.Landmark, 
-                areaName:request.body.Areaname,city:request.body.City, zip:request.body.zip, 
-                latitude:request.body.latitude,longitude:request.body.longitude }
-            },
-           
-
-    function( err,customer ) {
-        if( !err ) {
-                if(customer == null)
-                {
-                    console.log( "empty" );
-                                        var customer = new CustomerInfoModel({
-                        id:request.params.id,
-                        phone:request.body.phone,
-                        vegornonveg:"veg",
-                        speciality:"",
-                       address:{addressLine1:request.body.Address1,addressLine2:request.body.Address2,
-                        street:request.body.street, LandMark:request.body.Landmark, 
-                        areaName:request.body.Areaname,city:request.body.City, zip:request.body.zip, 
-                        latitude:request.body.latitude,longitude:request.body.longitude }
-                    });
-                 
-                    console.log(request.body);
-                    customer.save( function( err ) {
-                        if( !err ) {
-                            console.log( 'created' );
-                            return response.send( customer );
-                        } else {
-                         console.log( 'error' );
-                            console.log( err );
-                            return response.send('ERROR');
-                        }
-                    });
-                   
-                }
-                
-                    return  response.send(customer);
-               
-            
-
-        } else {
-            console.log( err );
-            return response.send('ERROR');
-        }
-    });
-
 });
 
 
@@ -1659,25 +1714,6 @@ app.delete( '/v1/admin/coverageAreaAll', function( request, response ) {
 });
 
 
-
-
-//unregister a book
-app.delete( '/v1/vendor/unregister/:id', function( request, response ) {
-  	if(checkVendorApiAunthaticated(request,0) == false)
-	{
-		return response.send("Not aunthiticated").status(403);
-	}
-        return VendorInfoModel.remove( { 'hotel.email':request.params.id},function( err ) {
-            if( !err ) {
-                console.log( 'Book removed' );
-                return response.send( '' );
-            } else {
-                console.log( err );
-                return response.send('ERROR');
-            }
-        });
-    //});
-});
 
 app.get( '/v1/vendor/menu/:id', function( request, response ) {
 
