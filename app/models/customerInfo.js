@@ -12,9 +12,9 @@ var CustomerInfoSchema = new mongoose.Schema({
 		zip:String, 
 		latitude:Number,
 		longitude:Number }],
-    phone:Number,
-    name:String,
-    email: String,
+	    phone:Number,
+	    name:String,
+	    email: String
 
     });
 

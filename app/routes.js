@@ -415,12 +415,13 @@ function registerCustomer(req, res, next) {
   var res = getNextSequence('customer',function(data) {
 
     cus_id = cus_id + data.sequence;
-    console.log(hotel_id);
+    console.log(cus_id);
 
       var customerInfo = new CustomerInfoModel({
         email:req.body.email2,
         id:cus_id,
         phone:req.body.email,
+        name:req.body.name
 
 
       });
@@ -444,7 +445,45 @@ function registerCustomer(req, res, next) {
         });
     });
 };
-
+app.get( '/v1/admin/customer/all', function( request, response ) {
+ 
+     return CustomerInfoModel.find(function( err, customerInfo ) {
+        if( !err ) {
+            return response.send( customerInfo );
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+ // });
+});
+app.post( '/v1/customer/address/:id', function( req, res ) {
+	  console.log('/v1/vendor/isopen/:id');
+	    console.log(req.headers);
+	   	if(checkVendorApiAunthaticated(request,1) == false)
+		{
+			return response.send("Not aunthiticated").status(403);
+		}
+	  console.log(req.params.id);
+	  console.log(req.body.isopen);
+	  var isopen = parseInt(req.body.isopen);
+	  console.log(isopen);
+	  VendorInfoModel.update({ 'phone':req.params.id},
+	      {
+	        $set: { isOpen: isopen } 
+	      },
+	       function( err ) {
+	        if( !err ) {
+	            console.log( 'updated isopen created' );
+	           
+	            return res.send('created');;
+	        } else {
+			console.log( 'updated isopen error' );		 
+		             console.log( err );		 
+		             return res.send('ERROR');		 
+		         }		
+	    	     });		
+	 });
 app.get( '/v1/customer', function( request, response ) {
     console.log(request.user.local);
      console.log(request.user.local.email);
@@ -618,9 +657,12 @@ app.post( '/v1/vendor/isopen/:id', function( req, res ) {
            
             return res.send('created');;
         } else {
-
-
-
+		console.log( 'updated isopen error' );		 
+	             console.log( err );		 
+	             return res.send('ERROR');		 
+	         }		
+    	     });		
+ });
 
 app.post( '/v1/vendor/review/:id', function( req, res ) {
   console.log('/v1/vendor/review/:id');
