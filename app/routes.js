@@ -457,32 +457,64 @@ app.get( '/v1/admin/customer/all', function( request, response ) {
     });
  // });
 });
-app.post( '/v1/customer/address/:id', function( req, res ) {
-	  console.log('/v1/vendor/isopen/:id');
-	    console.log(req.headers);
-	   	if(checkVendorApiAunthaticated(request,1) == false)
-		{
-			return response.send("Not aunthiticated").status(403);
-		}
-	  console.log(req.params.id);
-	  console.log(req.body.isopen);
-	  var isopen = parseInt(req.body.isopen);
-	  console.log(isopen);
-	  VendorInfoModel.update({ 'phone':req.params.id},
-	      {
-	        $set: { isOpen: isopen } 
-	      },
-	       function( err ) {
-	        if( !err ) {
-	            console.log( 'updated isopen created' );
-	           
-	            return res.send('created');;
-	        } else {
-			console.log( 'updated isopen error' );		 
-		             console.log( err );		 
-		             return res.send('ERROR');		 
-		         }		
-	    	     });		
+app.post( '/v1/customer/address/:id', function( request, response ) {
+	  console.log('/v1/customer/address/:id');
+	    console.log(request.headers);
+	    console.log("request.headers");
+	    console.log(request.body);
+//	   	if(checkVendorApiAunthaticated(request,1) == false)
+//		{
+//			return response.send("Not aunthiticated").status(403);
+//		}
+	  console.log(request.params.id);
+	
+//	  VendorInfoModel.update({ 'hotel.email':request.body.email},
+//		      {
+//		        uniqueid:request.body.uniqueid
+//		      },
+
+//	  VendorInfoModel.update({ 'phone':req.params.id},
+//	      {
+//	        //$set: { isOpen: isopen } 
+//		  	address:{addressLine1:request.body.Address1,addressLine2:request.body.Address2,
+//	          street:request.body.street, LandMark:request.body.Landmark, 
+//	          areaName:request.body.Areaname,city:request.body.City, zip:request.body.zip, 
+//	          latitude:request.body.latitude,longitude:request.body.longitude }
+//	      },
+//	      
+//	       function( err ) {
+//	        if( !err ) {
+//	            console.log( 'updated isopen created' );
+//	           
+//	            return res.send('created');;
+//	        } else {
+//			console.log( 'updated isopen error' );		 
+//		             console.log( err );		 
+//		             return res.send('ERROR');		 
+//		         }		
+//	    	     });	
+	    return CustomerInfoModel.update({ 'phone':request.params.id},
+	    	       { $addToSet: {addresses: {$each:
+	    	    	   [{label:request.body.label, 
+	    	    			addressLine1:request.body.address1,
+	    	    			addressLine2:request.body.address2,
+	    	    			street:request.body.street, 
+	    	    			LandMark:request.body.landmark, 
+	    	    			areaName:request.body.areaname,
+	    	    			city:request.body.city, 
+	    	    			zip:request.body.zip, 
+	    	    			latitude:request.body.latitude,
+	    	    			longitude:request.body.longitude }], }}},
+	    	    	   function( err, order ) {
+				    	       if( !err ) {
+				    	           console.log("no error");
+				    	           console.log(order);
+				    	           return response.send('Success');
+				    	       } else {
+				    	           console.log( err );
+				    	           return response.send('ERROR');
+				    	       }
+	    	    	   	});
 	 });
 app.get( '/v1/customer', function( request, response ) {
     console.log(request.user.local);
