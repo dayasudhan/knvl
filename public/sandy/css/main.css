@@ -1,0 +1,1459 @@
+/*! HTML5 Boilerplate v5.3.0 | MIT License | https://html5boilerplate.com/ */
+
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+html {
+    color: #222;
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+/*
+ * Remove text-shadow in selection highlight:
+ * https://twitter.com/miketaylr/status/12228805301
+ *
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * Remove the gap between audio, canvas, iframes,
+ * images, videos and the bottom of their containers:
+ * https://github.com/h5bp/html5-boilerplate/issues/440
+ */
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+    vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+    resize: vertical;
+}
+
+/* ==========================================================================
+   Browser Upgrade Prompt
+   ========================================================================== */
+
+.browserupgrade {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+body {
+    background: rgba(255, 255, 255, 0);
+    font-family: 'Roboto', sans-serif;
+    /*font-family: 'Ubuntu Condensed', sans-serif;*/
+    font-weight: normal;
+    font-size: 16px;
+    color: #161617;
+    line-height: 1.4;
+}
+
+
+*, *::before, *::after {
+    border: 0 none;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    max-width: 100%;
+}
+
+ul {
+    padding: 0px;
+    list-style-type: none;
+}
+
+a, a:hover {
+    text-decoration: none;
+}
+
+
+.mains {
+    background: url("../img/story.jpg");
+    background-size: cover !important;
+    float: left;
+    clear: both;
+    width: 100%;
+}
+
+.headup {
+    width: 100%;
+    margin-top: 3%;
+/*    border: 1px solid black;*/
+    float: left;
+    clear: both;
+}
+
+.logo {
+    width: 100%;
+    float: left;
+    margin: 5px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.navigationbox {
+    width: 100%;
+    margin: 10px auto;
+    float: right;
+}
+
+.headone {
+    width: 100%;
+    margin: 0px auto;
+    padding: 15px;
+    float: left;
+    clear: both;
+} 
+
+.tracks {
+    float: none !important;
+    text-align: center;
+}
+
+.tracklist {
+    list-style-type: none;
+    padding: 12px;
+    text-align: center !important;
+    left: 21em;
+}
+
+.boxtrack ul li {
+    padding: 0px 10px 0 10px;
+}
+
+.fieldone {
+    border: 2px solid #f7f7f7;
+    padding: 5px;
+    margin: 5px auto;
+    width: 10em;
+}
+
+.headtwo {
+    width: 100%;
+    margin: 0px auto;
+    padding: 15px;
+    float: left;
+    clear: both;
+}
+
+.menu {
+    list-style-type: none;
+    padding: 0px;
+    float: right;
+}
+
+.menu li {
+    display: inline-block;
+    padding: 0px 38px 0 38px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: darkblue;
+    font-size: 16px;
+}
+
+.menu li a:hover {
+    color: #ffffff;
+}
+
+.log h3 {
+    font-size: 18px;
+    text-transform: capitalize;
+    word-spacing: 10px;
+    letter-spacing: 2px;
+}
+
+.log h2 {
+    font-size: 20px;
+    text-transform: capitalize;
+    word-spacing: 10px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.loglist li {
+    display: block;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.loglist li .inputne {
+    background: url("../img/profile.png") no-repeat left center;
+    padding-left: 40px;
+}
+
+.loglist li .inputnew {
+    background: url("../img/phone.png") no-repeat left center;
+    padding-left: 40px;
+}
+
+.loglist li .inputnews {
+    background: url("../img/mail.png") no-repeat left center;
+    padding-left: 40px;
+}
+
+.loglist li .inputnewd {
+    background: url("../img/pwd.png") no-repeat left center;
+    padding-left: 40px;
+}
+
+.loglist li .lone {
+    color: #E08283; !important
+    text-align: center;
+}
+
+.loglist li .lone:hover {
+    color: red; !important
+}
+
+.loglist li .alone {
+    text-align: center;
+    width: 10em;
+}
+
+.sectionone {
+    margin: 0px auto;
+    width: 100%;
+}
+
+.khanaquotes {
+    margin: 40px auto;
+    text-align: center;
+}
+
+.khanaquotes h1 {
+    letter-spacing: 2px;
+    word-spacing: 5px;
+    margin-top: 15px;
+}
+
+.khanaquotes h1 span {
+    color: white;
+}
+
+.finderkeepers {
+    background-color: rgba(0, 191, 60, 0.6);
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 50px;
+    max-width: 800px;
+    min-height: 90px;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.findernav {
+    list-style-type: none;
+    padding: 0px;
+}
+
+.findernav li {
+    float: left;
+    padding: 0px 15px 0px 15px;
+}
+
+.selectouter {
+    border: 1px solid #d0d0d0;
+    overflow: hidden;
+    padding: 2px;
+    width: 17em;
+}
+
+.fordonate {
+    margin: 0 auto;
+}
+
+.selector {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: rgba(255, 255, 255, 1);
+    background-image: url("../img/select-arrow.jpg");
+    background-origin: padding-box;
+    background-position: right center, 0 0;
+    background-repeat: no-repeat;
+    background-size: 34px 34px;
+    border: medium none;
+    padding-right: 34px;
+    padding-left: 8px;
+    width: 100% !important;
+    vertical-align: top;
+    height: 34px;
+/*    display: inline-flex;*/
+    outline: medium mone;
+}
+
+.optor {
+    padding: 10px;
+    border-bottom: 1px solid #f5f5f5;
+    display: block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    transition: all 0.15s ease 0s;
+    overflow: auto;
+}
+
+.finds {
+    width: 7em;
+    padding: 9px 9px;
+    border: 1px solid white;
+}
+
+.finds:hover {
+    background: rgb(0, 0, 0);
+    color: chartreuse;
+}
+
+/*
+.ordertime {
+    margin: 0px auto;
+    padding: 20px;
+    width: 100%;
+    float: left;
+    clear: both;
+    background: #DADFE1;
+}
+
+.timemenu li {
+    width: 24%;
+    padding-right: 12px;
+    background: ;
+    display: inline-block;
+    text-align: center;
+    border-right: 2px solid white;  
+}
+
+.timemenu li:last-child {
+    border-right: none;
+}
+
+.timemenu li h3 {
+    margin-top: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+}
+
+.timemenu li h3 {
+    margin-top: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+
+.timemenu li p {
+    margin-top: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+*/
+
+.sectionthree {
+    margin: 0px auto;
+    min-height: 800px;
+}
+
+.gettoknow {
+    margin: 0px auto;
+    padding: 5px;
+    width: 100%;
+    float: left;
+    clear: both;
+    border: 1px solid dodgerblue;
+/*
+    background: rgba(0, 0, 0, 0.3);
+*/
+}
+
+.knowmenu li {
+    width: 19%;
+    padding: 10px;
+    background: ;
+    display: inline-block;
+    text-align: center; 
+}
+
+.knowmenu li a {
+    margin-top: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #161617;
+}
+
+.knowmenu li a:hover {
+    border-bottom: 2px solid #F4D03F;
+    text-decoration: none;
+    color: darkgreen;
+}
+
+.sectionfour {
+    
+}
+
+.sectionfive {
+    margin: 0px auto;
+    min-height: 800px;
+}
+
+.khaanagalu {
+    margin: 10px auto;
+    padding: 30px;
+    width: 100%;
+    float: left;
+    clear: both;
+}
+
+.hotelist li {
+    display: block;
+    margin: 10px auto;
+}
+
+.hotelist li .wrapper {
+    width: 100%;
+    float: left;
+    max-height: 200px;
+    background: #C8F7C5;
+    border: 1px solid #000000;
+    margin: 10px auto;
+}
+
+.hotelist li .wrapper .banner {
+    padding: 10px;
+    text-align: center;
+    float: left;
+}
+
+.hotelist li .wrapper .banner img {
+    width: 100%;
+}
+
+.hotelist li .wrapper .bandescription {
+    padding-left: 2em;
+    float: left;
+    margin: 0px auto;
+}
+
+.hotelist li .wrapper .bandescription h2 {
+    text-transform: capitalize;
+    text-align: left;
+}
+
+.hotelist li .wrapper .bandescription p {
+    font-size: 16px;
+    text-transform: capitalize;
+    text-align: left;
+    font-style: italic;
+}
+
+.hotelist li .wrapper .bannen {
+    padding: 10px;
+    float: right;
+    height: 180px;
+}
+
+.hotelist li .wrapper .bannen::before {
+    content: "";
+    vertical-align: middle;
+    display: inline-block;
+    height: 100%;
+}
+
+.hotelist li .wrapper .bannen {
+    text-align: center;
+}
+
+.kmenu {
+    margin: 0px auto;
+    width: 100%;
+}
+
+.kmenu .khlist li {
+    display: inline-block;
+    padding-right: 30px;
+}
+
+.kmenu .khlist li h3 {
+    color: #019875 ; !important
+}
+
+.sectionsix {
+    margin: 0px auto;
+    min-height: 800px;
+}
+
+.menselect {
+    margin: 20px auto;
+    border: 1px solid green;
+    padding: 10px;
+}
+
+.menselect table .tabcent {
+    text-align: center;
+}
+
+.mencheck {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.idetails h3 {
+    font-size: 18px;
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
+.idetails h3 span {
+    color: #DB0A5B;
+}
+
+.idetails .grand {
+    border: 1px solid #19B5FE;
+    text-align: center;
+    padding: 5px;
+    font-weight: 800;
+    color: #96281B;
+}
+
+.itembox table .tabcent {
+    text-align: center;
+}
+
+.itembox table .tabbold {
+    font-weight: 700;
+}
+
+.mordlist li {
+    display: block;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.mordlist li .inputne {
+    background: url("../img/profile.png") no-repeat left center;
+    padding-left: 40px;
+}
+
+.mordlist li .inputnew {
+    background: url("../img/phone.png") no-repeat left center;
+    padding-left: 40px;
+}
+
+.mordlist li .inputnews {
+    background: url("../img/mail.png") no-repeat left center;
+    padding-left: 40px;
+}
+
+.mordlist li .inputnewd {
+    background: url("../img/pwd.png") no-repeat left center;
+    padding-left: 40px;
+}
+
+.mordlist li .lone {
+    color: #E08283; !important
+    text-align: center;
+}
+
+.mordlist li .lone:hover {
+    color: red; !important
+}
+
+.mordlist li .alone {
+    text-align: center;
+    width: 10em;
+}
+
+.sectionseven {
+    margin: 0px auto;
+    min-height: 800px;
+}
+
+.thank {
+    border: 1px solid #019875;
+    padding: 20px;
+    margin:20px auto;
+}
+
+.thank h1 {
+    font-weight: 500;
+    word-spacing: 4px;
+    letter-spacing: 1px;
+}
+
+.thank h1 .t {
+    color: #F7CA18; 
+}
+
+.thank h1 .th {
+    color: #22313F; 
+}
+
+.thank h1 .oid {
+    color: #BE90D4; 
+}
+
+.thank p {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#myform {
+    padding: 5px;
+}
+
+.qty {
+    width: 25px;
+    height: 25px;
+    text-align: center;
+}
+
+input.qtyplus { 
+    width:25px; 
+    height:25px;
+}
+
+input.qtyminus { 
+    width:25px; 
+    height:25px;
+}
+
+.sectioneight {
+    margin: 0px auto;
+    min-height: 800px;
+}
+
+.teambanner {
+    padding: 20px;
+    clear: both;
+    width: 100%;
+    float: left;
+}
+
+.teambanner img {
+    width: 100%;
+    max-height: 400px;
+}
+
+.aboutkhaana {
+    margin: 0px auto;
+    padding: 10px;
+}
+
+.aboutkhaana h3 {
+    text-align: center;
+    font-weight: 500;
+}
+
+.aboutkhaana p {
+    font-weight: normal;
+    font-size: 14px;
+    text-align: center;
+}
+
+.aboutus {
+    margin: 0px auto;
+    padding: 10px;
+}
+
+.aboutus h3 {
+    text-align: center;
+    font-weight: 500;
+    margin: 0px auto;
+}
+
+.aboutus p {
+    font-weight: normal;
+    font-size: 14px;
+    text-align: center;
+}
+
+.teamimg {
+    margin: 0px auto;
+}
+
+.teamimg .teamcolor {
+    color: #049372;
+    font-size: 16px;
+    text-align: center;
+}
+
+.teamlists {
+    margin: 0px auto;
+    padding: 20px;
+}
+
+.teamli li {
+    width: 33%;
+    display: inline-block;
+    text-align: center;
+    margin: 10px auto;
+}
+
+.teamli li img {
+    text-align: center;
+    width: auto;
+    border-radius: 5px;
+}
+
+.teamli li h5 {
+    text-align: center;
+}
+
+.teamli li p {
+    color: #049372;
+    font-size: 14px;
+    text-align: center;
+}
+
+.teamdesc {
+   text-align: center;
+   width: 500px;
+   height: auto;
+}
+
+.teamdesc h6 {
+    text-align: center;
+}
+
+.sectionnine {
+    margin: 0px auto;
+    min-height: 800px;
+}
+
+.techpart {
+    margin: 0px auto;
+    padding: 20px;
+}
+
+.techlist li {
+    border: 1px solid #D24D57;
+    width: 33%;
+    display: inline-block;
+    vertical-align: top;
+    clear: both;
+}
+
+.techlist li .techpartlist {
+    padding: 5px;
+}
+
+.techlist li .techpartlist .techhead {
+    background: #4183D7;
+    text-align: center;
+    width: 100%;
+    float: left;
+}
+
+.techlist li .techpartlist .techhead h4 {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.techlist li .techpartlist .techbody img {
+    width: 100%;
+    margin: 10px auto;
+    float: left;
+}
+
+.techlist li .techpartlist .techtail {
+    text-align: center;
+    margin: 5px;
+}
+
+.techlist li .techpartlist .techtail p {
+    font-size: 14px;
+}
+
+.techlist li .techpartlist .techtail a {
+    border: 1px solid #E87E04;
+    padding: 3px;
+    text-align: center;
+}
+
+.techlist li .techpartlist .techtail a .buttn {
+    background: none;
+}
+
+.sectionten {
+    margin: 0px auto;
+    min-height: 800px;
+}
+
+.topicsect {
+    margin: 0px auto;
+    width: 100%;
+    float: left;
+    clear: both;
+}
+
+.topicsect .topiclist .dist {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: block;
+    border: 1px solid lightblue;
+    padding: 10px;
+    float: left;
+    clear: both;
+}
+
+.topicsect .topiclist .dist .topicalist {
+    margin: 0px auto;
+    float: left;
+}
+
+.topichead {
+    clear:both;
+}
+
+.topichead img {
+   width: auto;
+   max-height: 400px;
+}
+
+.topicbody {
+    clear: both;
+}
+
+.topicbody h3 {
+    color: #D35400;
+    font-weight: 500;
+}
+
+.topicbody .topicdatecomment li {
+    float: left;
+}
+
+.topicbody .topicdatecomment li .s1 {
+    float: left;
+    margin-right: 3px;
+}
+
+.topicbody .topicdatecomment li p {
+    float: left;
+    font-size: 16px;
+}
+
+.topicbody .topicdatecomment li:last-child {
+    float: right;
+}
+
+.topicbody .topicdatecomment li:last-child .s2 {
+    float: left;
+    margin-right: 3px;
+}
+
+.topictail {
+    clear: both;
+}
+
+.topictail p {
+    font-size: 16px;
+    color: #22313F;
+    text-align: center;
+}
+
+.topictails {
+    width: 100%;
+    float: left;
+    clear: both;
+} 
+
+.bloglist li { 
+    display:inline-block; 
+    margin:0 10px; 
+    vertical-align: top; 
+}
+
+.bloglist li a { 
+    display:block; 
+    width:50px;
+    height:60px;
+    border:0px;
+    text-indent:-1000em;
+    background: url("../img/social.png") no-repeat center;
+}
+
+#s8 { background-position:-37px 0px; }
+#s9 { background-position:-216px 0px; }
+
+.getapp {
+    width: 100%;
+    float: left;
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    clear: both;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
+    text-align: center;
+}
+
+.getapp h4 {
+    font-family: "Roboto", sans-serif;
+}
+
+.getapp span {
+    color: darkgreen;
+}
+
+.getrecipe {
+    width: 100%;
+    float: left;
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    clear: both;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
+    text-align: center;
+}
+
+.getrecipe .recipes h3 {
+    color: #D35400;
+    font-weight: 500;
+}
+
+.getrecipe .recipes .recipe li {
+    clear: both;
+    float: left;
+    width: 100%;
+    margin: 4px auto;
+    border-bottom: 1px solid #f5f5f5;
+    padding-bottom: 5px;
+}
+
+.getrecipe .recipes .recipe li .r1 {
+    float: left;
+    margin-right: 10px;
+}
+
+.getrecipe .recipes .recipe li a {
+    float: left;
+    font-size: 20px;
+}
+
+.archives {
+    width: 100%;
+    float: left;
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    clear: both;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
+    text-align: center;
+}
+
+.archives .archive h3 {
+    color: #D35400;
+    font-weight: 500;
+}
+
+.archives .archive .arch li {
+    clear: both;
+    float: left;
+    width: 100%;
+    margin: 4px auto;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.archives .archive .arch li .c1 {
+    float: left;
+    margin-right: 10px;
+}
+
+.archives .archive .arch li a {
+    float: left;
+    font-size: 20px;
+}
+
+.sectioneleven {
+    margin: 0px auto;
+    min-height: 800px;
+}
+
+.career {
+    margin: 10px auto;
+    padding: 20px;
+    clear: both;
+}
+
+.carhead {
+    margin: 10px auto;
+}
+
+.carhead h3 {
+    font-weight: 500;
+    color: #26C281;
+    border-bottom: 2px solid #26C281;
+}
+
+.carbody {
+    margin: 20px auto;
+}
+
+.cartail {
+    margin: 10px auto;
+}
+
+.cartail p {
+    font-weight: 500;
+}
+
+.sectiontwelve {
+    margin: 0px auto;
+    padding-bottom: 20px;
+    min-height: 800px;
+}
+
+.contact {
+    margin: 0px auto;
+    padding: 20px;
+}
+
+.addlist li h5 {
+    margin-left: 45px;
+    padding-top: 3px;
+}
+
+.addlist li img {
+    float: left;
+    margin: 0px auto;
+}
+
+.social {
+    margin: 10px auto;
+}
+
+.social h4 {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+.sociallist li { 
+    display:inline-block; 
+    margin:0 10px; 
+    vertical-align: top; 
+}
+
+.sociallist li a { 
+    display:block; 
+    width:50px;
+    height:60px;
+    border:0px;
+    text-indent:-1000em;
+    background: url("../img/social.png") no-repeat center;
+}
+
+#s1 { background-position:-37px 0px; }
+#s2 { background-position:-97px 0px; }
+#s3 { background-position:-186px -57px; }
+#s4 { background-position:-127px -57px; }
+#s5 { background-position:-156px 0px; }
+#s6 { background-position:-216px 0px; }
+#s7 { background-position:-246px -57px; }
+
+.maps {
+    margin: 0px auto;
+    padding: 10px;
+    width: 100%;
+    height: auto;
+    float: left;
+    clear: both;
+}
+
+
+.footnotes {
+    margin: 0px auto;
+    width: 100%;
+    float: left;
+    clear: both;
+    border: 1px solid #19B5FE;
+}
+
+.footlist li {
+    padding-right: 30px;
+    float: left;
+    text-align: center;
+}
+
+.footlist li a {
+    color: #161617;
+    font-size: 16px;
+}
+
+.footlist li a:hover {
+    color: #F7CA18;
+}
+
+.footcopy {
+    margin: 0px auto;
+    padding-top: 10px;
+}
+
+.footcopy p {
+    font-size: 16px;
+    color: #F7CA18;
+    text-align: center;
+}
+
+@media only screen and (min-width: 320px) {
+    .menu li { display: block; padding: 0px 90px 0 90px; }
+    .tracklist { left: 4em; }
+    .findernav li { float: none; text-align: center; }
+    .selectouter { width: 100%; display: block;}
+/*
+    .timemenu li { width: 100%; border-right: none; }
+*/
+    .knowmenu li { display: block; width: 100%; }
+    .footlist li { float: none; padding-right: 0px; }
+    .hotelist li .wrapper { max-height: 100%; }
+    .hotelist li .wrapper .banner { float: none; }
+    .hotelist li .wrapper .bannen { height: auto; }
+    .qty { width: 15px; }
+    input.qtyplus { width: 15px; }
+    input.qtyminus { width: 15px; }
+    .teamli li { width: 100%; }
+    .teamdesc { width: inherit; }
+    .techlist li { width: 100%; display: block; margin-top: 6px; }
+}
+
+@media only screen and (min-width: 360px) {
+    .menu li { display: block; padding: 0px 112px 0 112px; }
+    .tracklist { left: 6em; }
+    .footlist li { float: none; padding-right: 0px; }
+    .qty { width: 15px; }
+    input.qtyplus { width: 15px; }
+    input.qtyminus { width: 15px; }
+}
+
+@media only screen and (min-width: 420px) {
+    .menu li { display: block; padding: 0px 140px 0 140px; }
+    .tracklist { left: 8em; }
+    .footlist li { float: none; padding-right: 0px; }
+    .qty { width: 25px; }
+    input.qtyplus { width: 25px; }
+    input.qtyminus { width: 25px; }
+}
+
+@media only screen and (min-width: 460px) {
+    .menu li { display: block; padding: 0px 160px 0 160px; }
+    .tracklist { left: 10em; }
+    .footlist li { float: none; padding-right: 0px; }
+}
+
+@media only screen and (min-width: 500px) {
+    .menu li { display: inline-block; padding: 0px 38px 0 38px; }
+    .tracklist { left: 11em; }
+    .footlist li { float: none; padding-right: 0px; }
+    .teamli li { width: 49%; }
+    .teamdesc { width: inherit; }
+    
+}
+
+@media only screen and (min-width: 640px) {
+    .menu li { display: inline-block; padding: 0px 62px 0 62px; }
+    .tracklist { left: 16em; }
+    .findernav li { float: left; }
+    .selectouter { width: 11em; }
+/*   
+    .timemenu li { width: 24%; border-right: 2px solid white; }
+*/
+    .footlist li { float: none; padding-right: 0px; }
+    .teamli li { width: 32%; }
+    .teamdesc { width: inherit; }
+    
+}
+
+@media only screen and (min-width: 767px) {
+    .menu li { display: inline-block; padding: 0px 38px 0 38px; }
+    .tracklist { left: 20em; }
+    .selectouter { width: 15em; }
+/*    .timemenu li { width: 24%; border-right: 2px solid white; }*/
+    .knowmenu li { display: inline-block; width: 24%; }
+    .footlist li { float: left; padding-right: 20px; }
+    .hotelist li .wrapper { max-height: 200px; }
+    .hotelist li .wrapper .banner { float: left; }
+    .hotelist li .wrapper .bannen { height: 180px; }
+    .techlist li { width: 49%; display: inline-block; margin-top: 6px; }
+}
+
+@media only screen and (min-width: 768px) {
+    .menu li { display: inline-block; padding: 0px 38px 0 38px; }
+    .tracklist { left: 20em; }
+/*    .timemenu li { width: 24%; border-right: 2px solid white; }*/
+    .knowmenu li { display: inline-block; width: 24%; }
+    .footlist li { float: left; padding-right: 20px; }
+}
+
+@media only screen and (min-width: 800px) {
+    .menu li { display: inline-block; padding: 0px 38px 0 38px; }
+    .tracklist { left: 20em; }
+/*    .timemenu li { width: 24%; border-right: 2px solid white; }*/
+    .knowmenu li { display: inline-block; width: 24%; }
+    .footlist li { float: left; }
+}
+
+@media only screen and (min-width: 920px) {
+    .menu li { display: inline-block; padding: 0px 38px 0 38px; }
+    .tracklist { left: 20em; }
+/*    .timemenu li { width: 24%; border-right: 2px solid white; }*/
+    .knowmenu li { display: inline-block; width: 24%; }
+    .footlist li { float: left; }
+}
+
+@media only screen and (min-width: 1024px) {
+    .menu li { display: inline-block; padding: 0px 38px 0 38px; }
+    .tracklist { left: 16em; }
+    .knowmenu li { display: inline-block; width: 24%; }
+    .footlist li { float: left; }
+}
+
+@media only screen and (min-width: 1200px) {
+    .menu li { display: inline-block; padding: 0px 38px 0 38px; }
+    .tracklist { left: 21em; }
+    .findernav li { float: left; }
+    .selectouter { width: 17em; }
+/*    .timemenu li { width: 24%; border-right: 2px solid white; }*/
+    .knowmenu li { display: inline-block; width: 19%; }
+    .footlist li { float: left; }
+    .teamli li { width: 33%; }
+    .teamdesc { width: 500px; }
+    .techlist li { width: 33%; display: inline-block; }
+}
+
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Hide visually and from screen readers
+ */
+
+.hidden {
+    display: none !important;
+}
+
+/*
+ * Hide only visually, but have it available for screen readers:
+ * http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ */
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element
+ * to be focusable when navigated to via the keyboard:
+ * https://www.drupal.org/node/897638
+ */
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+/*
+ * Hide visually and from screen readers, but maintain layout
+ */
+
+.invisible {
+    visibility: hidden;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+    /* Style adjustments for viewports that meet the condition */
+}
+
+@media print,
+       (-webkit-min-device-pixel-ratio: 1.25),
+       (min-resolution: 1.25dppx),
+       (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid the additional HTTP request:
+   http://www.phpied.com/delay-loading-your-print-css/
+   ========================================================================== */
+
+@media print {
+    *,
+    *:before,
+    *:after,
+    *:first-letter,
+    *:first-line {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster:
+                                   http://www.sanbeiji.com/archives/953 */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links that are fragment identifiers,
+     * or use the `javascript:` pseudo protocol
+     */
+
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    /*
+     * Printing Tables:
+     * http://css-discuss.incutio.com/wiki/Printing_Tables
+     */
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}

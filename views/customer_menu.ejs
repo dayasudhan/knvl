@@ -10,6 +10,13 @@
                 </div>
                 
                   <div class="col-md-3 col-sm-3">
+
+                  <div ng-if="user.local.email.length > 1">
+                   <p class="hero-title"><u>Address</u></p>
+                </div>
+                <div ng-else>
+                    <p class="hero-title"><u>Address2</u></p>
+                </div>
                   <p class="hero-title"><u>Address</u></p>
                   <p class="hero-description hidden-xs">{{hotel.address.addressLine1}}</p>
                   <p class="hero-description hidden-xs">{{hotel.address.LandMark}}</p>

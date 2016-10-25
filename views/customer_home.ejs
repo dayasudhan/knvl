@@ -1,4 +1,4 @@
-            <section class="hero" >
+             <section class="hero" >
                 <div class="container text-center" ng-init="getCityCoverage()">
                     
                     <h2 class="hero-title">Online Food Order</h2>                         
@@ -18,6 +18,10 @@
                              <div class="col-md-2 col-sm-2 search-input">    
                                  <button class="btn btn-custom btn-block btn-lg"  ng-click="findRestaurants()">Find</button>   
                              </div>    
+
+                              <a ui-sref="menu" ng-click="currentHotel($index)" class="btn btn-primary">Menu</a>
+
+                              
                              <!--div class="col-md-2 col-sm-2">    
                              <label>or</label>   
                              </div>    

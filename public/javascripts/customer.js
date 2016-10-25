@@ -16,7 +16,11 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
             templateUrl: '../../views/customer_home.ejs',
             controller: 'mainController'
         })
-        
+        .state('find', {
+            url: '/find',
+            templateUrl: '../../views/customer_find.ejs',
+            controller: 'mainController'
+        })
         // nested list with custom controller
         .state('menu', {
             url: '/menu',
@@ -26,7 +30,72 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       });
   customerApp.controller('mainController', function ($rootScope,$scope, $http, jsonFilter,$window)
   {
+
    
+    $scope.login_customer = function () {
+      console.log("login_customer");
+      console.log($scope.login_phone);
+      console.log($scope.login_password);
+      var login_body = new Object();
+      login_body.email = $scope.login_phone;
+      login_body.password = $scope.login_password;
+      login_body.role = "customer";
+      console.log(login_body);
+      var url = "/login";
+      $scope
+     
+      $http.post(url, login_body,config)
+        .success(function (data, status, headers)
+        {
+          console.log("Success in login post");
+           
+            console.log(data);
+            $scope.isLoggedIn = data;
+            console.log($scope.isLoggedIn);
+          
+        })
+        .error(function (data, status, headers)
+        {
+          console.log("ERROR in login");
+        });
+    };
+
+
+    $scope.signup_customer = function () {
+      console.log("signup_customer");
+      console.log($scope.signup_phone);
+      console.log($scope.signup_password);
+      var signup_body = new Object();
+      signup_body.email2 = $scope.signup_email;
+      signup_body.password = $scope.signup_password1;
+      signup_body.name = $scope.signup_name;
+      signup_body.email = $scope.signup_phone;
+      signup_body.password2 = $scope.signup_password2;
+      signup_body.role = "customer";
+      console.log(signup_body);
+      var url = "/signup";
+      $scope
+     
+      $http.post(url, signup_body,config)
+        .success(function (data, status, headers)
+        {
+          console.log("Success in sign up post");
+           
+            console.log(data);
+           
+          
+        })
+        .error(function (data, status, headers)
+        {
+          console.log("ERROR in login");
+        });
+    };
+
+    // $scope.signup = function()
+    // {
+    //    console.log("signup");
+    //     $('#signupModal').modal({ show: false})
+    // };
 
      $scope.findRestaurantsByNearBy = function () {
     //  $scope.getCurrentAddress()
@@ -127,6 +196,16 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
     };
 
     $scope.confirmOrder = function() {
+      if($scope.isLoggedIn)
+      {
+        console.log("loggedin proceed to order");
+      }
+      else
+      {
+
+        $('#loginModal').modal('show'); 
+         console.log("loggedin proceed to not order");
+      }
       if($scope.isOrderPresent)
       {
        
@@ -192,6 +271,13 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
           $scope.showModal =false;
           $scope.isOrderPresent == false;
        }
+       else  if(!$scope.isLoggedIn)
+       {
+          console.log("not loggedin ");
+        
+          $('#loginModal').modal('show'); 
+      
+        }
        else
        {
         console.log("order function else");

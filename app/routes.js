@@ -118,7 +118,7 @@ app.post('/v1/m/login', function(req, res, next) {
     if (err) {console.log('post /v1/m/login  1');return next(err); }
     if (!user) {
         console.log('post /v1/m/login  2');
-             return res.send("0"); 
+        return res.send("0"); 
     }
     req.logIn(user, function(err) {
         console.log('post /v1/m/login  3');
@@ -151,13 +151,15 @@ app.post('/login', function(req, res, next) {
          var redirect_url = '/';
             if(req.body.role == 'customer')
             {
-                redirect_url = '/signup';
+                //redirect_url = '/signup';
+                 return res.send("0"); 
             }
             else if(req.body.role == 'vendor') 
             {
                 redirect_url = '/p/vendor_signup';
+                return res.redirect(redirect_url); 
             } 
-            return res.redirect(redirect_url); 
+            
     }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
@@ -165,13 +167,15 @@ app.post('/login', function(req, res, next) {
       var redirect_url = '/';
       if(req.body.role == 'customer')
       {
-        redirect_url = '/';
+        //redirect_url = '/';
+        return res.send("1"); 
       }
        else if(req.body.role == 'vendor') 
        {
         redirect_url = '/p/vendor_details';
+         return res.redirect(redirect_url);
        }
-      return res.redirect(redirect_url);
+     
     });
   })(req, res, next);
 });
@@ -319,7 +323,9 @@ app.get('/vendor', function (req, res) {
 app.get('/', function (req, res) {
     res.render('customer', { user : req.user });
 });
-
+//app.get('/find', function (req, res) {
+//    res.render('find', { user : req.user });
+//});
 app.get('/p/vendor_order', function (req, res) {
     console.log(req.user);
     res.render('vendor_order', { user : req.user });
@@ -397,8 +403,9 @@ console.log(req.body);
         var redirect_url;
         if(req.body.role == 'customer')
         {
-          redirect_url = '/';
+          //redirect_url = '/';
           registerCustomer(req, res, next);
+          return res.send("1"); 
         }
         else if(req.body.role == 'vendor') 
         {

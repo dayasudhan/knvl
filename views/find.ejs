@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Khaanavali</title>
+        <title>Find</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -21,7 +21,7 @@
     
         <script src="/javascripts/customer.js"></script>
     </head>
-    <body ng-app="mainModule" ng-controller="mainController" >
+    <body ng-app="mainModule"  ng-controller="mainController">
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -34,7 +34,7 @@
                     <div class="headup">
                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                         <div class="logo">
-                            <a href="index.html" target="_self"><img src="/sandy/img/logo.png" alt="Logo"></a>
+                            <a href="index.html" target="_parent"><img src="/sandy/img/logo.png" alt="Logo"></a>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
@@ -42,45 +42,24 @@
                             <div class="navigationbox">
                             <div class="headone">
                                 <div class="dropdown tracks">
-
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
-                            <a class="dropdown-toggle" href="login" data-toggle="dropdown"><i class="" style="padding:15px;min-width:150px"></i> track my order<strong class="caret"></strong>&nbsp;</a>
-                                <div class="dropdown-menu dropdown-login" style="padding:15px;min-width:150px">
-                                    <form form >                     
-                                        <div class="form-group">
-                                            <div class="input-group" >
-                                                    <input type="text" placeholder="Order ID" name="orderId" ng-model="orderId" required="required" class="form-control " >
-                                                    <button class="btn-custom btn-block btn-lg"  data-toggle="modal" data-target="#myModal1" ng-click="getOrderStatus()">orderstatus</button>                                         
-                                            </div>
-                                        </div>
-                                        
-                                    </form> 
-                                    </div>    
-                            </li>
-
-                        </ul>
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Track My Order
+                                    <span class="caret"></span></button>
+                                    <ul class="dropdown-menu tracklist">
+                                        <li>
+                                           <input class="fieldone" type="text" placeholder="Enter Order ID"> 
+                                        </li>
+                                        <li>
+                                            <button class="btn btn-success" type="button">Order Status</button>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                                        <div class="col-md-6 col-sm-6">
-                                  <div id="myModal1" class="modal fade" role="dialog">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                              <h4 ><center>Your Order Status</center></h4>
-                                            </div>
-                                        <div ng-repeat="tracker in OrderStatus[0].tracker">
-                                            <b>{{tracker.status}}</b> : {{tracker.time| date:'medium'}}
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                             <div class="headtwo">
                                 <nav>
                                     <ul class="menu">
+                                        <li>
+                                            <a href="index.html" target="_parent">Home</a>
+                                        </li>
                                         <li>
                                             Get Our App <a href="https://play.google.com/store/search?q=khaanavali&hl=en" target="_blank"><span><img src="/sandy/img/androidlogo.png" alt="Icon"></span></a>
                                         </li>
@@ -88,8 +67,8 @@
                                             <a href="khaana.html" target="_blank">Khaanavali</a>
                                         </li>
                                         <li>
-                                            <a href="#" data-toggle="modal" data-target="#loginModal">Login</a>
-                                            <div class="modal fade" id="loginModal" role="dialog">
+                                            <a href="#" data-toggle="modal" data-target="#myModal">Login</a>
+                                            <div class="modal fade" id="myModal" role="dialog">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header log">
@@ -100,20 +79,19 @@
                                                              <div class="form-group">
                                                                 <ul class="loglist">
                                                                     <li>
-                                                                        <input type="text" class="form-control inputnew" 
-                                                                        ng-model="login_phone" placeholder="Mobile Number">
+                                                                        <input type="text" class="form-control inputnew" placeholder="Mobile Number">
                                                                     </li>
-
                                                                     <li>
-                                                                        <input type="password" class="form-control inputnewd" 
-                                                                        ng-model="login_password"
-                                                                        placeholder="Password">
+                                                                        <input type="text" class="form-control inputnews" placeholder="E-mail ID">
                                                                     </li>
-
                                                                     <li>
-                                                                        <button type="button" class="btn btn-success alone"
-                                                                        data-dismiss="modal" 
-                                                                        ng-click="login_customer()">LOGIN</button>
+                                                                        <input type="text" class="form-control inputnewd" placeholder="Password">
+                                                                    </li>
+                                                                    <li>
+                                                                        <a class="lone" href="#" target="_blank">Forgot Password ?</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <button type="button" class="btn btn-success alone">LOGIN</button>
                                                                     </li>
                                                                 </ul>
                                                              </div>
@@ -122,11 +100,7 @@
                                                             <h2>Not a Member yet ?</h2>
                                                             <ul class="loglist">
                                                                     <li>
-                                                                        <button type="button" class="btn btn-success alone"
-                                                                        data-dismiss="modal" 
-                                                                        data-toggle="modal"
-                                                                        data-target="#signupModal"
-                                                                        >SIGN UP</button>
+                                                                        <button type="button" class="btn btn-success alone">SIGN UP</button>
                                                                     </li>
                                                                 </ul>
                                                         </div>
@@ -135,8 +109,8 @@
                                             </div>
                                         </li>
                                         <li>
-                                            <a href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>
-                                            <div class="modal fade" id="signupModal" role="dialog">
+                                            <a href="#" data-toggle="modal" data-target="#mineModal">Sign Up</a>
+                                            <div class="modal fade" id="mineModal" role="dialog">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header log">
@@ -147,26 +121,20 @@
                                                              <div class="form-group">
                                                                 <ul class="loglist">
                                                                     <li>
-                                                                        <input type="text" class="form-control inputne" 
-                                                                        ng-model="siginup_name" placeholder="Name">
+                                                                        <input type="text" class="form-control inputne" placeholder="Name">
                                                                     </li>
                                                                     <li>
-                                                                        <input type="text" class="form-control inputnew" 
-                                                                        ng-model="signup_phone" placeholder="Mobile Number">
+                                                                        <input type="text" class="form-control inputnew" placeholder="Mobile Number">
                                                                     </li>
                                                                     
                                                                     <li>
-                                                                        <input type="text" class="form-control inputnews" 
-                                                                        ng-model="signup_email" placeholder="E-mail ID">
+                                                                        <input type="text" class="form-control inputnews" placeholder="E-mail ID">
                                                                     </li>
                                                                     <li>
-                                                                        <input type="text" class="form-control inputnewd" 
-                                                                        ng-model="signup_password1" placeholder="Password">
+                                                                        <input type="text" class="form-control inputnewd" placeholder="Password">
                                                                     </li>
                                                                     <li>
-                                                                        <input type="text" class="form-control inputnewd" 
-                                                                        ng-model="signup_password2"
-                                                                        placeholder="Confirm Password">
+                                                                        <input type="text" class="form-control inputnewd" placeholder="Confirm Password">
                                                                     </li>
                                                                     <li>
                                                                         <div class="checkbox">
@@ -174,9 +142,7 @@
                                                                         </div>
                                                                     </li>
                                                                     <li>
-                                                                        <button type="button" class="btn btn-success alone"
-                                                                        data-dismiss="modal" 
-                                                                        ng-click="signup_customer()">REGISTER</button>
+                                                                        <button type="button" class="btn btn-success alone">REGISTER</button>
                                                                     </li>
                                                                 </ul>
                                                              </div>
@@ -185,10 +151,7 @@
                                                             <h2>Already a Member ?</h2>
                                                             <ul class="loglist">
                                                                     <li>
-                                                                        <button type="button" class="btn btn-success alone"                                                                                               data-dismiss="modal" 
-                                                                        data-toggle="modal"
-                                                                        data-target="#loginModal"
-                                                                        >LOGIN</button>
+                                                                        <button type="button" class="btn btn-success alone">LOGIN</button>
                                                                     </li>
                                                                 </ul>
                                                         </div>
@@ -206,62 +169,45 @@
                 </div>
             </div>
         </header>
-        
-            <div >
-                <div ui-view></div>
-
-            </div> 
         </div>
         
-<!--
-        <div class="sectiontwo">
+        <div class="sectionfive">
             <div class="container">
-                <div class="ordertime">
-                    <ul class="timemenu">
-                        <li>
-                            <h2>ORDER TIMINGS</h2>
-                        </li>
-                        <li>
-                            <h3>BREAKFAST</h3>
-                            <p>8 a.m - 11 a.m</p>
-                        </li>
-                        <li>
-                            <h3>LUNCH</h3>
-                            <p>8 a.m - 11 a.m</p>
-                        </li>
-                        <li>
-                            <h3>DINNER</h3>
-                            <p>8 a.m - 11 a.m</p>
-                        </li>
-                    </ul>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-repeat="hotel in hotellist">
+                    <div class="khaanagalu">
+                        <ul class="hotelist">
+                            <li>
+                                <div class="wrapper">
+                                    <div class="banner">
+                                        <img src="/sandy/img/ban.jpg" alt="Banner">
+                                    </div>
+                                    <div class="bandescription">
+                                        <a ng-click="currentHotel($index)"><b>{{hotel.hotel.name}}</b></a>
+                                        <p>Native Style</p>
+                                        <div class="kmenu">
+                                            <ul class="khlist">
+                                                <li>
+                                                    <h3>30 Mins</h3>
+                                                </li>
+                                                <li>
+                                                    <h3>Min. &#8377; 100</h3>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="bannen">
+                                        <a href="menu.html" target="_self"><button type="button" class="btn btn-danger btn-lg">MENU</button></a>
+                                    </div>
+                                </div>
+                            </li>
+                           
+                           
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </div>    
         </div>
--->
-        <div class="sectionthree">
-            <div class="container">
-                <div class="gettoknow">
-                    <ul class="knowmenu">
-                        <li>
-                            <a href="aboutus.html" target="_blank">ABOUT US</a>
-                        </li>
-                        <li>
-                            <a href="techpartners.html" target="_blank">TECHNOLOGY PARTNERS</a>
-                        </li>
-                        <li>
-                            <a href="blog.html" target="_blank">BLOG</a>
-                        </li>
-                        <li>
-                            <a href="careers.html" target="_blank">CAREERS</a>
-                        </li>
-                        <li>
-                            <a href="contactus.html" target="_blank">CONTACT US</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
+            
         <footer>
             <div class="container">
                 <div class="footnotes">
@@ -291,7 +237,6 @@
                 </div>
             </div>
         </footer>
-
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="/sandy/js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
