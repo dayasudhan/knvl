@@ -128,7 +128,7 @@ a, a:hover {
 
 
 .mains {
-    background: url("../img/story.jpg");
+    background: url("../img/one.jpg");
     background-size: cover !important;
     float: left;
     clear: both;
@@ -137,8 +137,8 @@ a, a:hover {
 
 .headup {
     width: 100%;
-    margin-top: 3%;
-/*    border: 1px solid black;*/
+/*  margin-top: 3%;
+    border: 1px solid black;*/
     float: left;
     clear: both;
 }
@@ -153,20 +153,20 @@ a, a:hover {
 
 .navigationbox {
     width: 100%;
-    margin: 10px auto;
+    margin: 5px auto;
     float: right;
 }
 
 .headone {
     width: 100%;
     margin: 0px auto;
-    padding: 15px;
+    padding: 10px;
     float: left;
     clear: both;
 } 
 
 .tracks {
-    float: none !important;
+    float: right;
     text-align: center;
 }
 
@@ -174,7 +174,7 @@ a, a:hover {
     list-style-type: none;
     padding: 12px;
     text-align: center !important;
-    left: 21em;
+    left: 0em;
 }
 
 .boxtrack ul li {
@@ -211,12 +211,13 @@ a, a:hover {
 
 .menu li a {
     text-decoration: none;
-    color: darkblue;
+    color: #232323;
     font-size: 16px;
+    font-weight: 600;
 }
 
 .menu li a:hover {
-    color: #ffffff;
+    color: #F9690E;
 }
 
 .log h3 {
@@ -294,12 +295,35 @@ a, a:hover {
     color: white;
 }
 
+.khanaquotes h2 {
+    letter-spacing: 2px;
+    word-spacing: 5px;
+    margin-top: 15px;
+}
+
+.khanaquotes p {
+    letter-spacing: 2px;
+    word-spacing: 5px;
+}
+
+.khannaam {
+    margin: 10px auto;
+    padding: 15px;
+    background: orange;
+}
+
+.khannaam h2 {
+    letter-spacing: 2px;
+    word-spacing: 5px;
+    margin-top: 15px;
+}
+
 .finderkeepers {
-    background-color: rgba(0, 191, 60, 0.6);
+    background-color: rgba(0, 0, 0, 0.6);
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 50px;
-    max-width: 800px;
+    max-width: auto;
     min-height: 90px;
     padding: 25px;
     border-radius: 10px;
@@ -366,6 +390,32 @@ a, a:hover {
 .finds:hover {
     background: rgb(0, 0, 0);
     color: chartreuse;
+}
+
+.search-first {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: rgba(255, 255, 255, 1);
+    background-image: url("../img/arrow.png");
+    background-origin: padding-box;
+    background-position: 95% 50%, 0 0;
+    background-repeat: no-repeat;
+    background-size: 16px 10px;
+    padding: 0px 16px;
+}
+
+.search-second {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: rgba(255, 255, 255, 1);
+    background-image: url("../img/arrow.png");
+    background-origin: padding-box;
+    background-position: 95% 50%, 0 0;
+    background-repeat: no-repeat;
+    background-size: 16px 10px;
+    padding: 0px 16px;
 }
 
 /*
@@ -454,12 +504,16 @@ a, a:hover {
 
 .sectionfive {
     margin: 0px auto;
-    min-height: 800px;
+/*    min-height: 800px;*/
+    float: left;
+    width: 100%;
+    clear: both;
+    background: #ffffff;
 }
 
 .khaanagalu {
     margin: 10px auto;
-    padding: 30px;
+    padding: 5px;
     width: 100%;
     float: left;
     clear: both;
@@ -473,9 +527,10 @@ a, a:hover {
 .hotelist li .wrapper {
     width: 100%;
     float: left;
-    max-height: 200px;
-    background: #C8F7C5;
-    border: 1px solid #000000;
+    max-height: 100px;
+/*    background: #C8F7C5;*/
+    border: 1px solid #F9690E;
+    border-radius: 5px;
     margin: 10px auto;
 }
 
@@ -483,6 +538,8 @@ a, a:hover {
     padding: 10px;
     text-align: center;
     float: left;
+    width: 120px;
+    height: 120px;
 }
 
 .hotelist li .wrapper .banner img {
@@ -495,9 +552,10 @@ a, a:hover {
     margin: 0px auto;
 }
 
-.hotelist li .wrapper .bandescription h2 {
+.hotelist li .wrapper .bandescription h4 {
     text-transform: capitalize;
     text-align: left;
+    color: #000000;
 }
 
 .hotelist li .wrapper .bandescription p {
@@ -505,12 +563,13 @@ a, a:hover {
     text-transform: capitalize;
     text-align: left;
     font-style: italic;
+    color: #000000;
 }
 
 .hotelist li .wrapper .bannen {
     padding: 10px;
     float: right;
-    height: 180px;
+    height: 120px;
 }
 
 .hotelist li .wrapper .bannen::before {
@@ -534,13 +593,17 @@ a, a:hover {
     padding-right: 30px;
 }
 
-.kmenu .khlist li h3 {
-    color: #019875 ; !important
+.kmenu .khlist li h5 {
+    color: #000000 ; !important
 }
 
 .sectionsix {
     margin: 0px auto;
-    min-height: 800px;
+/*    min-height: 800px;*/
+    float: left;
+    width: 100%;
+    clear: both;
+    background: #ffffff;
 }
 
 .menselect {
@@ -551,6 +614,19 @@ a, a:hover {
 
 .menselect table .tabcent {
     text-align: center;
+}
+
+.menselect table .tabbold {
+    text-align: center;
+    font-weight: 700;
+}
+
+.menselect .grand {
+    border: 1px solid #19B5FE;
+    text-align: center;
+    padding: 5px;
+    font-weight: 800;
+    color: #96281B;
 }
 
 .mencheck {
@@ -1129,7 +1205,7 @@ input.qtyminus {
 
 
 .footnotes {
-    margin: 0px auto;
+    margin: 12px auto;
     width: 100%;
     float: left;
     clear: both;
@@ -1164,7 +1240,7 @@ input.qtyminus {
 
 @media only screen and (min-width: 320px) {
     .menu li { display: block; padding: 0px 90px 0 90px; }
-    .tracklist { left: 4em; }
+    .tracklist { left: 0em; }
     .findernav li { float: none; text-align: center; }
     .selectouter { width: 100%; display: block;}
 /*
@@ -1174,7 +1250,7 @@ input.qtyminus {
     .footlist li { float: none; padding-right: 0px; }
     .hotelist li .wrapper { max-height: 100%; }
     .hotelist li .wrapper .banner { float: none; }
-    .hotelist li .wrapper .bannen { height: auto; }
+/*    .hotelist li .wrapper .bannen { height: auto; }*/
     .qty { width: 15px; }
     input.qtyplus { width: 15px; }
     input.qtyminus { width: 15px; }
@@ -1185,7 +1261,7 @@ input.qtyminus {
 
 @media only screen and (min-width: 360px) {
     .menu li { display: block; padding: 0px 112px 0 112px; }
-    .tracklist { left: 6em; }
+    .tracklist { left: 0em; }
     .footlist li { float: none; padding-right: 0px; }
     .qty { width: 15px; }
     input.qtyplus { width: 15px; }
@@ -1203,22 +1279,21 @@ input.qtyminus {
 
 @media only screen and (min-width: 460px) {
     .menu li { display: block; padding: 0px 160px 0 160px; }
-    .tracklist { left: 10em; }
+    .tracklist { left: 0em; }
     .footlist li { float: none; padding-right: 0px; }
 }
 
 @media only screen and (min-width: 500px) {
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 11em; }
+    .tracklist { left: 0em; }
     .footlist li { float: none; padding-right: 0px; }
     .teamli li { width: 49%; }
     .teamdesc { width: inherit; }
-    
 }
 
 @media only screen and (min-width: 640px) {
     .menu li { display: inline-block; padding: 0px 62px 0 62px; }
-    .tracklist { left: 16em; }
+    .tracklist { left: 0em; }
     .findernav li { float: left; }
     .selectouter { width: 11em; }
 /*   
@@ -1227,25 +1302,24 @@ input.qtyminus {
     .footlist li { float: none; padding-right: 0px; }
     .teamli li { width: 32%; }
     .teamdesc { width: inherit; }
-    
 }
 
 @media only screen and (min-width: 767px) {
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 20em; }
+    .tracklist { left: 0em; }
     .selectouter { width: 15em; }
 /*    .timemenu li { width: 24%; border-right: 2px solid white; }*/
     .knowmenu li { display: inline-block; width: 24%; }
     .footlist li { float: left; padding-right: 20px; }
-    .hotelist li .wrapper { max-height: 200px; }
+    .hotelist li .wrapper { max-height: 120px; }
     .hotelist li .wrapper .banner { float: left; }
-    .hotelist li .wrapper .bannen { height: 180px; }
+/*    .hotelist li .wrapper .bannen { height: 180px; }*/
     .techlist li { width: 49%; display: inline-block; margin-top: 6px; }
 }
 
 @media only screen and (min-width: 768px) {
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 20em; }
+    .tracklist { left: 0em; }
 /*    .timemenu li { width: 24%; border-right: 2px solid white; }*/
     .knowmenu li { display: inline-block; width: 24%; }
     .footlist li { float: left; padding-right: 20px; }
@@ -1253,7 +1327,7 @@ input.qtyminus {
 
 @media only screen and (min-width: 800px) {
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 20em; }
+    .tracklist { left: 0em; }
 /*    .timemenu li { width: 24%; border-right: 2px solid white; }*/
     .knowmenu li { display: inline-block; width: 24%; }
     .footlist li { float: left; }
@@ -1261,7 +1335,7 @@ input.qtyminus {
 
 @media only screen and (min-width: 920px) {
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 20em; }
+    .tracklist { left: 0em; }
 /*    .timemenu li { width: 24%; border-right: 2px solid white; }*/
     .knowmenu li { display: inline-block; width: 24%; }
     .footlist li { float: left; }
@@ -1269,14 +1343,14 @@ input.qtyminus {
 
 @media only screen and (min-width: 1024px) {
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 16em; }
+    .tracklist { left: 0em; }
     .knowmenu li { display: inline-block; width: 24%; }
     .footlist li { float: left; }
 }
 
 @media only screen and (min-width: 1200px) {
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 21em; }
+    .tracklist { left: 0em; }
     .findernav li { float: left; }
     .selectouter { width: 17em; }
 /*    .timemenu li { width: 24%; border-right: 2px solid white; }*/
@@ -1286,7 +1360,6 @@ input.qtyminus {
     .teamdesc { width: 500px; }
     .techlist li { width: 33%; display: inline-block; }
 }
-
 
 /* ==========================================================================
    Helper classes

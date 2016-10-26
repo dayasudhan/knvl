@@ -1,89 +1,112 @@
-             <section class="hero" >
-                <div class="container text-center" ng-init="getCityCoverage()">
-                    
-                    <h2 class="hero-title">Online Food Order</h2>                         
-                     <p class="hero-description hidden-xs">Find all food you need on Khaanavali. We give you a simple way.</p>   
-                      <div class="row hero-search-box">                         
-                         <form>     
-                             <div class="col-md-5 col-sm-4 search-input">    
-                                 <select class="form-control input-lg search-first" ng-model="selectedCity" ng-options="cityCoverage.citys.indexOf(selectedCity) as selectedCity for selectedCity in cityCoverage.citys "" >   
-                               </select>   
-     
-                             </div>    
-                             <div class="col-md-5 col-sm-4 search-input">    
-                                 <select class="form-control input-lg search-second" ng-model="search_areaname" ng-options="o for o in cityCoverage[selectedCity].subAreas track by o" >   
-     
-                             </select>   
-                             </div>    
-                             <div class="col-md-2 col-sm-2 search-input">    
-                                 <button class="btn btn-custom btn-block btn-lg"  ng-click="findRestaurants()">Find</button>   
-                             </div>    
-
-                              <a ui-sref="menu" ng-click="currentHotel($index)" class="btn btn-primary">Menu</a>
-
-                              
-                             <!--div class="col-md-2 col-sm-2">    
+<div class="sectionone">
+    <div class="container" ng-init="getCityCoverage()">
+        <div class="khanaquotes">
+            <h1><span>Feel</span> the real taste of <span>NORTH KARNATAKA</span></h1>
+            <h2>Online Food Order And Delivery</h2>
+            <p>Find all food you need on Khaanavali. We give you a simple way.</p>
+        </div>
+        <div class="finderkeepers">
+            <ul class="findernav">
+              <li class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <div class="search-input">
+                    <select class="form-control search-first" ng-model="selectedCity" ng-options="cityCoverage.citys.indexOf(selectedCity) as selectedCity for selectedCity in cityCoverage.citys"> </select>
+                </div>
+                </li>
+                <li class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <div class="search-input">
+                    <select class="form-control search-second" ng-model="search_areaname" ng-options="o for o in cityCoverage[selectedCity].subAreas track by o"> </select>
+                </div>
+                </li>
+                <li class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                <div class="search-input">
+                    <button class="btn btn-success btn-block btn-md" ng-click="findRestaurants()">FIND</button>
+                </div>
+                </li>
+                <!--
+<a ui-sref="menu " ng-click="currentHotel($index) " class="btn btn-primary ">Menu</a>-->
+                <!--div class="col-md-2 col-sm-2 ">    
                              <label>or</label>   
                              </div>    
-                             <div class="col-md-2 col-sm-2 search-input">    
-                                 <button class="btn btn-custom btn-block btn-lg"  ng-click="findRestaurantsByNearBy()">NearBy</button>   
-                             </div-->    
-                         </form>
-                    </div>
-                </div>
-            </section>
+                             <div class="col-md-2 col-sm-2 search-input ">    
+                                 <button class="btn btn-custom btn-block btn-lg "  ng-click="findRestaurantsByNearBy() ">NearBy</button>   
+                             </div-->
+            </ul>
+        </div>
+    </div>
+</div>
+<!--<section class="main ">
+    <div class="container ">
+        <div class="row ">
+            <!--div class="col-md-3 col-sm-3 ">
 
-<section class="main">
-                <div class="container">
-                    <div class="row">
-
-                        <!--div class="col-md-3 col-sm-3">
-
-                            <div class="widget">
-                                <div class="widget-header">
+                            <div class="widget ">
+                                <div class="widget-header ">
                                     <h3>Trends</h3>
                                 </div>
-                                <div class="widget-body">
-                                    <ul class="trends">
-                                        <li><a href="#">Northa Karnataks dishes &nbsp;<span class="item-numbers">(2,342)</span></a></li>
-                                        <li><a href="#">South Karnataks dishes &nbsp;<span class="item-numbers">(2,342)</span></a></li>
-                                        <li><a href="#">Idly/Dosa &nbsp;<span class="item-numbers">(2,342)</span></a></li>
-                                        <li><a href="#">Biryani &nbsp;<span class="item-numbers">(2,342)</span></a></li>
-                                        <li><a href="#">North Indian &nbsp;<span class="item-numbers">(2,342)</span></a></li>
+                                <div class="widget-body ">
+                                    <ul class="trends ">
+                                        <li><a href="# ">Northa Karnataks dishes &nbsp;<span class="item-numbers ">(2,342)</span></a></li>
+                                        <li><a href="# ">South Karnataks dishes &nbsp;<span class="item-numbers ">(2,342)</span></a></li>
+                                        <li><a href="# ">Idly/Dosa &nbsp;<span class="item-numbers ">(2,342)</span></a></li>
+                                        <li><a href="# ">Biryani &nbsp;<span class="item-numbers ">(2,342)</span></a></li>
+                                        <li><a href="# ">North Indian &nbsp;<span class="item-numbers ">(2,342)</span></a></li>
                      
                   
                                     </ul>
                                 </div>
                             </div>
-                            <div class="banner-widget">
-                                <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Uttar_Karnataka_food.JPG/1024px-Uttar_Karnataka_food.JPG" alt="banner" class="img-responsive">
+                            <div class="banner-widget ">
+                                <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Uttar_Karnataka_food.JPG/1024px-Uttar_Karnataka_food.JPG " alt="banner " class="img-responsive ">
                             </div>
                         </div>
                     </div-->
-                        <div class="container">
-                            <div class="row" >
-                              <div class="col-xs-12 col-sm-12" ng-repeat="hotel in hotellist">
-                                    <div class="col-xs-1 col-sm-1">
-                                      <br>
-                                      <img src="/images/logo/logo.png" style="width:80px;height:80px">  
-
-                                      </div>
-
-                                      <div class="shortcut">
-                                           <a ng-click="currentHotel($index)"><b>{{hotel.hotel.name}}</b></a>
-
-                                        <a><p>veg north karnataka mess</p></a>
-                                        <!--span class="total-items">25,366</span-->
-                                    
-                                         <a ui-sref="menu" ng-click="currentHotel($index)" class="btn btn-primary">Menu</a>
-                                      </div>
-                                  </div>
-
-                               </div>
-                        </div>
-
-                    
+            <!--<div class="container ">
+                <div class="row ">
+                    <div class="col-xs-12 col-sm-12 " ng-repeat="hotel in hotellist ">
+                        <div class="col-xs-1 col-sm-1 ">
+                            <br> <img src="/images/logo/logo.png " style="width:80px;height:80px "> </div>
+                        <div class="shortcut "> <a ng-click="currentHotel($index) "><b>{{hotel.hotel.name}}</b></a>
+                            <a>
+                                <p>veg north karnataka mess</p>
+                            </a>
+                            <!--span class="total-items ">25,366</span--><!--<a ui-sref="menu " ng-click="currentHotel($index) " class="btn btn-primary ">Menu</a> </div>
+                    </div>
                 </div>
-            </section>
-                             
-                      
+            </div>
+                    </div>
+</section>-->
+            <div class="sectionfive">
+                <div class="container">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-repeat="hotel in hotellist">
+                    <div class="khaanagalu">
+                        <ul class="hotelist">
+                            <li>
+                                <div class="wrapper">
+                                    <div class="banner">
+                                        <img src="../public/sandy/img/ban.jpg" alt="Banner">
+                                    </div>
+                                    <div class="bandescription">
+                                        <h4 ng-click="currentHotel($index)"><b>{{hotel.hotel.name}}</b></h4>
+                                        <p>Native Style</p>
+                                        <div class="kmenu">
+                                            <ul class="khlist">
+                                                <li>
+                                                    <h5>{{hotel.deliveryTime}} Mins</h5>
+                                                </li>
+                                                <li>
+                                                    <h5>Min. &#8377; {{hotel.minimumOrder}}</h5>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="bannen">
+                                        <a ui-sref="menu"  ng-click="currentHotel($index)"><button type="button" class="btn btn-danger btn-lg">MENU</button></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                </div>
+    </div>
+

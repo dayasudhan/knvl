@@ -125,6 +125,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       $http.get(url,config)
         .success(function (data, status, headers, config)
         {
+          
           $scope.hotellist = data;
         })
         .error(function (data, status, headers, config)
@@ -194,7 +195,14 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
         })
         return total;
     };
-
+    $scope.grandtotal = function() {
+        var total = 0;
+        angular.forEach($scope.hotel.menu, function(item) {
+            total += item.price * item.qty;
+        })
+        var grandtotal = total + $scope.hotel.deliverCharge;
+        return grandtotal;
+    };
     $scope.confirmOrder = function() {
       if($scope.isLoggedIn)
       {

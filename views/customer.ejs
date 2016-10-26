@@ -1,48 +1,71 @@
 <!doctype html>
 <html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Khaanavali</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        <!-- Place favicon.ico in the root directory -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Khaanavali</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="/sandy/css/bootstrap.css">
+    <link rel="stylesheet" href="/sandy/css/normalize.css">
+    <link rel="stylesheet" href="/sandy/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Ubuntu+Condensed" rel="stylesheet">
+    <script src="/sandy/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+    <script src="/javascripts/customer.js"></script>
+</head>
 
-        <link rel="stylesheet" href="/sandy/css/bootstrap.css">
-        <link rel="stylesheet" href="/sandy/css/normalize.css">
-        <link rel="stylesheet" href="/sandy/css/main.css">
-        
-        <link href="https://fonts.googleapis.com/css?family=Roboto|Ubuntu+Condensed" rel="stylesheet">  
-        <script src="/sandy/js/vendor/modernizr-2.8.3.min.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
-    
-        <script src="/javascripts/customer.js"></script>
-    </head>
-    <body ng-app="mainModule" ng-controller="mainController" >
-        <!--[if lt IE 8]>
+<body ng-app="mainModule" ng-controller="mainController">
+    <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
-        <!-- Add your site or application content here -->
-        <div class="mains">
+    <!-- Add your site or application content here -->
+    <div class="mains">
         <header>
             <div class="container">
                 <div class="row">
                     <div class="headup">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                        <div class="logo">
-                            <a href="index.html" target="_self"><img src="/sandy/img/logo.png" alt="Logo"></a>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="logo">
+                                <a href="index.html" target="_self"><img src="/sandy/img/logo.png" alt="Logo"></a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                        <div class="row">
-                            <div class="navigationbox">
-                            <div class="headone">
-                                <div class="dropdown tracks">
-
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <div class="row">
+                                <div class="navigationbox">
+                                    <div class="headone">
+                                        <div class="dropdown tracks">
+                                            
+                                                <div class="dropdown tracks">
+                                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Track My Order <span class="caret"></span></button>
+                                                    <ul class="dropdown-menu tracklist">
+                                                        <li>
+                                                            <input class="fieldone" type="text" placeholder="Enter Order ID" ng-model="orderId" required="required"> </li>
+                                                        <li>
+                                                            <button class="btn btn-success" type="button" data-toggle="modal" data-target="#myModal1" ng-click="getOrderStatus()">Order Status</button>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <div id="myModal1" class="modal fade" role="dialog">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                        <h4><center>Your Order Status</center></h4> </div>
+                                                                    <div ng-repeat="tracker in OrderStatus[0].tracker"> <b>{{tracker.status}}</b> : {{tracker.time| date:'medium'}} </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <!--
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
                             <a class="dropdown-toggle" href="login" data-toggle="dropdown"><i class="" style="padding:15px;min-width:150px"></i> track my order<strong class="caret"></strong>&nbsp;</a>
@@ -60,10 +83,10 @@
                             </li>
 
                         </ul>
-                                </div>
-                            </div>
-                                        <div class="col-md-6 col-sm-6">
-                                  <div id="myModal1" class="modal fade" role="dialog">
+-->
+                                    <!--
+                        <div class="col-md-6 col-sm-6">
+                            <div id="myModal1" class="modal fade" role="dialog">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -78,208 +101,227 @@
                                 </div>
                             </div>
                         </div>
-                            <div class="headtwo">
-                                <nav>
-                                    <ul class="menu">
-                                        <li>
-                                            Get Our App <a href="https://play.google.com/store/search?q=khaanavali&hl=en" target="_blank"><span><img src="/sandy/img/androidlogo.png" alt="Icon"></span></a>
-                                        </li>
-                                        <li>
-                                            <a href="khaana.html" target="_blank">Khaanavali</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" data-toggle="modal" data-target="#loginModal">Login</a>
-                                            <div class="modal fade" id="loginModal" role="dialog">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header log">
-                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                            <h3>LOGIN TO YOUR ACCOUNT</h3>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                             <div class="form-group">
-                                                                <ul class="loglist">
-                                                                    <li>
-                                                                        <input type="text" class="form-control inputnew" 
-                                                                        ng-model="login_phone" placeholder="Mobile Number">
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <input type="password" class="form-control inputnewd" 
-                                                                        ng-model="login_password"
-                                                                        placeholder="Password">
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <button type="button" class="btn btn-success alone"
-                                                                        data-dismiss="modal" 
-                                                                        ng-click="login_customer()">LOGIN</button>
-                                                                    </li>
-                                                                </ul>
-                                                             </div>
-                                                        </div>
-                                                        <div class="modal-footer log">
-                                                            <h2>Not a Member yet ?</h2>
-                                                            <ul class="loglist">
-                                                                    <li>
-                                                                        <button type="button" class="btn btn-success alone"
-                                                                        data-dismiss="modal" 
-                                                                        data-toggle="modal"
-                                                                        data-target="#signupModal"
-                                                                        >SIGN UP</button>
-                                                                    </li>
-                                                                </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <a href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>
-                                            <div class="modal fade" id="signupModal" role="dialog">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header log">
-                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                            <h3>REGISTER</h3>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                             <div class="form-group">
-                                                                <ul class="loglist">
-                                                                    <li>
-                                                                        <input type="text" class="form-control inputne" 
-                                                                        ng-model="siginup_name" placeholder="Name">
-                                                                    </li>
-                                                                    <li>
-                                                                        <input type="text" class="form-control inputnew" 
-                                                                        ng-model="signup_phone" placeholder="Mobile Number">
-                                                                    </li>
-                                                                    
-                                                                    <li>
-                                                                        <input type="text" class="form-control inputnews" 
-                                                                        ng-model="signup_email" placeholder="E-mail ID">
-                                                                    </li>
-                                                                    <li>
-                                                                        <input type="text" class="form-control inputnewd" 
-                                                                        ng-model="signup_password1" placeholder="Password">
-                                                                    </li>
-                                                                    <li>
-                                                                        <input type="text" class="form-control inputnewd" 
-                                                                        ng-model="signup_password2"
-                                                                        placeholder="Confirm Password">
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="checkbox">
-                                                                            <label><input type="checkbox" value="">I accept <a class="lone" href="#" target="_blank">Terms &amp; Conditions</a></label>
+-->
+                                    <!--
+                                            <div class="headtwo">
+                                                <nav>
+                                                    <ul class="menu">
+                                                        <li> Get Our App <a href="https://play.google.com/store/search?q=khaanavali&hl=en" target="_blank"><span><img src="/sandy/img/androidlogo.png" alt="Icon"></span></a> </li>
+                                                        <li> <a href="khaana.html" target="_blank">Khaanavali</a> </li>
+                                                        <li> <a href="#" data-toggle="modal" data-target="#loginModal">Login</a>
+                                                            <div class="modal fade" id="loginModal" role="dialog">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header log">
+                                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                            <h3>LOGIN TO YOUR ACCOUNT</h3> </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="form-group">
+                                                                                <ul class="loglist">
+                                                                                    <li>
+                                                                                        <input type="text" class="form-control inputnew" ng-model="login_phone" placeholder="Mobile Number"> </li>
+                                                                                    <li>
+                                                                                        <input type="password" class="form-control inputnewd" ng-model="login_password" placeholder="Password"> </li>
+                                                                                    <li>
+                                                                                        <button type="button" class="btn btn-success alone" data-dismiss="modal" ng-click="login_customer()">LOGIN</button>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
                                                                         </div>
-                                                                    </li>
+                                                                        <div class="modal-footer log">
+                                                                            <h2>Not a Member yet ?</h2>
+                                                                            <ul class="loglist">
+                                                                                <li>
+                                                                                    <button type="button" class="btn btn-success alone" data-dismiss="modal" data-toggle="modal" data-target="#signupModal">SIGN UP</button>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li> <a href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>
+                                                            <div class="modal fade" id="signupModal" role="dialog">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header log">
+                                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                            <h3>REGISTER</h3> </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="form-group">
+                                                                                <ul class="loglist">
+                                                                                    <li>
+                                                                                        <input type="text" class="form-control inputne" ng-model="siginup_name" placeholder="Name"> </li>
+                                                                                    <li>
+                                                                                        <input type="text" class="form-control inputnew" ng-model="signup_phone" placeholder="Mobile Number"> </li>
+                                                                                    <li>
+                                                                                        <input type="text" class="form-control inputnews" ng-model="signup_email" placeholder="E-mail ID"> </li>
+                                                                                    <li>
+                                                                                        <input type="text" class="form-control inputnewd" ng-model="signup_password1" placeholder="Password"> </li>
+                                                                                    <li>
+                                                                                        <input type="text" class="form-control inputnewd" ng-model="signup_password2" placeholder="Confirm Password"> </li>
+                                                                                    <li>
+                                                                                        <div class="checkbox">
+                                                                                            <label>
+                                                                                                <input type="checkbox" value="">I accept <a class="lone" href="#" target="_blank">Terms &amp; Conditions</a></label>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <button type="button" class="btn btn-success alone" data-dismiss="modal" ng-click="signup_customer()">REGISTER</button>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer log">
+                                                                            <h2>Already a Member ?</h2>
+                                                                            <ul class="loglist">
+                                                                                <li>
+                                                                                    <button type="button" class="btn btn-success alone" data-dismiss="modal" data-toggle="modal" data-target="#loginModal">LOGIN</button>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+-->
+                                    <div class="headtwo">
+                                        <nav>
+                                            <ul class="menu">
+                                                <li> Get Our App <a href="https://play.google.com/store/search?q=khaanavali&hl=en" target="_blank"><span><img src="../public/sandy/img/androidlogo.png" alt="Icon"></span></a> </li>
+                                                <li> <a href="khaana.html" target="_blank">Khaanavali</a> </li>
+                                                <li> <a href="#" data-toggle="modal" data-target="#myModal">Login</a>
+                                                    <div class="modal fade zoom" id="myModal" role="dialog">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header log">
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    <h3>LOGIN TO YOUR ACCOUNT</h3> </div>
+                                                                <div class="modal-body">
+                                                                    <div class="form-group">
+                                                                        <ul class="loglist">
+                                                                            <li>
+                                                                                <input type="text" class="form-control inputnew" ng-model="login_phone" placeholder="Mobile Number"> </li>
+                                                                            <!--
                                                                     <li>
-                                                                        <button type="button" class="btn btn-success alone"
-                                                                        data-dismiss="modal" 
-                                                                        ng-click="signup_customer()">REGISTER</button>
+                                                                        <input type="text" class="form-control inputnews" placeholder="E-mail ID">
                                                                     </li>
-                                                                </ul>
-                                                             </div>
-                                                        </div>
-                                                        <div class="modal-footer log">
-                                                            <h2>Already a Member ?</h2>
-                                                            <ul class="loglist">
+-->
+                                                                            <li>
+                                                                                <input type="text" class="form-control inputnewd" ng-model="login_password" placeholder="Password"> </li>
+                                                                            <!--
                                                                     <li>
-                                                                        <button type="button" class="btn btn-success alone"                                                                                               data-dismiss="modal" 
-                                                                        data-toggle="modal"
-                                                                        data-target="#loginModal"
-                                                                        >LOGIN</button>
+                                                                        <a class="lone" href="#" target="_blank">Forgot Password ?</a>
                                                                     </li>
-                                                                </ul>
+-->
+                                                                            <li>
+                                                                                <a href="profile.html" target="_parent">
+                                                                                    <button type="button" class="btn btn-success alone" data-dismiss="modal" ng-click="login_customer()">LOGIN</button>
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer log">
+                                                                    <h2>Not a Member yet ?</h2>
+                                                                    <ul class="loglist">
+                                                                        <li>
+                                                                            <button type="button" class="btn btn-success alone" data-dismiss="modal" data-toggle="modal" data-target="#signupModal">SIGN UP</button>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
+                                                    <div class="modal fade zoom" id="signupModal" role="dialog">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header log">
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    <h3>REGISTER</h3> </div>
+                                                                <div class="modal-body">
+                                                                    <div class="form-group">
+                                                                        <ul class="loglist">
+                                                                            <li>
+                                                                                <input type="text" class="form-control inputne" ng-model="siginup_name" placeholder="Name"> </li>
+                                                                            <li>
+                                                                                <input type="text" class="form-control inputnew" ng-model="signup_phone" placeholder="Mobile Number"> </li>
+                                                                            <li>
+                                                                                <input type="text" class="form-control inputnews" ng-model="signup_email" placeholder="E-mail ID"> </li>
+                                                                            <li>
+                                                                                <input type="text" class="form-control inputnewd" ng-model="signup_password1" placeholder="Password"> </li>
+                                                                            <li>
+                                                                                <input type="text" class="form-control inputnewd" ng-model="signup_password2" placeholder="Confirm Password"> </li>
+                                                                            <li>
+                                                                                <div class="checkbox">
+                                                                                    <label>
+                                                                                        <input type="checkbox" value="">I accept <a class="lone" href="#" target="_blank">Terms &amp; Conditions</a></label>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <button type="button" class="btn btn-success alone" data-dismiss="modal" ng-click="signup_customer()">REGISTER</button>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer log">
+                                                                    <h2>Already a Member ?</h2>
+                                                                    <ul class="loglist">
+                                                                        <li>
+                                                                            <a href="profile.html" target="_parent">
+                                                                                <button type="button" class="btn btn-success alone" data-dismiss="modal" data-toggle="modal" data-target="#loginModal">LOGIN</button>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    </div>
-                </div>
-            </div>
         </header>
-        
-            <div >
-                <div ui-view></div>
-
-            </div> 
+        <div>
+            <div ui-view></div>
         </div>
-        
+        </div>
 <!--
-        <div class="sectiontwo">
+        <div class="sectionthree">
             <div class="container">
-                <div class="ordertime">
-                    <ul class="timemenu">
-                        <li>
-                            <h2>ORDER TIMINGS</h2>
-                        </li>
-                        <li>
-                            <h3>BREAKFAST</h3>
-                            <p>8 a.m - 11 a.m</p>
-                        </li>
-                        <li>
-                            <h3>LUNCH</h3>
-                            <p>8 a.m - 11 a.m</p>
-                        </li>
-                        <li>
-                            <h3>DINNER</h3>
-                            <p>8 a.m - 11 a.m</p>
-                        </li>
+                <div class="gettoknow">
+                    <ul class="knowmenu">
+                        <li> <a href="aboutus.html" target="_blank">ABOUT US</a> </li>
+                        <li> <a href="techpartners.html" target="_blank">TECHNOLOGY PARTNERS</a> </li>
+                        <li> <a href="blog.html" target="_blank">BLOG</a> </li>
+                        <li> <a href="careers.html" target="_blank">CAREERS</a> </li>
+                        <li> <a href="contactus.html" target="_blank">CONTACT US</a> </li>
                     </ul>
                 </div>
             </div>
         </div>
 -->
-        <div class="sectionthree">
-            <div class="container">
-                <div class="gettoknow">
-                    <ul class="knowmenu">
-                        <li>
-                            <a href="aboutus.html" target="_blank">ABOUT US</a>
-                        </li>
-                        <li>
-                            <a href="techpartners.html" target="_blank">TECHNOLOGY PARTNERS</a>
-                        </li>
-                        <li>
-                            <a href="blog.html" target="_blank">BLOG</a>
-                        </li>
-                        <li>
-                            <a href="careers.html" target="_blank">CAREERS</a>
-                        </li>
-                        <li>
-                            <a href="contactus.html" target="_blank">CONTACT US</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
         <footer>
             <div class="container">
                 <div class="footnotes">
                     <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-left">
                         <div class="footmenu">
                             <ul class="footlist">
-                                <li>
-                                    <a href="terms.html" target="_blank">Terms &amp; Conditions</a>
-                                </li>
-                                <li>
-                                    <a href="help.html" target="_blank">Help &amp; Support</a>
-                                </li>
-                                <li>
-                                    <a href="privacy.html" target="_blank">Privacy Policy</a>
-                                </li>
-                                <li>
-                                    <a href="faq.html" target="_blank">FAQs</a>
-                                </li>
+                                <li> <a href="aboutus.html" target="_blank">About Us</a> </li>
+<!--                                <li> <a href="techpartners.html" target="_blank">TECHNOLOGY PARTNERS</a> </li>-->
+<!--                                <li> <a href="blog.html" target="_blank">BLOG</a> </li>-->
+<!--                                <li> <a href="careers.html" target="_blank">CAREERS</a> </li>-->
+                                <li> <a href="contactus.html" target="_blank">Contact Us</a> </li>
+                                <li> <a href="terms.html" target="_blank">Terms &amp; Conditions</a> </li>
+                                <li> <a href="help.html" target="_blank">Help &amp; Support</a> </li>
+                                <li> <a href="privacy.html" target="_blank">Privacy Policy</a> </li>
+                                <li> <a href="faq.html" target="_blank">FAQs</a> </li>
                             </ul>
                         </div>
                     </div>
@@ -291,22 +333,29 @@
                 </div>
             </div>
         </footer>
-
-
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-        <script>window.jQuery || document.write('<script src="/sandy/js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+        <script>
+            window.jQuery || document.write('<script src="/sandy/js/vendor/jquery-1.12.0.min.js"><\/script>')
+        </script>
         <script src="/sandy/js/plugins.js"></script>
         <script src="/sandy/js/main.js"></script>
-        <script src="/sandy/js/bootstrap.js"></script> 
-
+        <script src="/sandy/js/bootstrap.js"></script>
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='https://www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+            (function (b, o, i, l, e, r) {
+                b.GoogleAnalyticsObject = l;
+                b[l] || (b[l] = function () {
+                    (b[l].q = b[l].q || []).push(arguments)
+                });
+                b[l].l = +new Date;
+                e = o.createElement(i);
+                r = o.getElementsByTagName(i)[0];
+                e.src = 'https://www.google-analytics.com/analytics.js';
+                r.parentNode.insertBefore(e, r)
+            }(window, document, 'script', 'ga'));
+            ga('create', 'UA-XXXXX-X', 'auto');
+            ga('send', 'pageview');
         </script>
-    </body>
+</body>
+
 </html>
