@@ -474,6 +474,8 @@ app.post( '/v1/customer/address/:id', function( request, response ) {
 //			return response.send("Not aunthiticated").status(403);
 //		}
 	  console.log(request.params.id);
+    var phoneNumber = parseInt(request.params.id);
+    console.log(phoneNumber);
 	
 //	  VendorInfoModel.update({ 'hotel.email':request.body.email},
 //		      {
@@ -500,18 +502,18 @@ app.post( '/v1/customer/address/:id', function( request, response ) {
 //		             return res.send('ERROR');		 
 //		         }		
 //	    	     });	
-	    return CustomerInfoModel.update({ 'phone':request.params.id},
+	    return CustomerInfoModel.update({ 'phone':phoneNumber},
 	    	       { $addToSet: {addresses: {$each:
 	    	    	   [{label:request.body.label, 
-	    	    			addressLine1:request.body.addressLine1,
-	    	    			addressLine2:request.body.addressLine2,
-	    	    			street:request.body.street, 
-	    	    			LandMark:request.body.LandMark, 
-	    	    			areaName:request.body.areaname,
-	    	    			city:request.body.city, 
-	    	    			zip:request.body.zip, 
-	    	    			latitude:request.body.latitude,
-	    	    			longitude:request.body.longitude }], }}},
+	    	    			addressLine1:request.body.address.addressLine1,
+	    	    			addressLine2:request.body.address.addressLine2,
+	    	    			street:request.body.address.street, 
+	    	    			LandMark:request.body.address.LandMark, 
+	    	    			areaName:request.body.address.areaname,
+	    	    			city:request.body.address.city, 
+	    	    			zip:request.body.address.zip, 
+	    	    			latitude:request.body.address.latitude,
+	    	    			longitude:request.body.address.longitude }], }}},
 	    	    	   function( err, order ) {
 				    	       if( !err ) {
 				    	           console.log("no error");
