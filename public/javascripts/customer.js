@@ -42,16 +42,27 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       login_body.role = "customer";
       console.log(login_body);
       var url = "/login";
-      $scope
+     
      
       $http.post(url, login_body,config)
         .success(function (data, status, headers)
         {
           console.log("Success in login post");
-           
-            console.log(data);
-            $scope.isLoggedIn = data;
+          console.log(data);
+          if(data  ==  0)
+              {
+            $scope.isLoggedIn = false;
+              }
+          else
+              {
+                  $scope.isLoggedIn = true;
+              }
             console.log($scope.isLoggedIn);
+//           if(data == 0)
+//               {
+//                    $window.alert("Invalid username and password ");
+//               }
+            
           
         })
         .error(function (data, status, headers)
@@ -82,7 +93,15 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
           console.log("Success in sign up post");
            
             console.log(data);
-           
+          if(data  ==  0)
+              {
+            $scope.isLoggedIn = false;
+              }
+          else
+              {
+                  $scope.isLoggedIn = true;
+              }
+            console.log($scope.isLoggedIn);
           
         })
         .error(function (data, status, headers)

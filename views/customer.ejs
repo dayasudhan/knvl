@@ -194,7 +194,9 @@
                                                 <li> <a href="index.html" target="_parent" class="active">Home</a> </li>
                                                 <li> Get Our App <a href="https://play.google.com/store/search?q=khaanavali&hl=en" target="_blank"><span><img src="../public/sandy/img/androidlogo.png" alt="Icon"></span></a> </li>
 <!--                                                <li> <a href="khaana.html" target="_blank">Khaanavali</a> </li>-->
-                                                <li> <a href="#" data-toggle="modal" data-target="#myModal">Login</a>
+                                                <li><a href="/logout" ng-show="isLoggedIn" >Logout</a> 
+                                                    <a href="#" data-toggle="modal" data-target="#myModal" ng-show="!isLoggedIn">Login</a>
+                                                    
                                                     <div class="modal fade zoom" id="myModal" role="dialog">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
@@ -272,9 +274,9 @@
                                                                     <h2>Already a Member ?</h2>
                                                                     <ul class="loglist">
                                                                         <li>
-                                                                            <a href="profile.html" target="_parent">
-                                                                                <button type="button" class="btn btn-success alone" data-dismiss="modal" data-toggle="modal" data-target="#loginModal">LOGIN</button>
-                                                                            </a>
+                                                                            
+                                                                                <button type="button" class="btn btn-success alone" data-dismiss="modal" data-toggle="modal" data-target="#myModal">LOGIN</button>
+                                                                            
                                                                         </li>
                                                                     </ul>
                                                                 </div>
