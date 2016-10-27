@@ -537,7 +537,19 @@ app.get( '/v1/customer', function( request, response ) {
     });
  // });
 });
-
+app.get( '/v1/customer/phone/:id', function( request, response ) {
+    console.log(request.params.id);
+    
+     return CustomerInfoModel.find({ 'phone':request.params.id},function( err, customerInfo ) {
+        if( !err ) {
+            return response.send( customerInfo );
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+ // });
+});
 app.post( '/v1/customer/:id', function( request, response ) {
 
 console.log(request.body);
