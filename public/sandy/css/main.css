@@ -103,6 +103,9 @@ body {
     font-size: 16px;
     color: #161617;
     line-height: 1.4;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 
@@ -128,8 +131,9 @@ a, a:hover {
 
 
 .mains {
-    background: url("../img/one.jpg");
+    background: url("../img/one.jpg") repeat scroll 0 0;
     background-size: cover !important;
+    background-attachment: fixed !important;
     float: left;
     clear: both;
     width: 100%;
@@ -220,18 +224,15 @@ a, a:hover {
     color: #F9690E;
 }
 
-.log h3 {
+.log h2 {
     font-size: 18px;
     text-transform: capitalize;
-    word-spacing: 10px;
-    letter-spacing: 2px;
+    font-weight: 600;
 }
 
 .log h2 {
     font-size: 20px;
     text-transform: capitalize;
-    word-spacing: 10px;
-    letter-spacing: 2px;
     text-align: center;
 }
 
@@ -286,8 +287,6 @@ a, a:hover {
 }
 
 .khanaquotes h1 {
-    letter-spacing: 2px;
-    word-spacing: 5px;
     margin-top: 15px;
 }
 
@@ -296,14 +295,11 @@ a, a:hover {
 }
 
 .khanaquotes h2 {
-    letter-spacing: 2px;
-    word-spacing: 5px;
     margin-top: 15px;
 }
 
 .khanaquotes p {
-    letter-spacing: 2px;
-    word-spacing: 5px;
+
 }
 
 .khannaam {
@@ -313,8 +309,6 @@ a, a:hover {
 }
 
 .khannaam h2 {
-    letter-spacing: 2px;
-    word-spacing: 5px;
     margin-top: 15px;
 }
 
@@ -324,9 +318,12 @@ a, a:hover {
     margin-left: auto;
     margin-bottom: 50px;
     max-width: auto;
-    min-height: 90px;
+/*    min-height: 90px;*/
     padding: 25px;
     border-radius: 10px;
+    width: 100%;
+    float: left;
+    clear: both;
 }
 
 .findernav {
@@ -337,6 +334,7 @@ a, a:hover {
 .findernav li {
     float: left;
     padding: 0px 15px 0px 15px;
+    margin: 0px auto;
 }
 
 .selectouter {
@@ -610,6 +608,7 @@ a, a:hover {
     margin: 20px auto;
     border: 1px solid green;
     padding: 10px;
+    overflow-x: auto;
 }
 
 .menselect table .tabcent {
@@ -632,6 +631,10 @@ a, a:hover {
 .mencheck {
     margin: 20px auto;
     text-align: center;
+}
+
+.idetails {
+    overflow-x: auto;
 }
 
 .idetails h3 {
@@ -1239,18 +1242,17 @@ input.qtyminus {
 }
 
 @media only screen and (min-width: 320px) {
-    .menu li { display: block; padding: 0px 90px 0 90px; }
-    .tracklist { left: 0em; }
-    .findernav li { float: none; text-align: center; }
+    .tracks { float: none; }
+    .menu li { display: inline-block; padding: 0px 14px; }
+    .tracklist { left: 65px; }
+    .findernav li { float: none; text-align: center; margin: 10px 0px; }
     .selectouter { width: 100%; display: block;}
-/*
-    .timemenu li { width: 100%; border-right: none; }
-*/
+/*  .timemenu li { width: 100%; border-right: none; }*/
     .knowmenu li { display: block; width: 100%; }
     .footlist li { float: none; padding-right: 0px; }
     .hotelist li .wrapper { max-height: 100%; }
-    .hotelist li .wrapper .banner { float: none; }
-/*    .hotelist li .wrapper .bannen { height: auto; }*/
+    .hotelist li .wrapper .banner { float: none; width: 100%; height: auto; }
+/*  .hotelist li .wrapper .bannen { height: auto; }*/
     .qty { width: 15px; }
     input.qtyplus { width: 15px; }
     input.qtyminus { width: 15px; }
@@ -1260,75 +1262,108 @@ input.qtyminus {
 }
 
 @media only screen and (min-width: 360px) {
-    .menu li { display: block; padding: 0px 112px 0 112px; }
-    .tracklist { left: 0em; }
+    .tracks { float: none; }
+    .menu li { display: inline-block; padding: 0px 21px; }
+    .tracklist { left: 86px; }
     .footlist li { float: none; padding-right: 0px; }
     .qty { width: 15px; }
     input.qtyplus { width: 15px; }
     input.qtyminus { width: 15px; }
 }
 
+@media only screen and (min-width: 380px) {
+    .tracks { float: none; }
+    .menu li { display: inline-block; padding: 0px 23px; }
+    .tracklist { left: 100px; }
+    .footlist li { float: none; padding-right: 0px; }
+    .qty { width: 15px; }
+    input.qtyplus { width: 15px; }
+    input.qtyminus { width: 15px; }
+}
+
+@media only screen and (min-width: 400px) {
+    .tracks { float: none; }
+    .menu li { display: inline-block; padding: 0px 27px; }
+    .tracklist { left: 105px; }
+}
+
 @media only screen and (min-width: 420px) {
-    .menu li { display: block; padding: 0px 140px 0 140px; }
-    .tracklist { left: 8em; }
+    .tracks { float: none; }
+    .menu li { display: inline-block; padding: 0px 31px; }
+    .tracklist { left: 116px; }
     .footlist li { float: none; padding-right: 0px; }
     .qty { width: 25px; }
     input.qtyplus { width: 25px; }
     input.qtyminus { width: 25px; }
+    .hotelist li .wrapper { max-height: 100%; width: 100%; }
 }
 
 @media only screen and (min-width: 460px) {
-    .menu li { display: block; padding: 0px 160px 0 160px; }
-    .tracklist { left: 0em; }
+    .tracks { float: none; }
+    .menu li { display: inline-block; padding: 0px 37px; }
+    .tracklist { left: 136px; }
     .footlist li { float: none; padding-right: 0px; }
 }
 
+@media only screen and (min-width: 480px) {
+    .tracks { float: none; }
+    .menu li { display: inline-block; padding: 0px 41px; }
+    .tracklist { left: 145px; }
+}
+
 @media only screen and (min-width: 500px) {
-    .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 0em; }
+    .menu li { display: inline-block; padding: 0px 44px; }
+    .tracklist { left: 154px; }
+    .footlist li { float: none; padding-right: 0px; }
+    .teamli li { width: 49%; }
+    .teamdesc { width: inherit; }
+}
+
+@media only screen and (min-width: 600px) {
+    .menu li { display: inline-block; padding: 0px 61px; }
+    .tracklist { left: 204px; }
     .footlist li { float: none; padding-right: 0px; }
     .teamli li { width: 49%; }
     .teamdesc { width: inherit; }
 }
 
 @media only screen and (min-width: 640px) {
-    .menu li { display: inline-block; padding: 0px 62px 0 62px; }
-    .tracklist { left: 0em; }
+    .menu li { display: inline-block; padding: 0px 67px; }
+    .tracklist { left: 225px; }
     .findernav li { float: left; }
     .selectouter { width: 11em; }
-/*   
-    .timemenu li { width: 24%; border-right: 2px solid white; }
-*/
+/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
     .footlist li { float: none; padding-right: 0px; }
     .teamli li { width: 32%; }
     .teamdesc { width: inherit; }
 }
 
 @media only screen and (min-width: 767px) {
+    .tracks { float: right; }
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 0em; }
+    .tracklist { left: 0px; }
     .selectouter { width: 15em; }
-/*    .timemenu li { width: 24%; border-right: 2px solid white; }*/
+/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
     .knowmenu li { display: inline-block; width: 24%; }
     .footlist li { float: left; padding-right: 20px; }
     .hotelist li .wrapper { max-height: 120px; }
-    .hotelist li .wrapper .banner { float: left; }
-/*    .hotelist li .wrapper .bannen { height: 180px; }*/
+    .hotelist li .wrapper .banner { float: left; width: 120px; height: 120px; }
+/*  .hotelist li .wrapper .bannen { height: 180px; }*/
     .techlist li { width: 49%; display: inline-block; margin-top: 6px; }
 }
 
 @media only screen and (min-width: 768px) {
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 0em; }
-/*    .timemenu li { width: 24%; border-right: 2px solid white; }*/
+    .tracklist { left: 0px; }
+/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
     .knowmenu li { display: inline-block; width: 24%; }
     .footlist li { float: left; padding-right: 20px; }
 }
 
 @media only screen and (min-width: 800px) {
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 0em; }
-/*    .timemenu li { width: 24%; border-right: 2px solid white; }*/
+    .tracklist { left: 0px; }
+/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
     .knowmenu li { display: inline-block; width: 24%; }
     .footlist li { float: left; }
 }
@@ -1336,7 +1371,7 @@ input.qtyminus {
 @media only screen and (min-width: 920px) {
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
     .tracklist { left: 0em; }
-/*    .timemenu li { width: 24%; border-right: 2px solid white; }*/
+/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
     .knowmenu li { display: inline-block; width: 24%; }
     .footlist li { float: left; }
 }
@@ -1349,11 +1384,12 @@ input.qtyminus {
 }
 
 @media only screen and (min-width: 1200px) {
+    .tracks { float: right; }
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 0em; }
+    .tracklist { left: 0px; }
     .findernav li { float: left; }
     .selectouter { width: 17em; }
-/*    .timemenu li { width: 24%; border-right: 2px solid white; }*/
+/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
     .knowmenu li { display: inline-block; width: 19%; }
     .footlist li { float: left; }
     .teamli li { width: 33%; }
