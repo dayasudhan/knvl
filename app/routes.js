@@ -503,10 +503,10 @@ app.post( '/v1/customer/address/:id', function( request, response ) {
 	    return CustomerInfoModel.update({ 'phone':request.params.id},
 	    	       { $addToSet: {addresses: {$each:
 	    	    	   [{label:request.body.label, 
-	    	    			addressLine1:request.body.address1,
-	    	    			addressLine2:request.body.address2,
+	    	    			addressLine1:request.body.addressLine1,
+	    	    			addressLine2:request.body.addressLine2,
 	    	    			street:request.body.street, 
-	    	    			LandMark:request.body.landmark, 
+	    	    			LandMark:request.body.LandMark, 
 	    	    			areaName:request.body.areaname,
 	    	    			city:request.body.city, 
 	    	    			zip:request.body.zip, 
