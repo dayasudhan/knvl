@@ -1242,6 +1242,95 @@ input.qtyminus {
     clear: both;
 }
 
+.sectionthirteen {
+    margin: 0px auto;
+    min-height: 800px;
+}
+
+.picandname {
+    margin: 10px auto;
+    float: left;
+    width: 100%;
+    background : #ECF0F1;
+    -webkit-box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);
+    -moz-box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);
+    box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);
+    clear: both;
+}
+
+.userpicdetail {
+    margin: 10px auto;
+    padding: 20px;
+}
+
+.userpic {
+    float: left;
+    width: 80%;
+}
+
+.userpic img {
+    width: 100%; 
+}
+
+.userdetail {
+    margin: 10px auto;
+    padding: 20px;
+}
+
+.usernames {
+    float: left;
+    width: 80%;
+}
+
+.usernameslist li {
+    display: block;
+    margin-top: 15px;
+}
+
+.usernameslist li .inptne {
+    background: url("../img/profile.png") no-repeat left center;
+    padding-left: 40px;
+}
+
+.usernameslist li .inptnew {
+    background: url("../img/phone.png") no-repeat left center;
+    padding-left: 40px;
+}
+
+.usernameslist li .inptnews {
+    background: url("../img/mail.png") no-repeat left center;
+    padding-left: 40px;
+}
+
+.usernameslist li .inptnewd {
+    background: url("../img/map.png") no-repeat left center;
+    padding-left: 40px;
+}
+
+/*
+.usernameslist li .inpt {
+    background: url("../img/pwd.png") no-repeat left center;
+    padding-left: 40px;
+}
+
+.usernameslist li .inp {
+    background: url("../img/profile.png") no-repeat left center;
+    padding-left: 40px;
+}
+*/
+
+.edt {
+    float: right;
+    text-align: right;
+}
+ 
+.save {
+    margin: 30px auto;
+    text-align: center;
+    clear: both;
+    width: 100%;
+    float: left;
+}
 
 .footnotes {
     margin: 12px auto;
