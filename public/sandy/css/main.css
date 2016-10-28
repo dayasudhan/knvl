@@ -224,6 +224,42 @@ a, a:hover {
     color: #F9690E;
 }
 
+.menu li .profedit a {
+    cursor: pointer;
+/*    background: url("../img/profile.png") no-repeat left center;*/
+}
+
+.menu li .profedit .profiledit {
+    min-width: 300px;
+    left: -16em;
+}
+
+.menu li .profedit .profiledit li {
+    padding: 10px;
+    display: block;
+}
+
+.menu li .profedit .profiledit li img {
+    margin: 20px auto;
+}
+
+.menu li .profedit .profiledit li p {
+    font-weight: 600;
+    color: dodgerblue;
+}
+
+.menu li .profedit .profiledit li p small {
+    font-weight: lighter;
+}
+
+.profiledit li:last-child .proone {
+    float: left;
+}
+
+.menu li .profedit .profiledit li:last-child .protwo {
+    float: right;
+}
+
 .log h2 {
     font-size: 18px;
     text-transform: capitalize;
@@ -1243,7 +1279,7 @@ input.qtyminus {
 
 @media only screen and (min-width: 320px) {
     .tracks { float: none; }
-    .menu li { display: inline-block; padding: 0px 14px; }
+    .menu li { display: inline-block; padding: 0px 10px; }
     .tracklist { left: 65px; }
     .findernav li { float: none; text-align: center; margin: 10px 0px; }
     .selectouter { width: 100%; display: block;}
@@ -1263,7 +1299,7 @@ input.qtyminus {
 
 @media only screen and (min-width: 360px) {
     .tracks { float: none; }
-    .menu li { display: inline-block; padding: 0px 21px; }
+    .menu li { display: inline-block; padding: 0px 17px; }
     .tracklist { left: 86px; }
     .footlist li { float: none; padding-right: 0px; }
     .qty { width: 15px; }
@@ -1273,7 +1309,7 @@ input.qtyminus {
 
 @media only screen and (min-width: 380px) {
     .tracks { float: none; }
-    .menu li { display: inline-block; padding: 0px 23px; }
+    .menu li { display: inline-block; padding: 0px 20px; }
     .tracklist { left: 100px; }
     .footlist li { float: none; padding-right: 0px; }
     .qty { width: 15px; }
@@ -1283,13 +1319,13 @@ input.qtyminus {
 
 @media only screen and (min-width: 400px) {
     .tracks { float: none; }
-    .menu li { display: inline-block; padding: 0px 27px; }
+    .menu li { display: inline-block; padding: 0px 23px; }
     .tracklist { left: 105px; }
 }
 
 @media only screen and (min-width: 420px) {
     .tracks { float: none; }
-    .menu li { display: inline-block; padding: 0px 31px; }
+    .menu li { display: inline-block; padding: 0px 27px; }
     .tracklist { left: 116px; }
     .footlist li { float: none; padding-right: 0px; }
     .qty { width: 25px; }
@@ -1300,19 +1336,19 @@ input.qtyminus {
 
 @media only screen and (min-width: 460px) {
     .tracks { float: none; }
-    .menu li { display: inline-block; padding: 0px 37px; }
+    .menu li { display: inline-block; padding: 0px 33px; }
     .tracklist { left: 136px; }
     .footlist li { float: none; padding-right: 0px; }
 }
 
 @media only screen and (min-width: 480px) {
     .tracks { float: none; }
-    .menu li { display: inline-block; padding: 0px 41px; }
+    .menu li { display: inline-block; padding: 0px 37px; }
     .tracklist { left: 145px; }
 }
 
 @media only screen and (min-width: 500px) {
-    .menu li { display: inline-block; padding: 0px 44px; }
+    .menu li { display: inline-block; padding: 0px 40px; }
     .tracklist { left: 154px; }
     .footlist li { float: none; padding-right: 0px; }
     .teamli li { width: 49%; }
@@ -1320,7 +1356,7 @@ input.qtyminus {
 }
 
 @media only screen and (min-width: 600px) {
-    .menu li { display: inline-block; padding: 0px 61px; }
+    .menu li { display: inline-block; padding: 0px 57px; }
     .tracklist { left: 204px; }
     .footlist li { float: none; padding-right: 0px; }
     .teamli li { width: 49%; }
@@ -1328,7 +1364,7 @@ input.qtyminus {
 }
 
 @media only screen and (min-width: 640px) {
-    .menu li { display: inline-block; padding: 0px 67px; }
+    .menu li { display: inline-block; padding: 0px 63px; }
     .tracklist { left: 225px; }
     .findernav li { float: left; }
     .selectouter { width: 11em; }

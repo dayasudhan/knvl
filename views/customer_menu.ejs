@@ -124,7 +124,10 @@
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="mencheck">
-                <a href="#" data-toggle="modal" data-target="#meraModal">
+                <a href="#" ng-show="isLoggedIn" data-toggle="modal" data-target="#meraModal">
+                    <button type="button" class="btn btn-primary">CHECKOUT</button>
+                </a>
+                <a href="#" data-target="#myModal" ng-show="!isLoggedIn" data-toggle="modal" data-target="#meraModal">
                     <button type="button" class="btn btn-primary">CHECKOUT</button>
                 </a>
                 <div class="modal fade" id="meraModal" role="dialog">
@@ -193,8 +196,8 @@
                                     <h3><span>PAYMENT</span> is only <i>CASH ON DELIVERY.</i></h3> </div>
                             </div>
                             <div class="modal-footer">
-                                <a href="thanks.html" target="_self">
-                                    <button type="button" class="btn btn-danger" ng-click="order()" ng-disabled= "myForm.$invalid || {{showModal ==false}}">ORDER</button>
+                                <a href="">
+                                    <button type="button" class="btn btn-danger" ng-click="order()" ng-disabled= "myForm.$invalid || {{showModal ==false}}" data-dismiss="modal" data-toggle="modal" data-target="#myModal2" ng-click="confirmOrder()">ORDER</button>
                                 </a>
                             </div>
                         </div>
