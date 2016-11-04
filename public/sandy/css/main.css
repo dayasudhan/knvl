@@ -98,7 +98,7 @@ textarea {
 body {
     background: rgba(255, 255, 255, 0);
     font-family: 'Roboto', sans-serif;
-    /*font-family: 'Ubuntu Condensed', sans-serif;*/
+    font-family: 'Ubuntu Condensed', sans-serif;
     font-weight: normal;
     font-size: 16px;
     color: #161617;
@@ -131,7 +131,7 @@ a, a:hover {
 
 
 .mains {
-    background: url("../img/one.jpg") repeat scroll 0 0;
+    background: url("../img/JoladaRotti.jpg") repeat scroll 0 0;
     background-size: cover !important;
     background-attachment: fixed !important;
     float: left;
@@ -141,8 +141,8 @@ a, a:hover {
 
 .headup {
     width: 100%;
-/*  margin-top: 3%;
-    border: 1px solid black;*/
+    margin-top: 2%;
+    border-radius: 6px;
     float: left;
     clear: both;
 }
@@ -153,6 +153,7 @@ a, a:hover {
     margin: 5px auto;
     padding: 20px;
     text-align: center;
+    box-sizing: border-box;
 }
 
 .navigationbox {
@@ -198,11 +199,12 @@ a, a:hover {
     padding: 15px;
     float: left;
     clear: both;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .menu {
-    list-style-type: none;
-    padding: 0px;
     float: right;
 }
 
@@ -210,45 +212,45 @@ a, a:hover {
     display: inline-block;
     padding: 0px 38px 0 38px;
     font-size: 16px;
-    text-align: center;
+    text-align: center;  
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
 }
 
 .menu li a {
     text-decoration: none;
-    color: #232323;
+    color: #ffffff;
     font-size: 16px;
     font-weight: 600;
+    display: inline-block;
 }
 
-.menu li a:hover {
-    color: #F9690E;
-}
-
-.menu li .profedit a {
+.profedit a {
     cursor: pointer;
 /*    background: url("../img/profile.png") no-repeat left center;*/
 }
 
-.menu li .profedit .profiledit {
+.profedit .profiledit {
     min-width: 300px;
     left: -16em;
 }
 
-.menu li .profedit .profiledit li {
+.profedit .profiledit li {
     padding: 10px;
     display: block;
 }
 
-.menu li .profedit .profiledit li img {
+.profedit .profiledit li img {
     margin: 20px auto;
 }
 
-.menu li .profedit .profiledit li p {
+.profedit .profiledit li p {
     font-weight: 600;
     color: dodgerblue;
 }
 
-.menu li .profedit .profiledit li p small {
+.profedit .profiledit li p small {
     font-weight: lighter;
 }
 
@@ -256,20 +258,16 @@ a, a:hover {
     float: left;
 }
 
-.menu li .profedit .profiledit li:last-child .protwo {
+.profedit .profiledit li:last-child .protwo {
     float: right;
-}
-
-.log h2 {
-    font-size: 18px;
-    text-transform: capitalize;
-    font-weight: 600;
 }
 
 .log h2 {
     font-size: 20px;
     text-transform: capitalize;
     text-align: center;
+    color: #232323;
+    font-family: 'Roboto', sans-serif;
 }
 
 .loglist li {
@@ -323,19 +321,25 @@ a, a:hover {
 }
 
 .khanaquotes h1 {
+    color: #ffffff;
     margin-top: 15px;
+    text-shadow: 6px 6px 6px #000 ; 
 }
 
 .khanaquotes h1 span {
-    color: white;
+    color: #ffffff;
+    text-shadow: 6px 6px 6px #000 ; 
 }
 
 .khanaquotes h2 {
+    color: #ffffff;
     margin-top: 15px;
+    text-shadow: 6px 6px 6px #000 ; 
 }
 
 .khanaquotes p {
-
+    color: #ffffff;
+    text-shadow: 6px 6px 6px #000 ; 
 }
 
 .khannaam {
@@ -362,6 +366,7 @@ a, a:hover {
     clear: both;
 }
 
+/*
 .findernav {
     list-style-type: none;
     padding: 0px;
@@ -400,7 +405,7 @@ a, a:hover {
     width: 100% !important;
     vertical-align: top;
     height: 34px;
-/*    display: inline-flex;*/
+    display: inline-flex;
     outline: medium mone;
 }
 
@@ -425,6 +430,7 @@ a, a:hover {
     background: rgb(0, 0, 0);
     color: chartreuse;
 }
+*/
 
 .search-first {
     -webkit-appearance: none;
@@ -533,7 +539,12 @@ a, a:hover {
 }
 
 .sectionfour {
-    
+    margin: 0px auto;
+/*    min-height: 800px;*/
+    float: left;
+    width: 100%;
+    clear: both;
+    background: #ffffff;
 }
 
 .sectionfive {
@@ -546,7 +557,7 @@ a, a:hover {
 }
 
 .khaanagalu {
-    margin: 10px auto;
+/*    margin: 10px auto;*/
     padding: 5px;
     width: 100%;
     float: left;
