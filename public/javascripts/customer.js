@@ -223,7 +223,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
         return grandtotal;
     };
     $scope.confirmOrder = function() {
-      if($scope.isLoggedIn)
+      if($scope.isLoggedIn === true)
       {
         console.log("loggedin proceed to order");
       }
@@ -298,7 +298,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
           $scope.showModal =false;
           $scope.isOrderPresent == false;
        }
-       else  if(!$scope.isLoggedIn)
+       else if($scope.isLoggedIn === false)
        {
           console.log("not loggedin ");
         
@@ -308,7 +308,8 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
        else
        {
         console.log("order function else");
-        $('#myModal').modal()
+        console.log($scope.isLoggedIn);
+        $('#myModal3').modal()
        }
        var totalCost = $scope.hotel.deliverCharge +  total_price;
         var ordarr = {

@@ -311,7 +311,7 @@ a, a:hover {
 }
 
 .sectionone {
-    margin: 0px auto;
+    margin: 20px auto;
     width: 100%;
 }
 
@@ -501,8 +501,9 @@ a, a:hover {
 */
 
 .sectionthree {
-    margin: 0px auto;
+    margin: 20px auto;
     min-height: 800px;
+    clear: both;
 }
 
 .gettoknow {
@@ -751,8 +752,9 @@ a, a:hover {
 }
 
 .sectionseven {
-    margin: 0px auto;
+    margin: 20px auto;
     min-height: 800px;
+    clear: both;
 }
 
 .thank {
@@ -805,8 +807,9 @@ input.qtyminus {
 }
 
 .sectioneight {
-    margin: 0px auto;
+    margin: 20px auto;
     min-height: 800px;
+    clear: both;
 }
 
 .teambanner {
@@ -903,8 +906,9 @@ input.qtyminus {
 }
 
 .sectionnine {
-    margin: 0px auto;
+    margin: 20px auto;
     min-height: 800px;
+    clear: both;
 }
 
 .techpart {
@@ -962,8 +966,9 @@ input.qtyminus {
 }
 
 .sectionten {
-    margin: 0px auto;
+    margin: 20px auto;
     min-height: 800px;
+    clear: both;
 }
 
 .topicsect {
@@ -1158,8 +1163,9 @@ input.qtyminus {
 }
 
 .sectioneleven {
-    margin: 0px auto;
+    margin: 20px auto;
     min-height: 800px;
+    clear: both;    
 }
 
 .career {
@@ -1191,9 +1197,10 @@ input.qtyminus {
 }
 
 .sectiontwelve {
-    margin: 0px auto;
+    margin: 20px auto;
     padding-bottom: 20px;
     min-height: 800px;
+    clear: both;
 }
 
 .contact {
@@ -1254,8 +1261,9 @@ input.qtyminus {
 }
 
 .sectionthirteen {
-    margin: 0px auto;
+    margin: 20px auto;
     min-height: 800px;
+    clear: both;
 }
 
 .picandname {
