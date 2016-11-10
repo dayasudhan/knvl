@@ -171,7 +171,18 @@ app.post('/login', function(req, res, next) {
       if(req.body.role == 'customer')
       {
         //redirect_url = '/';
+
            console.log("success in login 1");
+
+        return CustomerInfoModel.find({ 'phone':req.body.email},function( err, customerInfo ) {
+            if( !err ) {
+                return res.send( customerInfo );
+            } else {
+                console.log( err );
+                return res.send('ERROR');
+            }
+        });
+
         return res.send("1"); 
       }
        else if(req.body.role == 'vendor') 
@@ -427,15 +438,13 @@ function registerCustomer(req, res, next) {
 
     cus_id = cus_id + data.sequence;
     console.log(cus_id);
-
       var customerInfo = new CustomerInfoModel({
         email:req.body.email2,
         id:cus_id,
         phone:req.body.email,
         name:req.body.name
-
-
       });
+
       customerInfo.save( function( err ) {
         if( !err ) {
               console.log( 'registerCustomer created' );
@@ -451,10 +460,67 @@ function registerCustomer(req, res, next) {
               } else {
                 console.log( 'registerCustomer error' );
                 console.log( err );
-                return response.send('ERROR');
+                return res.send('ERROR');
               }
         });
     });
+};
+app.get( '/v1/test/customer', function( req, res ) {
+                req.body.email2 = "dayasudhankggg@gmail.com";
+                req.body.email = "8798797798000";
+                req.body.name = "dayas";
+                registerCustomer2(req, res,null);
+
+});
+
+function registerCustomer2(req, res, next)
+{
+        console.log("/registerCustomer2");
+        var cus_id = "C";
+        var result = getNextSequence('customer',function(data) {
+
+          cus_id = cus_id + data.sequence;
+          console.log(cus_id);
+          return CustomerInfoModel.findOneAndUpdate({ 'phone':req.body.email},
+            {
+                  email:req.body.email2,
+                  name:req.body.name
+            },
+            function( err,customer ) {
+                if( !err ) {
+                    if(customer == null)
+                    {
+                        console.log( "empty" );
+                        var customer = new CustomerInfoModel({
+                                  email:req.body.email2,
+                                  id:cus_id,
+                                  phone:req.body.email,
+                                  name:req.body.name
+                        });
+                     
+                        console.log(req.body);
+                        customer.save( function( err ) {
+                            if( !err ) {
+                                console.log( 'created' );
+                                return res.send( customer );
+                            } else {
+                             console.log( 'error' );
+                                console.log( err );
+                                return res.send('ERROR');
+                            }
+                        });
+                    } 
+
+                    console.log("register2 ");
+                    console.log(customer);
+                    return  res.send(customer);
+            } else {
+                console.log( err );
+                return res.send('ERROR');
+            }
+        });
+
+  });
 };
 app.get( '/v1/admin/customer/all', function( request, response ) {
  
@@ -478,44 +544,22 @@ app.post( '/v1/customer/address/:id', function( request, response ) {
 //			return response.send("Not aunthiticated").status(403);
 //		}
 	  console.log(request.params.id);
+    var phoneNumber = parseInt(request.params.id);
+    console.log(phoneNumber);
 	
-//	  VendorInfoModel.update({ 'hotel.email':request.body.email},
-//		      {
-//		        uniqueid:request.body.uniqueid
-//		      },
 
-//	  VendorInfoModel.update({ 'phone':req.params.id},
-//	      {
-//	        //$set: { isOpen: isopen } 
-//		  	address:{addressLine1:request.body.Address1,addressLine2:request.body.Address2,
-//	          street:request.body.street, LandMark:request.body.Landmark, 
-//	          areaName:request.body.Areaname,city:request.body.City, zip:request.body.zip, 
-//	          latitude:request.body.latitude,longitude:request.body.longitude }
-//	      },
-//	      
-//	       function( err ) {
-//	        if( !err ) {
-//	            console.log( 'updated isopen created' );
-//	           
-//	            return res.send('created');;
-//	        } else {
-//			console.log( 'updated isopen error' );		 
-//		             console.log( err );		 
-//		             return res.send('ERROR');		 
-//		         }		
-//	    	     });	
-	    return CustomerInfoModel.update({ 'phone':request.params.id},
+	    return CustomerInfoModel.update({ 'phone':phoneNumber},
 	    	       { $addToSet: {addresses: {$each:
 	    	    	   [{label:request.body.label, 
-	    	    			addressLine1:request.body.address1,
-	    	    			addressLine2:request.body.address2,
-	    	    			street:request.body.street, 
-	    	    			LandMark:request.body.landmark, 
-	    	    			areaName:request.body.areaname,
-	    	    			city:request.body.city, 
-	    	    			zip:request.body.zip, 
-	    	    			latitude:request.body.latitude,
-	    	    			longitude:request.body.longitude }], }}},
+	    	    			addressLine1:request.body.address.addressLine1,
+	    	    			addressLine2:request.body.address.addressLine2,
+	    	    			street:request.body.address.street, 
+	    	    			LandMark:request.body.address.LandMark, 
+	    	    			areaName:request.body.address.areaname,
+	    	    			city:request.body.address.city, 
+	    	    			zip:request.body.address.zip, 
+	    	    			latitude:request.body.address.latitude,
+	    	    			longitude:request.body.address.longitude }], }}},
 	    	    	   function( err, order ) {
 				    	       if( !err ) {
 				    	           console.log("no error");
@@ -527,6 +571,7 @@ app.post( '/v1/customer/address/:id', function( request, response ) {
 				    	       }
 	    	    	   	});
 	 });
+
 app.get( '/v1/customer', function( request, response ) {
     console.log(request.user.local);
      console.log(request.user.local.email);
@@ -540,6 +585,19 @@ app.get( '/v1/customer', function( request, response ) {
         }
     });
  // });
+});
+app.get( '/v1/customer/phone/:id', function( request, response ) {
+    console.log(request.params.id);
+    
+     return CustomerInfoModel.find({ 'phone':request.params.id},function( err, customerInfo ) {
+        if( !err ) {
+            return response.send( customerInfo );
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+
 });
 
 app.post( '/v1/customer/:id', function( request, response ) {
@@ -805,10 +863,10 @@ app.post( '/v1/vendor/otp/register', function( req, res ) {
 
 });
 app.get( '/v1/vendor/otp/all', function( req, res ) {
-    console.log('/v1/vendor/otp/confirm');
-   	if(checkVendorApiAunthaticated(request,0) == false)
+    console.log('/v1/vendor/otp/all');
+   	if(checkVendorApiAunthaticated(req,0) == false)
 	{
-		return response.send("Not aunthiticated").status(403);
+		return res.send("Not aunthiticated").status(403);
 	}
     return OtpModel.find(function( err, otpInfo ) {
         if( !err ) {
@@ -821,10 +879,10 @@ app.get( '/v1/vendor/otp/all', function( req, res ) {
 });
 app.post( '/v1/vendor/otp/confirm', function( req, res ) {
     console.log('/v1/vendor/otp/confirm');
-    if(checkVendorApiAunthaticated(req,2) == false)
-	  {
-	 	 return res.send("Not aunthiticated").status(403);
-	  }
+   //  if(checkVendorApiAunthaticated(req,2) == false)
+	  // {
+	 	//  return res.send("Not aunthiticated").status(403);
+	  // }
     console.log(req.body.phoneNumber);
     console.log(req.body.otpText);
 
@@ -835,6 +893,9 @@ app.post( '/v1/vendor/otp/confirm', function( req, res ) {
             //console.log(otpInfo[0].otpnumber);
             if(otpInfo.otpnumber == req.body.otpText)
             {
+                req.body.email2 = req.body.email;
+                req.body.email = req.body.phoneNumber;
+                registerCustomer2(req, res,null);
                 return res.send("Success");
             }
             else if(otpInfo[0].otpnumber == req.body.otpText)
@@ -848,7 +909,7 @@ app.post( '/v1/vendor/otp/confirm', function( req, res ) {
         }
         else {
             console.log( err );
-            return response.send('ERROR');
+            return res.send('ERROR');
         }
     });
 });
