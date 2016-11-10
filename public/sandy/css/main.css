@@ -98,11 +98,14 @@ textarea {
 body {
     background: rgba(255, 255, 255, 0);
     font-family: 'Roboto', sans-serif;
-    /*font-family: 'Ubuntu Condensed', sans-serif;*/
+    font-family: 'Ubuntu Condensed', sans-serif;
     font-weight: normal;
     font-size: 16px;
     color: #161617;
     line-height: 1.4;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 
@@ -128,8 +131,9 @@ a, a:hover {
 
 
 .mains {
-    background: url("../img/story.jpg");
+    background: url("../img/JoladaRotti.jpg") repeat scroll 0 0;
     background-size: cover !important;
+    background-attachment: fixed !important;
     float: left;
     clear: both;
     width: 100%;
@@ -137,8 +141,8 @@ a, a:hover {
 
 .headup {
     width: 100%;
-    margin-top: 3%;
-/*    border: 1px solid black;*/
+    margin-top: 2%;
+    border-radius: 6px;
     float: left;
     clear: both;
 }
@@ -149,24 +153,25 @@ a, a:hover {
     margin: 5px auto;
     padding: 20px;
     text-align: center;
+    box-sizing: border-box;
 }
 
 .navigationbox {
     width: 100%;
-    margin: 10px auto;
+    margin: 5px auto;
     float: right;
 }
 
 .headone {
     width: 100%;
     margin: 0px auto;
-    padding: 15px;
+    padding: 10px;
     float: left;
     clear: both;
 } 
 
 .tracks {
-    float: none !important;
+    float: right;
     text-align: center;
 }
 
@@ -174,7 +179,7 @@ a, a:hover {
     list-style-type: none;
     padding: 12px;
     text-align: center !important;
-    left: 21em;
+    left: 0em;
 }
 
 .boxtrack ul li {
@@ -194,11 +199,12 @@ a, a:hover {
     padding: 15px;
     float: left;
     clear: both;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .menu {
-    list-style-type: none;
-    padding: 0px;
     float: right;
 }
 
@@ -206,32 +212,62 @@ a, a:hover {
     display: inline-block;
     padding: 0px 38px 0 38px;
     font-size: 16px;
-    text-align: center;
+    text-align: center;  
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
 }
 
 .menu li a {
     text-decoration: none;
-    color: darkblue;
-    font-size: 16px;
-}
-
-.menu li a:hover {
     color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    display: inline-block;
 }
 
-.log h3 {
-    font-size: 18px;
-    text-transform: capitalize;
-    word-spacing: 10px;
-    letter-spacing: 2px;
+.profedit a {
+    cursor: pointer;
+/*    background: url("../img/profile.png") no-repeat left center;*/
+}
+
+.profedit .profiledit {
+    min-width: 300px;
+    left: -16em;
+}
+
+.profedit .profiledit li {
+    padding: 10px;
+    display: block;
+}
+
+.profedit .profiledit li img {
+    margin: 20px auto;
+}
+
+.profedit .profiledit li p {
+    font-weight: 600;
+    color: dodgerblue;
+}
+
+.profedit .profiledit li p small {
+    font-weight: lighter;
+}
+
+.profiledit li:last-child .proone {
+    float: left;
+}
+
+.profedit .profiledit li:last-child .protwo {
+    float: right;
 }
 
 .log h2 {
     font-size: 20px;
     text-transform: capitalize;
-    word-spacing: 10px;
-    letter-spacing: 2px;
     text-align: center;
+    color: #232323;
+    font-family: 'Roboto', sans-serif;
 }
 
 .loglist li {
@@ -275,7 +311,7 @@ a, a:hover {
 }
 
 .sectionone {
-    margin: 0px auto;
+    margin: 20px auto;
     width: 100%;
 }
 
@@ -285,26 +321,52 @@ a, a:hover {
 }
 
 .khanaquotes h1 {
-    letter-spacing: 2px;
-    word-spacing: 5px;
+    color: #ffffff;
     margin-top: 15px;
+    text-shadow: 6px 6px 6px #000 ; 
 }
 
 .khanaquotes h1 span {
-    color: white;
+    color: #ffffff;
+    text-shadow: 6px 6px 6px #000 ; 
+}
+
+.khanaquotes h2 {
+    color: #ffffff;
+    margin-top: 15px;
+    text-shadow: 6px 6px 6px #000 ; 
+}
+
+.khanaquotes p {
+    color: #ffffff;
+    text-shadow: 6px 6px 6px #000 ; 
+}
+
+.khannaam {
+    margin: 10px auto;
+    padding: 15px;
+    background: orange;
+}
+
+.khannaam h2 {
+    margin-top: 15px;
 }
 
 .finderkeepers {
-    background-color: rgba(0, 191, 60, 0.6);
+    background-color: rgba(0, 0, 0, 0.6);
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 50px;
-    max-width: 800px;
-    min-height: 90px;
+    max-width: auto;
+/*    min-height: 90px;*/
     padding: 25px;
     border-radius: 10px;
+    width: 100%;
+    float: left;
+    clear: both;
 }
 
+/*
 .findernav {
     list-style-type: none;
     padding: 0px;
@@ -313,6 +375,7 @@ a, a:hover {
 .findernav li {
     float: left;
     padding: 0px 15px 0px 15px;
+    margin: 0px auto;
 }
 
 .selectouter {
@@ -342,7 +405,7 @@ a, a:hover {
     width: 100% !important;
     vertical-align: top;
     height: 34px;
-/*    display: inline-flex;*/
+    display: inline-flex;
     outline: medium mone;
 }
 
@@ -366,6 +429,33 @@ a, a:hover {
 .finds:hover {
     background: rgb(0, 0, 0);
     color: chartreuse;
+}
+*/
+
+.search-first {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: rgba(255, 255, 255, 1);
+    background-image: url("../img/arrow.png");
+    background-origin: padding-box;
+    background-position: 95% 50%, 0 0;
+    background-repeat: no-repeat;
+    background-size: 16px 10px;
+    padding: 0px 16px;
+}
+
+.search-second {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: rgba(255, 255, 255, 1);
+    background-image: url("../img/arrow.png");
+    background-origin: padding-box;
+    background-position: 95% 50%, 0 0;
+    background-repeat: no-repeat;
+    background-size: 16px 10px;
+    padding: 0px 16px;
 }
 
 /*
@@ -411,8 +501,9 @@ a, a:hover {
 */
 
 .sectionthree {
-    margin: 0px auto;
+    margin: 20px auto;
     min-height: 800px;
+    clear: both;
 }
 
 .gettoknow {
@@ -449,17 +540,26 @@ a, a:hover {
 }
 
 .sectionfour {
-    
+    margin: 0px auto;
+/*    min-height: 800px;*/
+    float: left;
+    width: 100%;
+    clear: both;
+    background: #ffffff;
 }
 
 .sectionfive {
     margin: 0px auto;
-    min-height: 800px;
+/*    min-height: 800px;*/
+    float: left;
+    width: 100%;
+    clear: both;
+    background: #ffffff;
 }
 
 .khaanagalu {
-    margin: 10px auto;
-    padding: 30px;
+/*    margin: 10px auto;*/
+    padding: 5px;
     width: 100%;
     float: left;
     clear: both;
@@ -473,9 +573,10 @@ a, a:hover {
 .hotelist li .wrapper {
     width: 100%;
     float: left;
-    max-height: 200px;
-    background: #C8F7C5;
-    border: 1px solid #000000;
+    max-height: 100px;
+/*    background: #C8F7C5;*/
+    border: 1px solid #F9690E;
+    border-radius: 5px;
     margin: 10px auto;
 }
 
@@ -483,6 +584,8 @@ a, a:hover {
     padding: 10px;
     text-align: center;
     float: left;
+    width: 120px;
+    height: 120px;
 }
 
 .hotelist li .wrapper .banner img {
@@ -495,9 +598,10 @@ a, a:hover {
     margin: 0px auto;
 }
 
-.hotelist li .wrapper .bandescription h2 {
+.hotelist li .wrapper .bandescription h4 {
     text-transform: capitalize;
     text-align: left;
+    color: #000000;
 }
 
 .hotelist li .wrapper .bandescription p {
@@ -505,12 +609,13 @@ a, a:hover {
     text-transform: capitalize;
     text-align: left;
     font-style: italic;
+    color: #000000;
 }
 
 .hotelist li .wrapper .bannen {
     padding: 10px;
     float: right;
-    height: 180px;
+    height: 120px;
 }
 
 .hotelist li .wrapper .bannen::before {
@@ -534,28 +639,50 @@ a, a:hover {
     padding-right: 30px;
 }
 
-.kmenu .khlist li h3 {
-    color: #019875 ; !important
+.kmenu .khlist li h5 {
+    color: #000000 ; !important
 }
 
 .sectionsix {
     margin: 0px auto;
-    min-height: 800px;
+/*    min-height: 800px;*/
+    float: left;
+    width: 100%;
+    clear: both;
+    background: #ffffff;
 }
 
 .menselect {
     margin: 20px auto;
     border: 1px solid green;
     padding: 10px;
+    overflow-x: auto;
 }
 
 .menselect table .tabcent {
     text-align: center;
 }
 
+.menselect table .tabbold {
+    text-align: center;
+    font-weight: 700;
+}
+
+.menselect .grand {
+    border: 1px solid #19B5FE;
+    text-align: center;
+    padding: 5px;
+    font-weight: 800;
+    color: #96281B;
+}
+
 .mencheck {
     margin: 20px auto;
     text-align: center;
+}
+
+.idetails {
+    overflow-x: auto;
 }
 
 .idetails h3 {
@@ -568,7 +695,42 @@ a, a:hover {
     color: #DB0A5B;
 }
 
+.idetails p {
+    font-size: 16px;
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
 .idetails .grand {
+    border: 1px solid #19B5FE;
+    text-align: center;
+    padding: 5px;
+    font-weight: 800;
+    color: #96281B;
+}
+
+.confirmdetails {
+    overflow-x: auto;
+}
+
+.confirmdetails h3 {
+    font-size: 18px;
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
+.confirmdetails h3 span {
+    color: #DB0A5B;
+}
+
+.confirmdetails p {
+    font-size: 18px;
+    text-transform: capitalize;
+    font-weight: 600;
+    text-align: left;
+}
+
+.confirmdetails .grand {
     border: 1px solid #19B5FE;
     text-align: center;
     padding: 5px;
@@ -625,8 +787,9 @@ a, a:hover {
 }
 
 .sectionseven {
-    margin: 0px auto;
+    margin: 20px auto;
     min-height: 800px;
+    clear: both;
 }
 
 .thank {
@@ -679,8 +842,9 @@ input.qtyminus {
 }
 
 .sectioneight {
-    margin: 0px auto;
+    margin: 20px auto;
     min-height: 800px;
+    clear: both;
 }
 
 .teambanner {
@@ -777,8 +941,9 @@ input.qtyminus {
 }
 
 .sectionnine {
-    margin: 0px auto;
+    margin: 20px auto;
     min-height: 800px;
+    clear: both;
 }
 
 .techpart {
@@ -836,8 +1001,9 @@ input.qtyminus {
 }
 
 .sectionten {
-    margin: 0px auto;
+    margin: 20px auto;
     min-height: 800px;
+    clear: both;
 }
 
 .topicsect {
@@ -1032,8 +1198,9 @@ input.qtyminus {
 }
 
 .sectioneleven {
-    margin: 0px auto;
+    margin: 20px auto;
     min-height: 800px;
+    clear: both;    
 }
 
 .career {
@@ -1065,9 +1232,10 @@ input.qtyminus {
 }
 
 .sectiontwelve {
-    margin: 0px auto;
+    margin: 20px auto;
     padding-bottom: 20px;
     min-height: 800px;
+    clear: both;
 }
 
 .contact {
@@ -1127,9 +1295,99 @@ input.qtyminus {
     clear: both;
 }
 
+.sectionthirteen {
+    margin: 20px auto;
+    min-height: 800px;
+    clear: both;
+}
+
+.picandname {
+    margin: 10px auto;
+    float: left;
+    width: 100%;
+    background : #ECF0F1;
+    -webkit-box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);
+    -moz-box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);
+    box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);
+    clear: both;
+}
+
+.userpicdetail {
+    margin: 10px auto;
+    padding: 20px;
+}
+
+.userpic {
+    float: left;
+    width: 80%;
+}
+
+.userpic img {
+    width: 100%; 
+}
+
+.userdetail {
+    margin: 10px auto;
+    padding: 20px;
+}
+
+.usernames {
+    float: left;
+    width: 80%;
+}
+
+.usernameslist li {
+    display: block;
+    margin-top: 15px;
+}
+
+.usernameslist li .inptne {
+    background: url("../img/profile.png") no-repeat left center;
+    padding-left: 40px;
+}
+
+.usernameslist li .inptnew {
+    background: url("../img/phone.png") no-repeat left center;
+    padding-left: 40px;
+}
+
+.usernameslist li .inptnews {
+    background: url("../img/mail.png") no-repeat left center;
+    padding-left: 40px;
+}
+
+.usernameslist li .inptnewd {
+    background: url("../img/map.png") no-repeat left center;
+    padding-left: 40px;
+}
+
+/*
+.usernameslist li .inpt {
+    background: url("../img/pwd.png") no-repeat left center;
+    padding-left: 40px;
+}
+
+.usernameslist li .inp {
+    background: url("../img/profile.png") no-repeat left center;
+    padding-left: 40px;
+}
+*/
+
+.edt {
+    float: right;
+    text-align: right;
+}
+ 
+.save {
+    margin: 30px auto;
+    text-align: center;
+    clear: both;
+    width: 100%;
+    float: left;
+}
 
 .footnotes {
-    margin: 0px auto;
+    margin: 12px auto;
     width: 100%;
     float: left;
     clear: both;
@@ -1163,18 +1421,17 @@ input.qtyminus {
 }
 
 @media only screen and (min-width: 320px) {
-    .menu li { display: block; padding: 0px 90px 0 90px; }
-    .tracklist { left: 4em; }
-    .findernav li { float: none; text-align: center; }
+    .tracks { float: none; }
+    .menu li { display: inline-block; padding: 0px 10px; }
+    .tracklist { left: 65px; }
+    .findernav li { float: none; text-align: center; margin: 10px 0px; }
     .selectouter { width: 100%; display: block;}
-/*
-    .timemenu li { width: 100%; border-right: none; }
-*/
+/*  .timemenu li { width: 100%; border-right: none; }*/
     .knowmenu li { display: block; width: 100%; }
     .footlist li { float: none; padding-right: 0px; }
     .hotelist li .wrapper { max-height: 100%; }
-    .hotelist li .wrapper .banner { float: none; }
-    .hotelist li .wrapper .bannen { height: auto; }
+    .hotelist li .wrapper .banner { float: none; width: 100%; height: auto; }
+/*  .hotelist li .wrapper .bannen { height: auto; }*/
     .qty { width: 15px; }
     input.qtyplus { width: 15px; }
     input.qtyminus { width: 15px; }
@@ -1184,109 +1441,140 @@ input.qtyminus {
 }
 
 @media only screen and (min-width: 360px) {
-    .menu li { display: block; padding: 0px 112px 0 112px; }
-    .tracklist { left: 6em; }
+    .tracks { float: none; }
+    .menu li { display: inline-block; padding: 0px 17px; }
+    .tracklist { left: 86px; }
     .footlist li { float: none; padding-right: 0px; }
     .qty { width: 15px; }
     input.qtyplus { width: 15px; }
     input.qtyminus { width: 15px; }
 }
 
+@media only screen and (min-width: 380px) {
+    .tracks { float: none; }
+    .menu li { display: inline-block; padding: 0px 20px; }
+    .tracklist { left: 100px; }
+    .footlist li { float: none; padding-right: 0px; }
+    .qty { width: 15px; }
+    input.qtyplus { width: 15px; }
+    input.qtyminus { width: 15px; }
+}
+
+@media only screen and (min-width: 400px) {
+    .tracks { float: none; }
+    .menu li { display: inline-block; padding: 0px 23px; }
+    .tracklist { left: 105px; }
+}
+
 @media only screen and (min-width: 420px) {
-    .menu li { display: block; padding: 0px 140px 0 140px; }
-    .tracklist { left: 8em; }
+    .tracks { float: none; }
+    .menu li { display: inline-block; padding: 0px 27px; }
+    .tracklist { left: 116px; }
     .footlist li { float: none; padding-right: 0px; }
     .qty { width: 25px; }
     input.qtyplus { width: 25px; }
     input.qtyminus { width: 25px; }
+    .hotelist li .wrapper { max-height: 100%; width: 100%; }
 }
 
 @media only screen and (min-width: 460px) {
-    .menu li { display: block; padding: 0px 160px 0 160px; }
-    .tracklist { left: 10em; }
+    .tracks { float: none; }
+    .menu li { display: inline-block; padding: 0px 33px; }
+    .tracklist { left: 136px; }
     .footlist li { float: none; padding-right: 0px; }
+}
+
+@media only screen and (min-width: 480px) {
+    .tracks { float: none; }
+    .menu li { display: inline-block; padding: 0px 37px; }
+    .tracklist { left: 145px; }
 }
 
 @media only screen and (min-width: 500px) {
-    .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 11em; }
+    .menu li { display: inline-block; padding: 0px 40px; }
+    .tracklist { left: 154px; }
     .footlist li { float: none; padding-right: 0px; }
     .teamli li { width: 49%; }
     .teamdesc { width: inherit; }
-    
+}
+
+@media only screen and (min-width: 600px) {
+    .menu li { display: inline-block; padding: 0px 57px; }
+    .tracklist { left: 204px; }
+    .footlist li { float: none; padding-right: 0px; }
+    .teamli li { width: 49%; }
+    .teamdesc { width: inherit; }
 }
 
 @media only screen and (min-width: 640px) {
-    .menu li { display: inline-block; padding: 0px 62px 0 62px; }
-    .tracklist { left: 16em; }
+    .menu li { display: inline-block; padding: 0px 63px; }
+    .tracklist { left: 225px; }
     .findernav li { float: left; }
     .selectouter { width: 11em; }
-/*   
-    .timemenu li { width: 24%; border-right: 2px solid white; }
-*/
+/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
     .footlist li { float: none; padding-right: 0px; }
     .teamli li { width: 32%; }
     .teamdesc { width: inherit; }
-    
 }
 
 @media only screen and (min-width: 767px) {
+    .tracks { float: right; }
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 20em; }
+    .tracklist { left: 0px; }
     .selectouter { width: 15em; }
-/*    .timemenu li { width: 24%; border-right: 2px solid white; }*/
+/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
     .knowmenu li { display: inline-block; width: 24%; }
     .footlist li { float: left; padding-right: 20px; }
-    .hotelist li .wrapper { max-height: 200px; }
-    .hotelist li .wrapper .banner { float: left; }
-    .hotelist li .wrapper .bannen { height: 180px; }
+    .hotelist li .wrapper { max-height: 120px; }
+    .hotelist li .wrapper .banner { float: left; width: 120px; height: 120px; }
+/*  .hotelist li .wrapper .bannen { height: 180px; }*/
     .techlist li { width: 49%; display: inline-block; margin-top: 6px; }
 }
 
 @media only screen and (min-width: 768px) {
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 20em; }
-/*    .timemenu li { width: 24%; border-right: 2px solid white; }*/
+    .tracklist { left: 0px; }
+/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
     .knowmenu li { display: inline-block; width: 24%; }
     .footlist li { float: left; padding-right: 20px; }
 }
 
 @media only screen and (min-width: 800px) {
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 20em; }
-/*    .timemenu li { width: 24%; border-right: 2px solid white; }*/
+    .tracklist { left: 0px; }
+/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
     .knowmenu li { display: inline-block; width: 24%; }
     .footlist li { float: left; }
 }
 
 @media only screen and (min-width: 920px) {
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 20em; }
-/*    .timemenu li { width: 24%; border-right: 2px solid white; }*/
+    .tracklist { left: 0em; }
+/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
     .knowmenu li { display: inline-block; width: 24%; }
     .footlist li { float: left; }
 }
 
 @media only screen and (min-width: 1024px) {
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 16em; }
+    .tracklist { left: 0em; }
     .knowmenu li { display: inline-block; width: 24%; }
     .footlist li { float: left; }
 }
 
 @media only screen and (min-width: 1200px) {
+    .tracks { float: right; }
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 21em; }
+    .tracklist { left: 0px; }
     .findernav li { float: left; }
     .selectouter { width: 17em; }
-/*    .timemenu li { width: 24%; border-right: 2px solid white; }*/
+/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
     .knowmenu li { display: inline-block; width: 19%; }
     .footlist li { float: left; }
     .teamli li { width: 33%; }
     .teamdesc { width: 500px; }
     .techlist li { width: 33%; display: inline-block; }
 }
-
 
 /* ==========================================================================
    Helper classes

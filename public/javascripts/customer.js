@@ -42,16 +42,28 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       login_body.role = "customer";
       console.log(login_body);
       var url = "/login";
-      $scope
+     
      
       $http.post(url, login_body,config)
         .success(function (data, status, headers)
         {
           console.log("Success in login post");
-           
-            console.log(data);
-            $scope.isLoggedIn = data;
+          console.log(data);
+          if(data  ==  0)
+              {
+            $scope.isLoggedIn = false;
+            $window.alert("Invalid Login");
+              }
+          else
+              {
+                  $scope.isLoggedIn = true;
+              }
             console.log($scope.isLoggedIn);
+//           if(data == 0)
+//               {
+//                    $window.alert("Invalid username and password ");
+//               }
+            
           
         })
         .error(function (data, status, headers)
@@ -82,7 +94,15 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
           console.log("Success in sign up post");
            
             console.log(data);
-           
+          if(data  ==  0)
+              {
+            $scope.isLoggedIn = false;
+              }
+          else
+              {
+                  $scope.isLoggedIn = true;
+              }
+            console.log($scope.isLoggedIn);
           
         })
         .error(function (data, status, headers)
@@ -125,6 +145,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       $http.get(url,config)
         .success(function (data, status, headers, config)
         {
+          
           $scope.hotellist = data;
         })
         .error(function (data, status, headers, config)
@@ -194,9 +215,16 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
         })
         return total;
     };
-
+    $scope.grandtotal = function() {
+        var total = 0;
+        angular.forEach($scope.hotel.menu, function(item) {
+            total += item.price * item.qty;
+        })
+        var grandtotal = total + $scope.hotel.deliverCharge;
+        return grandtotal;
+    };
     $scope.confirmOrder = function() {
-      if($scope.isLoggedIn)
+      if($scope.isLoggedIn === true)
       {
         console.log("loggedin proceed to order");
       }
@@ -271,7 +299,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
           $scope.showModal =false;
           $scope.isOrderPresent == false;
        }
-       else  if(!$scope.isLoggedIn)
+       else if($scope.isLoggedIn === false)
        {
           console.log("not loggedin ");
         
@@ -281,7 +309,8 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
        else
        {
         console.log("order function else");
-        $('#myModal').modal()
+        console.log($scope.isLoggedIn);
+        $('#myModal3').modal()
        }
        var totalCost = $scope.hotel.deliverCharge +  total_price;
         var ordarr = {

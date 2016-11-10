@@ -10,7 +10,7 @@
 	line-height:20px;
 	/*border: 1px solid #cccccc;*/
 	cursor: pointer;
-	color: #fff !important;
+	color: #000 !important;
 	font-family: "roboto_condensedregular";
 	text-indent:10px;
 	
@@ -21,10 +21,11 @@
 
 .active-header {
 	color:#fff;
-	background:url(../img/minus.png) #F39C12;
+	background:url(../img/minus1.png) #FFFFFF;
 	/*border-radius: 5px 5px 0 0;*/
 	background-repeat: no-repeat;
 	background-position: 98% 50%;
+    border: 1px solid black;
 }
 
 /*.active-header:hover {
@@ -34,10 +35,11 @@
 }
 */
 .inactive-header {
-	background:url(../img/plus.png) #F39C12;
+	background:url(../img/plus1.png) #FFFFFF;
 	background-repeat: no-repeat;
 	color:#fff;
 	background-position: 98% 50%;
+    border: 1px solid black;
 }
 
 /*.inactive-header:hover {
