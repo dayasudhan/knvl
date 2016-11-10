@@ -52,6 +52,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
           if(data  ==  0)
               {
             $scope.isLoggedIn = false;
+            $window.alert("Invalid Login");
               }
           else
               {
