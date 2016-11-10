@@ -182,7 +182,7 @@ app.post('/login', function(req, res, next) {
                 return res.send('ERROR');
             }
         });
-
+ 
         return res.send("1"); 
       }
        else if(req.body.role == 'vendor') 

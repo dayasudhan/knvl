@@ -226,6 +226,10 @@ a, a:hover {
     display: inline-block;
 }
 
+.applinks li {
+    display: inline-block;
+}
+
 .profedit a {
     cursor: pointer;
 /*    background: url("../img/profile.png") no-repeat left center;*/
@@ -1302,10 +1306,11 @@ input.qtyminus {
 }
 
 .picandname {
-    margin: 10px auto;
+    margin: 20px auto;
     float: left;
     width: 100%;
-    background : #ECF0F1;
+    background : #FFFFFF;
+    border: 1px solid #000000;
     -webkit-box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);
     -moz-box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);
     box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);

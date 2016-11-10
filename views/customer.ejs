@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="/sandy/css/w3.css">
     <link rel="stylesheet" href="/sandy/css/bootstrap.css">
     <link rel="stylesheet" href="/sandy/css/normalize.css">
     <link rel="stylesheet" href="/sandy/css/main.css">
@@ -191,17 +192,22 @@
                                         <nav>
                                             <ul class="menu">
                                                 <li> <a href="/" target="_parent" class="active">Home</a> </li>
-                                                <li> <a href="https://play.google.com/store/search?q=khaanavali&hl=en" target="_blank">Get Our App <span><img src="../public/sandy/img/androidlogo.png" alt="Icon"></span></a> </li>
+                                                <li>
+                                            <a href="https://play.google.com/store/search?q=khaanavali&hl=en" target="_blank">Get Our App <span><img src="../public/sandy/img/androidlogo.png" alt="Icon"></span></a> </li>
+                                        </li>       
+                                                    
+                                                    
                                                 <!--                                                <li> <a href="khaana.html" target="_blank">Khaanavali</a> </li>-->
+<!--                                                <li><img src="../public/sandy/img/gp.png"</li>-->
                                                 <li>
                                                     <!--<a href="/logout" ng-show="isLoggedIn" >Logout</a>--><a href="#" data-toggle="modal" data-target="#myModal" ng-show="!isLoggedIn">Login</a>
-                                                    <div class="dropdown profedit" data-toggle="modal" ng-show="isLoggedIn"> <a class="dropdown-toggle" data-toggle="dropdown">Sandeep</a>
+                                                    <div class="dropdown profedit" data-toggle="modal" ng-show="isLoggedIn"> <a class="dropdown-toggle" data-toggle="dropdown">{{profile.name}}</a>
                                                         <ul class="dropdown-menu profiledit">
                                                             <li> <img src="../public/sandy/img/ban.jpg" class="img-circle" alt="User Image">
-                                                                <p> Sandeep - Web Developer <small>Member since August. 2016</small> </p>
+                                                                <p> {{profile.name}} </p>
                                                             </li>
                                                             <li>
-                                                                <div class="proone"> <a href="/profile.html" target="_blank" class="btn btn-success btn-flat">Profile Edit</a> </div>
+                                                                <div class="proone"> <a ui-sref="profile" class="btn btn-success btn-flat">Profile Edit</a> </div>
                                                                 <div class="protwo"> <a href="/logout" ng-show="isLoggedIn" class="btn btn-warning btn-flat">Log out</a> </div>
                                                             </li>
                                                         </ul>
@@ -258,7 +264,7 @@
                                                                     <div class="form-group">
                                                                         <ul class="loglist">
                                                                             <li>
-                                                                                <input type="text" class="form-control inputne" ng-model="siginup_name" placeholder="Name"> </li>
+                                                                                <input type="text" class="form-control inputne" ng-model="signup_name" placeholder="Name"> </li>
                                                                             <li>
                                                                                 <input type="text" class="form-control inputnew" ng-model="signup_phone" placeholder="Mobile Number"> </li>
                                                                             <li>
@@ -300,10 +306,16 @@
                             </div>
                         </div>
         </header>
+        
+                
         <div>
-            <div ui-view></div>
+            <div ui-view>
+            
+            </div>
         </div>
+                    
         </div>
+        
         <!--
         <div class="sectionthree">
             <div class="container">

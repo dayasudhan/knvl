@@ -27,6 +27,11 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
             templateUrl: '../../views/customer_menu.ejs',
             controller: 'mainController'
         })
+        .state('profile', {
+            url: '/profile',
+            templateUrl: '../../views/customer_profile.ejs',
+            controller: 'mainController'
+        })
       });
   customerApp.controller('mainController', function ($rootScope,$scope, $http, jsonFilter,$window)
   {
@@ -47,8 +52,13 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       $http.post(url, login_body,config)
         .success(function (data, status, headers)
         {
-          console.log("Success in login post");
+          console.log("Success in login post 1");
           console.log(data);
+          console.log("Success in login post 2");
+          
+          $scope.profile = data[0];
+          console.log($scope.profile);
+          console.log($scope.profile.name);
           if(data  ==  0)
               {
             $scope.isLoggedIn = false;
