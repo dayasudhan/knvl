@@ -48,7 +48,6 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       console.log(login_body);
       var url = "/login";
      
-     
       $http.post(url, login_body,config)
         .success(function (data, status, headers)
         {
@@ -246,9 +245,8 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       }
       if($scope.isOrderPresent)
       {
-       
           $scope.postOrder($scope.orderSummary);
-      
+ //         $scope.postAddress($scope.orderSummary.address);
       }
     }
    $scope.phonenumber = function(inputtxt)  
@@ -336,6 +334,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
         };
         $scope.orderSummary = ordarr;
         $scope.total_price = total_price;
+        
 
     };
 
