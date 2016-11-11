@@ -481,7 +481,8 @@ function registerCustomer2(req, res, next)
 
           cus_id = cus_id + data.sequence;
           console.log(cus_id);
-          return CustomerInfoModel.findOneAndUpdate({ 'phone':req.body.email},
+          console.log(req.body);
+          return CustomerInfoModel.findOneAndUpdate({ 'phone':req.body.phonenumber},
             {
                   email:req.body.email2,
                   name:req.body.name
@@ -494,7 +495,7 @@ function registerCustomer2(req, res, next)
                         var customer = new CustomerInfoModel({
                                   email:req.body.email2,
                                   id:cus_id,
-                                  phone:req.body.email,
+                                  phone:req.body.phonenumber,
                                   name:req.body.name
                         });
                      
