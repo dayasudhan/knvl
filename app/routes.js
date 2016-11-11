@@ -460,7 +460,7 @@ function registerCustomer(req, res, next) {
 };
 app.get( '/v1/test/customer', function( req, res ) {
                 req.body.email2 = "dayasudhankggg@gmail.com";
-                req.body.email = "8798797798000";
+                req.body.email = "9987";
                 req.body.name = "dayas";
                 registerCustomer2(req, res,null);
 
@@ -495,21 +495,21 @@ function registerCustomer2(req, res, next)
                         customer.save( function( err ) {
                             if( !err ) {
                                 console.log( 'created' );
-                                return res.send( customer );
+                                next( customer );
                             } else {
                              console.log( 'error' );
                                 console.log( err );
-                                return res.send('ERROR');
+                                next(err);
                             }
                         });
                     } 
 
                     console.log("register2 ");
                     console.log(customer);
-                    return  res.send(customer);
+                    return  next(customer);
             } else {
                 console.log( err );
-                return res.send('ERROR');
+                return next('ERROR');
             }
         });
 
@@ -888,12 +888,18 @@ app.post( '/v1/vendor/otp/confirm', function( req, res ) {
             {
                 req.body.email2 = req.body.email;
                 req.body.email = req.body.phoneNumber;
-                registerCustomer2(req, res,null);
-                return res.send("Success");
+                registerCustomer2(req, res,function(data)
+                  {
+                     return res.send(data);
+                  });
+               
             }
             else if(otpInfo[0].otpnumber == req.body.otpText)
             {
-                return res.send("Success");
+                  registerCustomer2(req, res,function(data)
+                  {
+                     return res.send(data);
+                  });
             }
             else
             {
@@ -1893,7 +1899,12 @@ app.post( '/v1/vendor/menu', function( request, response ) {
    return response.send("Not aunthiticated").status(403);
   }
     return VendorInfoModel.update({ 'hotel.email':request.user.local.email},
-       { $addToSet: {menu: {$each:[{name: request.body.fooditem,  price:request.body.foodprice,availability:1,timings:request.body.timings}] }}},function( err, order ) {
+       { $addToSet: {menu: {$each:[{name: request.body.fooditem,  
+                                    price:request.body.foodprice,
+                                    availability:1,
+                                    description:request.body.description,
+                                    timings:request.body.timings}] }}},
+       function( err, order ) {
        if( !err ) {
            console.log("no error");
            console.log(order);
