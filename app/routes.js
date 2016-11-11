@@ -484,7 +484,7 @@ function registerCustomer2(req, res, next)
           console.log(req.body);
           return CustomerInfoModel.findOneAndUpdate({ 'phone':req.body.phonenumber},
             {
-                  email:req.body.email2,
+                  email:req.body.email,
                   name:req.body.name
             },
             function( err,customer ) {
@@ -493,7 +493,7 @@ function registerCustomer2(req, res, next)
                     {
                         console.log( "empty" );
                         var customer = new CustomerInfoModel({
-                                  email:req.body.email2,
+                                  email:req.body.email,
                                   id:cus_id,
                                   phone:req.body.phonenumber,
                                   name:req.body.name
@@ -894,8 +894,8 @@ app.post( '/v1/vendor/otp/confirm', function( req, res ) {
             //console.log(otpInfo[0].otpnumber);
             if(otpInfo.otpnumber == req.body.otpText)
             {
-                req.body.email2 = req.body.email;
-                req.body.email = req.body.phoneNumber;
+                // req.body.email2 = req.body.email;
+                // req.body.email = req.body.phoneNumber;
                 registerCustomer2(req, res,function(data)
                   {
                      return res.send(data);
