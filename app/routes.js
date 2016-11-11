@@ -81,7 +81,7 @@ app.get('/profile', isLoggedIn, function(req, res) {
 
 // LOGOUT ==============================
 app.get('/logout', function(req, res) {
-  
+  console.log('/logout');
   var redirect_url = '/';
     req.logout();
     res.redirect(redirect_url);
@@ -146,12 +146,15 @@ app.post('/login', function(req, res, next) {
       console.log(req.body);
   passport.authenticate('local-login', function(err, user, info) {
    
-    if (err) { return next(err); }
+    if (err) {
+         console.log("error in login 0");
+        return next(err); }
     if (!user) {
          var redirect_url = '/';
             if(req.body.role == 'customer')
             {
                 //redirect_url = '/signup';
+                console.log("error in login 1");
                  return res.send("0"); 
             }
             else if(req.body.role == 'vendor') 
@@ -168,6 +171,9 @@ app.post('/login', function(req, res, next) {
       if(req.body.role == 'customer')
       {
         //redirect_url = '/';
+
+           console.log("success in login 1");
+
         return CustomerInfoModel.find({ 'phone':req.body.email},function( err, customerInfo ) {
             if( !err ) {
                 return res.send( customerInfo );
@@ -176,6 +182,7 @@ app.post('/login', function(req, res, next) {
                 return res.send('ERROR');
             }
         });
+
         return res.send("1"); 
       }
        else if(req.body.role == 'vendor') 
