@@ -466,10 +466,13 @@ function registerCustomer(req, res, next) {
     });
 };
 app.get( '/v1/test/customer', function( req, res ) {
-                req.body.email2 = "dayasudhankggg@gmail.com";
-                req.body.email = "9987";
+                req.body.email = "dayasudhankggg@gmail.com";
+                req.body.phoneNumber = "9987";
                 req.body.name = "dayas";
-                registerCustomer2(req, res,null);
+                  registerCustomer2(req, res,function(data)
+                  {
+                     return res.send(data);
+                  });
 
 });
 
@@ -482,10 +485,13 @@ function registerCustomer2(req, res, next)
           cus_id = cus_id + data.sequence;
           console.log(cus_id);
           console.log(req.body);
-          return CustomerInfoModel.findOneAndUpdate({ 'phone':req.body.phonenumber},
+          console.log(req.body.phoneNumber);
+          var phoneNumber = parseInt(req.body.phoneNumber);
+          console.log(phoneNumber);
+          return CustomerInfoModel.findOneAndUpdate({ 'phone':phoneNumber},
             {
-                  email:req.body.email,
-                  name:req.body.name
+                  $set:{email:req.body.email,
+                  name:req.body.name}
             },
             function( err,customer ) {
                 if( !err ) {
