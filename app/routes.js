@@ -418,16 +418,22 @@ console.log(req.body);
         var redirect_url;
         if(req.body.role == 'customer')
         {
-          //redirect_url = '/';
-          registerCustomer(req, res, next);
-          return res.send("1"); 
+       
+          registerCustomer(req, res, function(data){
+            console.log("423")
+            console.log(data);
+           return  res.send(data);
+          });
         }
         else if(req.body.role == 'vendor') 
         {
           redirect_url = '/p/vendor_details';
           registerVendor(req, res, next);
         }
+        else
+        {
         return res.redirect(redirect_url);
+      }
       });
     })(req, res, next);
 });
@@ -452,11 +458,12 @@ function registerCustomer(req, res, next) {
                   req.session.save(function (err) {
                     if (err) {
                         console.log( 'registerCustomer save error' );
-                      return next(err);
+                       next(err);
                     }
                     console.log( 'registerCustomer save complete' );
                   });
-              return ;
+                  console.log( '463' );
+               next(customerInfo);
               } else {
                 console.log( 'registerCustomer error' );
                 console.log( err );
@@ -606,7 +613,28 @@ app.get( '/v1/customer/phone/:id', function( request, response ) {
     });
 
 });
-
+//Delete a menu item
+app.delete( '/v1/customer/address/:phone/:label', function( request, response ) {
+     console.log('delete checkVendorApiAunthaticated');
+     console.log(request.headers);
+    if(checkVendorApiAunthaticated(request,2) == false &&  request.isAuthenticated() == false)
+    {
+      return response.send("Not aunthiticated").status(403);
+    }
+     console.log(request.params.phone);
+      console.log(request.params.label);
+        return CustomerInfoModel.update( { 'phone':request.params.phone},
+          { $pull: {addresses: {"label": request.params.label }}},function( err ) {
+            if( !err ) {
+                console.log( 'address removed' );
+                return response.send( 'success' );
+            } else {
+                console.log( err );
+                return response.send('ERROR');
+            }
+        });
+    //});
+});
 app.post( '/v1/customer/:id', function( request, response ) {
 
 console.log(request.body);
