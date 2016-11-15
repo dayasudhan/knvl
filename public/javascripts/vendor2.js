@@ -147,7 +147,9 @@ $scope.trackerUpdateStatus = function(param1)
     //  url4 = url4 + param;
       var postData={fooditem:$scope.fooditem,
     		  foodprice:$scope.foodprice,
-       		  timings:$scope.timings};
+          description:$scope.fooddescription,
+          logo:$scope.foodItemlogo,
+       		timings:$scope.timings};
 
       $http.post(url4,postData)
         .success(function (data, status, headers, config)

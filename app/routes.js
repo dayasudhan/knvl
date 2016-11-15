@@ -1880,10 +1880,10 @@ app.get( '/v1/vendor/menu/:id', function( request, response ) {
   console.log(request.params.id);
   console.log(request.headers);
 
-  if(checkVendorApiAunthaticated(request,1) == false && request.isAuthenticated() == false)
-  {
-    return response.send("Not aunthiticated").status(403);
-  }
+  // if(checkVendorApiAunthaticated(request,1) == false && request.isAuthenticated() == false)
+  // {
+  //   return response.send("Not aunthiticated").status(403);
+  // }
      return VendorInfoModel.find({ 'hotel.email':request.params.id                               },
       function( err, vendorinfo ) {
         if( !err ) {
@@ -1917,6 +1917,7 @@ app.post( '/v1/vendor/menu', function( request, response ) {
                                     price:request.body.foodprice,
                                     availability:1,
                                     description:request.body.description,
+                                    logo:request.body.logo,
                                     timings:request.body.timings}] }}},
        function( err, order ) {
        if( !err ) {
