@@ -428,7 +428,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
     };
     $scope.addAddress = function (param) {
       console.log("addAddress");
-       console.log( $scope.fooditem);
+     
 
       var url4 = "/v1/customer/address/";
         url4 = url4 + $scope.profile.phone;
@@ -447,21 +447,64 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
                  longitude:$scope.longitude
        }
      }
-
       $http.post(url4,postData)
         .success(function (data, status, headers, config)
         {
            console.log("success add");
            console.log(data);
+          initprofile();
         })
         .error(function (data, status, headers, config)
         {
-           getMenuList(param);
           console.log("errod on add");
           console.log(status);
           console.log(data);
         });
     };
+      
+    $scope.deleteAddress = function (address) {
+      console.log("deleteAddress");
+     
+
+      var url4 = "/v1/customer/address/";
+         console.log(address);
+
+        url4 = url4 + $scope.profile.phone + "/" + address.label;
+        console.log(url4);
+
+      $http.delete(url4)
+        .success(function (data, status, headers, config)
+        {
+           console.log("success delete");
+           console.log(data);
+          initprofile();
+        })
+        .error(function (data, status, headers, config)
+        {
+          console.log("errod on delete");
+          console.log(status);
+          console.log(data);
+        });
+    };  
+     function initprofile()
+      {
+          var url = "/v1/customer/phone/";
+          url = url + $scope.profile.phone;
+          $http.get(url).success(function (data, status, headers)
+        {
+          console.log("Success in get");
+          console.log(data);
+         
+          
+          $scope.profile = data[0];
+          console.log($scope.profile);
+          console.log($scope.profile.name);
+        })
+        .error(function (data, status, headers)
+        {
+          console.log("ERROR in init get");
+        });
+      }
     function showPosition(position)
     {
       console.log("getCurrentAddress 3");
