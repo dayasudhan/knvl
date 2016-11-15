@@ -226,6 +226,14 @@ a, a:hover {
     display: inline-block;
 }
 
+.menu li img {
+    vertical-align: inherit; ! important
+}
+
+.applinks li {
+    display: inline-block;
+}
+
 .profedit a {
     cursor: pointer;
 /*    background: url("../img/profile.png") no-repeat left center;*/
@@ -1000,6 +1008,274 @@ input.qtyminus {
     background: none;
 }
 
+.addresspart {
+    margin: 0px auto;
+    padding: 10px;
+    float: left;
+    clear: both;
+}
+
+.addresslist li {
+    border: 1px solid #FFFFFF;
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    clear: both;
+    padding-right: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.addresslist li .addlist {
+    padding: 5px;
+}
+
+.addresslist li .addlistt {
+    padding: 5px;
+}
+
+.addresslist li .addlist {
+    background: #4183D7;
+    text-align: center;
+    width: 100%;
+    float: left;
+}
+
+.addresslist li .addlist h3 {
+    color: #ffffff;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.addresslist li .addlistt {
+    background: #2285B5;
+    text-align: center;
+    width: 100%;
+    float: left;
+}
+
+.addresslist li .addlistt .adddetails li {
+    display: block;
+    width: 100%;
+    border: 0 none; 
+    clear: both;
+    text-align: left;
+}
+
+.addresslist li .addlistt .adddetails li p {
+    color: #ffffff;
+    text-transform: capitalize;
+}
+
+.addresslist li .addlistt .adddetails li p span {
+    color: #ffffff;
+    font-weight: 500; !important
+    text-transform: capitalize;
+} 
+
+.deladdresspart {
+    margin: 0px auto;
+    padding: 10px;
+    float: left;
+    clear: both;
+}
+
+.deladdresslist li {
+    border: 1px solid #FFFFFF;
+    width: 33%;
+    display: inline-block;
+    vertical-align: top;
+    clear: both;
+    padding-right: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.deladdresslist li .deladdlist {
+    padding: 5px;
+}
+
+.deladdresslist li .deladdlistt {
+    padding: 5px;
+}
+
+.deladdresslist li .deladdlist {
+    background: #4183D7;
+    text-align: center;
+    width: 100%;
+    float: left;
+}
+
+.deladdresslist li .deladdlist h3 {
+    color: #ffffff;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.deladdresslist li .deladdlistt {
+    background: #2285B5;
+    text-align: center;
+    width: 100%;
+    float: left;
+}
+
+.deladdresslist li .deladdlistt .deladddetails li {
+    display: block;
+    width: 100%;
+    border: 0 none; 
+    clear: both;
+    text-align: left;
+}
+
+.deladdresslist li .deladdlistt .deladddetails li p {
+    color: #ffffff;
+    text-transform: capitalize;
+}
+
+.deladdresslist li .deladdlistt .deladddetails li p span {
+    color: #ffffff;
+    font-weight: 500; !important
+    text-transform: capitalize;
+}
+
+.deladdresspart {
+    margin: 0px auto;
+    padding: 10px;
+    float: left;
+    clear: both;
+}
+
+.deladdresslist li {
+    border: 1px solid #FFFFFF;
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    clear: both;
+    padding-right: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.deladdresslist li .deladdlist {
+    padding: 5px;
+}
+
+.deladdresslist li .deladdlistt {
+    padding: 5px;
+}
+
+.deladdresslist li .deladdlist {
+    background: #4183D7;
+    text-align: center;
+    width: 100%;
+    float: left;
+}
+
+.deladdresslist li .deladdlist h3 {
+    color: #ffffff;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.deladdresslist li .deladdlistt {
+    background: #2285B5;
+    text-align: center;
+    width: 100%;
+    float: left;
+}
+
+.deladdresslist li .deladdlistt .deladddetails li {
+    display: block;
+    width: 100%;
+    border: 0 none; 
+    clear: both;
+    text-align: left;
+}
+
+.deladdresslist li .deladdlistt .deladddetails li p {
+    color: #ffffff;
+    text-transform: capitalize;
+}
+
+.deladdresslist li .deladdlistt .deladddetails li p span {
+    color: #ffffff;
+    font-weight: 500; !important
+    text-transform: capitalize;
+} 
+
+.deladdresspart {
+    margin: 0px auto;
+    padding: 10px;
+    float: left;
+    clear: both;
+}
+
+.deladdresslist li {
+    border: 1px solid #FFFFFF;
+    width: 33%;
+    display: inline-block;
+    vertical-align: top;
+    clear: both;
+    padding-right: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.deladdresslist li .deladdlist {
+    padding: 5px;
+}
+
+.deladdresslist li .deladdlistt {
+    padding: 5px;
+}
+
+.deladdresslist li .deladdlist {
+    background: #4183D7;
+    text-align: center;
+    width: 100%;
+    float: left;
+}
+
+.deladdresslist li .deladdlist h3 {
+    color: #ffffff;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.deladdresslist li .deladdlistt {
+    background: #2285B5;
+    text-align: center;
+    width: 100%;
+    float: left;
+}
+
+.deladdresslist li .deladdlistt .deladddetails li {
+    display: block;
+    width: 100%;
+    border: 0 none; 
+    clear: both;
+    text-align: left;
+}
+
+.deladdresslist li .deladdlistt .deladddetails li p {
+    color: #ffffff;
+    text-transform: capitalize;
+}
+
+.deladdresslist li .deladdlistt .deladddetails li p span {
+    color: #ffffff;
+    font-weight: 500; !important
+    text-transform: capitalize;
+} 
+
+.marg {
+    margin:5px auto;
+}
+
 .sectionten {
     margin: 20px auto;
     min-height: 800px;
@@ -1302,10 +1578,11 @@ input.qtyminus {
 }
 
 .picandname {
-    margin: 10px auto;
+    margin: 20px auto;
     float: left;
     width: 100%;
-    background : #ECF0F1;
+    background : #FFFFFF;
+    border: 1px solid #000000;
     -webkit-box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);
     -moz-box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);
     box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);
@@ -1438,6 +1715,7 @@ input.qtyminus {
     .teamli li { width: 100%; }
     .teamdesc { width: inherit; }
     .techlist li { width: 100%; display: block; margin-top: 6px; }
+    .addresslist li { width: 100%; }
 }
 
 @media only screen and (min-width: 360px) {
@@ -1545,6 +1823,7 @@ input.qtyminus {
 /*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
     .knowmenu li { display: inline-block; width: 24%; }
     .footlist li { float: left; }
+    .addresslist li { width: 33%; }
 }
 
 @media only screen and (min-width: 920px) {

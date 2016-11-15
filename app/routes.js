@@ -182,7 +182,7 @@ app.post('/login', function(req, res, next) {
                 return res.send('ERROR');
             }
         });
-
+ 
         return res.send("1"); 
       }
        else if(req.body.role == 'vendor') 
@@ -544,7 +544,7 @@ app.get( '/v1/admin/customer/all', function( request, response ) {
 app.post( '/v1/customer/address/:id', function( request, response ) {
 	  console.log('/v1/customer/address/:id');
 	    console.log(request.headers);
-	    console.log("request.headers");
+	   // console.log("request.headers");
 	    console.log(request.body);
 //	   	if(checkVendorApiAunthaticated(request,1) == false)
 //		{

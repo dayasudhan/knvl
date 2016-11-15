@@ -1,0 +1,82 @@
+<div class="sectionthirteen">
+    <div class="container">
+        <div class="row picandname">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 userpicdetail pull-left">
+                <div class="userpic"> <img src="/sandy/img/four.jpg"> </div>
+                <div class="edt">
+                    <a href=""><img src="/sandy/img/edit.png"></a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 userdetail pull-right">
+                <div class="usernames">
+                    <ul class="usernameslist">
+                        <li>
+                            <input type="text" class="w3-input inptne" placeholder="Name" value="{{profile.name}}"> </li>
+                        <li>
+                            <input type="text" class="w3-input inptnew" placeholder="Phone" value="{{profile.phone}}"> </li>
+                        <li>
+                            <input type="text" class="w3-input inptnews" placeholder="Mail ID" value="{{profile.email}}"> </li>
+                    </ul>
+                </div>
+                <div class="edt">
+                    <a href=""><img src="/sandy/img/edit.png"></a>
+                </div>
+            </div>
+        </div>
+        <div class="row picandname">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 userdetail pull-right">
+                        <div class="addresspart">
+                    <ul class="addresslist">
+                        <li ng-repeat="address in profile.addresses">
+                            <div class="addlist">
+                                <h3>{{address.label}}</h3> </div>
+                            <div class="addlistt">
+                                <ul class="adddetails">
+                                    <li><p><span>Address Line 1 :</span> {{address.addressLine1}}</p></li>
+                                    <li><p><span>Address Line 2 :</span> {{address.addressLine2}}</p></li>
+                                    <li><p><span>Street         :</span> {{address.street}}</p></li>
+                                    <li><p><span>Landmark       :</span> {{address.Landmark}}</p></li>
+                                    <li><p><span>City           :</span> {{address.city}}</p></li>
+                                    <li><p><span>Zip            :</span> {{address.zip}}</p></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                        </div>
+
+                
+                <div class="edt">
+                    <a href=""><img src="/sandy/img/edit.png"></a>
+                </div>
+            </div>
+        </div>
+        <div class="row picandname">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 userdetail pull-right">
+                        <div class="usernames">
+                            <ul class="usernameslist">
+                                <li>
+                                    <input type="text" class="w3-input inptnewd" placeholder="Residential Address">
+                                </li>
+                                <li>
+                                    <input type="text" class="w3-input inptnewd" placeholder="Office Address">
+                                </li>
+                                <li>
+                                    <input type="text" class="w3-input inptnewd" placeholder="Delivery Address">
+                                </li>                                
+                            </ul>
+                        </div>
+                        <div class="edt">
+                            <a href=""><img src="/sandy/img/edit.png"></a>
+                        </div>
+                    </div>
+                </div>
+        <div class="row save">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 marg">
+                <button type="submit" class="btn btn-danger btn-lg">+ ADD ADDRESS</button>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 marg">
+                <button type="submit" class="btn btn-primary btn-lg">SAVE</button>
+            </div>
+        </div>
+    </div>
+</div>
