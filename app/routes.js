@@ -418,16 +418,22 @@ console.log(req.body);
         var redirect_url;
         if(req.body.role == 'customer')
         {
-          //redirect_url = '/';
-          registerCustomer(req, res, next);
-          return res.send("1"); 
+       
+          registerCustomer(req, res, function(data){
+            console.log("423")
+            console.log(data);
+           return  res.send(data);
+          });
         }
         else if(req.body.role == 'vendor') 
         {
           redirect_url = '/p/vendor_details';
           registerVendor(req, res, next);
         }
+        else
+        {
         return res.redirect(redirect_url);
+      }
       });
     })(req, res, next);
 });
@@ -452,11 +458,12 @@ function registerCustomer(req, res, next) {
                   req.session.save(function (err) {
                     if (err) {
                         console.log( 'registerCustomer save error' );
-                      return next(err);
+                       next(err);
                     }
                     console.log( 'registerCustomer save complete' );
                   });
-              return ;
+                  console.log( '463' );
+               next(customerInfo);
               } else {
                 console.log( 'registerCustomer error' );
                 console.log( err );

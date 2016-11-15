@@ -95,7 +95,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       signup_body.role = "customer";
       console.log(signup_body);
       var url = "/signup";
-      $scope
+      
      
       $http.post(url, signup_body,config)
         .success(function (data, status, headers)
@@ -103,6 +103,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
           console.log("Success in sign up post");
            
             console.log(data);
+             $scope.profile = data;
           if(data  ==  0)
               {
             $scope.isLoggedIn = false;
@@ -429,6 +430,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       console.log("addAddress");
        console.log( $scope.fooditem);
       var url4 = "/v1/customer/address";
+      url4 =  url4 + $scope.profile.phone;
 
       var postData={label:$scope.label,
         address:{addressLine1:$scope.addressLine1,
