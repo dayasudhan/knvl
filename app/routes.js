@@ -613,7 +613,7 @@ app.get( '/v1/customer/phone/:id', function( request, response ) {
     });
 
 });
-//Delete a menu item
+//Delete a custome address item
 app.delete( '/v1/customer/address/:phone/:label', function( request, response ) {
      console.log('delete checkVendorApiAunthaticated');
      console.log(request.headers);
@@ -635,6 +635,42 @@ app.delete( '/v1/customer/address/:phone/:label', function( request, response ) 
         });
     //});
 });
+
+
+//update a customer address
+app.patch( '/v1/customer/address/:phone/:label', function( request, response ) {
+     console.log('update /v1/customer/address/:phone/:label');
+
+  // if(checkVendorApiAunthaticated(request,2) == false)
+  // {
+  //   return response.send("Not aunthiticated").status(403);
+  // }
+  console.log(request.params.phone);
+  console.log(request.params.label);
+
+        return CustomerInfoModel.update( { 'phone':request.params.phone, 
+          "addresses.label":request.params.label},
+            { $set:{"addresses.$.addressLine1":request.body.address.addressLine1,
+                  "addresses.$.addressLine2":request.body.address.addressLine2,
+                  "addresses.$.street":request.body.address.street, 
+                  "addresses.$.LandMark":request.body.address.LandMark, 
+                  "addresses.$.areaName":request.body.address.areaname,
+                  "addresses.$.city":request.body.address.city, 
+                  "addresses.$.zip":request.body.address.zip, 
+                  "addresses.$.latitude":request.body.address.latitude,
+                  "addresses.$.longitude":request.body.address.longitude }},
+            function( err ) {
+            if( !err ) {
+                console.log( 'address custome updated ' );
+                return response.send( 'Success' );
+            } else {
+                console.log( err );
+                return response.send('ERROR');
+            }
+        });
+});
+
+
 app.post( '/v1/customer/:id', function( request, response ) {
 
 console.log(request.body);
