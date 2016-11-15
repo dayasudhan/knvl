@@ -1272,6 +1272,11 @@ input.qtyminus {
     text-transform: capitalize;
 } 
 
+.delete {
+    margin: 10px auto;
+    text-align: center;
+}
+
 .marg {
     margin:5px auto;
 }
@@ -1649,6 +1654,22 @@ input.qtyminus {
     padding-left: 40px;
 }
 */
+
+.adderslist {
+    float: left;
+    width: 100%;
+    clear: both;
+}
+
+.adderslist li {
+    display: block;
+    margin-top: 15px;
+}
+
+.adderslist li .adders {
+    background: url("../img/map.png") no-repeat left center;
+    padding-left: 40px;
+}
 
 .edt {
     float: right;

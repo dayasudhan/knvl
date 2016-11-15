@@ -428,8 +428,9 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
     $scope.addAddress = function (param) {
       console.log("addAddress");
        console.log( $scope.fooditem);
-      var url4 = "/v1/customer/address";
-
+      var url4 = "/v1/customer/address/";
+        url4 = url4 + $scope.profile.phone;
+        console.log(url4);
       var postData={label:$scope.label,
         address:{addressLine1:$scope.addressLine1,
                  addressLine2:$scope.addressLine2,
