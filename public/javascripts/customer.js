@@ -425,7 +425,38 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       }
 
     };
-    
+    $scope.addAddress = function (param) {
+      console.log("addAddress");
+       console.log( $scope.fooditem);
+      var url4 = "/v1/customer/address";
+
+      var postData={label:$scope.label,
+        address:{addressLine1:$scope.addressLine1,
+                 addressLine2:$scope.addressLine2,
+                 street:$scope.street,
+                 LandMark:$scope.LandMark,
+                 areaname :$scope.areaname,
+                 city:$scope.city,
+                 zip:$scope.zip,
+                 latitude:$scope.latitude,
+                 longitude:$scope.longitude
+       }
+     }
+
+      $http.post(url4,postData)
+        .success(function (data, status, headers, config)
+        {
+           console.log("success add");
+           console.log(data);
+        })
+        .error(function (data, status, headers, config)
+        {
+           getMenuList(param);
+          console.log("errod on add");
+          console.log(status);
+          console.log(data);
+        });
+    };
     function showPosition(position)
     {
       console.log("getCurrentAddress 3");
