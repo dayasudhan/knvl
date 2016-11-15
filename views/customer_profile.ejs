@@ -24,8 +24,8 @@
             </div>
         </div>
         <div class="row picandname">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 userdetail pull-right">
-                <div class="addresspart">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 userdetail pull-right">
+                        <div class="addresspart">
                     <ul class="addresslist">
                         <li ng-repeat="address in profile.addresses">
                             <div class="addlist">
@@ -42,15 +42,40 @@
                             </div>
                         </li>
                     </ul>
-                </div>
+                        </div>
+
+                
                 <div class="edt">
                     <a href=""><img src="/sandy/img/edit.png"></a>
                 </div>
             </div>
         </div>
+        <div class="row picandname">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 userdetail pull-right">
+                        <div class="usernames">
+                            <ul class="usernameslist">
+                                <li>
+                                    <input type="text" class="w3-input inptnewd" placeholder="Residential Address">
+                                </li>
+                                <li>
+                                    <input type="text" class="w3-input inptnewd" placeholder="Office Address">
+                                </li>
+                                <li>
+                                    <input type="text" class="w3-input inptnewd" placeholder="Delivery Address">
+                                </li>                                
+                            </ul>
+                        </div>
+                        <div class="edt">
+                            <a href=""><img src="/sandy/img/edit.png"></a>
+                        </div>
+                    </div>
+                </div>
         <div class="row save">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <button type="submit" class="btn btn-success btn-lg">SAVE</button>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 marg">
+                <button type="submit" class="btn btn-danger btn-lg">+ ADD ADDRESS</button>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 marg">
+                <button type="submit" class="btn btn-primary btn-lg">SAVE</button>
             </div>
         </div>
     </div>

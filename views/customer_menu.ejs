@@ -171,9 +171,36 @@
                                 </table>
                                 <h3 class="grand">GRAND TOTAL <span>is</span> &#8377; {{ grandtotal() }} </h3> </div>
                         </div>
-                        <div class="modal-body idetails">
+                        
+
+                                <div class="modal-body idetails">
                             <div>
                                 <h3>DELIVERY ADDRESS</h3>
+                                <div class="deladdresspart">
+                    <ul class="deladdresslist">
+                        <li ng-repeat="address in profile.addresses">
+                            <div class="deladdlist">
+                                <h3><input type="checkbox"> {{address.label}} </h3> </div>
+                            <div class="deladdlistt">
+                                <ul class="deladddetails">
+                                    <li><p><span>Address Line 1 :</span> {{address.addressLine1}}</p></li>
+                                    <li><p><span>Address Line 2 :</span> {{address.addressLine2}}</p></li>
+                                    <li><p><span>Street         :</span> {{address.street}}</p></li>
+                                    <li><p><span>Landmark       :</span> {{address.Landmark}}</p></li>
+                                    <li><p><span>City           :</span> {{address.city}}</p></li>
+                                    <li><p><span>Zip            :</span> {{address.zip}}</p></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                            </div>
+                            </div>
+                        <div> OR </div>
+                        
+                        <div class="modal-body idetails">
+                            <div>
+<!--                                <h3>DELIVERY ADDRESS</h3>-->
                                 <div class="form-group">
                                     <ul class="mordlist">
                                         <li>
@@ -188,21 +215,31 @@
                                             <input type="text" class="form-control" name="inputareaName" ng-model="areaName" placeholder="Enter AreaName" ng-trim="false" required> </li>
                                         <li>
                                             <input type="text" class="form-control" id="inputlocality" ng-model="landmark" placeholder="Enter Locality/Landmark" required> </li>
+<!--
                                         <li>
                                                                         OR
                                                                     </li>
                                         <li>
                                                                         <div class="checkbox">
-                                                                            <label><input type="checkbox" value="{{profile.address}}">Saved Address</label>
+                                                                            <ul class="checklist">
+                                                                                <li ng-repeat="address in profile.addresses"><label><input type="checkbox" value="{{profile.address}}">Saved Address ( {{address.label}} )</label></li>
+                                                                                <li><label><input type="checkbox" value="{{profile.address}}">Saved Address ( {{address.label}} )</label></li>
+                                                                                <li><label><input type="checkbox" value="{{profile.address}}">Saved Address ( {{address.label}} )</label></li>
+                                                                            </ul>
+                                                                            
                                                                         </div>
                                                                     </li>
+-->
                                     </ul>
                                 </div>
-                            </div>
-                            <div>
+</div>
+</div>
+                        <div class="idetails">
                                 <h3><span>PAYMENT</span> is only <i>CASH ON DELIVERY.</i></h3> </div>
-                        </div>
+                        
                         <div class="modal-footer">
+                            
+                        
                             <a href="">
                                 <button type="button" class="btn btn-danger" data-target="#myModal3" data-dismiss="modal" ng-click="order()" ng-disabled="myForm.$invalid || {{showModal ==false}}">ORDER</button>
                             </a>

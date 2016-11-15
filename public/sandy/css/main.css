@@ -1017,7 +1017,7 @@ input.qtyminus {
 
 .addresslist li {
     border: 1px solid #FFFFFF;
-    width: 33%;
+    width: 50%;
     display: inline-block;
     vertical-align: top;
     clear: both;
@@ -1073,6 +1073,208 @@ input.qtyminus {
     font-weight: 500; !important
     text-transform: capitalize;
 } 
+
+.deladdresspart {
+    margin: 0px auto;
+    padding: 10px;
+    float: left;
+    clear: both;
+}
+
+.deladdresslist li {
+    border: 1px solid #FFFFFF;
+    width: 33%;
+    display: inline-block;
+    vertical-align: top;
+    clear: both;
+    padding-right: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.deladdresslist li .deladdlist {
+    padding: 5px;
+}
+
+.deladdresslist li .deladdlistt {
+    padding: 5px;
+}
+
+.deladdresslist li .deladdlist {
+    background: #4183D7;
+    text-align: center;
+    width: 100%;
+    float: left;
+}
+
+.deladdresslist li .deladdlist h3 {
+    color: #ffffff;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.deladdresslist li .deladdlistt {
+    background: #2285B5;
+    text-align: center;
+    width: 100%;
+    float: left;
+}
+
+.deladdresslist li .deladdlistt .deladddetails li {
+    display: block;
+    width: 100%;
+    border: 0 none; 
+    clear: both;
+    text-align: left;
+}
+
+.deladdresslist li .deladdlistt .deladddetails li p {
+    color: #ffffff;
+    text-transform: capitalize;
+}
+
+.deladdresslist li .deladdlistt .deladddetails li p span {
+    color: #ffffff;
+    font-weight: 500; !important
+    text-transform: capitalize;
+}
+
+.deladdresspart {
+    margin: 0px auto;
+    padding: 10px;
+    float: left;
+    clear: both;
+}
+
+.deladdresslist li {
+    border: 1px solid #FFFFFF;
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    clear: both;
+    padding-right: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.deladdresslist li .deladdlist {
+    padding: 5px;
+}
+
+.deladdresslist li .deladdlistt {
+    padding: 5px;
+}
+
+.deladdresslist li .deladdlist {
+    background: #4183D7;
+    text-align: center;
+    width: 100%;
+    float: left;
+}
+
+.deladdresslist li .deladdlist h3 {
+    color: #ffffff;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.deladdresslist li .deladdlistt {
+    background: #2285B5;
+    text-align: center;
+    width: 100%;
+    float: left;
+}
+
+.deladdresslist li .deladdlistt .deladddetails li {
+    display: block;
+    width: 100%;
+    border: 0 none; 
+    clear: both;
+    text-align: left;
+}
+
+.deladdresslist li .deladdlistt .deladddetails li p {
+    color: #ffffff;
+    text-transform: capitalize;
+}
+
+.deladdresslist li .deladdlistt .deladddetails li p span {
+    color: #ffffff;
+    font-weight: 500; !important
+    text-transform: capitalize;
+} 
+
+.deladdresspart {
+    margin: 0px auto;
+    padding: 10px;
+    float: left;
+    clear: both;
+}
+
+.deladdresslist li {
+    border: 1px solid #FFFFFF;
+    width: 33%;
+    display: inline-block;
+    vertical-align: top;
+    clear: both;
+    padding-right: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.deladdresslist li .deladdlist {
+    padding: 5px;
+}
+
+.deladdresslist li .deladdlistt {
+    padding: 5px;
+}
+
+.deladdresslist li .deladdlist {
+    background: #4183D7;
+    text-align: center;
+    width: 100%;
+    float: left;
+}
+
+.deladdresslist li .deladdlist h3 {
+    color: #ffffff;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.deladdresslist li .deladdlistt {
+    background: #2285B5;
+    text-align: center;
+    width: 100%;
+    float: left;
+}
+
+.deladdresslist li .deladdlistt .deladddetails li {
+    display: block;
+    width: 100%;
+    border: 0 none; 
+    clear: both;
+    text-align: left;
+}
+
+.deladdresslist li .deladdlistt .deladddetails li p {
+    color: #ffffff;
+    text-transform: capitalize;
+}
+
+.deladdresslist li .deladdlistt .deladddetails li p span {
+    color: #ffffff;
+    font-weight: 500; !important
+    text-transform: capitalize;
+} 
+
+.marg {
+    margin:5px auto;
+}
 
 .sectionten {
     margin: 20px auto;
