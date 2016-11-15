@@ -613,7 +613,28 @@ app.get( '/v1/customer/phone/:id', function( request, response ) {
     });
 
 });
-
+//Delete a menu item
+app.delete( '/v1/customer/address/:phone/:label', function( request, response ) {
+     console.log('delete checkVendorApiAunthaticated');
+     console.log(request.headers);
+    if(checkVendorApiAunthaticated(request,2) == false &&  request.isAuthenticated() == false)
+    {
+      return response.send("Not aunthiticated").status(403);
+    }
+     console.log(request.params.phone);
+      console.log(request.params.label);
+        return CustomerInfoModel.update( { 'phone':request.params.phone},
+          { $pull: {addresses: {"label": request.params.label }}},function( err ) {
+            if( !err ) {
+                console.log( 'address removed' );
+                return response.send( 'success' );
+            } else {
+                console.log( err );
+                return response.send('ERROR');
+            }
+        });
+    //});
+});
 app.post( '/v1/customer/:id', function( request, response ) {
 
 console.log(request.body);
