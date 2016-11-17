@@ -1032,6 +1032,20 @@ input.qtyminus {
     clear: both;
 }
 
+.teamabout {
+    width: 100%;
+    float: left;
+    clear: both;
+    padding: 6px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #3A539B;
+    margin: 10px auto;
+    border-radius: 6px;
+}
+
 .teambanner {
     padding: 20px;
     clear: both;
@@ -1051,12 +1065,14 @@ input.qtyminus {
 
 .aboutkhaana h3 {
     text-align: center;
-    font-weight: 500;
+    font-weight: 700;
+    background: url('../img/underline.png') no-repeat scroll center 28px;
+    padding-bottom: 20px;
 }
 
 .aboutkhaana p {
     font-weight: normal;
-    font-size: 14px;
+    font-size: 18px;
     text-align: center;
 }
 
@@ -1067,24 +1083,27 @@ input.qtyminus {
 
 .aboutus h3 {
     text-align: center;
-    font-weight: 500;
+    font-weight: 700;
     margin: 0px auto;
+    background: url('../img/underlines.png') no-repeat scroll center 28px;
+    padding-bottom: 20px;
 }
 
 .aboutus p {
     font-weight: normal;
-    font-size: 14px;
+    font-size: 18px;
     text-align: center;
 }
 
 .teamimg {
-    margin: 0px auto;
+    margin: 10px auto;
 }
 
 .teamimg .teamcolor {
     color: #049372;
-    font-size: 16px;
+    font-size: 20px;
     text-align: center;
+    text-shadow: 5px 5px 5px #049372;
 }
 
 .teamlists {
@@ -1107,12 +1126,17 @@ input.qtyminus {
 
 .teamli li h5 {
     text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 5px auto;
+    text-shadow: 3px 3px 3px #000000;
 }
 
 .teamli li p {
     color: #049372;
     font-size: 14px;
     text-align: center;
+    margin: 0px auto;
 }
 
 .teamdesc {
@@ -1410,6 +1434,11 @@ input.qtyminus {
     margin: 20px auto;
 }
 
+.carbody p {
+    font-size: 16px;
+    font-family: 'Ubuntu Condensed', sans-serif; 
+}
+
 .cartail {
     margin: 10px auto;
 }
@@ -1426,18 +1455,35 @@ input.qtyminus {
 }
 
 .contact {
-    margin: 0px auto;
-    padding: 20px;
+    margin: 30px auto;
+    background: url("../img/leaf.jpg") no-repeat;
+    float: left;
+    clear: both;
+    width: 100%;
+/*
+    padding-top: 3px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+*/
+}
+
+.contact h4 {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 600;
 }
 
 .addlist li h5 {
     margin-left: 45px;
-    padding-top: 3px;
+    padding: 10px;
 }
 
 .addlist li img {
     float: left;
     margin: 0px auto;
+    padding-left: 5px;
 }
 
 .social {
@@ -1474,12 +1520,17 @@ input.qtyminus {
 #s7 { background-position:-246px -57px; }
 
 .maps {
-    margin: 0px auto;
-    padding: 10px;
+    margin: 30px auto;
     width: 100%;
-    height: auto;
     float: left;
     clear: both;
+/*
+    padding: 5px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+*/
 }
 
 .sectionthirteen {
@@ -1660,6 +1711,58 @@ input.qtyminus {
 
 .addmargin {
     margin: 5px auto;
+}
+
+.sectionfourteen {
+    margin: 20px auto;
+    min-height: 800px;
+    clear: both;
+}
+
+.privacy {
+    margin: 10px auto;
+}
+
+.privacy h2 {
+    font-weight: 500;
+    color: #26C281;
+    border-bottom: 2px solid #26C281;
+}
+
+.privacy h4 {
+    font-weight: 600;
+    color: #3A539B;
+}
+
+.privacy .para {
+   font-weight: 500;
+   font-size: 18px;  
+}
+
+.privacy .para a {
+   font-weight: 500;
+   font-size: 18px;
+}
+
+.sectionfifteen {
+    margin: 20px auto;
+    min-height: 800px;
+    clear: both;
+}
+
+.terms{
+    margin: 10px auto;
+}
+
+.terms h2 {
+    font-weight: 500;
+    color: #26C281;
+    border-bottom: 2px solid #26C281;
+}
+
+.terms h4 {
+    font-weight: 600;
+    color: #3A539B;
 }
 
 .footnotes {
