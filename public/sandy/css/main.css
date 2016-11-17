@@ -97,7 +97,6 @@ textarea {
 
 body {
     background: rgba(255, 255, 255, 0);
-    font-family: 'Roboto', sans-serif;
     font-family: 'Ubuntu Condensed', sans-serif;
     font-weight: normal;
     font-size: 16px;
@@ -105,9 +104,9 @@ body {
     line-height: 1.4;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
     box-sizing: border-box;
 }
-
 
 *, *::before, *::after {
     border: 0 none;
@@ -131,7 +130,7 @@ a, a:hover {
 
 
 .mains {
-    background: url("../img/JoladaRotti.jpg") repeat scroll 0 0;
+    background: url("../img/thisisit.jpg") no-repeat scroll 0 0;
     background-size: cover !important;
     background-attachment: fixed !important;
     float: left;
@@ -193,6 +192,17 @@ a, a:hover {
     width: 10em;
 }
 
+.trackbacks h4 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.trackback h4 {
+    color: darkgoldenrod;
+    font-size: 16px;
+    font-weight: 600;
+}
+
 .headtwo {
     width: 100%;
     margin: 0px auto;
@@ -201,6 +211,7 @@ a, a:hover {
     clear: both;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -211,11 +222,7 @@ a, a:hover {
 .menu li {
     display: inline-block;
     padding: 0px 38px 0 38px;
-    font-size: 16px;
     text-align: center;  
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: 600;
 }
 
 .menu li a {
@@ -226,13 +233,21 @@ a, a:hover {
     display: inline-block;
 }
 
-.menu li img {
-    vertical-align: inherit; ! important
+.menu li a:hover {
+    color: #F39C12;
 }
 
+.menu li a span::after {
+    content: "" ;
+    background: url('../img/newandroid.png') no-repeat;
+    padding-left: 22px;
+}
+
+/*
 .applinks li {
     display: inline-block;
 }
+*/
 
 .profedit a {
     cursor: pointer;
@@ -274,8 +289,7 @@ a, a:hover {
     font-size: 20px;
     text-transform: capitalize;
     text-align: center;
-    color: #232323;
-    font-family: 'Roboto', sans-serif;
+    color: #161617;
 }
 
 .loglist li {
@@ -284,33 +298,38 @@ a, a:hover {
     width: 100%;
 }
 
-.loglist li .inputne {
-    background: url("../img/profile.png") no-repeat left center;
+.loglist li .inputname {
+    background: url("../img/name.png") no-repeat 0px center;
     padding-left: 40px;
 }
 
-.loglist li .inputnew {
-    background: url("../img/phone.png") no-repeat left center;
+.loglist li .inputphone {
+    background: url("../img/phone.png") no-repeat 0px center;
     padding-left: 40px;
 }
 
-.loglist li .inputnews {
-    background: url("../img/mail.png") no-repeat left center;
+.loglist li .inputmail {
+    background: url("../img/mail.png") no-repeat 0px center;
     padding-left: 40px;
 }
 
-.loglist li .inputnewd {
-    background: url("../img/pwd.png") no-repeat left center;
+.loglist li .inputpwd {
+    background: url("../img/pwd.png") no-repeat 0px center;
     padding-left: 40px;
 }
 
-.loglist li .lone {
-    color: #E08283; !important
+.loglist li .inputcpwd {
+    background: url("../img/cpwd.png") no-repeat 0px center;
+    padding-left: 40px;
+}
+
+.loglist li .forgot {
+    color: #E08283; 
     text-align: center;
 }
 
-.loglist li .lone:hover {
-    color: red; !important
+.loglist li .forgot:hover {
+    color: #D24D57; 
 }
 
 .loglist li .alone {
@@ -321,6 +340,10 @@ a, a:hover {
 .sectionone {
     margin: 20px auto;
     width: 100%;
+/*
+    float: left;
+    clear: both;
+*/
 }
 
 .khanaquotes {
@@ -330,34 +353,32 @@ a, a:hover {
 
 .khanaquotes h1 {
     color: #ffffff;
+    font-size: 40px;
     margin-top: 15px;
     text-shadow: 6px 6px 6px #000 ; 
 }
 
-.khanaquotes h1 span {
-    color: #ffffff;
-    text-shadow: 6px 6px 6px #000 ; 
+.khanaquotes h1 span:first-of-type {
+    color: #F5AB35;
+    text-shadow: 3px 3px 3px #000 ; 
+}
+
+.khanaquotes h1 span:last-of-type {
+    color: #CF000F;
+    text-shadow: 3px 3px 3px #000 ; 
 }
 
 .khanaquotes h2 {
     color: #ffffff;
+    font-size: 30px;
     margin-top: 15px;
     text-shadow: 6px 6px 6px #000 ; 
 }
 
 .khanaquotes p {
     color: #ffffff;
+    font-size: 20px;
     text-shadow: 6px 6px 6px #000 ; 
-}
-
-.khannaam {
-    margin: 10px auto;
-    padding: 15px;
-    background: orange;
-}
-
-.khannaam h2 {
-    margin-top: 15px;
 }
 
 .finderkeepers {
@@ -367,8 +388,8 @@ a, a:hover {
     margin-bottom: 50px;
     max-width: auto;
 /*    min-height: 90px;*/
-    padding: 25px;
-    border-radius: 10px;
+    padding: 30px;
+    border-radius: 80px;
     width: 100%;
     float: left;
     clear: both;
@@ -391,6 +412,10 @@ a, a:hover {
     overflow: hidden;
     padding: 2px;
     width: 17em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .fordonate {
@@ -443,6 +468,7 @@ a, a:hover {
 .search-first {
     -webkit-appearance: none;
     -moz-appearance: none;
+    -o-appearance: none;
     appearance: none;
     background-color: rgba(255, 255, 255, 1);
     background-image: url("../img/arrow.png");
@@ -456,6 +482,7 @@ a, a:hover {
 .search-second {
     -webkit-appearance: none;
     -moz-appearance: none;
+    -o-appearance: none;
     appearance: none;
     background-color: rgba(255, 255, 255, 1);
     background-image: url("../img/arrow.png");
@@ -521,6 +548,10 @@ a, a:hover {
     float: left;
     clear: both;
     border: 1px solid dodgerblue;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
 /*
     background: rgba(0, 0, 0, 0.3);
 */
@@ -531,12 +562,15 @@ a, a:hover {
     padding: 10px;
     background: ;
     display: inline-block;
-    text-align: center; 
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .knowmenu li a {
     margin-top: 5px;
-    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     color: #161617;
 }
@@ -571,6 +605,10 @@ a, a:hover {
     width: 100%;
     float: left;
     clear: both;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .hotelist li {
@@ -586,6 +624,7 @@ a, a:hover {
     border: 1px solid #F9690E;
     border-radius: 5px;
     margin: 10px auto;
+    background: url("../img/this.jpg") no-repeat scroll 0 0;
 }
 
 .hotelist li .wrapper .banner {
@@ -594,6 +633,10 @@ a, a:hover {
     float: left;
     width: 120px;
     height: 120px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .hotelist li .wrapper .banner img {
@@ -609,7 +652,9 @@ a, a:hover {
 .hotelist li .wrapper .bandescription h4 {
     text-transform: capitalize;
     text-align: left;
-    color: #000000;
+    color: #FFFFFF;
+    font-size: 26px;
+    text-shadow: 6px 6px 6px #000 ;
 }
 
 .hotelist li .wrapper .bandescription p {
@@ -624,6 +669,10 @@ a, a:hover {
     padding: 10px;
     float: right;
     height: 120px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .hotelist li .wrapper .bannen::before {
@@ -648,7 +697,9 @@ a, a:hover {
 }
 
 .kmenu .khlist li h5 {
-    color: #000000 ; !important
+    color: #000000 ;
+    font-size: 16px;
+    margin: 0px auto;
 }
 
 .sectionsix {
@@ -658,6 +709,50 @@ a, a:hover {
     width: 100%;
     clear: both;
     background: #ffffff;
+}
+
+.khannaam {
+    margin: 10px auto;
+    padding: 15px;
+    background: url("../img/this.jpg") no-repeat scroll 0 0;
+}
+
+.khannaam h2 {
+    margin-top: 15px;
+    text-transform: capitalize;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 26px;
+    text-shadow: 6px 6px 6px #000 ;
+}
+
+.khannaam p {
+    font-size: 16px;
+    text-transform: capitalize;
+    text-align: center;
+    font-style: italic;
+    color: #000000;
+}
+
+.khannaammenu {
+    margin: 0px auto;
+    width: 100%;
+    text-align: right;
+}
+
+.khannaamlist {
+    text-align: left;
+}
+
+.khannaamlist li {
+    display: inline-block;
+    padding-right: 30px;
+}
+
+.khannaamlist li h5 {
+    color: #000000 ;
+    font-size: 16px;
+    margin: 0px auto;
 }
 
 .menselect {
@@ -715,6 +810,83 @@ a, a:hover {
     padding: 5px;
     font-weight: 800;
     color: #96281B;
+} 
+
+.deladdresspart {
+    margin: 0px auto;
+    padding: 10px;
+    clear: both;
+}
+
+.deladdresslist li {
+    width: 50%;
+    border: 1px solid #4183D7;
+    display: inline-block;
+/*    vertical-align: top;*/
+    clear: both;
+    padding: 5px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.deladdresslist li .deladdlist {
+    padding: 5px;
+    background: #4183D7;
+    text-align: center;
+    width: 100%;
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.deladdresslist li .deladdlist h3 {
+    color: #ffffff;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.deladdresslist li .deladdlistt {
+    background: #2285B5;
+    text-align: center;
+    width: 100%;
+    float: left;
+    padding: 5px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.deladdresslist li .deladdlistt .deladddetails li {
+    display: block;
+    width: 100%;
+    border: 0 none; 
+    clear: both;
+    text-align: left;
+}
+
+.deladdresslist li .deladdlistt .deladddetails li p {
+    color: #ffffff;
+    text-transform: capitalize;
+}
+
+.deladdresslist li .deladdlistt .deladddetails li p span {
+    color: #ffffff;
+    font-weight: 500; !important
+    text-transform: capitalize;
+}
+
+.delete {
+    margin: 10px auto;
+    text-align: center;
+}
+
+.marg {
+    margin:5px auto;
 }
 
 .confirmdetails {
@@ -722,28 +894,33 @@ a, a:hover {
 }
 
 .confirmdetails h3 {
+    color: #000000;
     font-size: 18px;
+    font-weight: 500;
     text-transform: capitalize;
-    font-weight: 600;
-}
-
-.confirmdetails h3 span {
-    color: #DB0A5B;
+    text-decoration-line: underline;
 }
 
 .confirmdetails p {
-    font-size: 18px;
     text-transform: capitalize;
     font-weight: 600;
     text-align: left;
 }
 
-.confirmdetails .grand {
-    border: 1px solid #19B5FE;
+.confirmdetails p i {
+    font-weight: 400;
+}
+
+.itembox .grand {
     text-align: center;
-    padding: 5px;
     font-weight: 800;
     color: #96281B;
+    border: 1px solid #19B5FE;
+    padding: 5px;
+}
+
+.itembox .grand span {
+    color: #DB0A5B;
 }
 
 .itembox table .tabcent {
@@ -1008,279 +1185,6 @@ input.qtyminus {
     background: none;
 }
 
-.addresspart {
-    margin: 0px auto;
-    padding: 10px;
-    float: left;
-    clear: both;
-}
-
-.addresslist li {
-    border: 1px solid #FFFFFF;
-    width: 50%;
-    display: inline-block;
-    vertical-align: top;
-    clear: both;
-    padding-right: 10px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.addresslist li .addlist {
-    padding: 5px;
-}
-
-.addresslist li .addlistt {
-    padding: 5px;
-}
-
-.addresslist li .addlist {
-    background: #4183D7;
-    text-align: center;
-    width: 100%;
-    float: left;
-}
-
-.addresslist li .addlist h3 {
-    color: #ffffff;
-    font-weight: 500;
-    text-transform: capitalize;
-}
-
-.addresslist li .addlistt {
-    background: #2285B5;
-    text-align: center;
-    width: 100%;
-    float: left;
-}
-
-.addresslist li .addlistt .adddetails li {
-    display: block;
-    width: 100%;
-    border: 0 none; 
-    clear: both;
-    text-align: left;
-}
-
-.addresslist li .addlistt .adddetails li p {
-    color: #ffffff;
-    text-transform: capitalize;
-}
-
-.addresslist li .addlistt .adddetails li p span {
-    color: #ffffff;
-    font-weight: 500; !important
-    text-transform: capitalize;
-} 
-
-.deladdresspart {
-    margin: 0px auto;
-    padding: 10px;
-    float: left;
-    clear: both;
-}
-
-.deladdresslist li {
-    border: 1px solid #FFFFFF;
-    width: 33%;
-    display: inline-block;
-    vertical-align: top;
-    clear: both;
-    padding-right: 10px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.deladdresslist li .deladdlist {
-    padding: 5px;
-}
-
-.deladdresslist li .deladdlistt {
-    padding: 5px;
-}
-
-.deladdresslist li .deladdlist {
-    background: #4183D7;
-    text-align: center;
-    width: 100%;
-    float: left;
-}
-
-.deladdresslist li .deladdlist h3 {
-    color: #ffffff;
-    font-weight: 500;
-    text-transform: capitalize;
-}
-
-.deladdresslist li .deladdlistt {
-    background: #2285B5;
-    text-align: center;
-    width: 100%;
-    float: left;
-}
-
-.deladdresslist li .deladdlistt .deladddetails li {
-    display: block;
-    width: 100%;
-    border: 0 none; 
-    clear: both;
-    text-align: left;
-}
-
-.deladdresslist li .deladdlistt .deladddetails li p {
-    color: #ffffff;
-    text-transform: capitalize;
-}
-
-.deladdresslist li .deladdlistt .deladddetails li p span {
-    color: #ffffff;
-    font-weight: 500; !important
-    text-transform: capitalize;
-}
-
-.deladdresspart {
-    margin: 0px auto;
-    padding: 10px;
-    float: left;
-    clear: both;
-}
-
-.deladdresslist li {
-    border: 1px solid #FFFFFF;
-    width: 50%;
-    display: inline-block;
-    vertical-align: top;
-    clear: both;
-    padding-right: 10px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.deladdresslist li .deladdlist {
-    padding: 5px;
-}
-
-.deladdresslist li .deladdlistt {
-    padding: 5px;
-}
-
-.deladdresslist li .deladdlist {
-    background: #4183D7;
-    text-align: center;
-    width: 100%;
-    float: left;
-}
-
-.deladdresslist li .deladdlist h3 {
-    color: #ffffff;
-    font-weight: 500;
-    text-transform: capitalize;
-}
-
-.deladdresslist li .deladdlistt {
-    background: #2285B5;
-    text-align: center;
-    width: 100%;
-    float: left;
-}
-
-.deladdresslist li .deladdlistt .deladddetails li {
-    display: block;
-    width: 100%;
-    border: 0 none; 
-    clear: both;
-    text-align: left;
-}
-
-.deladdresslist li .deladdlistt .deladddetails li p {
-    color: #ffffff;
-    text-transform: capitalize;
-}
-
-.deladdresslist li .deladdlistt .deladddetails li p span {
-    color: #ffffff;
-    font-weight: 500; !important
-    text-transform: capitalize;
-} 
-
-.deladdresspart {
-    margin: 0px auto;
-    padding: 10px;
-    float: left;
-    clear: both;
-}
-
-.deladdresslist li {
-    border: 1px solid #FFFFFF;
-    width: 33%;
-    display: inline-block;
-    vertical-align: top;
-    clear: both;
-    padding-right: 10px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.deladdresslist li .deladdlist {
-    padding: 5px;
-}
-
-.deladdresslist li .deladdlistt {
-    padding: 5px;
-}
-
-.deladdresslist li .deladdlist {
-    background: #4183D7;
-    text-align: center;
-    width: 100%;
-    float: left;
-}
-
-.deladdresslist li .deladdlist h3 {
-    color: #ffffff;
-    font-weight: 500;
-    text-transform: capitalize;
-}
-
-.deladdresslist li .deladdlistt {
-    background: #2285B5;
-    text-align: center;
-    width: 100%;
-    float: left;
-}
-
-.deladdresslist li .deladdlistt .deladddetails li {
-    display: block;
-    width: 100%;
-    border: 0 none; 
-    clear: both;
-    text-align: left;
-}
-
-.deladdresslist li .deladdlistt .deladddetails li p {
-    color: #ffffff;
-    text-transform: capitalize;
-}
-
-.deladdresslist li .deladdlistt .deladddetails li p span {
-    color: #ffffff;
-    font-weight: 500; !important
-    text-transform: capitalize;
-} 
-
-.delete {
-    margin: 10px auto;
-    text-align: center;
-}
-
-.marg {
-    margin:5px auto;
-}
-
 .sectionten {
     margin: 20px auto;
     min-height: 800px;
@@ -1410,6 +1314,7 @@ input.qtyminus {
     float: left;
     -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -o-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
     clear: both;
     margin-top: 5px;
@@ -1447,6 +1352,7 @@ input.qtyminus {
     float: left;
     -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -o-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
     clear: both;
     margin-top: 5px;
@@ -1586,30 +1492,17 @@ input.qtyminus {
     margin: 20px auto;
     float: left;
     width: 100%;
-    background : #FFFFFF;
-    border: 1px solid #000000;
+    background: url("../img/this.jpg") repeat scroll 0 0;
+    border: 3px solid #ffffff;
     -webkit-box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);
     -moz-box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);
+    -o-box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);
     box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);
     clear: both;
 }
 
-.userpicdetail {
-    margin: 10px auto;
-    padding: 20px;
-}
-
-.userpic {
-    float: left;
-    width: 80%;
-}
-
-.userpic img {
-    width: 100%; 
-}
-
 .userdetail {
-    margin: 10px auto;
+    margin: 5px auto;
     padding: 20px;
 }
 
@@ -1618,70 +1511,155 @@ input.qtyminus {
     width: 80%;
 }
 
+.edt {
+    float:right;
+    width: auto;
+}
+
 .usernameslist li {
     display: block;
     margin-top: 15px;
 }
 
-.usernameslist li .inptne {
-    background: url("../img/profile.png") no-repeat left center;
+.usernameslist li .inptname {
+    background: url("../img/name.png") no-repeat 0px center;
     padding-left: 40px;
 }
 
-.usernameslist li .inptnew {
-    background: url("../img/phone.png") no-repeat left center;
+.usernameslist li .inptphone {
+    background: url("../img/phone.png") no-repeat 0px center;
     padding-left: 40px;
 }
 
-.usernameslist li .inptnews {
-    background: url("../img/mail.png") no-repeat left center;
+.usernameslist li .inptmail {
+    background: url("../img/mail.png") no-repeat 0px center;
     padding-left: 40px;
 }
 
-.usernameslist li .inptnewd {
-    background: url("../img/map.png") no-repeat left center;
-    padding-left: 40px;
+.adder {
+    margin: 10px auto;
+    padding: 4px;
 }
 
-/*
-.usernameslist li .inpt {
-    background: url("../img/pwd.png") no-repeat left center;
-    padding-left: 40px;
-}
-
-.usernameslist li .inp {
-    background: url("../img/profile.png") no-repeat left center;
-    padding-left: 40px;
-}
-*/
-
-.adderslist {
-    float: left;
-    width: 100%;
-    clear: both;
-}
+.adder h3 {
+    color: #000000;
+    font-weight: 500;
+    text-transform: capitalize;
+} 
 
 .adderslist li {
     display: block;
     margin-top: 15px;
+    width: 100%;
 }
 
 .adderslist li .adders {
-    background: url("../img/map.png") no-repeat left center;
+    background: url("../img/address.png") no-repeat 0px center;
     padding-left: 40px;
 }
 
-.edt {
-    float: right;
-    text-align: right;
+.adderslist li .addersname {
+    background: url("../img/name.png") no-repeat 0px center;
+    padding-left: 40px;
 }
- 
-.save {
-    margin: 30px auto;
-    text-align: center;
+
+.adderslist li .addersphone {
+    background: url("../img/phone.png") no-repeat 0px center;
+    padding-left: 40px;
+}
+
+.adderslist li .addersmail {
+    background: url("../img/mail.png") no-repeat 0px center;
+    padding-left: 40px;
+}
+
+.addresspart {
+    margin: 0px auto;
+    padding: 10px;
     clear: both;
+}
+
+.addresslist li {
+    display: inline-block;
+    clear: both;
+    padding: 5px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.addresslist li .addlist {
+    padding: 5px;
+    background: #4183D7;
+    text-align: center;
     width: 100%;
     float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.addresslist li .addlist h3 {
+    color: #ffffff;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.addresslist li .addlistt {
+    background: #2285B5;
+    text-align: center;
+    width: 100%;
+    float: left;
+    padding: 5px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.addresslist li .addlistt .adddetails li {
+    display: block;
+    width: 100%;
+    border: 0 none; 
+    clear: both;
+    text-align: left;
+    padding: 5px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.addresslist li .addlistt .adddetails li p {
+    color: #ffffff;
+    text-transform: capitalize;
+}
+
+.addresslist li .addlistt .adddetails li p span {
+    color: #ffffff;
+    font-weight: 500; !important
+    text-transform: capitalize;
+}
+
+.edel {
+    margin: 10px auto;
+}
+
+.delete {
+    text-align: center;
+    float: left;
+}
+
+.edits {
+    margin: 10px auto;
+    text-align: center;
+    float: right;
+}
+
+.addmargin {
+    margin: 5px auto;
 }
 
 .footnotes {
@@ -1689,22 +1667,32 @@ input.qtyminus {
     width: 100%;
     float: left;
     clear: both;
-    border: 1px solid #19B5FE;
+    background: url("../img/thi.jpg") no-repeat scroll 0 0;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+}
+
+.footmenu {
+    margin: 0px auto;
+    padding-top: 10px;
 }
 
 .footlist li {
     padding-right: 30px;
-    float: left;
     text-align: center;
+    display: inline-block;
 }
 
 .footlist li a {
+    text-decoration: none;
     color: #161617;
     font-size: 16px;
+    font-weight: 600;
+    display: inline-block;
 }
 
 .footlist li a:hover {
-    color: #F7CA18;
+    color: #FFFFFF;
 }
 
 .footcopy {
@@ -1714,166 +1702,186 @@ input.qtyminus {
 
 .footcopy p {
     font-size: 16px;
-    color: #F7CA18;
+    color: #ffffff;
     text-align: center;
 }
 
 @media only screen and (min-width: 320px) {
     .tracks { float: none; }
-    .menu li { display: inline-block; padding: 0px 10px; }
+    .menu li { display: inline-block; padding: 0px 16px; }
     .tracklist { left: 65px; }
     .findernav li { float: none; text-align: center; margin: 10px 0px; }
-    .selectouter { width: 100%; display: block;}
-/*  .timemenu li { width: 100%; border-right: none; }*/
-    .knowmenu li { display: block; width: 100%; }
-    .footlist li { float: none; padding-right: 0px; }
-    .hotelist li .wrapper { max-height: 100%; }
-    .hotelist li .wrapper .banner { float: none; width: 100%; height: auto; }
-/*  .hotelist li .wrapper .bannen { height: auto; }*/
-    .qty { width: 15px; }
-    input.qtyplus { width: 15px; }
-    input.qtyminus { width: 15px; }
+    .deladdresslist li { width: 100%; }
     .teamli li { width: 100%; }
     .teamdesc { width: inherit; }
     .techlist li { width: 100%; display: block; margin-top: 6px; }
-    .addresslist li { width: 100%; }
+    .footlist li { display: block; padding-right: 0px; }
+    .knowmenu li { display: block; width: 100%; }
+    .hotelist li .wrapper { max-height: 100%; }
+    .hotelist li .wrapper .banner { float: none; width: 100%; height: auto; }
+    .profedit .profiledit { left: -13em; }
+/*
+    .selectouter { width: 100%; display: block;}
+    .timemenu li { width: 100%; border-right: none; }
+    .hotelist li .wrapper .bannen { height: auto; }
+    .qty { width: 15px; }
+    input.qtyplus { width: 15px; }
+    input.qtyminus { width: 15px; }
+*/
+    
 }
 
 @media only screen and (min-width: 360px) {
     .tracks { float: none; }
     .menu li { display: inline-block; padding: 0px 17px; }
     .tracklist { left: 86px; }
-    .footlist li { float: none; padding-right: 0px; }
+    .footlist li { display: block; padding-right: 0px; }
+/*
     .qty { width: 15px; }
     input.qtyplus { width: 15px; }
     input.qtyminus { width: 15px; }
+*/
 }
 
 @media only screen and (min-width: 380px) {
     .tracks { float: none; }
     .menu li { display: inline-block; padding: 0px 20px; }
     .tracklist { left: 100px; }
-    .footlist li { float: none; padding-right: 0px; }
+    .footlist li { display: block; padding-right: 0px; }
+/*
     .qty { width: 15px; }
     input.qtyplus { width: 15px; }
     input.qtyminus { width: 15px; }
+*/
 }
 
 @media only screen and (min-width: 400px) {
     .tracks { float: none; }
     .menu li { display: inline-block; padding: 0px 23px; }
     .tracklist { left: 105px; }
+    .footlist li { display: block; padding-right: 0px; }
 }
 
 @media only screen and (min-width: 420px) {
     .tracks { float: none; }
     .menu li { display: inline-block; padding: 0px 27px; }
     .tracklist { left: 116px; }
-    .footlist li { float: none; padding-right: 0px; }
+    .footlist li { display: block; padding-right: 0px; }
+    .hotelist li .wrapper { max-height: 100%; width: 100%; }
+/*
     .qty { width: 25px; }
     input.qtyplus { width: 25px; }
     input.qtyminus { width: 25px; }
-    .hotelist li .wrapper { max-height: 100%; width: 100%; }
+*/
+    
 }
 
 @media only screen and (min-width: 460px) {
     .tracks { float: none; }
     .menu li { display: inline-block; padding: 0px 33px; }
     .tracklist { left: 136px; }
-    .footlist li { float: none; padding-right: 0px; }
+    .footlist li { display: block; padding-right: 0px; }
 }
 
 @media only screen and (min-width: 480px) {
     .tracks { float: none; }
     .menu li { display: inline-block; padding: 0px 37px; }
     .tracklist { left: 145px; }
+    .footlist li { display: block; padding-right: 0px; }
 }
 
 @media only screen and (min-width: 500px) {
+    .tracks { float: none; }
     .menu li { display: inline-block; padding: 0px 40px; }
     .tracklist { left: 154px; }
-    .footlist li { float: none; padding-right: 0px; }
+    .footlist li { display: block; padding-right: 0px; }
     .teamli li { width: 49%; }
     .teamdesc { width: inherit; }
 }
 
 @media only screen and (min-width: 600px) {
+    .tracks { float: none; }
     .menu li { display: inline-block; padding: 0px 57px; }
     .tracklist { left: 204px; }
-    .footlist li { float: none; padding-right: 0px; }
+    .footlist li { display: block; padding-right: 0px; }
     .teamli li { width: 49%; }
     .teamdesc { width: inherit; }
 }
 
 @media only screen and (min-width: 640px) {
+    .tracks { float: none; }
     .menu li { display: inline-block; padding: 0px 63px; }
     .tracklist { left: 225px; }
     .findernav li { float: left; }
     .selectouter { width: 11em; }
-/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
     .footlist li { float: none; padding-right: 0px; }
     .teamli li { width: 32%; }
     .teamdesc { width: inherit; }
+/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
 }
 
 @media only screen and (min-width: 767px) {
     .tracks { float: right; }
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 0px; }
-    .selectouter { width: 15em; }
-/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
+    .tracklist { left: -49px; }
     .knowmenu li { display: inline-block; width: 24%; }
-    .footlist li { float: left; padding-right: 20px; }
+    .footlist li { display: inline-block; padding-right: 20px; }
     .hotelist li .wrapper { max-height: 120px; }
     .hotelist li .wrapper .banner { float: left; width: 120px; height: 120px; }
-/*  .hotelist li .wrapper .bannen { height: 180px; }*/
     .techlist li { width: 49%; display: inline-block; margin-top: 6px; }
+/*
+    .selectouter { width: 15em; }
+    .timemenu li { width: 24%; border-right: 2px solid white; }
+    .hotelist li .wrapper .bannen { height: 180px; }
+*/
 }
 
 @media only screen and (min-width: 768px) {
+    .tracks { float: right; }
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 0px; }
-/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
+    .tracklist { left: -16px; }
     .knowmenu li { display: inline-block; width: 24%; }
-    .footlist li { float: left; padding-right: 20px; }
+    .footlist li { display: inline-block; padding-right: 20px; }
+/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
 }
 
 @media only screen and (min-width: 800px) {
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 0px; }
-/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
+    .tracklist { left: 0em; }
     .knowmenu li { display: inline-block; width: 24%; }
-    .footlist li { float: left; }
-    .addresslist li { width: 33%; }
+    .footlist li { display: inline-block; padding-right: 20px; }
+/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/    
 }
 
 @media only screen and (min-width: 920px) {
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
     .tracklist { left: 0em; }
-/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
     .knowmenu li { display: inline-block; width: 24%; }
-    .footlist li { float: left; }
+    .footlist li { display: inline-block; padding-right: 20px;  }
+/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
 }
 
 @media only screen and (min-width: 1024px) {
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
     .tracklist { left: 0em; }
     .knowmenu li { display: inline-block; width: 24%; }
-    .footlist li { float: left; }
+    .deladdresslist li { width: 50%; }
+    .footlist li { display: inline-block; padding-right: 30px; }
 }
 
 @media only screen and (min-width: 1200px) {
     .tracks { float: right; }
     .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 0px; }
+    .tracklist { left: 0em; }
     .findernav li { float: left; }
-    .selectouter { width: 17em; }
-/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
     .knowmenu li { display: inline-block; width: 19%; }
-    .footlist li { float: left; }
+    .footlist li { display: inline-block; text-align: center; padding-right: 30px; }
     .teamli li { width: 33%; }
     .teamdesc { width: 500px; }
     .techlist li { width: 33%; display: inline-block; }
+/*  .selectouter { width: 17em; }
+    .timemenu li { width: 24%; border-right: 2px solid white; }
+*/
 }
 
 /* ==========================================================================

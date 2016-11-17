@@ -505,6 +505,83 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
           console.log("ERROR in init get");
         });
       }
+      
+      $scope.editAddress = function () {
+      console.log("editAddress");
+     
+
+      var url4 = "/v1/customer/address/";
+       //  console.log(address);
+
+        url4 = url4 + $scope.profile.phone + "/" +  $scope.editaddress.label;
+        console.log(url4);
+
+      var postData={label:$scope.label,
+        address:{addressLine1:$scope.addressLine1,
+                 addressLine2:$scope.addressLine2,
+                 street:$scope.street,
+                 LandMark:$scope.LandMark,
+                 areaname :$scope.areaName,
+                 city:$scope.city,
+                 zip:$scope.zip,
+                 latitude:$scope.latitude,
+                 longitude:$scope.longitude
+       }
+     }
+      console.log(postData);
+      $http.patch(url4,postData)
+        .success(function (data, status, headers, config)
+        {
+           console.log("success edit");
+           console.log(data);
+          initprofile();
+        })
+        .error(function (data, status, headers, config)
+        {
+          console.log("errod on edit");
+          console.log(status);
+          console.log(data);
+        });
+    }; 
+      
+           $scope.editAddressFirst = function (address) {
+               console.log("editAddressFirst");
+               $scope.editaddress = address;
+               console.log($scope.editaddress);
+               $scope.label = address.label;
+               $scope.addressLine1 = address.addressLine1;
+               $scope.addressLine2 = address.addressLine2;
+               $scope.street = address.street;
+               $scope.LandMark = address.LandMark;
+               $scope.areaName = address.areaName;
+               $scope.city = address.city;
+               $scope.zip = address.zip;
+               $scope.latitude = address.latitude;
+               $scope.longitude = address.longitude;
+           };
+     
+
+     function initprofile()
+      {
+          var url = "/v1/customer/phone/";
+          url = url + $scope.profile.phone;
+          $http.get(url).success(function (data, status, headers)
+        {
+          console.log("Success in get");
+          console.log(data);
+         
+          
+          $scope.profile = data[0];
+          console.log($scope.profile);
+          console.log($scope.profile.name);
+        })
+        .error(function (data, status, headers)
+        {
+          console.log("ERROR in init get");
+        });
+      }
+      
+      
     function showPosition(position)
     {
       console.log("getCurrentAddress 3");
