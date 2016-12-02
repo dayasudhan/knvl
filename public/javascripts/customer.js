@@ -58,6 +58,8 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
           $scope.profile = data[0];
           console.log($scope.profile);
           console.log($scope.profile.name);
+          $scope.phone = $scope.profile.phone;
+          $scope.user = $scope.profile.name;
           if(data  ==  0)
               {
             $scope.isLoggedIn = false;
@@ -104,6 +106,8 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
            
             console.log(data);
              $scope.profile = data;
+              $scope.phone = $scope.profile.phone;
+              $scope.user = $scope.profile.name;
           if(data  ==  0)
               {
             $scope.isLoggedIn = false;
@@ -250,10 +254,23 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
  //         $scope.postAddress($scope.orderSummary.address);
       }
     }
+
+
+    $scope.fnChangeAssetType=function(val){
+      $scope.addressLine1 = val.addressLine1;
+      $scope.addressLine2 = val.addressLine2;
+      $scope.street = val.street;
+      $scope.landmark = val.LandMark;
+      $scope.areaName = val.areaName;
+      $scope.city = val.city;
+      $scope.zip=val.zip;
+      $scope.latitude =val.latitude;
+      $scope.longitude=val.longitude;
+    }
    $scope.phonenumber = function(inputtxt)  
     {  
       console.log("phonenumber 1 ",inputtxt);
-   
+   //console.log($scope.selected[address.label]);
         var phoneno = /^\d{10}$/;  
         if(phoneno.test(inputtxt))  
         {  
@@ -265,6 +282,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
            return false;  
         }  
       } 
+
     $scope.order = function() {
 
       console.log("order function 1");
@@ -329,7 +347,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
           "bill_value":total_price,
           "deliverCharge":$scope.hotel.deliverCharge,
           "customer":{"name":$scope.user,"email": "","phone":$scope.phone,
-          "address":{"addressLine1":$scope.flat_no,"addressLine2":$scope.address,"street":"", 
+          "address":{"addressLine1":$scope.addressLine1,"addressLine2":$scope.addressLine2,"street":$scope.street, 
           "LandMark":$scope.landmark, "areaName":$scope.areaName,"city":$scope.city,
            "zip":$scope.zip, "latitude":$scope.latitude,"longitude":$scope.longitude}}
         };
