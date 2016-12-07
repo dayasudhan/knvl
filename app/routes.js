@@ -555,7 +555,7 @@ app.post( '/v1/customer/address/:id', function( request, response ) {
 	    console.log(request.headers);
 	   // console.log("request.headers");
 	    console.log(request.body);
-	   if(checkVendorApiAunthaticated(request,1) == false)
+	   if(checkVendorApiAunthaticated(request,2) == false)
 		{
 			return response.send("Not aunthiticated").status(403);
 		}
