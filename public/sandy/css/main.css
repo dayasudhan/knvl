@@ -829,6 +829,7 @@ a, a:hover {
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
     box-sizing: border-box;
+    vertical-align: top;
 }
 
 .deladdresslist li .deladdlist {
@@ -1475,6 +1476,10 @@ input.qtyminus {
     font-weight: 600;
 }
 
+.addlist li h3 {
+    text-align: center;
+}
+
 .addlist li h5 {
     margin-left: 45px;
     padding: 10px;
@@ -1638,6 +1643,8 @@ input.qtyminus {
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
     box-sizing: border-box;
+    vertical-align: top;
+    width: 33%;
 }
 
 .addresslist li .addlist {
@@ -1815,6 +1822,7 @@ input.qtyminus {
     .tracklist { left: 65px; }
     .findernav li { float: none; text-align: center; margin: 10px 0px; }
     .deladdresslist li { width: 100%; }
+    .addresslist li { width: 100%; }
     .teamli li { width: 100%; }
     .teamdesc { width: inherit; }
     .techlist li { width: 100%; display: block; margin-top: 6px; }
