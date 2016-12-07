@@ -399,12 +399,14 @@ console.log(req.body);
   console.log('/signup');
     passport.authenticate('local-signup', function(err, user, info) {
      console.log(req.body);
-      if (err) { return next(err); }
+      if (err) { 
+        return next(err); }
       if (!user) { 
           var redirect_url = '/';
               if(req.body.role == 'customer')
               {
                   redirect_url = '/signup';
+                  return res.send("0");
               }
               else if(req.body.role == 'vendor') 
               {
@@ -553,10 +555,10 @@ app.post( '/v1/customer/address/:id', function( request, response ) {
 	    console.log(request.headers);
 	   // console.log("request.headers");
 	    console.log(request.body);
-//	   	if(checkVendorApiAunthaticated(request,1) == false)
-//		{
-//			return response.send("Not aunthiticated").status(403);
-//		}
+	   if(checkVendorApiAunthaticated(request,1) == false)
+		{
+			return response.send("Not aunthiticated").status(403);
+		}
 	  console.log(request.params.id);
     var phoneNumber = parseInt(request.params.id);
     console.log(phoneNumber);
@@ -641,10 +643,10 @@ app.delete( '/v1/customer/address/:phone/:label', function( request, response ) 
 app.patch( '/v1/customer/address/:phone/:label', function( request, response ) {
      console.log('update /v1/customer/address/:phone/:label');
 
-  // if(checkVendorApiAunthaticated(request,2) == false)
-  // {
-  //   return response.send("Not aunthiticated").status(403);
-  // }
+  if(checkVendorApiAunthaticated(request,2) == false)
+  {
+    return response.send("Not aunthiticated").status(403);
+  }
   console.log(request.params.phone);
   console.log(request.params.label);
 
@@ -950,10 +952,10 @@ app.get( '/v1/vendor/otp/all', function( req, res ) {
 });
 app.post( '/v1/vendor/otp/confirm', function( req, res ) {
     console.log('/v1/vendor/otp/confirm');
-   //  if(checkVendorApiAunthaticated(req,2) == false)
-	  // {
-	 	//  return res.send("Not aunthiticated").status(403);
-	  // }
+    if(checkVendorApiAunthaticated(req,2) == false)
+	  {
+	 	 return res.send("Not aunthiticated").status(403);
+	  }
     console.log(req.body.phoneNumber);
     console.log(req.body.otpText);
 
@@ -1566,10 +1568,10 @@ app.get( '/v1/vendor/order/today/:id', function( request, response ) {
 
 app.get( '/v1/vendor/order_by_id/:id', function( request, response ) {
      console.log('/v1/vendor/order_by_id/:id');
-	// if(checkVendorApiAunthaticated(request,2) == false)
-	// {
-	// 	return response.send("Not aunthiticated").status(403);
-	// }
+	if(checkVendorApiAunthaticated(request,2) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
      console.log(request.params.id);
      return OrderModel.find({ 'id':request.params.id},function( err, order ) {
         if( !err ) {
