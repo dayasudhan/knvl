@@ -32,6 +32,31 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
             templateUrl: '../../views/customer_profile.ejs',
             controller: 'mainController'
         })
+//        .state('about', {
+//            url: '/about',
+//            templateUrl: '../../views/customer_about.ejs',
+//            controller: 'mainController'
+//        })
+//        .state('contact', {
+//            url: '/contact',
+//            templateUrl: '../../views/customer_contact.ejs',
+//            controller: 'mainController'
+//        })
+//        .state('terms', {
+//            url: '/terms',
+//            templateUrl: '../../views/customer_terms.ejs',
+//            controller: 'mainController'
+//        })
+//        .state('privacy', {
+//            url: '/privacy',
+//            templateUrl: '../../views/customer_privacypolicy.ejs',
+//            controller: 'mainController'
+//        })
+//        .state('faq', {
+//            url: '/faq',
+//            templateUrl: '../../views/customer_faq.ejs',
+//            controller: 'mainController'
+//        })
       });
   customerApp.controller('mainController', function ($rootScope,$scope, $http, jsonFilter,$window)
   {
