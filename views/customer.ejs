@@ -204,7 +204,7 @@
                                                     <!--<a href="/logout" ng-show="isLoggedIn" >Logout</a>--><a href="#" data-toggle="modal" data-target="#myModal" ng-show="!isLoggedIn">Login</a>
                                                     <div class="dropdown profedit" data-toggle="modal" ng-show="isLoggedIn"> <a class="dropdown-toggle" data-toggle="dropdown">{{profile.name}}</a>
                                                         <ul class="dropdown-menu profiledit">
-                                                            <li> <img src="../public/sandy/img/ban.jpg" class="img-circle" alt="User Image">
+                                                            <li> <!-- <img src="../public/sandy/img/ban.jpg" class="img-circle" alt="User Image">-->
                                                                 <p> {{profile.name}} </p>
                                                             </li>
                                                             <li>
@@ -231,7 +231,7 @@
 -->
                                                                             <li>
                                                                                 <input type="password" id="pwd" class="form-control inputpwd" ng-model="login_password" placeholder="Password"> </li>
-                                                                            <li> <a class="forgot" href="#" target="_blank">Forgot Password ?</a> </li>
+<!--                                                                            <li> <a class="forgot" href="#" target="_blank">Forgot Password ?</a> </li>-->
                                                                             <li>
                                                                                 <a href="profile.html" target="_parent">
                                                                                     <button type="button" class="btn btn-success alone" data-dismiss="modal" ng-click="login_customer()">LOGIN</button>

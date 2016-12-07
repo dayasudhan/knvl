@@ -1475,6 +1475,10 @@ input.qtyminus {
     font-weight: 600;
 }
 
+.addlist li h3 {
+    text-align: center;
+}
+
 .addlist li h5 {
     margin-left: 45px;
     padding: 10px;
