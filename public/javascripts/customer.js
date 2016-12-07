@@ -182,8 +182,9 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       console.log("findRestaurants");
     //  var url = "/v1/vendor/city?";
      var url = "/v1/vendor/delieveryareas?";
-      console.log($scope.search_areaname);
-      url = url +  "city=" +$scope.cityCoverage.citys[$scope.selectedCity] + "&areaName="+$scope.search_areaname;
+     var search_areaname = $scope.subAreaCoverage[$scope.selectedAreaIndex];
+      console.log($scope.subAreaCoverage[$scope.selectedAreaIndex]);
+      url = url +  "city=" +$scope.cityCoverage.citys[$scope.selectedCity] + "&areaName="+ search_areaname;
       $http.get(url,config)
         .success(function (data, status, headers, config)
         {
@@ -445,6 +446,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
                subAreaCoverage.push(area.name);
              });
              obj.subAreas = subAreaCoverage;
+              $scope.subAreaCoverage = subAreaCoverage
              cityCoverage.push(obj);
               objCity.push(obj2)
           });
@@ -452,6 +454,8 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
            cityCoverage.citys = objCity;
            $scope.cityCoverage = cityCoverage;
            $scope.selectedCity = 0;
+           $scope.selectedAreaIndex = 0;
+
       console.log($scope.cityCoverage);
         })
         .error(function (data, status, headers, config)

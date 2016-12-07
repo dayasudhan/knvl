@@ -14,7 +14,7 @@
                 </li>
                 <li class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                     <div class="search-input">
-                        <select class="form-control search-second" ng-model="search_areaname" ng-options="o for o in cityCoverage[selectedCity].subAreas track by o"> </select>
+                        <select class="form-control search-second" ng-model="selectedAreaIndex" ng-options="subAreaCoverage.indexOf(selectedAreaIndex) as selectedAreaIndex for selectedAreaIndex in subAreaCoverage"> </select>
                     </div>
                 </li>
                 <li class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
