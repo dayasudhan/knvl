@@ -187,7 +187,9 @@
                                     <ul class="deladdresslist">
                                         <li ng-repeat="address in profile.addresses">
                                             <div class="deladdlist">
-                                                <h3><input type="checkbox"> &nbsp; {{address.label}}</h3> 
+                                                <h3><input type="radio" 
+                                                name="name" required
+                                                ng-click="fnChangeAssetType(address)" > &nbsp; {{address.label}}</h3> 
                                             </div>
                                             <div class="deladdlistt">
                                                 <ul class="deladddetails">
@@ -227,9 +229,9 @@
                                         <li>
                                             <input type="text" class="form-control" id="inputphone" ng-model="phone" placeholder="Enter Phone Number" required> </li>
                                         <li>
-                                            <input type="text" class="form-control" id="inputflat" ng-model="flat_no" placeholder="Enter House/Flat No" required> </li>
+                                            <input type="text" class="form-control" id="inputflat" ng-model="addressLine1" placeholder="Enter House/Flat No" required> </li>
                                         <li>
-                                            <input type="text" class="form-control" id="inputflat" ng-model="address" placeholder="Enter Address" required> </li>
+                                            <input type="text" class="form-control" id="inputflat" ng-model="addressLine2" placeholder="Enter Address" required> </li>
                                         <li>
                                             <input type="text" class="form-control" name="inputareaName" ng-model="areaName" placeholder="Enter AreaName" ng-trim="false" required> </li>
                                         <li>
@@ -308,8 +310,8 @@
                                 <h3>DELIVERY ADDRESS</h3>
                                 <p>Name     : <i>{{user}}</i></p>
                                 <p>Phone    : <i>{{phone}}</i></p>
-                                <p>Flat No  : <i>{{flat_no}}</i></p>
-                                <p>Street   : <i>{{address}}</i></p>
+                                <p>Flat No  : <i>{{addressLine1}}</i></p>
+                                <p>Street   : <i>{{addressLine2}}</i></p>
                                 <p>AreaName : <i>{{areaName}}</i></p>
                                 <p>LandMark : <i>{{landmark}}</i></p>
                             </div>
