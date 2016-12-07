@@ -431,6 +431,7 @@ console.log(req.body);
         {
           redirect_url = '/p/vendor_details';
           registerVendor(req, res, next);
+          return res.redirect(redirect_url);
         }
         else
         {
