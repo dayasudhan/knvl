@@ -1318,7 +1318,7 @@ app.get( '/v1/vendor/deliveryareasbygps', function( request, response ) {
               }
             });
             }
-            
+            return response.send(null);
             // console.log("old vendor", vendor);
            // return response.send( vendor2 );
         } else {
