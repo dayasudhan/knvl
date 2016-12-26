@@ -152,6 +152,49 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
           console.log("ERROR in login");
         });
     };
+      
+      
+      
+      $scope.forgot_customer = function () {
+      console.log("signup_customer");
+      console.log($scope.forgot_phone);
+     
+      var signup_body = new Object();
+
+      signup_body.email = $scope.signup_phone;
+      signup_body.role = "customer";
+      console.log(signup_body);
+      var url = "/signup";
+      
+     
+      $http.post(url, signup_body,config)
+        .success(function (data, status, headers)
+        {
+          console.log("Success in sign up post");
+           
+            console.log(data);
+            if(data  ==  0)
+              {
+            $scope.isLoggedIn = false;
+            $window.alert("Signup failed");
+              }
+          else
+              {
+                  $scope.isLoggedIn = true;
+              $scope.profile = data;
+              $scope.phone = $scope.profile.phone;
+              $scope.user = $scope.profile.name;
+              }
+            
+          
+            console.log($scope.isLoggedIn);
+          
+        })
+        .error(function (data, status, headers)
+        {
+          console.log("ERROR in login");
+        });
+    };
 
     // $scope.signup = function()
     // {

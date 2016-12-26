@@ -231,7 +231,9 @@
 -->
                                                                             <li>
                                                                                 <input type="password" id="pwd" class="form-control inputpwd" ng-model="login_password" placeholder="Password"> </li>
-<!--                                                                            <li> <a class="forgot" href="#" target="_blank">Forgot Password ?</a> </li>-->
+                                                                            
+                                                                            <li> <a class="forgot" href="#" data-toggle="modal" data-dismiss="modal" data-target="#forgotModal">Forgot Password ?</a></li> 
+                                                    
                                                                             <li>
                                                                                 <a href="profile.html" target="_parent">
                                                                                     <button type="button" class="btn btn-success alone" data-dismiss="modal" ng-click="login_customer()">LOGIN</button>
@@ -283,6 +285,111 @@
                                                                             </li>
                                                                         </ul>
                                                                     </div>
+                                                                </div>
+                                                                <div class="modal-footer log">
+                                                                    <h2>Already a Member ?</h2>
+                                                                    <ul class="loglist">
+                                                                        <li>
+                                                                            <button type="button" class="btn btn-success alone" data-dismiss="modal" data-toggle="modal" data-target="#myModal">LOGIN</button>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade zoom" id="forgotModal" role="dialog">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header log">
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    <h2>Forgot Password ! Don't Worry.</h2> </div>
+                                                                <div class="modal-body">
+                                                                    <div class="form-group">
+                                                                        <ul class="loglist">
+                                                                            <li>
+                                                                                <input type="text" class="form-control inputphone" ng-model="forgot_phone" placeholder="Enter Mobile Number"> </li>
+                                                                            <li>
+                                                                                <button type="button" class="btn btn-success alone" data-dismiss="modal" data-target="#otpModal" ng-click="">SUBMIT</button>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer log">
+                                                                    <h2>Not a Member yet ?</h2>
+                                                                    <ul class="loglist">
+                                                                        <li>
+                                                                            <button type="button" class="btn btn-success alone" data-dismiss="modal" data-toggle="modal" data-target="#signupModal">SIGN UP</button>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade zoom" id="otpModal" role="dialog">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header log">
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    <h2>Verify</h2> </div>
+                                                                <div class="modal-body">
+                                                                    <div class="form-group">
+                                                                        <ul class="loglist">
+                                                                            <li>
+                                                                                <input type="text" class="form-control inputphone" ng-model="" placeholder="Enter OTP"> </li>
+                                                                            <li>
+                                                                                <button type="button" class="btn btn-success alone" data-dismiss="modal" data-target="#newpwdModal" ng-click="">SUBMIT</button>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer log">
+                                                                    <h2>Not a Member yet ?</h2>
+                                                                    <ul class="loglist">
+                                                                        <li>
+                                                                            <button type="button" class="btn btn-success alone" data-dismiss="modal" data-toggle="modal" data-target="#signupModal">SIGN UP</button>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade zoom" id="newpwdModal" role="dialog">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header log">
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    <h2>Enter your New Password</h2> </div>
+                                                                <div class="modal-body">
+                                                                    <div class="form-group">
+                                                                        <ul class="loglist">
+                                                                            <li><input type="text" class="form-control inputphone" ng-model="signup_phone" placeholder="Mobile Number"></li>
+                                                                            <li>
+                                                                                <input type="text" class="form-control inputphone" ng-model="" placeholder="Enter New Password"> </li>
+                                                                            <li>
+                                                                                <button type="button" class="btn btn-success alone" data-dismiss="modal" data-target="#Modal" ng-click="">SUBMIT</button>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer log">
+                                                                    <h2>Not a Member yet ?</h2>
+                                                                    <ul class="loglist">
+                                                                        <li>
+                                                                            <button type="button" class="btn btn-success alone" data-dismiss="modal" data-toggle="modal" data-target="#signupModal">SIGN UP</button>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade zoom" id="newpwdModal" role="dialog">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header log">
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    <h2>Confirmation</h2> </div>
+                                                                <div class="modal-body log">
+                                                                    <h2>Your Password has been changed. Thank You !</h2>
                                                                 </div>
                                                                 <div class="modal-footer log">
                                                                     <h2>Already a Member ?</h2>
