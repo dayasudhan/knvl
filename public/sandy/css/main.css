@@ -1644,7 +1644,7 @@ input.qtyminus {
     -o-box-sizing: border-box;
     box-sizing: border-box;
     vertical-align: top;
-    width: 33%;
+    width: 50%;
 }
 
 .addresslist li .addlist {
@@ -1847,6 +1847,7 @@ input.qtyminus {
     .menu li { display: inline-block; padding: 0px 17px; }
     .tracklist { left: 86px; }
     .footlist li { display: block; padding-right: 0px; }
+    .addresslist li { width: 100%; }
 /*
     .qty { width: 15px; }
     input.qtyplus { width: 15px; }
@@ -1940,6 +1941,7 @@ input.qtyminus {
     .hotelist li .wrapper { max-height: 120px; }
     .hotelist li .wrapper .banner { float: left; width: 120px; height: 120px; }
     .techlist li { width: 49%; display: inline-block; margin-top: 6px; }
+    .addresslist li { width: 50%; }
 /*
     .selectouter { width: 15em; }
     .timemenu li { width: 24%; border-right: 2px solid white; }
