@@ -218,7 +218,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       console.log("postOrder");
       console.log(ordarr);
       var url = "/v1/vendor/order";
-      $http.post(url, ordarr,config)
+      $http.post(url, ordarr)
         .success(function (data, status, headers)
         {
           console.log("Success in postorder");
@@ -412,7 +412,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       console.log(ordarr);
       var url = "/v1/customer/";
       url = url + param;
-      $http.post(url, ordarr,config)
+      $http.post(url, ordarr)
         .success(function (data, status, headers)
         {
           console.log("Success in postorder")
@@ -497,7 +497,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
                  longitude:$scope.longitude
        }
      }
-      $http.post(url4,postData,config)
+      $http.post(url4,postData)
         .success(function (data, status, headers, config)
         {
            console.log("success add");

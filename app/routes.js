@@ -556,7 +556,7 @@ app.post( '/v1/customer/address/:id', function( request, response ) {
 	    console.log(request.headers);
 	   // console.log("request.headers");
 	    console.log(request.body);
-	   if(checkVendorApiAunthaticated(request,2) == false)
+	   if(checkVendorApiAunthaticated(request,2) == false &&   request.isAuthenticated() == false)
 		{
 			return response.send("Not aunthiticated").status(403);
 		}
@@ -644,7 +644,7 @@ app.delete( '/v1/customer/address/:phone/:label', function( request, response ) 
 app.patch( '/v1/customer/address/:phone/:label', function( request, response ) {
      console.log('update /v1/customer/address/:phone/:label');
 
-  if(checkVendorApiAunthaticated(request,2) == false)
+  if(checkVendorApiAunthaticated(request,2) == false &&  request.isAuthenticated() == false) 
   {
     return response.send("Not aunthiticated").status(403);
   }
@@ -676,8 +676,10 @@ app.patch( '/v1/customer/address/:phone/:label', function( request, response ) {
 
 app.post( '/v1/customer/:id', function( request, response ) {
 
-console.log(request.body);
-
+  if(checkVendorApiAunthaticated(request,2) == false &&  request.isAuthenticated() == false) 
+  {
+    return response.send("Not aunthiticated").status(403);
+}
 return CustomerInfoModel.findOneAndUpdate({ 'id':request.params.id},
 
         {
@@ -1674,7 +1676,7 @@ function sendOrderReceivedSmstoVendor(order,phone,order_id)
 app.post( '/v1/vendor/order', function( request, response ) {
 
      console.log(request.headers);
- 	if(checkVendorApiAunthaticated(request,2) == false)
+ 	if(checkVendorApiAunthaticated(request,2) == false && request.isAuthenticated() == false)
 	{
 		return response.send("Not aunthiticated").status(403);
 	}
