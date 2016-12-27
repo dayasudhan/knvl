@@ -339,6 +339,26 @@ $scope.reset_password = function () {
           $scope.simpleGetCallResult = logResult("GET ERROR", data, status, headers, config);
         });
     };
+      
+      var app1 = angular.module('app1',[]);
+
+app1.controller('ctrl',['$scope',function($scope){
+
+  var toUTCDate = function(date){
+    var _utc = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),  date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+    return _utc;
+  };
+
+  var millisToUTCDate = function(millis){
+    return toUTCDate(new Date(millis));
+  };
+
+    $scope.toUTCDate = toUTCDate;
+    $scope.millisToUTCDate = millisToUTCDate;
+
+  }]);
+      
+      
     $scope.postOrder = function (ordarr) {
       console.log("postOrder");
       console.log(ordarr);
