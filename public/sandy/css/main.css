@@ -504,11 +504,6 @@ a, a:hover {
     padding: 0px 16px;
 }
 
-.btn-own {
-    background: #00b16a;
-    color: #ffffff;
-}
-
 /*
 .ordertime {
     margin: 0px auto;
@@ -853,6 +848,7 @@ a, a:hover {
     background: #4183D7;
     text-align: center;
     width: 100%;
+    height: 370px;
     float: left;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -1685,6 +1681,7 @@ input.qtyminus {
     background: #2285B5;
     text-align: center;
     width: 100%;
+    height: 370px;
     float: left;
     padding: 5px;
     -webkit-box-sizing: border-box;
