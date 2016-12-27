@@ -58,7 +58,7 @@
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                     <h4><center>Your Order Status</center></h4> </div>
                                                                 <div class="modal-body">
-                                                                    <div ng-repeat="tracker in OrderStatus[0].tracker"> <b>{{tracker.status}}</b> : {{tracker.time| date:'MMM d, y H:mm:ss a'}} </div>
+                                                                    <div ng-repeat="tracker in OrderStatus[0].tracker"> <b>{{tracker.status}}</b> : {{tracker.time| date:'MMM d, y H:mm:ss a Z'}} </div>
                                                                 </div>
                                                                 <div class="modal-footer trackback">
                                                                     <h4><center>Thank You ! Have a Nice Day</center></h4> </div>
