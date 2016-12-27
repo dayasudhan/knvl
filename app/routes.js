@@ -384,6 +384,52 @@ app.get('/p/admin_order_today', function (req, res) {
     res.render('admin_order_today', { user : req.user });
 });
 
+
+
+app.post('/reset', function(req, res, next) {
+console.log(req.body);
+  if(req.body.password != req.body.password2)
+  {
+     
+  console.log("password mimatchmatch");
+     return res.send('ERROR');
+  }
+  else
+  {
+    console.log("password match");
+  }
+  console.log('/reset');
+    passport.authenticate('local-reset', function(err, user, info) {
+     console.log(req.body);
+      if (err) { 
+        return next(err); }
+      if (!user) { 
+          return res.send("0");
+      }
+      req.logIn(user, function(err) {
+        if (err) { return next(err); }
+        console.log(req.body.role);
+        var redirect_url;
+        if(req.body.role == 'customer')
+        {
+       
+         return CustomerInfoModel.find({ 'phone':req.body.email},function( err, customerInfo ) {
+            if( !err ) {
+                return res.send( customerInfo );
+            } else {
+                console.log( err );
+                return res.send('ERROR');
+            }
+        });
+ 
+        return res.send("1");
+        }
+       
+      });
+    })(req, res, next);
+});
+
+
 app.post('/signup', function(req, res, next) {
 console.log(req.body);
   if(req.body.password != req.body.password2)
@@ -996,6 +1042,41 @@ app.post( '/v1/vendor/otp/confirm', function( req, res ) {
     });
 });
 
+app.post( '/v1/vendor/otp/confirm_for_web', function( req, res ) {
+    console.log('/v1/vendor/otp/confirm_for_web');
+    if(checkVendorApiAunthaticated(req,2) == false)
+    {
+     return res.send("Not aunthiticated").status(403);
+    }
+    console.log(req.body.phoneNumber);
+    console.log(req.body.otpText);
+
+    return OtpModel.find({ '_id':req.body.phoneNumber},function( err, otpInfo ) {
+        if( !err ) {
+            console.log(otpInfo);
+            console.log(otpInfo.otpnumber);
+            //console.log(otpInfo[0].otpnumber);
+            if(otpInfo.otpnumber == req.body.otpText)
+            {
+
+                return res.send("Success");
+               
+            }
+            else if(otpInfo[0].otpnumber == req.body.otpText)
+            {
+                 return res.send("Success");
+            }
+            else
+            {
+                return res.send("Error");
+            }
+        }
+        else {
+            console.log( err );
+            return res.send('ERROR');
+        }
+    });
+});
 
 app.post( '/v1/vendor/info/:id', function( req, res ) {
 if(checkVendorApiAunthaticated(req,1) == false && req.isAuthenticated() == false)

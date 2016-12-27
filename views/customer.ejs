@@ -309,7 +309,7 @@
                                                                             <li>
                                                                                 <input type="text" class="form-control inputphone" ng-model="forgot_phone" placeholder="Enter Mobile Number"> </li>
                                                                             <li>
-                                                                                <button type="button" class="btn btn-success alone" data-dismiss="modal" data-target="#otpModal" ng-click="">SUBMIT</button>
+                                                                                <button type="button" class="btn btn-success alone" data-dismiss="modal"                          ng-click="forgot_customer()">SUBMIT</button>
                                                                             </li>
                                                                         </ul>
                                                                     </div>
@@ -335,9 +335,10 @@
                                                                     <div class="form-group">
                                                                         <ul class="loglist">
                                                                             <li>
-                                                                                <input type="text" class="form-control inputphone" ng-model="" placeholder="Enter OTP"> </li>
+                                                                                <input type="text" class="form-control inputphone" ng-model="otp_text" placeholder="Enter OTP"> </li>
                                                                             <li>
-                                                                                <button type="button" class="btn btn-success alone" data-dismiss="modal" data-target="#newpwdModal" ng-click="">SUBMIT</button>
+
+                                                                                <button type="button" class="btn-success alone" data-dismiss="modal" ng-click="customer_otp_verify()">SUBMIT</button>                                                           
                                                                             </li>
                                                                         </ul>
                                                                     </div>
@@ -362,15 +363,18 @@
                                                                 <div class="modal-body">
                                                                     <div class="form-group">
                                                                         <ul class="loglist">
-                                                                            <li><input type="text" class="form-control inputphone" ng-model="signup_phone" placeholder="Mobile Number"></li>
+                                                                      reset_password()
                                                                             <li>
-                                                                                <input type="text" class="form-control inputphone" ng-model="" placeholder="Enter New Password"> </li>
+                                                                                <input type="password" id="pwd" class="form-control inputpwd" ng-model="forgot_password1" placeholder="New Password"> </li>
                                                                             <li>
-                                                                                <button type="button" class="btn btn-success alone" data-dismiss="modal" data-target="#Modal" ng-click="">SUBMIT</button>
+                                                                                <input type="password" id="pwd" class="form-control inputcpwd" ng-model="forgot_password2" placeholder="Confirm New Password"> </li>
+                                                                            <li>
+                                                                                <button type="button" class="btn btn-success alone" data-dismiss="modal" data-target="#Modal" ng-click="reset_password()">SUBMIT</button>
                                                                             </li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>
+
                                                                 <div class="modal-footer log">
                                                                     <h2>Not a Member yet ?</h2>
                                                                     <ul class="loglist">
@@ -466,7 +470,7 @@
         <script src="/sandy/js/bootstrap.js"></script>
         <script src="/sandy/js/vallenato.js"></script>
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
+<!--         <script>
             (function (b, o, i, l, e, r) {
                 b.GoogleAnalyticsObject = l;
                 b[l] || (b[l] = function () {
@@ -494,7 +498,7 @@
                 var map = new google.maps.Map(document.getElementById("map"), mapOptions);
             }
         </script>
-        <script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script> -->
 </body>
 
 </html>

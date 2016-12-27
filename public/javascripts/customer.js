@@ -156,34 +156,122 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
       
       
       $scope.forgot_customer = function () {
-      console.log("signup_customer");
+      console.log("forgot_customer");
       console.log($scope.forgot_phone);
      
       var signup_body = new Object();
 
-      signup_body.email = $scope.signup_phone;
+      signup_body.phoneNumber = $scope.forgot_phone;
       signup_body.role = "customer";
       console.log(signup_body);
-      var url = "/signup";
+      var url = "/v1/vendor/otp/register";
       
      
       $http.post(url, signup_body,config)
         .success(function (data, status, headers)
         {
-          console.log("Success in sign up post");
+          console.log("Success in forgot phonenumber post");
            
             console.log(data);
-            if(data  ==  0)
+
+              if(data == 'Success')
+              {
+                $scope.isOktocontinue = true;
+                $scope.phone = $scope.forgot_phone;
+                 console.log("success forgot_customer");
+                  $('#otpModal').modal('show'); 
+              }
+              else
+              {
+                console.log("else 1");
+                $scope.isOktocontinue = false;
+                $window.alert("Invalid Phone Number");
+              }
+          
+        })
+        .error(function (data, status, headers)
+        {
+          console.log("ERROR in forgot passowrd");
+        });
+    };
+
+
+      $scope.customer_otp_verify = function () {
+      console.log("customer_otp_verify");
+       console.log($scope.forgot_phone);
+       console.log( $scope.otp_text);
+      var signup_body = new Object();
+
+      signup_body.phoneNumber = $scope.forgot_phone;
+      signup_body.otpText = $scope.otp_text;
+      signup_body.role = "customer";
+      console.log(signup_body);
+      var url = "/v1/vendor/otp/confirm_for_web";
+      
+     
+      $http.post(url, signup_body,config)
+        .success(function (data, status, headers)
+        {
+          console.log("Success in otp verify post");
+           
+            console.log(data);
+           if(data == 'Success')
+              {
+                $scope.isOktocontinue = true;
+                $scope.phone = $scope.forgot_phone;
+                console.log("success customer_otp_verify");
+                 $('#newpwdModal').modal('show'); 
+
+              }
+             else
+              {
+                $scope.isOktocontinue = false;
+                console.log("error customer_otp_verify");
+                $window.alert("Invalid OTP");
+              }
+          
+        })
+        .error(function (data, status, headers)
+        {
+          console.log("ERROR in login");
+        });
+    };
+
+$scope.reset_password = function () {
+      console.log("reset_password");
+      console.log($scope.forgot_phone);
+      console.log($scope.forgot_password);
+      var signup_body = new Object();
+      signup_body.password = $scope.forgot_password1;
+      signup_body.email = $scope.forgot_phone;
+      signup_body.password2 = $scope.forgot_password2;
+      signup_body.role = "customer";
+      console.log(signup_body);
+      var url = "/reset";
+      
+     
+      $http.post(url, signup_body)
+        .success(function (data, status, headers)
+        {
+          console.log("Success in sign up post");
+           
+          
+            console.log(data[0]);
+            if(data  ==  0 || data == 'ERROR')
               {
             $scope.isLoggedIn = false;
-            $window.alert("Signup failed");
+            $window.alert("Password Reset failed");
               }
-          else
+              else
               {
-                  $scope.isLoggedIn = true;
-              $scope.profile = data;
+              $scope.isLoggedIn = true;
+              $scope.profile = data[0];
               $scope.phone = $scope.profile.phone;
               $scope.user = $scope.profile.name;
+              $window.alert("Password Reset Success");
+              console.log($scope.phone);
+              console.log($scope.user);
+
               }
             
           
@@ -195,13 +283,7 @@ customerApp.config( function ($stateProvider, $urlRouterProvider) {
           console.log("ERROR in login");
         });
     };
-
-    // $scope.signup = function()
-    // {
-    //    console.log("signup");
-    //     $('#signupModal').modal({ show: false})
-    // };
-
+    
      $scope.findRestaurantsByNearBy = function () {
     //  $scope.getCurrentAddress()
       console.log("findRestaurantsByNearBy");
