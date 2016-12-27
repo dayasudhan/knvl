@@ -96,7 +96,7 @@ textarea {
    ========================================================================== */
 
 body {
-    background: rgba(255, 255, 255, 0);
+    background: rgba(236, 240, 241, 1);
     font-family: 'Ubuntu Condensed', sans-serif;
     font-weight: normal;
     font-size: 16px;
@@ -130,9 +130,10 @@ a, a:hover {
 
 
 .mains {
-    background: url("../img/thisisit.jpg") no-repeat scroll 0 0;
+    background: url("../img/websiteposter.jpg") no-repeat scroll 0 0;
     background-size: cover !important;
     background-attachment: fixed !important;
+/*    background: #00b16a;*/
     float: left;
     clear: both;
     width: 100%;
@@ -349,6 +350,16 @@ a, a:hover {
 .khanaquotes {
     margin: 40px auto;
     text-align: center;
+    width: 100%;
+    padding: 15px;
+    float: left;
+    clear: both;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 8px;
 }
 
 .khanaquotes h1 {
@@ -389,7 +400,7 @@ a, a:hover {
     max-width: auto;
 /*    min-height: 90px;*/
     padding: 30px;
-    border-radius: 80px;
+    border-radius: 8px;
     width: 100%;
     float: left;
     clear: both;
@@ -491,6 +502,11 @@ a, a:hover {
     background-repeat: no-repeat;
     background-size: 16px 10px;
     padding: 0px 16px;
+}
+
+.btn-own {
+    background: #00b16a;
+    color: #ffffff;
 }
 
 /*
