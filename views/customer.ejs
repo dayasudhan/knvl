@@ -58,7 +58,7 @@
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                     <h4><center>Your Order Status</center></h4> </div>
                                                                 <div class="modal-body">
-                                                                    <div ng-repeat="tracker in OrderStatus[0].tracker"> <b>{{tracker.status}}</b> : {{tracker.time| date:'medium'}} </div>
+                                                                    <div ng-repeat="tracker in OrderStatus[0].tracker"> <b>{{tracker.status}}</b> : {{tracker.time| date:'MMM d, y H:mm:ss a Z'}} </div>
                                                                 </div>
                                                                 <div class="modal-footer trackback">
                                                                     <h4><center>Thank You ! Have a Nice Day</center></h4> </div>
@@ -338,7 +338,7 @@
                                                                                 <input type="text" class="form-control inputphone" ng-model="otp_text" placeholder="Enter OTP"> </li>
                                                                             <li>
 
-                                                                                <button type="button" class="btn-success alone" data-dismiss="modal" ng-click="customer_otp_verify()">SUBMIT</button>                                                           
+                                                                                <button type="button" class="btn btn-success alone" data-dismiss="modal" ng-click="customer_otp_verify()">SUBMIT</button>                                                           
                                                                             </li>
                                                                         </ul>
                                                                     </div>
@@ -363,7 +363,6 @@
                                                                 <div class="modal-body">
                                                                     <div class="form-group">
                                                                         <ul class="loglist">
-                                                                      reset_password()
                                                                             <li>
                                                                                 <input type="password" id="pwd" class="form-control inputpwd" ng-model="forgot_password1" placeholder="New Password"> </li>
                                                                             <li>
@@ -469,6 +468,11 @@
         <script src="/sandy/js/main.js"></script>
         <script src="/sandy/js/bootstrap.js"></script>
         <script src="/sandy/js/vallenato.js"></script>
+        <script src="/sandy/js/moment.js"></script>
+            
+            <script>
+    moment().format();
+</script>
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <!--         <script>
             (function (b, o, i, l, e, r) {
