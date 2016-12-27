@@ -551,6 +551,7 @@ $scope.reset_password = function () {
     };
     $scope.getCityCoverage = function(){
       console.log("getCityCoverage");
+      initprofile2();
       var url = "/v1/admin/coverageArea";
       $http.get(url,config)
         .success(function (data, status, headers, config)
@@ -582,6 +583,7 @@ $scope.reset_password = function () {
            $scope.selectedAreaIndex = 0;
 
       console.log($scope.cityCoverage);
+      
         })
         .error(function (data, status, headers, config)
         {
@@ -661,19 +663,32 @@ $scope.reset_password = function () {
           console.log(data);
         });
     };  
-     function initprofile()
+     function initprofile2()
       {
-          var url = "/v1/customer/phone/";
-          url = url + $scope.profile.phone;
+        console.log("initprofile2");
+          var url = "/v1/customer/";
+          //url = url + $scope.profile.phone;
           $http.get(url).success(function (data, status, headers)
         {
           console.log("Success in get");
-          console.log(data);
+          // console.log(data);
          
+         if(data  ==  0)
+          {
+            $scope.isLoggedIn = false;
           
+          }
+          else
+          {
+            $scope.isLoggedIn = true;
+          }
+          console.log($scope.isLoggedIn);
           $scope.profile = data[0];
           console.log($scope.profile);
           console.log($scope.profile.name);
+          $scope.phone = $scope.profile.phone;
+          $scope.user = $scope.profile.name;
+           $scope.isLoggedIn = true;
         })
         .error(function (data, status, headers)
         {

@@ -636,16 +636,14 @@ app.post( '/v1/customer/address/:id', function( request, response ) {
 	 });
 
 app.get( '/v1/customer', function( request, response ) {
-    console.log(request.user.local);
-     console.log(request.user.local.email);
-  
-     return CustomerInfoModel.find({ 'id':request.user.local.email},function( err, customerInfo ) {
+     return CustomerInfoModel.find({ 'phone':request.user.local.email},function( err, customerInfo ) {
         if( !err ) {
             return response.send( customerInfo );
         } else {
             console.log( err );
             return response.send('ERROR');
         }
+   
     });
  // });
 });
@@ -1937,8 +1935,10 @@ app.post( '/v1/admin/coverageArea', function( request, response ) {
 	{
 		return response.send("Not aunthiticated").status(403);
 	}
-     console.log(request.body);
 
+    // console.log(request.body);
+     console.log("request.user");
+console.log(request.user);
      var dd = {'cityName':request.body.cityName};
      var coverageArea = new CoverageAreaModel(
          dd);
@@ -1989,6 +1989,8 @@ app.get( '/v1/admin/coverageArea', function( request, response ) {
   	{
   		return response.send("Not aunthiticated").status(403);
   	}
+    console.log("request.user");
+console.log(request.user);
 	    return CoverageAreaModel.find(function( err, order ) {
 	        if( !err ) {
 	            console.log("no error");
