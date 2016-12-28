@@ -1472,7 +1472,7 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
               menu_array = vendor[j].menu;
               var new_menu_array = [];
               for (var i = 0; i < menu_array.length; i++) {
-                    iif((menu_array[i].timings & current_time) && (menu_array[i].availability == 1))
+                    if((menu_array[i].timings & current_time) && (menu_array[i].availability == 1))
                     {
                       new_menu_array.push(menu_array[i]);
                     }
