@@ -1560,7 +1560,8 @@ input.qtyminus {
     margin: 20px auto;
     float: left;
     width: 100%;
-    background: url("../img/this.jpg") repeat scroll 0 0;
+    background: #eeeeee;
+/*    background: url("../img/this.jpg") repeat scroll 0 0;*/
     border: 3px solid #ffffff;
     -webkit-box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);
     -moz-box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);
