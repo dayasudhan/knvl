@@ -82,7 +82,7 @@
 <div class="sectionsix">
     <div class="container">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="khannaam" ng-app="StarOfMonth" ng-controller="OodlesRatingCtrl">
+            <div class="khannaam">
                 <h2 ng-click="currentHotel($index)"><b>{{hotel.hotel.name}}</b></h2> 
                 <p>Native Style</p>
                 <div class="khannaammenu">
@@ -91,11 +91,6 @@
                                             <h5>{{hotel.deliveryTime}} Mins</h5> </li>
                                         <li>
                                             <h5>Min. &#8377; {{hotel.minimumOrder}}</h5> </li>
-                                        <li><div ng-init="rating = star.rating + 1"></div>
-
-<div class="star-rating" star-rating rating-value="rating"
-
- data-max="10" on-rating-selected="rateFunction(rating)"></div></li>
                                     </ul>
                                 </div>
             </div>
