@@ -238,9 +238,21 @@ a, a:hover {
     color: #F39C12;
 }
 
-.menu li a span::after {
+.menu li a .homey::after {
+    content: "" ;
+    background: url('../img/homey.png') no-repeat;
+    padding-left: 22px;
+}
+
+.menu li a .android::after {
     content: "" ;
     background: url('../img/newandroid.png') no-repeat;
+    padding-left: 22px;
+}
+
+.menu li a .logicon::after {
+    content: "" ;
+    background: url('../img/logs.png') no-repeat;
     padding-left: 22px;
 }
 
