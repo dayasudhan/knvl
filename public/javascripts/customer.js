@@ -295,6 +295,7 @@ $scope.reset_password = function () {
       $http.get(url,config)
         .success(function (data, status, headers, config)
         {
+
           $scope.hotellist = data;
         })
         .error(function (data, status, headers, config)
@@ -313,7 +314,7 @@ $scope.reset_password = function () {
       $http.get(url,config)
         .success(function (data, status, headers, config)
         {
-          
+           
           $scope.hotellist = data;
         })
         .error(function (data, status, headers, config)
