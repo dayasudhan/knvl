@@ -150,6 +150,15 @@
                                     </ul>
                                 </div>
                             </div>
+                            <div class="timings">
+                                <div class="timemenu">
+                                    <ul class="timelist">
+                                        <li><i class="fa fa-sun-o  fa-lg fa-fw"></i>&nbsp; <b>BREAKFAST:</b> {{hotel.orderAcceptTimings.Morning.startTime}} - {{hotel.orderAcceptTimings.Morning.endTime}} <b>;</b> <i class="fa fa-clock-o  fa-lg fa-fw"></i>:&nbsp; {{hotel.orderAcceptTimings.Morning.available}}</li>
+                                        <li><i class="fa fa-cloud  fa-lg fa-fw"></i>&nbsp; <b>LUNCH:</b> {{hotel.orderAcceptTimings.Lunch.startTime}} - {{hotel.orderAcceptTimings.Lunch.endTime}} <b>;</b> <i class="fa fa-clock-o  fa-lg fa-fw"></i>:&nbsp; {{hotel.orderAcceptTimings.Lunch.available}}</li>
+                                        <li><i class="fa fa-moon-o fa-lg fa-fw"></i>&nbsp; <b>DINNER:</b> {{hotel.orderAcceptTimings.Dinner.startTime}} - {{hotel.orderAcceptTimings.Dinner.endTime}} <b>;</b> <i class="fa fa-clock-o  fa-lg fa-fw"></i>:&nbsp; {{hotel.orderAcceptTimings.Dinner.available}}</li>
+                                    </ul>
+                                </div>
+                            </div>
                             <div class="bannen">
                                 <a ui-sref="menu" ng-click="currentHotel($index)">
                                     <button type="button" class="btn btn-danger btn-lg">MENU</button>
