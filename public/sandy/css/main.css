@@ -141,7 +141,7 @@ a, a:hover {
 
 .headup {
     width: 100%;
-    margin-top: 2%;
+    margin: 0px auto;
     border-radius: 6px;
     float: left;
     clear: both;
@@ -351,12 +351,19 @@ a, a:hover {
 }
 
 .sectionone {
+/*
     margin: 20px auto;
     width: 100%;
-/*
     float: left;
     clear: both;
 */
+    background: url("../img/websiteposter.jpg") no-repeat scroll 0 0;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+/*    background: #00b16a;*/
+    float: left;
+    clear: both;
+    width: 100%;
 }
 
 .khanaquotes {
@@ -376,8 +383,7 @@ a, a:hover {
 
 .khanaquotes h1 {
     color: #ffffff;
-    font-size: 40px;
-    margin-top: 15px;
+    margin-top: 5px;
     text-shadow: 6px 6px 6px #000 ; 
 }
 
@@ -393,14 +399,19 @@ a, a:hover {
 
 .khanaquotes h2 {
     color: #ffffff;
-    font-size: 30px;
-    margin-top: 15px;
+    margin-top: 5px;
+    text-shadow: 6px 6px 6px #000 ; 
+}
+
+.khanaquotes h3 {
+    color: #ffffff;
+    margin-top: 5px;
     text-shadow: 6px 6px 6px #000 ; 
 }
 
 .khanaquotes p {
     color: #ffffff;
-    font-size: 20px;
+    margin-top: 5px;
     text-shadow: 6px 6px 6px #000 ; 
 }
 
@@ -1481,7 +1492,6 @@ input.qtyminus {
 
 .contact {
     margin: 30px auto;
-    background: url("../img/leaf.jpg") no-repeat;
     float: left;
     clear: both;
     width: 100%;
@@ -1799,13 +1809,10 @@ input.qtyminus {
 }
 
 .footnotes {
-    margin: 12px auto;
+    margin: 0px auto;
     width: 100%;
     float: left;
     clear: both;
-    background: url("../img/thi.jpg") no-repeat scroll 0 0;
-    background-size: cover !important;
-    background-attachment: fixed !important;
 }
 
 .footmenu {
@@ -1828,7 +1835,7 @@ input.qtyminus {
 }
 
 .footlist li a:hover {
-    color: #FFFFFF;
+    color: #674172;
 }
 
 .footcopy {
@@ -1838,7 +1845,7 @@ input.qtyminus {
 
 .footcopy p {
     font-size: 16px;
-    color: #ffffff;
+    color: #E87E04;
     text-align: center;
 }
 
