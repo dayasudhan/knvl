@@ -1,10 +1,12 @@
 /*! HTML5 Boilerplate v5.3.0 | MIT License | https://html5boilerplate.com/ */
 
+
 /*
  * What follows is the result of much research on cross-browser styling.
  * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
  * Kroc Camen, and the H5BP dev community and team.
  */
+
 
 /* ==========================================================================
    Base styles: opinionated defaults
@@ -15,6 +17,7 @@ html {
     font-size: 1em;
     line-height: 1.4;
 }
+
 
 /*
  * Remove text-shadow in selection highlight:
@@ -34,6 +37,7 @@ html {
     text-shadow: none;
 }
 
+
 /*
  * A better looking default horizontal rule
  */
@@ -46,6 +50,7 @@ hr {
     margin: 1em 0;
     padding: 0;
 }
+
 
 /*
  * Remove the gap between audio, canvas, iframes,
@@ -62,6 +67,7 @@ video {
     vertical-align: middle;
 }
 
+
 /*
  * Remove default fieldset styles.
  */
@@ -72,6 +78,7 @@ fieldset {
     padding: 0;
 }
 
+
 /*
  * Allow only vertical resizing of textareas.
  */
@@ -79,6 +86,7 @@ fieldset {
 textarea {
     resize: vertical;
 }
+
 
 /* ==========================================================================
    Browser Upgrade Prompt
@@ -90,6 +98,7 @@ textarea {
     color: #000;
     padding: 0.2em 0;
 }
+
 
 /* ==========================================================================
    Author's custom styles
@@ -108,7 +117,9 @@ body {
     box-sizing: border-box;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     border: 0 none;
     box-sizing: border-box;
     margin: 0;
@@ -124,16 +135,16 @@ ul {
     list-style-type: none;
 }
 
-a, a:hover {
+a,
+a:hover {
     text-decoration: none;
 }
-
 
 .mains {
     background: url("../img/websiteposter.jpg") no-repeat scroll 0 0;
     background-size: cover !important;
     background-attachment: fixed !important;
-/*    background: #00b16a;*/
+    /*    background: #00b16a;*/
     float: left;
     clear: both;
     width: 100%;
@@ -141,7 +152,7 @@ a, a:hover {
 
 .headup {
     width: 100%;
-    margin-top: 2%;
+    margin: 0px auto;
     border-radius: 6px;
     float: left;
     clear: both;
@@ -168,7 +179,7 @@ a, a:hover {
     padding: 10px;
     float: left;
     clear: both;
-} 
+}
 
 .tracks {
     float: right;
@@ -223,7 +234,7 @@ a, a:hover {
 .menu li {
     display: inline-block;
     padding: 0px 38px 0 38px;
-    text-align: center;  
+    text-align: center;
 }
 
 .menu li a {
@@ -238,11 +249,24 @@ a, a:hover {
     color: #F39C12;
 }
 
-.menu li a span::after {
-    content: "" ;
+.menu li a .homey::after {
+    content: "";
+    background: url('../img/homey.png') no-repeat;
+    padding-left: 22px;
+}
+
+.menu li a .android::after {
+    content: "";
     background: url('../img/newandroid.png') no-repeat;
     padding-left: 22px;
 }
+
+.menu li a .logicon::after {
+    content: "";
+    background: url('../img/logs.png') no-repeat;
+    padding-left: 22px;
+}
+
 
 /*
 .applinks li {
@@ -252,7 +276,7 @@ a, a:hover {
 
 .profedit a {
     cursor: pointer;
-/*    background: url("../img/profile.png") no-repeat left center;*/
+    /*    background: url("../img/profile.png") no-repeat left center;*/
 }
 
 .profedit .profiledit {
@@ -325,12 +349,12 @@ a, a:hover {
 }
 
 .loglist li .forgot {
-    color: #E08283; 
+    color: #E08283;
     text-align: center;
 }
 
 .loglist li .forgot:hover {
-    color: #D24D57; 
+    color: #D24D57;
 }
 
 .loglist li .alone {
@@ -339,12 +363,19 @@ a, a:hover {
 }
 
 .sectionone {
+    /*
     margin: 20px auto;
     width: 100%;
-/*
     float: left;
     clear: both;
 */
+    background: url("../img/websiteposter.jpg") no-repeat scroll 0 0;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    /*    background: #00b16a;*/
+    float: left;
+    clear: both;
+    width: 100%;
 }
 
 .khanaquotes {
@@ -364,32 +395,36 @@ a, a:hover {
 
 .khanaquotes h1 {
     color: #ffffff;
-    font-size: 40px;
-    margin-top: 15px;
-    text-shadow: 6px 6px 6px #000 ; 
+    margin-top: 5px;
+    text-shadow: 6px 6px 6px #000;
 }
 
 .khanaquotes h1 span:first-of-type {
     color: #F5AB35;
-    text-shadow: 3px 3px 3px #000 ; 
+    text-shadow: 3px 3px 3px #000;
 }
 
 .khanaquotes h1 span:last-of-type {
     color: #CF000F;
-    text-shadow: 3px 3px 3px #000 ; 
+    text-shadow: 3px 3px 3px #000;
 }
 
 .khanaquotes h2 {
     color: #ffffff;
-    font-size: 30px;
-    margin-top: 15px;
-    text-shadow: 6px 6px 6px #000 ; 
+    margin-top: 5px;
+    text-shadow: 6px 6px 6px #000;
+}
+
+.khanaquotes h3 {
+    color: #ffffff;
+    margin-top: 5px;
+    text-shadow: 6px 6px 6px #000;
 }
 
 .khanaquotes p {
     color: #ffffff;
-    font-size: 20px;
-    text-shadow: 6px 6px 6px #000 ; 
+    margin-top: 5px;
+    text-shadow: 6px 6px 6px #000;
 }
 
 .finderkeepers {
@@ -398,13 +433,14 @@ a, a:hover {
     margin-left: auto;
     margin-bottom: 50px;
     max-width: auto;
-/*    min-height: 90px;*/
+    /*    min-height: 90px;*/
     padding: 30px;
     border-radius: 8px;
     width: 100%;
     float: left;
     clear: both;
 }
+
 
 /*
 .findernav {
@@ -504,6 +540,7 @@ a, a:hover {
     padding: 0px 16px;
 }
 
+
 /*
 .ordertime {
     margin: 0px auto;
@@ -563,7 +600,7 @@ a, a:hover {
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
     box-sizing: border-box;
-/*
+    /*
     background: rgba(0, 0, 0, 0.3);
 */
 }
@@ -594,7 +631,7 @@ a, a:hover {
 
 .sectionfour {
     margin: 0px auto;
-/*    min-height: 800px;*/
+    /*    min-height: 800px;*/
     float: left;
     width: 100%;
     clear: both;
@@ -603,7 +640,7 @@ a, a:hover {
 
 .sectionfive {
     margin: 0px auto;
-/*    min-height: 800px;*/
+    /*    min-height: 800px;*/
     float: left;
     width: 100%;
     clear: both;
@@ -611,7 +648,7 @@ a, a:hover {
 }
 
 .khaanagalu {
-/*    margin: 10px auto;*/
+    /*    margin: 10px auto;*/
     padding: 5px;
     width: 100%;
     float: left;
@@ -631,7 +668,7 @@ a, a:hover {
     width: 100%;
     float: left;
     max-height: 100px;
-/*    background: #C8F7C5;*/
+    /*    background: #C8F7C5;*/
     border: 1px solid #F9690E;
     border-radius: 5px;
     margin: 10px auto;
@@ -665,7 +702,7 @@ a, a:hover {
     text-align: left;
     color: #FFFFFF;
     font-size: 26px;
-    text-shadow: 6px 6px 6px #000 ;
+    text-shadow: 6px 6px 6px #000;
 }
 
 .hotelist li .wrapper .bandescription p {
@@ -674,6 +711,18 @@ a, a:hover {
     text-align: left;
     font-style: italic;
     color: #000000;
+}
+
+.hotelist li .wrapper .timings {
+    padding-left: 2em;
+    float: left;
+    margin: 0px auto;
+}
+
+.hotelist li .wrapper .timing {
+    padding-left: 2em;
+    float: left;
+    margin: 0px auto;
 }
 
 .hotelist li .wrapper .bannen {
@@ -708,14 +757,50 @@ a, a:hover {
 }
 
 .kmenu .khlist li h5 {
-    color: #000000 ;
+    color: #000000;
     font-size: 16px;
     margin: 0px auto;
 }
 
+.timemenu {
+    margin: 0px auto;
+    width: 100%;
+}
+
+.timemenu .timelist li {
+    display: block;
+    padding-right: 30px;
+}
+
+.timemenu .timelist li h5 {
+    color: #000000;
+    font-size: 16px;
+    margin: 0px auto;
+}
+
+.timmenu {
+    margin: 0px auto;
+    width: 100%;
+}
+
+.timmenu .timlist li {
+    display: inline-block;
+    padding-right: 30px;
+}
+
+.timmenu .timelist li h5 {
+    color: #000000;
+    font-size: 16px;
+    margin: 0px auto;
+}
+
+.tabux {
+    background: #F9BF3B;
+}
+
 .sectionsix {
     margin: 0px auto;
-/*    min-height: 800px;*/
+    /*    min-height: 800px;*/
     float: left;
     width: 100%;
     clear: both;
@@ -734,7 +819,7 @@ a, a:hover {
     text-align: center;
     color: #FFFFFF;
     font-size: 26px;
-    text-shadow: 6px 6px 6px #000 ;
+    text-shadow: 6px 6px 6px #000;
 }
 
 .khannaam p {
@@ -761,7 +846,7 @@ a, a:hover {
 }
 
 .khannaamlist li h5 {
-    color: #000000 ;
+    color: #000000;
     font-size: 16px;
     margin: 0px auto;
 }
@@ -771,10 +856,25 @@ a, a:hover {
     border: 1px solid green;
     padding: 10px;
     overflow-x: auto;
+    border-radius: 10px;
 }
 
 .menselect table .tabcent {
     text-align: center;
+}
+
+.menselect table .tabcents {
+    text-align: center;
+}
+
+.menselect table .tabcents b {
+    font-size: 20px;
+}
+
+.menselect table .tabcents img {
+    margin-right: 12px;
+    width: 150px;
+    height: 75px;
 }
 
 .menselect table .tabbold {
@@ -783,7 +883,7 @@ a, a:hover {
 }
 
 .menselect .grand {
-    border: 1px solid #19B5FE;
+    border: 1px solid #2C3E50;
     text-align: center;
     padding: 5px;
     font-weight: 800;
@@ -821,7 +921,7 @@ a, a:hover {
     padding: 5px;
     font-weight: 800;
     color: #96281B;
-} 
+}
 
 .deladdresspart {
     margin: 0px auto;
@@ -833,7 +933,7 @@ a, a:hover {
     width: 50%;
     border: 1px solid #4183D7;
     display: inline-block;
-/*    vertical-align: top;*/
+    /*    vertical-align: top;*/
     clear: both;
     padding: 5px;
     -webkit-box-sizing: border-box;
@@ -877,7 +977,7 @@ a, a:hover {
 .deladdresslist li .deladdlistt .deladddetails li {
     display: block;
     width: 100%;
-    border: 0 none; 
+    border: 0 none;
     clear: both;
     text-align: left;
 }
@@ -889,8 +989,8 @@ a, a:hover {
 
 .deladdresslist li .deladdlistt .deladddetails li p span {
     color: #ffffff;
-    font-weight: 500; !important
-    text-transform: capitalize;
+    font-weight: 500;
+    !important text-transform: capitalize;
 }
 
 .delete {
@@ -899,7 +999,7 @@ a, a:hover {
 }
 
 .marg {
-    margin:5px auto;
+    margin: 5px auto;
 }
 
 .confirmdetails {
@@ -971,12 +1071,13 @@ a, a:hover {
 }
 
 .mordlist li .lone {
-    color: #E08283; !important
-    text-align: center;
+    color: #E08283;
+    !important text-align: center;
 }
 
 .mordlist li .lone:hover {
-    color: red; !important
+    color: red;
+    !important
 }
 
 .mordlist li .alone {
@@ -993,7 +1094,7 @@ a, a:hover {
 .thank {
     border: 1px solid #019875;
     padding: 20px;
-    margin:20px auto;
+    margin: 20px auto;
 }
 
 .thank h1 {
@@ -1003,15 +1104,15 @@ a, a:hover {
 }
 
 .thank h1 .t {
-    color: #F7CA18; 
+    color: #F7CA18;
 }
 
 .thank h1 .th {
-    color: #22313F; 
+    color: #22313F;
 }
 
 .thank h1 .oid {
-    color: #BE90D4; 
+    color: #BE90D4;
 }
 
 .thank p {
@@ -1029,14 +1130,14 @@ a, a:hover {
     text-align: center;
 }
 
-input.qtyplus { 
-    width:25px; 
-    height:25px;
+input.qtyplus {
+    width: 25px;
+    height: 25px;
 }
 
-input.qtyminus { 
-    width:25px; 
-    height:25px;
+input.qtyminus {
+    width: 25px;
+    height: 25px;
 }
 
 .sectioneight {
@@ -1153,9 +1254,9 @@ input.qtyminus {
 }
 
 .teamdesc {
-   text-align: center;
-   width: 500px;
-   height: auto;
+    text-align: center;
+    width: 500px;
+    height: auto;
 }
 
 .teamdesc h6 {
@@ -1251,12 +1352,12 @@ input.qtyminus {
 }
 
 .topichead {
-    clear:both;
+    clear: both;
 }
 
 .topichead img {
-   width: auto;
-   max-height: 400px;
+    width: auto;
+    max-height: 400px;
 }
 
 .topicbody {
@@ -1305,32 +1406,37 @@ input.qtyminus {
     width: 100%;
     float: left;
     clear: both;
-} 
-
-.bloglist li { 
-    display:inline-block; 
-    margin:0 10px; 
-    vertical-align: top; 
 }
 
-.bloglist li a { 
-    display:block; 
-    width:50px;
-    height:60px;
-    border:0px;
-    text-indent:-1000em;
+.bloglist li {
+    display: inline-block;
+    margin: 0 10px;
+    vertical-align: top;
+}
+
+.bloglist li a {
+    display: block;
+    width: 50px;
+    height: 60px;
+    border: 0px;
+    text-indent: -1000em;
     background: url("../img/social.png") no-repeat center;
 }
 
-#s8 { background-position:-37px 0px; }
-#s9 { background-position:-216px 0px; }
+#s8 {
+    background-position: -37px 0px;
+}
+
+#s9 {
+    background-position: -216px 0px;
+}
 
 .getapp {
     width: 100%;
     float: left;
-    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
     clear: both;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -1349,10 +1455,10 @@ input.qtyminus {
 .getrecipe {
     width: 100%;
     float: left;
-    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    -o-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    -o-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
     clear: both;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -1387,10 +1493,10 @@ input.qtyminus {
 .archives {
     width: 100%;
     float: left;
-    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    -o-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    -o-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
     clear: both;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -1424,7 +1530,7 @@ input.qtyminus {
 .sectioneleven {
     margin: 20px auto;
     min-height: 800px;
-    clear: both;    
+    clear: both;
 }
 
 .career {
@@ -1449,7 +1555,7 @@ input.qtyminus {
 
 .carbody p {
     font-size: 16px;
-    font-family: 'Ubuntu Condensed', sans-serif; 
+    font-family: 'Ubuntu Condensed', sans-serif;
 }
 
 .cartail {
@@ -1469,11 +1575,10 @@ input.qtyminus {
 
 .contact {
     margin: 30px auto;
-    background: url("../img/leaf.jpg") no-repeat;
     float: left;
     clear: both;
     width: 100%;
-/*
+    /*
     padding-top: 3px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -1513,35 +1618,55 @@ input.qtyminus {
     font-weight: 600;
 }
 
-.sociallist li { 
-    display:inline-block; 
-    margin:0 10px; 
-    vertical-align: top; 
+.sociallist li {
+    display: inline-block;
+    margin: 0 10px;
+    vertical-align: top;
 }
 
-.sociallist li a { 
-    display:block; 
-    width:50px;
-    height:60px;
-    border:0px;
-    text-indent:-1000em;
+.sociallist li a {
+    display: block;
+    width: 50px;
+    height: 60px;
+    border: 0px;
+    text-indent: -1000em;
     background: url("../img/social.png") no-repeat center;
 }
 
-#s1 { background-position:-37px 0px; }
-#s2 { background-position:-97px 0px; }
-#s3 { background-position:-186px -57px; }
-#s4 { background-position:-127px -57px; }
-#s5 { background-position:-156px 0px; }
-#s6 { background-position:-216px 0px; }
-#s7 { background-position:-246px -57px; }
+#s1 {
+    background-position: -37px 0px;
+}
+
+#s2 {
+    background-position: -97px 0px;
+}
+
+#s3 {
+    background-position: -186px -57px;
+}
+
+#s4 {
+    background-position: -127px -57px;
+}
+
+#s5 {
+    background-position: -156px 0px;
+}
+
+#s6 {
+    background-position: -216px 0px;
+}
+
+#s7 {
+    background-position: -246px -57px;
+}
 
 .maps {
     margin: 30px auto;
     width: 100%;
     float: left;
     clear: both;
-/*
+    /*
     padding: 5px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -1560,12 +1685,13 @@ input.qtyminus {
     margin: 20px auto;
     float: left;
     width: 100%;
-    background: url("../img/this.jpg") repeat scroll 0 0;
-    border: 3px solid #ffffff;
-    -webkit-box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);
-    -moz-box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);
-    -o-box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);
-    box-shadow: 2px 2px 2px 0px rgba(108, 122, 137,0.75);
+    background: #eeeeee;
+    /*    background: url("../img/this.jpg") repeat scroll 0 0;*/
+    border: 3px solid #22313f;
+    -webkit-box-shadow: 2px 2px 2px 0px rgba(108, 122, 137, 0.75);
+    -moz-box-shadow: 2px 2px 2px 0px rgba(108, 122, 137, 0.75);
+    -o-box-shadow: 2px 2px 2px 0px rgba(108, 122, 137, 0.75);
+    box-shadow: 2px 2px 2px 0px rgba(108, 122, 137, 0.75);
     clear: both;
 }
 
@@ -1580,7 +1706,7 @@ input.qtyminus {
 }
 
 .edt {
-    float:right;
+    float: right;
     width: auto;
 }
 
@@ -1613,7 +1739,7 @@ input.qtyminus {
     color: #000000;
     font-weight: 500;
     text-transform: capitalize;
-} 
+}
 
 .adderslist li {
     display: block;
@@ -1693,7 +1819,7 @@ input.qtyminus {
 .addresslist li .addlistt .adddetails li {
     display: block;
     width: 100%;
-    border: 0 none; 
+    border: 0 none;
     clear: both;
     text-align: left;
     padding: 5px;
@@ -1710,8 +1836,8 @@ input.qtyminus {
 
 .addresslist li .addlistt .adddetails li p span {
     color: #ffffff;
-    font-weight: 500; !important
-    text-transform: capitalize;
+    font-weight: 500;
+    !important text-transform: capitalize;
 }
 
 .edel {
@@ -1755,13 +1881,13 @@ input.qtyminus {
 }
 
 .privacy .para {
-   font-weight: 500;
-   font-size: 18px;  
+    font-weight: 500;
+    font-size: 18px;
 }
 
 .privacy .para a {
-   font-weight: 500;
-   font-size: 18px;
+    font-weight: 500;
+    font-size: 18px;
 }
 
 .sectionfifteen {
@@ -1770,7 +1896,7 @@ input.qtyminus {
     clear: both;
 }
 
-.terms{
+.terms {
     margin: 10px auto;
 }
 
@@ -1786,13 +1912,10 @@ input.qtyminus {
 }
 
 .footnotes {
-    margin: 12px auto;
+    margin: 0px auto;
     width: 100%;
     float: left;
     clear: both;
-    background: url("../img/thi.jpg") no-repeat scroll 0 0;
-    background-size: cover !important;
-    background-attachment: fixed !important;
 }
 
 .footmenu {
@@ -1815,7 +1938,7 @@ input.qtyminus {
 }
 
 .footlist li a:hover {
-    color: #FFFFFF;
+    color: #674172;
 }
 
 .footcopy {
@@ -1825,26 +1948,63 @@ input.qtyminus {
 
 .footcopy p {
     font-size: 16px;
-    color: #ffffff;
+    color: #E87E04;
     text-align: center;
 }
 
 @media only screen and (min-width: 320px) {
-    .tracks { float: none; }
-    .menu li { display: inline-block; padding: 0px 16px; }
-    .tracklist { left: 65px; }
-    .findernav li { float: none; text-align: center; margin: 10px 0px; }
-    .deladdresslist li { width: 100%; }
-    .addresslist li { width: 100%; }
-    .teamli li { width: 100%; }
-    .teamdesc { width: inherit; }
-    .techlist li { width: 100%; display: block; margin-top: 6px; }
-    .footlist li { display: block; padding-right: 0px; }
-    .knowmenu li { display: block; width: 100%; }
-    .hotelist li .wrapper { max-height: 100%; }
-    .hotelist li .wrapper .banner { float: none; width: 100%; height: auto; }
-    .profedit .profiledit { left: -13em; }
-/*
+    .tracks {
+        float: none;
+    }
+    .menu li {
+        display: inline-block;
+        padding: 0px 16px;
+    }
+    .tracklist {
+        left: 65px;
+    }
+    .findernav li {
+        float: none;
+        text-align: center;
+        margin: 10px 0px;
+    }
+    .deladdresslist li {
+        width: 100%;
+    }
+    .addresslist li {
+        width: 100%;
+    }
+    .teamli li {
+        width: 100%;
+    }
+    .teamdesc {
+        width: inherit;
+    }
+    .techlist li {
+        width: 100%;
+        display: block;
+        margin-top: 6px;
+    }
+    .footlist li {
+        display: block;
+        padding-right: 0px;
+    }
+    .knowmenu li {
+        display: block;
+        width: 100%;
+    }
+    .hotelist li .wrapper {
+        max-height: 100%;
+    }
+    .hotelist li .wrapper .banner {
+        float: none;
+        width: 100%;
+        height: auto;
+    }
+    .profedit .profiledit {
+        left: -13em;
+    }
+    /*
     .selectouter { width: 100%; display: block;}
     .timemenu li { width: 100%; border-right: none; }
     .hotelist li .wrapper .bannen { height: auto; }
@@ -1852,16 +2012,27 @@ input.qtyminus {
     input.qtyplus { width: 15px; }
     input.qtyminus { width: 15px; }
 */
-    
 }
 
 @media only screen and (min-width: 360px) {
-    .tracks { float: none; }
-    .menu li { display: inline-block; padding: 0px 17px; }
-    .tracklist { left: 86px; }
-    .footlist li { display: block; padding-right: 0px; }
-    .addresslist li { width: 100%; }
-/*
+    .tracks {
+        float: none;
+    }
+    .menu li {
+        display: inline-block;
+        padding: 0px 17px;
+    }
+    .tracklist {
+        left: 86px;
+    }
+    .footlist li {
+        display: block;
+        padding-right: 0px;
+    }
+    .addresslist li {
+        width: 100%;
+    }
+    /*
     .qty { width: 15px; }
     input.qtyplus { width: 15px; }
     input.qtyminus { width: 15px; }
@@ -1869,11 +2040,21 @@ input.qtyminus {
 }
 
 @media only screen and (min-width: 380px) {
-    .tracks { float: none; }
-    .menu li { display: inline-block; padding: 0px 20px; }
-    .tracklist { left: 100px; }
-    .footlist li { display: block; padding-right: 0px; }
-/*
+    .tracks {
+        float: none;
+    }
+    .menu li {
+        display: inline-block;
+        padding: 0px 20px;
+    }
+    .tracklist {
+        left: 100px;
+    }
+    .footlist li {
+        display: block;
+        padding-right: 0px;
+    }
+    /*
     .qty { width: 15px; }
     input.qtyplus { width: 15px; }
     input.qtyminus { width: 15px; }
@@ -1881,81 +2062,194 @@ input.qtyminus {
 }
 
 @media only screen and (min-width: 400px) {
-    .tracks { float: none; }
-    .menu li { display: inline-block; padding: 0px 23px; }
-    .tracklist { left: 105px; }
-    .footlist li { display: block; padding-right: 0px; }
+    .tracks {
+        float: none;
+    }
+    .menu li {
+        display: inline-block;
+        padding: 0px 23px;
+    }
+    .tracklist {
+        left: 105px;
+    }
+    .footlist li {
+        display: block;
+        padding-right: 0px;
+    }
 }
 
 @media only screen and (min-width: 420px) {
-    .tracks { float: none; }
-    .menu li { display: inline-block; padding: 0px 27px; }
-    .tracklist { left: 116px; }
-    .footlist li { display: block; padding-right: 0px; }
-    .hotelist li .wrapper { max-height: 100%; width: 100%; }
-/*
+    .tracks {
+        float: none;
+    }
+    .menu li {
+        display: inline-block;
+        padding: 0px 27px;
+    }
+    .tracklist {
+        left: 116px;
+    }
+    .footlist li {
+        display: block;
+        padding-right: 0px;
+    }
+    .hotelist li .wrapper {
+        max-height: 100%;
+        width: 100%;
+    }
+    /*
     .qty { width: 25px; }
     input.qtyplus { width: 25px; }
     input.qtyminus { width: 25px; }
 */
-    
 }
 
 @media only screen and (min-width: 460px) {
-    .tracks { float: none; }
-    .menu li { display: inline-block; padding: 0px 33px; }
-    .tracklist { left: 136px; }
-    .footlist li { display: block; padding-right: 0px; }
+    .tracks {
+        float: none;
+    }
+    .menu li {
+        display: inline-block;
+        padding: 0px 33px;
+    }
+    .tracklist {
+        left: 136px;
+    }
+    .footlist li {
+        display: block;
+        padding-right: 0px;
+    }
 }
 
 @media only screen and (min-width: 480px) {
-    .tracks { float: none; }
-    .menu li { display: inline-block; padding: 0px 37px; }
-    .tracklist { left: 145px; }
-    .footlist li { display: block; padding-right: 0px; }
+    .tracks {
+        float: none;
+    }
+    .menu li {
+        display: inline-block;
+        padding: 0px 37px;
+    }
+    .tracklist {
+        left: 145px;
+    }
+    .footlist li {
+        display: block;
+        padding-right: 0px;
+    }
 }
 
 @media only screen and (min-width: 500px) {
-    .tracks { float: none; }
-    .menu li { display: inline-block; padding: 0px 40px; }
-    .tracklist { left: 154px; }
-    .footlist li { display: block; padding-right: 0px; }
-    .teamli li { width: 49%; }
-    .teamdesc { width: inherit; }
+    .tracks {
+        float: none;
+    }
+    .menu li {
+        display: inline-block;
+        padding: 0px 40px;
+    }
+    .tracklist {
+        left: 154px;
+    }
+    .footlist li {
+        display: block;
+        padding-right: 0px;
+    }
+    .teamli li {
+        width: 49%;
+    }
+    .teamdesc {
+        width: inherit;
+    }
 }
 
 @media only screen and (min-width: 600px) {
-    .tracks { float: none; }
-    .menu li { display: inline-block; padding: 0px 57px; }
-    .tracklist { left: 204px; }
-    .footlist li { display: block; padding-right: 0px; }
-    .teamli li { width: 49%; }
-    .teamdesc { width: inherit; }
+    .tracks {
+        float: none;
+    }
+    .menu li {
+        display: inline-block;
+        padding: 0px 57px;
+    }
+    .tracklist {
+        left: 204px;
+    }
+    .footlist li {
+        display: block;
+        padding-right: 0px;
+    }
+    .teamli li {
+        width: 49%;
+    }
+    .teamdesc {
+        width: inherit;
+    }
 }
 
 @media only screen and (min-width: 640px) {
-    .tracks { float: none; }
-    .menu li { display: inline-block; padding: 0px 63px; }
-    .tracklist { left: 225px; }
-    .findernav li { float: left; }
-    .selectouter { width: 11em; }
-    .footlist li { float: none; padding-right: 0px; }
-    .teamli li { width: 32%; }
-    .teamdesc { width: inherit; }
-/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
+    .tracks {
+        float: none;
+    }
+    .menu li {
+        display: inline-block;
+        padding: 0px 63px;
+    }
+    .tracklist {
+        left: 225px;
+    }
+    .findernav li {
+        float: left;
+    }
+    .selectouter {
+        width: 11em;
+    }
+    .footlist li {
+        float: none;
+        padding-right: 0px;
+    }
+    .teamli li {
+        width: 32%;
+    }
+    .teamdesc {
+        width: inherit;
+    }
+    /*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
 }
 
 @media only screen and (min-width: 767px) {
-    .tracks { float: right; }
-    .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: -49px; }
-    .knowmenu li { display: inline-block; width: 24%; }
-    .footlist li { display: inline-block; padding-right: 20px; }
-    .hotelist li .wrapper { max-height: 120px; }
-    .hotelist li .wrapper .banner { float: left; width: 120px; height: 120px; }
-    .techlist li { width: 49%; display: inline-block; margin-top: 6px; }
-    .addresslist li { width: 50%; }
-/*
+    .tracks {
+        float: right;
+    }
+    .menu li {
+        display: inline-block;
+        padding: 0px 38px 0 38px;
+    }
+    .tracklist {
+        left: -49px;
+    }
+    .knowmenu li {
+        display: inline-block;
+        width: 24%;
+    }
+    .footlist li {
+        display: inline-block;
+        padding-right: 20px;
+    }
+    .hotelist li .wrapper {
+        max-height: 120px;
+    }
+    .hotelist li .wrapper .banner {
+        float: left;
+        width: 120px;
+        height: 120px;
+    }
+    .techlist li {
+        width: 49%;
+        display: inline-block;
+        margin-top: 6px;
+    }
+    .addresslist li {
+        width: 50%;
+    }
+    /*
     .selectouter { width: 15em; }
     .timemenu li { width: 24%; border-right: 2px solid white; }
     .hotelist li .wrapper .bannen { height: 180px; }
@@ -1963,56 +2257,129 @@ input.qtyminus {
 }
 
 @media only screen and (min-width: 768px) {
-    .tracks { float: right; }
-    .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: -16px; }
-    .knowmenu li { display: inline-block; width: 24%; }
-    .footlist li { display: inline-block; padding-right: 20px; }
-/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
+    .tracks {
+        float: right;
+    }
+    .menu li {
+        display: inline-block;
+        padding: 0px 38px 0 38px;
+    }
+    .tracklist {
+        left: -16px;
+    }
+    .knowmenu li {
+        display: inline-block;
+        width: 24%;
+    }
+    .footlist li {
+        display: inline-block;
+        padding-right: 20px;
+    }
+    /*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
 }
 
 @media only screen and (min-width: 800px) {
-    .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 0em; }
-    .knowmenu li { display: inline-block; width: 24%; }
-    .footlist li { display: inline-block; padding-right: 20px; }
-/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/    
+    .menu li {
+        display: inline-block;
+        padding: 0px 38px 0 38px;
+    }
+    .tracklist {
+        left: 0em;
+    }
+    .knowmenu li {
+        display: inline-block;
+        width: 24%;
+    }
+    .footlist li {
+        display: inline-block;
+        padding-right: 20px;
+    }
+    /*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
 }
 
 @media only screen and (min-width: 920px) {
-    .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 0em; }
-    .knowmenu li { display: inline-block; width: 24%; }
-    .footlist li { display: inline-block; padding-right: 20px;  }
-/*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
+    .menu li {
+        display: inline-block;
+        padding: 0px 38px 0 38px;
+    }
+    .tracklist {
+        left: 0em;
+    }
+    .knowmenu li {
+        display: inline-block;
+        width: 24%;
+    }
+    .footlist li {
+        display: inline-block;
+        padding-right: 20px;
+    }
+    /*  .timemenu li { width: 24%; border-right: 2px solid white; }*/
 }
 
 @media only screen and (min-width: 1024px) {
-    .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 0em; }
-    .knowmenu li { display: inline-block; width: 24%; }
-    .deladdresslist li { width: 50%; }
-    .footlist li { display: inline-block; padding-right: 30px; }
+    .menu li {
+        display: inline-block;
+        padding: 0px 38px 0 38px;
+    }
+    .tracklist {
+        left: 0em;
+    }
+    .knowmenu li {
+        display: inline-block;
+        width: 24%;
+    }
+    .deladdresslist li {
+        width: 50%;
+    }
+    .footlist li {
+        display: inline-block;
+        padding-right: 30px;
+    }
 }
 
 @media only screen and (min-width: 1200px) {
-    .tracks { float: right; }
-    .menu li { display: inline-block; padding: 0px 38px 0 38px; }
-    .tracklist { left: 0em; }
-    .findernav li { float: left; }
-    .knowmenu li { display: inline-block; width: 19%; }
-    .footlist li { display: inline-block; text-align: center; padding-right: 30px; }
-    .teamli li { width: 33%; }
-    .teamdesc { width: 500px; }
-    .techlist li { width: 33%; display: inline-block; }
-/*  .selectouter { width: 17em; }
+    .tracks {
+        float: right;
+    }
+    .menu li {
+        display: inline-block;
+        padding: 0px 38px 0 38px;
+    }
+    .tracklist {
+        left: 0em;
+    }
+    .findernav li {
+        float: left;
+    }
+    .knowmenu li {
+        display: inline-block;
+        width: 19%;
+    }
+    .footlist li {
+        display: inline-block;
+        text-align: center;
+        padding-right: 30px;
+    }
+    .teamli li {
+        width: 33%;
+    }
+    .teamdesc {
+        width: 500px;
+    }
+    .techlist li {
+        width: 33%;
+        display: inline-block;
+    }
+    /*  .selectouter { width: 17em; }
     .timemenu li { width: 24%; border-right: 2px solid white; }
 */
 }
 
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */
+
 
 /*
  * Hide visually and from screen readers
@@ -2021,6 +2388,7 @@ input.qtyminus {
 .hidden {
     display: none !important;
 }
+
 
 /*
  * Hide only visually, but have it available for screen readers:
@@ -2038,6 +2406,7 @@ input.qtyminus {
     width: 1px;
 }
 
+
 /*
  * Extends the .visuallyhidden class to allow the element
  * to be focusable when navigated to via the keyboard:
@@ -2054,6 +2423,7 @@ input.qtyminus {
     width: auto;
 }
 
+
 /*
  * Hide visually and from screen readers, but maintain layout
  */
@@ -2061,6 +2431,7 @@ input.qtyminus {
 .invisible {
     visibility: hidden;
 }
+
 
 /*
  * Clearfix: contain floats
@@ -2076,13 +2447,16 @@ input.qtyminus {
 
 .clearfix:before,
 .clearfix:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */
 }
 
 .clearfix:after {
     clear: both;
 }
+
 
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
@@ -2095,11 +2469,12 @@ input.qtyminus {
 }
 
 @media print,
-       (-webkit-min-device-pixel-ratio: 1.25),
-       (min-resolution: 1.25dppx),
-       (min-resolution: 120dpi) {
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 1.25dppx),
+(min-resolution: 120dpi) {
     /* Style adjustments for high resolution devices */
 }
+
 
 /* ==========================================================================
    Print styles.
@@ -2114,66 +2489,55 @@ input.qtyminus {
     *:first-letter,
     *:first-line {
         background: transparent !important;
-        color: #000 !important; /* Black prints faster:
+        color: #000 !important;
+        /* Black prints faster:
                                    http://www.sanbeiji.com/archives/953 */
         box-shadow: none !important;
         text-shadow: none !important;
     }
-
     a,
     a:visited {
         text-decoration: underline;
     }
-
     a[href]:after {
         content: " (" attr(href) ")";
     }
-
     abbr[title]:after {
         content: " (" attr(title) ")";
     }
-
     /*
      * Don't show links that are fragment identifiers,
      * or use the `javascript:` pseudo protocol
      */
-
     a[href^="#"]:after,
     a[href^="javascript:"]:after {
         content: "";
     }
-
     pre,
     blockquote {
         border: 1px solid #999;
         page-break-inside: avoid;
     }
-
     /*
      * Printing Tables:
      * http://css-discuss.incutio.com/wiki/Printing_Tables
      */
-
     thead {
         display: table-header-group;
     }
-
     tr,
     img {
         page-break-inside: avoid;
     }
-
     img {
         max-width: 100% !important;
     }
-
     p,
     h2,
     h3 {
         orphans: 3;
         widows: 3;
     }
-
     h2,
     h3 {
         page-break-after: avoid;

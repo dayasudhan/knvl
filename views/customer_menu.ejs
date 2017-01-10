@@ -83,20 +83,29 @@
     <div class="container">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="khannaam">
-                <h2 ng-click="currentHotel($index)"><b>{{hotel.hotel.name}}</b></h2> 
+                <h2 ng-click="currentHotel($index)"><b>{{hotel.hotel.name}}</b></h2>
                 <p>Native Style</p>
                 <div class="khannaammenu">
-                                    <ul class="khannaamlist">
-                                        <li>
-                                            <h5>{{hotel.deliveryTime}} Mins</h5> </li>
-                                        <li>
-                                            <h5>Min. &#8377; {{hotel.minimumOrder}}</h5> </li>
-                                    </ul>
-                                </div>
+                    <ul class="khannaamlist">
+                        <li>
+                            <h5>{{hotel.deliveryTime}} Mins</h5> </li>
+                        <li>
+                            <h5>Min. &#8377; {{hotel.minimumOrder}}</h5> </li>
+                    </ul>
+                </div>
+                <div class="timing">
+                    <div class="timmenu">
+                        <ul class="timlist">
+                            <li><i class="fa fa-sun-o  fa-lg fa-fw"></i>&nbsp; <b>BREAKFAST:</b> {{hotel.orderAcceptTimings.Morning.startTime}} - {{hotel.orderAcceptTimings.Morning.endTime}} <b>;</b> <i class="fa fa-clock-o  fa-lg fa-fw"></i>:&nbsp; {{hotel.orderAcceptTimings.Morning.available}}</li>
+                            <li><i class="fa fa-cloud  fa-lg fa-fw"></i>&nbsp; <b>LUNCH:</b> {{hotel.orderAcceptTimings.Lunch.startTime}} - {{hotel.orderAcceptTimings.Lunch.endTime}} <b>;</b> <i class="fa fa-clock-o  fa-lg fa-fw"></i>:&nbsp; {{hotel.orderAcceptTimings.Lunch.available}}</li>
+                            <li><i class="fa fa-moon-o fa-lg fa-fw"></i>&nbsp; <b>DINNER:</b> {{hotel.orderAcceptTimings.Dinner.startTime}} - {{hotel.orderAcceptTimings.Dinner.endTime}} <b>;</b> <i class="fa fa-clock-o  fa-lg fa-fw"></i>:&nbsp; {{hotel.orderAcceptTimings.Dinner.available}}</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="menselect">
                 <table class="table table-bordered table-responsive">
-                    <thead>
+                    <thead class="tabux">
                         <tr>
                             <th class="tabcent">NAME</th>
                             <th class="tabcent">PRICE</th>
@@ -106,7 +115,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="menu in hotel.menu">
-                            <td class="tabcent">{{menu.name}}</td>
+                            <td class="tabcents"><img src="{{menu.logo}}" alt="Food Menu" /> <b>{{menu.name}}</b></br> {{menu.description}}</td>
                             <td class="tabcent">&#8377; {{menu.price}}</td>
                             <td class="tabcent">
                                 <input type="number" ng-model="menu.qty" min="0" max="99"> </td>
@@ -181,45 +190,45 @@
                                 <h3 class="grand">GRAND TOTAL <span>is</span> &#8377; {{ grandtotal() }} </h3> </div>
                         </div>
                         <div class="modal-body idetails">
-                            
-                                <h3>DELIVERY ADDRESS</h3>
-                                <div class="deladdresspart">
-                                    <ul class="deladdresslist">
-                                        <li ng-repeat="address in profile.addresses">
-                                            <div class="deladdlist">
-                                                <h3><input type="radio" 
+
+                            <h3>DELIVERY ADDRESS</h3>
+                            <div class="deladdresspart">
+                                <ul class="deladdresslist">
+                                    <li ng-repeat="address in profile.addresses">
+                                        <div class="deladdlist">
+                                            <h3><input type="radio" 
                                                 name="name" required
-                                                ng-click="fnChangeAssetType(address)" > &nbsp; {{address.label}}</h3> 
-                                            </div>
-                                            <div class="deladdlistt">
-                                                <ul class="deladddetails">
-                                                    <li>
-                                                        <p><span>Address Line 1 :</span> {{address.addressLine1}}</p>
-                                                    </li>
-                                                    <li>
-                                                        <p><span>Address Line 2 :</span> {{address.addressLine2}}</p>
-                                                    </li>
-                                                    <li>
-                                                        <p><span>Street         :</span> {{address.street}}</p>
-                                                    </li>
-                                                    <li>
-                                                        <p><span>Landmark       :</span> {{address.Landmark}}</p>
-                                                    </li>
-                                                    <li>
-                                                        <p><span>Areaname       :</span> {{address.areaName}}</p>
-                                                    </li>
-                                                    <li>
-                                                        <p><span>City           :</span> {{address.city}}</p>
-                                                    </li>
-                                                    <li>
-                                                        <p><span>Zip            :</span> {{address.zip}}</p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            
+                                                ng-click="fnChangeAssetType(address)" > &nbsp; {{address.label}}</h3>
+                                        </div>
+                                        <div class="deladdlistt">
+                                            <ul class="deladddetails">
+                                                <li>
+                                                    <p><span>Address Line 1 :</span> {{address.addressLine1}}</p>
+                                                </li>
+                                                <li>
+                                                    <p><span>Address Line 2 :</span> {{address.addressLine2}}</p>
+                                                </li>
+                                                <li>
+                                                    <p><span>Street         :</span> {{address.street}}</p>
+                                                </li>
+                                                <li>
+                                                    <p><span>Landmark       :</span> {{address.Landmark}}</p>
+                                                </li>
+                                                <li>
+                                                    <p><span>Areaname       :</span> {{address.areaName}}</p>
+                                                </li>
+                                                <li>
+                                                    <p><span>City           :</span> {{address.city}}</p>
+                                                </li>
+                                                <li>
+                                                    <p><span>Zip            :</span> {{address.zip}}</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
                         </div>
                         <div> OR </div>
                         <div class="modal-body idetails">
@@ -311,10 +320,10 @@
                                 <h3 class="grand">GRAND TOTAL <span>is</span> &#8377; {{ grandtotal() }} </h3> </div>
                             <div class="confirmdetails">
                                 <h3>DELIVERY ADDRESS</h3>
-                                <p>Name     : <i>{{user}}</i></p>
-                                <p>Phone    : <i>{{phone}}</i></p>
-                                <p>Flat No  : <i>{{addressLine1}}</i></p>
-                                <p>Street   : <i>{{addressLine2}}</i></p>
+                                <p>Name : <i>{{user}}</i></p>
+                                <p>Phone : <i>{{phone}}</i></p>
+                                <p>Flat No : <i>{{addressLine1}}</i></p>
+                                <p>Street : <i>{{addressLine2}}</i></p>
                                 <p>AreaName : <i>{{areaName}}</i></p>
                                 <p>LandMark : <i>{{landmark}}</i></p>
                             </div>
