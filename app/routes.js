@@ -1983,6 +1983,39 @@ app.put( '/v1/admin/coverageArea', function( request, response ) {
     });
 });
 
+app.put( '/v1/admin/coverageArea/slider', function( request, response ) {
+     console.log("v1/admin/coverageArea");
+
+     console.log(request.body);
+     console.log(request.body.cityName);
+     console.log(request.body.logo1);
+     console.log(request.body.logo2);
+     console.log(request.body.logo3);
+     console.log(request.body.logo4);
+    if(checkVendorApiAunthaticated(request,0) == false)
+  {
+    return response.send("Not aunthiticated").status(403);
+  }
+    
+        return CoverageAreaModel.update({ 'cityName':request.body.cityName},
+            {$set: { "sliders.logo1": request.body.logo1,
+                     "sliders.logo2": request.body.logo2,
+                     "sliders.logo3": request.body.logo3,
+                     "sliders.logo4": request.body.logo4
+             }} ,
+            function( err, order ) 
+             {
+        if( !err ) {
+            console.log("no error");
+            console.log(order);
+            return response.send('SUCCESS');
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+});
+
 app.get( '/v1/admin/coverageArea', function( request, response ) {
     console.log("/v1/admin/coverageArea");
   	if(checkVendorApiAunthaticated(request,2) == false && request.isAuthenticated() == false)
