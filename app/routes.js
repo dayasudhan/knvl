@@ -887,7 +887,7 @@ app.post( '/v1/vendor/isopen/:id', function( req, res ) {
 
 app.post( '/v1/vendor/review/:id', function( req, res ) {
   console.log('/v1/vendor/review/:id');
-  console.log(request.headers);
+  console.log(req.headers);
  	if(checkVendorApiAunthaticated(req,2) == false)
 	{
 		return res.send("Not aunthiticated").status(403);
