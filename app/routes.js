@@ -887,7 +887,7 @@ app.post( '/v1/vendor/isopen/:id', function( req, res ) {
 
 app.post( '/v1/vendor/review/:id', function( req, res ) {
   console.log('/v1/vendor/review/:id');
-  console.log(req.headers);
+  // console.log(req.headers);
  	if(checkVendorApiAunthaticated(req,2) == false)
 	{
 		return res.send("Not aunthiticated").status(403);
@@ -904,7 +904,8 @@ app.post( '/v1/vendor/review/:id', function( req, res ) {
             console.log( 'updated vendor review created' );
            
             return res.send('created');;
-        } else {
+        } else {  
+
          console.log( 'updated vendor review created' );
             console.log( err );
             return res.send('ERROR');
@@ -1465,8 +1466,8 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
         },
         function( err, vendor ) {
         if( !err ) {
-            console.log("old vendor", vendor);
-            console.log("vendor.length",vendor.length);
+         //   console.log("old vendor", vendor);
+          //  console.log("vendor.length",vendor.length);
             for (var j = 0; j < vendor.length; j++) {
               var menu_array ;
               menu_array = vendor[j].menu;
@@ -1479,7 +1480,7 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
               }
               vendor[j].menu = new_menu_array;
             }
-             console.log("old vendor", vendor);
+            // console.log("old vendor", vendor);
             return response.send( vendor );
         } else {
             console.log( err );
@@ -1500,7 +1501,7 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
         },
         function( err, vendor ) {
         if( !err ) {
-            console.log(vendor);
+      //      console.log(vendor);
 
              console.log("vendor.length",vendor.length);
             for (var j = 0; j < vendor.length; j++) {
