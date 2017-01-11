@@ -860,9 +860,9 @@ app.post( '/v1/vendor/logo/:id', upload.single('file'),function( req, res ) {
 app.post( '/v1/vendor/isopen/:id', function( req, res ) {
   console.log('/v1/vendor/isopen/:id');
     console.log(req.headers);
-   	if(checkVendorApiAunthaticated(request,1) == false)
+   	if(checkVendorApiAunthaticated(req,1) == false)
 	{
-		return response.send("Not aunthiticated").status(403);
+		return res.send("Not aunthiticated").status(403);
 	}
   console.log(req.params.id);
   console.log(req.body.isopen);
@@ -888,9 +888,9 @@ app.post( '/v1/vendor/isopen/:id', function( req, res ) {
 app.post( '/v1/vendor/review/:id', function( req, res ) {
   console.log('/v1/vendor/review/:id');
   console.log(request.headers);
- 	if(checkVendorApiAunthaticated(request,2) == false)
+ 	if(checkVendorApiAunthaticated(req,2) == false)
 	{
-		return response.send("Not aunthiticated").status(403);
+		return res.send("Not aunthiticated").status(403);
 	}
   console.log(req.params.id);
   console.log(req.body.rating);
