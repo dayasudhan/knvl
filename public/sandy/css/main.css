@@ -1840,6 +1840,11 @@ input.qtyminus {
     !important text-transform: capitalize;
 }
 
+.rq {
+    color: #FF0000;
+    font-size: 10pt;
+}
+
 .edel {
     margin: 10px auto;
 }
