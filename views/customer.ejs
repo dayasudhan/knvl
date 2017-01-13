@@ -197,7 +197,7 @@
                                     <div class="headtwo">
                                         <nav>
                                             <ul class="menu">
-<!--                                                <li> <a href="/" target="_parent"><i class="fa fa-home fa-lg fa-fw"></i>Home</a> </li>-->
+                                                <!--                                                <li> <a href="/" target="_parent"><i class="fa fa-home fa-lg fa-fw"></i>Home</a> </li>-->
                                                 <li> <a href="https://play.google.com/store/search?q=khaanavali&hl=en" target="_blank"><i class="fa fa-android fa-lg fa-fw" aria-hidden="true"></i></a> </li>
                                                 </li>
                                                 <!--                                                <li> <a href="khaana.html" target="_blank">Khaanavali</a> </li>-->
@@ -270,15 +270,15 @@
                                                                     <div class="form-group">
                                                                         <ul class="loglist">
                                                                             <li>
-                                                                                <input type="text" class="form-control inputname" ng-model="signup_name" placeholder="Name"> </li>
+                                                                                <input type="text" class="form-control inputname" ng-model="signup_name" placeholder="Name" maxlength="15"> </li>
                                                                             <li>
-                                                                                <input type="text" class="form-control inputphone" ng-model="signup_phone" placeholder="Mobile Number"> </li>
+                                                                                <input type="text" class="form-control inputphone" ng-model="signup_phone" placeholder="Mobile Number" maxlength="10"> </li>
                                                                             <li>
-                                                                                <input type="text" class="form-control inputmail" ng-model="signup_email" placeholder="E-mail ID"> </li>
+                                                                                <input type="text" class="form-control inputmail" ng-model="signup_email" placeholder="E-mail ID" maxlength="20"> </li>
                                                                             <li>
-                                                                                <input type="password" id="pwd" class="form-control inputpwd" ng-model="signup_password1" placeholder="Password"> </li>
+                                                                                <input type="password" id="pwd" class="form-control inputpwd" ng-model="signup_password1" placeholder="Password" maxlength="15"> </li>
                                                                             <li>
-                                                                                <input type="password" id="pwd" class="form-control inputcpwd" ng-model="signup_password2" placeholder="Confirm Password"> </li>
+                                                                                <input type="password" id="pwd" class="form-control inputcpwd" ng-model="signup_password2" placeholder="Confirm Password" maxlength="15"> </li>
                                                                             <!--
                                                                             <li>
                                                                                 <div class="checkbox">
@@ -314,7 +314,7 @@
                                                                     <div class="form-group">
                                                                         <ul class="loglist">
                                                                             <li>
-                                                                                <input type="text" class="form-control inputphone" ng-model="forgot_phone" placeholder="Enter Mobile Number"> </li>
+                                                                                <input type="text" class="form-control inputphone" ng-model="forgot_phone" placeholder="Enter Mobile Number" maxlength="10"> </li>
                                                                             <li>
                                                                                 <button type="button" class="btn btn-success alone" data-dismiss="modal" ng-click="forgot_customer()">SUBMIT</button>
                                                                             </li>
@@ -342,7 +342,7 @@
                                                                     <div class="form-group">
                                                                         <ul class="loglist">
                                                                             <li>
-                                                                                <input type="text" class="form-control inputphone" ng-model="otp_text" placeholder="Enter OTP"> </li>
+                                                                                <input type="text" class="form-control inputphone" ng-model="otp_text" placeholder="Enter OTP" maxlength="10"> </li>
                                                                             <li>
 
                                                                                 <button type="button" class="btn btn-success alone" data-dismiss="modal" ng-click="customer_otp_verify()">SUBMIT</button>
@@ -371,9 +371,9 @@
                                                                     <div class="form-group">
                                                                         <ul class="loglist">
                                                                             <li>
-                                                                                <input type="password" id="pwd" class="form-control inputpwd" ng-model="forgot_password1" placeholder="New Password"> </li>
+                                                                                <input type="password" id="pwd" class="form-control inputpwd" ng-model="forgot_password1" placeholder="New Password" maxlength="15"> </li>
                                                                             <li>
-                                                                                <input type="password" id="pwd" class="form-control inputcpwd" ng-model="forgot_password2" placeholder="Confirm New Password"> </li>
+                                                                                <input type="password" id="pwd" class="form-control inputcpwd" ng-model="forgot_password2" placeholder="Confirm New Password" maxlength="15"> </li>
                                                                             <li>
                                                                                 <button type="button" class="btn btn-success alone" data-dismiss="modal" data-target="#Modal" ng-click="reset_password()">SUBMIT</button>
                                                                             </li>

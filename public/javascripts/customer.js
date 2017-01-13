@@ -71,6 +71,18 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         login_body.role = "customer";
         console.log(login_body);
         var url = "/login";
+        
+        if ($scope.login_phone == "" || $scope.login_phone == null  || hasWhiteSpace($scope.login_phone) == true) {
+            $window.alert("Phone Number Empty");
+        }
+        else if(!isPhonenumberValid($scope.login_phone))
+        {
+            $window.alert("Invalid Phone Number");
+        }
+        else if ($scope.login_password == "" || $scope.login_password == null  || hasWhiteSpace($scope.login_password) == true) {
+            $window.alert("Password Empty");
+        }
+        else {
 
         $http.post(url, login_body, config)
             .success(function (data, status, headers) {
@@ -79,7 +91,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
                 console.log("Success in login post 2");
                 if (data == 0) {
                     $scope.isLoggedIn = false;
-                    $window.alert("Invalid Login");
+                    $window.alert("Invalid Login Details");
                 } else {
                     $scope.isLoggedIn = true;
                 }
@@ -100,6 +112,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
             .error(function (data, status, headers) {
                 console.log("ERROR in login");
             });
+        }
     };
 
 
@@ -117,7 +130,18 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         console.log(signup_body);
         var url = "/signup";
 
-
+if ($scope.signup_name == "" || $scope.signup_name == null) {
+            $window.alert("Name Empty");
+        } else if ($scope.signup_phone == "" || $scope.signup_phone == null  || hasWhiteSpace($scope.signup_phone) == true) {
+            $window.alert("Phone Number Empty");
+        }
+        else if ($scope.signup_email == "" || $scope.signup_email == null  || hasWhiteSpace($scope.signup_email) == true) {
+            $window.alert("Email Empty");
+        }
+        else if ($scope.signup_password1 == "" || $scope.signup_password1 == null  || hasWhiteSpace($scope.signup_password1) == true) {
+            $window.alert("Password Empty");
+        }
+        else {
         $http.post(url, signup_body, config)
             .success(function (data, status, headers) {
                 console.log("Success in sign up post");
@@ -125,7 +149,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
                 console.log(data);
                 if (data == 0) {
                     $scope.isLoggedIn = false;
-                    $window.alert("Signup failed");
+                    $window.alert("Enter Proper Details");
                 } else {
                     $scope.isLoggedIn = true;
                     $scope.profile = data;
@@ -140,6 +164,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
             .error(function (data, status, headers) {
                 console.log("ERROR in login");
             });
+        }
     };
 
 
@@ -155,7 +180,10 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         console.log(signup_body);
         var url = "/v1/vendor/otp/register";
 
-
+if ($scope.forgot_phone == "" || $scope.forgot_phone == null  || hasWhiteSpace($scope.forgot_phone) == true) {
+            $window.alert("Phone Number Empty");
+        }
+        else {
         $http.post(url, signup_body, config)
             .success(function (data, status, headers) {
                 console.log("Success in forgot phonenumber post");
@@ -177,6 +205,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
             .error(function (data, status, headers) {
                 console.log("ERROR in forgot passowrd");
             });
+        }
     };
 
 
@@ -192,7 +221,10 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         console.log(signup_body);
         var url = "/v1/vendor/otp/confirm_for_web";
 
-
+if ($scope.otp_text == "" || $scope.otp_text == null  || hasWhiteSpace($scope.otp_text) == true) {
+            $window.alert("OTP Empty");
+        }
+        else {
         $http.post(url, signup_body, config)
             .success(function (data, status, headers) {
                 console.log("Success in otp verify post");
@@ -214,6 +246,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
             .error(function (data, status, headers) {
                 console.log("ERROR in login");
             });
+        }
     };
 
     $scope.reset_password = function () {
@@ -227,8 +260,13 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         signup_body.role = "customer";
         console.log(signup_body);
         var url = "/reset";
-
-
+if ($scope.forgot_password1 == "" || $scope.forgot_password1 == null  || hasWhiteSpace($scope.forgot_password1) == true) {
+            $window.alert("Password Empty");
+        }
+        else if ($scope.forgot_password2 == "" || $scope.forgot_password2 == null  || hasWhiteSpace($scope.forgot_password2) == true) {
+            $window.alert("Confirm Password Empty");
+        }
+else {
         $http.post(url, signup_body)
             .success(function (data, status, headers) {
                 console.log("Success in sign up post");
@@ -237,7 +275,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
                 console.log(data[0]);
                 if (data == 0 || data == 'ERROR') {
                     $scope.isLoggedIn = false;
-                    $window.alert("Password Reset failed");
+                    $window.alert("Password Reset Failed");
                 } else {
                     $scope.isLoggedIn = true;
                     $scope.profile = data[0];
@@ -256,6 +294,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
             .error(function (data, status, headers) {
                 console.log("ERROR in login");
             });
+        }
     };
 
     $scope.findRestaurantsByNearBy = function () {
@@ -772,5 +811,20 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
     function hasWhiteSpace(s) {
         return s.indexOf(' ') >= 0;
     }
-
+    function isPhonenumberValid(inputtxt)  
+    {  
+     // var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;  
+        var phoneno = /^ \+?\d[\d -]{8,12}\d/;
+        var re = new RegExp("^" + phoneno);
+console.log(inputtxt);
+      if(inputtxt.match(re))  
+            {  
+          return true;  
+            }  
+          else  
+            {  
+           
+            return false;  
+            }  
+    } 
 });
