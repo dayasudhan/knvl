@@ -393,26 +393,14 @@ a:hover {
     border-radius: 8px;
 }
 
-.khanaquotes h1 {
-    color: #ffffff;
-    margin-top: 5px;
-    text-shadow: 6px 6px 6px #000;
-}
-
-.khanaquotes h1 span:first-of-type {
+.khanaquotes h3 span:first-of-type {
     color: #F5AB35;
     text-shadow: 3px 3px 3px #000;
 }
 
-.khanaquotes h1 span:last-of-type {
+.khanaquotes h3 span:last-of-type {
     color: #CF000F;
     text-shadow: 3px 3px 3px #000;
-}
-
-.khanaquotes h2 {
-    color: #ffffff;
-    margin-top: 5px;
-    text-shadow: 6px 6px 6px #000;
 }
 
 .khanaquotes h3 {

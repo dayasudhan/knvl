@@ -49,7 +49,7 @@
                                                     <li>
                                                         <input class="fieldone" type="text" placeholder="Enter Order ID" ng-model="orderId" required="required"> </li>
                                                     <li>
-                                                        <button class="btn btn-success" type="button" data-toggle="modal" data-target="#myModal1" ng-click="getOrderStatus()">Order Status</button>
+                                                        <button class="btn btn-success" type="button" ng-click="getOrderStatus()">Order Status</button>
                                                     </li>
                                                 </ul>
                                                 <div class="col-md-6 col-sm-6">
@@ -197,13 +197,13 @@
                                     <div class="headtwo">
                                         <nav>
                                             <ul class="menu">
-                                                <li> <a href="/" target="_parent" class="active"><i class="fa fa-home fa-lg fa-fw"></i></a> </li>
+                                                <li> <a href="/" target="_parent"><i class="fa fa-home fa-lg fa-fw"></i>Home</a> </li>
                                                 <li> <a href="https://play.google.com/store/search?q=khaanavali&hl=en" target="_blank"><i class="fa fa-android fa-lg fa-fw" aria-hidden="true"></i></a> </li>
                                                 </li>
                                                 <!--                                                <li> <a href="khaana.html" target="_blank">Khaanavali</a> </li>-->
                                                 <!--                                                <li><img src="../public/sandy/img/gp.png"</li>-->
                                                 <li>
-                                                    <!--<a href="/logout" ng-show="isLoggedIn" >Logout</a>--><a href="#" data-toggle="modal" data-target="#myModal" ng-show="!isLoggedIn"><i class="fa fa-sign-in fa-lg fa-fw"></i></a>
+                                                    <!--<a href="/logout" ng-show="isLoggedIn" >Logout</a>--><a href="#" data-toggle="modal" data-target="#myModal" ng-show="!isLoggedIn"><i class="fa fa-sign-in fa-lg fa-fw"></i>Sign In</a>
                                                     <div class="dropdown profedit" data-toggle="modal" ng-show="isLoggedIn"> <a class="dropdown-toggle" data-toggle="dropdown">{{profile.name}}</a>
                                                         <ul class="dropdown-menu profiledit">
                                                             <li>
@@ -232,21 +232,19 @@
                                                                     <div class="form-group">
                                                                         <ul class="loglist">
                                                                             <li>
-                                                                                <input type="text" class="form-control inputphone" ng-model="login_phone" placeholder="Mobile Number"> </li>
+                                                                                <input type="text" class="form-control inputphone" ng-model="login_phone" placeholder="Mobile Number" maxlength="10"> </li>
                                                                             <!--
                                                                     <li>
                                                                         <input type="text" class="form-control inputnews" placeholder="E-mail ID">
                                                                     </li>
 -->
                                                                             <li>
-                                                                                <input type="password" id="pwd" class="form-control inputpwd" ng-model="login_password" placeholder="Password"> </li>
+                                                                                <input type="password" id="pwd" class="form-control inputpwd" ng-model="login_password" placeholder="Password" maxlength="15"> </li>
 
                                                                             <li> <a class="forgot" href="#" data-toggle="modal" data-dismiss="modal" data-target="#forgotModal">Forgot Password ?</a></li>
 
                                                                             <li>
-                                                                                <a href="profile.html" target="_parent">
-                                                                                    <button type="button" class="btn btn-success alone" data-dismiss="modal" ng-click="login_customer()">LOGIN</button>
-                                                                                </a>
+                                                                                <button type="button" class="btn btn-success alone" data-dismiss="modal" ng-click="login_customer()">LOGIN</button>
                                                                             </li>
                                                                         </ul>
                                                                     </div>
