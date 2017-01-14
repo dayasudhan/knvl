@@ -18,6 +18,13 @@ var options = multer.diskStorage({ destination : 'public/images/logo/' ,
 var upload = multer({ storage: options });
 var securecustomerkey = 'EjR7tUPWx7WhsVs9FuVO6veFxFISIgIxhFZh6dM66rs';
 var securevendorkey = 'ORql2BHQq9ku8eUX2bGHjFmurqG84x2rkDQUNq9Peelw';
+var secureadminkey = 'tk0M6HKn0uzL%2FcWMnq3jkeF7Ao%2BtdWyYEJqPDl0P6Ac';
+var securewebkey = 'RN4CDXkqltLF%2FWloegKujIhiaSWBrgCzQXqI9cyWpT0';
+var version_value_1 = '1';
+var client_key_vendor = 'tunga';
+var client_key_customer = 'bhoomika';
+var client_key_admin = 'gajanuru';
+var client_key_web = 'pickcock';
 Firebase.initializeApp({
   serviceAccount: {
   "type": "service_account",
@@ -33,6 +40,8 @@ Firebase.initializeApp({
 },
   databaseURL: "https://project-8598805513533999178.firebaseio.com"
 });
+
+
 
 
 var rootRef = Firebase.database().ref();
@@ -72,7 +81,7 @@ app.get('/profile', isLoggedIn, function(req, res) {
 
 // LOGOUT ==============================
 app.get('/logout', function(req, res) {
-  
+  console.log('/logout');
   var redirect_url = '/';
     req.logout();
     res.redirect(redirect_url);
@@ -91,7 +100,7 @@ app.get('/vendor_logout', function(req, res) {
         // LOGIN ===============================
         // show the login form
         app.get('/login', function(req, res) {
-            res.render('login.ejs', { message: req.flash('loginMessage') });
+            res.render('customer_login.ejs', { message: req.flash('loginMessage') });
         });
 
         // process the login form
@@ -109,7 +118,7 @@ app.post('/v1/m/login', function(req, res, next) {
     if (err) {console.log('post /v1/m/login  1');return next(err); }
     if (!user) {
         console.log('post /v1/m/login  2');
-             return res.send("0"); 
+        return res.send("0"); 
     }
     req.logIn(user, function(err) {
         console.log('post /v1/m/login  3');
@@ -137,18 +146,23 @@ app.post('/login', function(req, res, next) {
       console.log(req.body);
   passport.authenticate('local-login', function(err, user, info) {
    
-    if (err) { return next(err); }
+    if (err) {
+         console.log("error in login 0");
+        return next(err); }
     if (!user) {
          var redirect_url = '/';
             if(req.body.role == 'customer')
             {
-                redirect_url = '/signup';
+                //redirect_url = '/signup';
+                console.log("error in login 1");
+                 return res.send("0"); 
             }
             else if(req.body.role == 'vendor') 
             {
                 redirect_url = '/p/vendor_signup';
+                return res.redirect(redirect_url); 
             } 
-            return res.redirect(redirect_url); 
+            
     }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
@@ -156,13 +170,27 @@ app.post('/login', function(req, res, next) {
       var redirect_url = '/';
       if(req.body.role == 'customer')
       {
-        redirect_url = '/';
+        //redirect_url = '/';
+
+           console.log("success in login 1");
+
+        return CustomerInfoModel.find({ 'phone':req.body.email},function( err, customerInfo ) {
+            if( !err ) {
+                return res.send( customerInfo );
+            } else {
+                console.log( err );
+                return res.send('ERROR');
+            }
+        });
+ 
+        return res.send("1"); 
       }
        else if(req.body.role == 'vendor') 
        {
         redirect_url = '/p/vendor_details';
+         return res.redirect(redirect_url);
        }
-      return res.redirect(redirect_url);
+     
     });
   })(req, res, next);
 });
@@ -310,7 +338,9 @@ app.get('/vendor', function (req, res) {
 app.get('/', function (req, res) {
     res.render('customer', { user : req.user });
 });
-
+//app.get('/find', function (req, res) {
+//    res.render('find', { user : req.user });
+//});
 app.get('/p/vendor_order', function (req, res) {
     console.log(req.user);
     res.render('vendor_order', { user : req.user });
@@ -349,52 +379,406 @@ app.get('/p/admin_order', function (req, res) {
     console.log(req.user);
     res.render('admin_order', { user : req.user });
 });
+app.get('/p/admin_order_today', function (req, res) {
+    console.log(req.user);
+    res.render('admin_order_today', { user : req.user });
+});
+
+
+
+app.post('/reset', function(req, res, next) {
+console.log(req.body);
+  if(req.body.password != req.body.password2)
+  {
+     
+  console.log("password mimatchmatch");
+     return res.send('ERROR');
+  }
+  else
+  {
+    console.log("password match");
+  }
+  console.log('/reset');
+    passport.authenticate('local-reset', function(err, user, info) {
+     console.log(req.body);
+      if (err) { 
+        return next(err); }
+      if (!user) { 
+          return res.send("0");
+      }
+      req.logIn(user, function(err) {
+        if (err) { return next(err); }
+        console.log(req.body.role);
+        var redirect_url;
+        if(req.body.role == 'customer')
+        {
+       
+         return CustomerInfoModel.find({ 'phone':req.body.email},function( err, customerInfo ) {
+            if( !err ) {
+                return res.send( customerInfo );
+            } else {
+                console.log( err );
+                return res.send('ERROR');
+            }
+        });
+ 
+        return res.send("1");
+        }
+       
+      });
+    })(req, res, next);
+});
 
 
 app.post('/signup', function(req, res, next) {
 console.log(req.body);
-if(req.body.password != req.body.password2)
-{
-   
-console.log("password mimatchmatch");
-   return res.send('ERROR');
-}
-else
-{
-  console.log("password match");
-}
-console.log('/signup');
-  passport.authenticate('local-signup', function(err, user, info) {
-   console.log(req.body);
-    if (err) { return next(err); }
-    if (!user) { 
-        var redirect_url = '/';
-            if(req.body.role == 'customer')
-            {
-                redirect_url = '/signup';
-            }
-            else if(req.body.role == 'vendor') 
-            {
-                redirect_url = '/p/vendor_signup';
-            } 
-            return res.redirect(redirect_url); 
-     }
-    req.logIn(user, function(err) {
-      if (err) { return next(err); }
-      console.log(req.body.role);
-      var redirect_url;
-      if(req.body.role == 'customer')
-        redirect_url = '/';
-       else if(req.body.role == 'vendor') 
-       {
-        redirect_url = '/p/vendor_details';
-        registerVendor(req, res, next);
+  if(req.body.password != req.body.password2)
+  {
+     
+  console.log("password mimatchmatch");
+     return res.send('ERROR');
+  }
+  else
+  {
+    console.log("password match");
+  }
+  console.log('/signup');
+    passport.authenticate('local-signup', function(err, user, info) {
+     console.log(req.body);
+      if (err) { 
+        return next(err); }
+      if (!user) { 
+          var redirect_url = '/';
+              if(req.body.role == 'customer')
+              {
+                  redirect_url = '/signup';
+                  return res.send("0");
+              }
+              else if(req.body.role == 'vendor') 
+              {
+                  redirect_url = '/p/vendor_signup';
+              } 
+              return res.redirect(redirect_url); 
+       }
+      req.logIn(user, function(err) {
+        if (err) { return next(err); }
+        console.log(req.body.role);
+        var redirect_url;
+        if(req.body.role == 'customer')
+        {
+       
+          registerCustomer(req, res, function(data){
+            console.log("423")
+            console.log(data);
+           return  res.send(data);
+          });
         }
-      return res.redirect(redirect_url);
+        else if(req.body.role == 'vendor') 
+        {
+          redirect_url = '/p/vendor_details';
+          registerVendor(req, res, next);
+          return res.redirect(redirect_url);
+        }
+        else
+        {
+        return res.redirect(redirect_url);
+      }
+      });
+    })(req, res, next);
+});
+function registerCustomer(req, res, next) {
+  console.log("/registerCustomer");
+  var cus_id = "C";
+  var res = getNextSequence('customer',function(data) {
+
+    cus_id = cus_id + data.sequence;
+    console.log(cus_id);
+      var customerInfo = new CustomerInfoModel({
+        email:req.body.email2,
+        id:cus_id,
+        phone:req.body.email,
+        name:req.body.name
+      });
+
+      customerInfo.save( function( err ) {
+        if( !err ) {
+              console.log( 'registerCustomer created' );
+              console.log(req.body.email);
+                  req.session.save(function (err) {
+                    if (err) {
+                        console.log( 'registerCustomer save error' );
+                       next(err);
+                    }
+                    console.log( 'registerCustomer save complete' );
+                  });
+                  console.log( '463' );
+               next(customerInfo);
+              } else {
+                console.log( 'registerCustomer error' );
+                console.log( err );
+                return res.send('ERROR');
+              }
+        });
     });
-  })(req, res, next);
+};
+app.get( '/v1/test/customer', function( req, res ) {
+                req.body.email = "dayasudhankggg@gmail.com";
+                req.body.phoneNumber = "9987";
+                req.body.name = "dayas";
+                  registerCustomer2(req, res,function(data)
+                  {
+                     return res.send(data);
+                  });
+
 });
 
+function registerCustomer2(req, res, next)
+{
+        console.log("/registerCustomer2");
+        var cus_id = "C";
+        var result = getNextSequence('customer',function(data) {
+
+          cus_id = cus_id + data.sequence;
+          console.log(cus_id);
+          console.log(req.body);
+          console.log(req.body.phoneNumber);
+          var phoneNumber = parseInt(req.body.phoneNumber);
+          console.log(phoneNumber);
+          return CustomerInfoModel.findOneAndUpdate({ 'phone':phoneNumber},
+            {
+                  $set:{email:req.body.email,
+                  name:req.body.name}
+            },
+            function( err,customer ) {
+                if( !err ) {
+                    if(customer == null)
+                    {
+                        console.log( "empty" );
+                        var customer = new CustomerInfoModel({
+                                  email:req.body.email,
+                                  id:cus_id,
+                                  phone:req.body.phonenumber,
+                                  name:req.body.name
+                        });
+                     
+                        console.log(req.body);
+                        customer.save( function( err ) {
+                            if( !err ) {
+                                console.log( 'created' );
+                                next( customer );
+                            } else {
+                             console.log( 'error' );
+                                console.log( err );
+                                next(err);
+                            }
+                        });
+                    } 
+
+                    console.log("register2 ");
+                    console.log(customer);
+                    return  next(customer);
+            } else {
+                console.log( err );
+                return next('ERROR');
+            }
+        });
+
+  });
+};
+app.get( '/v1/admin/customer/all', function( request, response ) {
+ 
+     return CustomerInfoModel.find(function( err, customerInfo ) {
+        if( !err ) {
+            return response.send( customerInfo );
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+ // });
+});
+app.post( '/v1/customer/address/:id', function( request, response ) {
+	  console.log('/v1/customer/address/:id');
+	    console.log(request.headers);
+	   // console.log("request.headers");
+	    console.log(request.body);
+	   if(checkVendorApiAunthaticated(request,2) == false &&   request.isAuthenticated() == false)
+		{
+			return response.send("Not aunthiticated").status(403);
+		}
+	  console.log(request.params.id);
+    var phoneNumber = parseInt(request.params.id);
+    console.log(phoneNumber);
+	
+
+	    return CustomerInfoModel.update({ 'phone':phoneNumber},
+	    	       { $addToSet: {addresses: {$each:
+	    	    	   [{label:request.body.label, 
+	    	    			addressLine1:request.body.address.addressLine1,
+	    	    			addressLine2:request.body.address.addressLine2,
+	    	    			street:request.body.address.street, 
+	    	    			LandMark:request.body.address.LandMark, 
+	    	    			areaName:request.body.address.areaname,
+	    	    			city:request.body.address.city, 
+	    	    			zip:request.body.address.zip, 
+	    	    			latitude:request.body.address.latitude,
+	    	    			longitude:request.body.address.longitude }], }}},
+	    	    	   function( err, order ) {
+				    	       if( !err ) {
+				    	           console.log("no error");
+				    	           console.log(order);
+				    	           return response.send('Success');
+				    	       } else {
+				    	           console.log( err );
+				    	           return response.send('ERROR');
+				    	       }
+	    	    	   	});
+	 });
+
+app.get( '/v1/customer', function( request, response ) {
+     return CustomerInfoModel.find({ 'phone':request.user.local.email},function( err, customerInfo ) {
+        if( !err ) {
+            return response.send( customerInfo );
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+   
+    });
+ // });
+});
+app.get( '/v1/customer/phone/:id', function( request, response ) {
+    console.log(request.params.id);
+    
+     return CustomerInfoModel.find({ 'phone':request.params.id},function( err, customerInfo ) {
+        if( !err ) {
+            return response.send( customerInfo );
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+
+});
+//Delete a custome address item
+app.delete( '/v1/customer/address/:phone/:label', function( request, response ) {
+     console.log('delete checkVendorApiAunthaticated');
+     console.log(request.headers);
+    if(checkVendorApiAunthaticated(request,2) == false &&  request.isAuthenticated() == false)
+    {
+      return response.send("Not aunthiticated").status(403);
+    }
+     console.log(request.params.phone);
+      console.log(request.params.label);
+        return CustomerInfoModel.update( { 'phone':request.params.phone},
+          { $pull: {addresses: {"label": request.params.label }}},function( err ) {
+            if( !err ) {
+                console.log( 'address removed' );
+                return response.send( 'success' );
+            } else {
+                console.log( err );
+                return response.send('ERROR');
+            }
+        });
+    //});
+});
+
+
+//update a customer address
+app.patch( '/v1/customer/address/:phone/:label', function( request, response ) {
+     console.log('update /v1/customer/address/:phone/:label');
+
+  if(checkVendorApiAunthaticated(request,2) == false &&  request.isAuthenticated() == false) 
+  {
+    return response.send("Not aunthiticated").status(403);
+  }
+  console.log(request.params.phone);
+  console.log(request.params.label);
+
+        return CustomerInfoModel.update( { 'phone':request.params.phone, 
+          "addresses.label":request.params.label},
+            { $set:{"addresses.$.addressLine1":request.body.address.addressLine1,
+                  "addresses.$.addressLine2":request.body.address.addressLine2,
+                  "addresses.$.street":request.body.address.street, 
+                  "addresses.$.LandMark":request.body.address.LandMark, 
+                  "addresses.$.areaName":request.body.address.areaname,
+                  "addresses.$.city":request.body.address.city, 
+                  "addresses.$.zip":request.body.address.zip, 
+                  "addresses.$.latitude":request.body.address.latitude,
+                  "addresses.$.longitude":request.body.address.longitude }},
+            function( err ) {
+            if( !err ) {
+                console.log( 'address custome updated ' );
+                return response.send( 'Success' );
+            } else {
+                console.log( err );
+                return response.send('ERROR');
+            }
+        });
+});
+
+
+app.post( '/v1/customer/:id', function( request, response ) {
+
+  if(checkVendorApiAunthaticated(request,2) == false &&  request.isAuthenticated() == false) 
+  {
+    return response.send("Not aunthiticated").status(403);
+}
+return CustomerInfoModel.findOneAndUpdate({ 'id':request.params.id},
+
+        {
+                id:request.params.id,
+                phone:request.body.phone,
+                vegornonveg:"veg",
+                speciality:"",
+               address:{addressLine1:request.body.Address1,addressLine2:request.body.Address2,
+                street:request.body.street, LandMark:request.body.Landmark, 
+                areaName:request.body.Areaname,city:request.body.City, zip:request.body.zip, 
+                latitude:request.body.latitude,longitude:request.body.longitude }
+            },
+           
+
+    function( err,customer ) {
+        if( !err ) {
+                if(customer == null)
+                {
+                    console.log( "empty" );
+                                        var customer = new CustomerInfoModel({
+                        id:request.params.id,
+                        phone:request.body.phone,
+                        vegornonveg:"veg",
+                        speciality:"",
+                       address:{addressLine1:request.body.Address1,addressLine2:request.body.Address2,
+                        street:request.body.street, LandMark:request.body.Landmark, 
+                        areaName:request.body.Areaname,city:request.body.City, zip:request.body.zip, 
+                        latitude:request.body.latitude,longitude:request.body.longitude }
+                    });
+                 
+                    console.log(request.body);
+                    customer.save( function( err ) {
+                        if( !err ) {
+                            console.log( 'created' );
+                            return response.send( customer );
+                        } else {
+                         console.log( 'error' );
+                            console.log( err );
+                            return response.send('ERROR');
+                        }
+                    });
+                   
+                }
+                
+                    return  response.send(customer);
+               
+            
+
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+
+});
 function registerVendor(req, res, next) {
   console.log("/registerVendor");
   var hotel_id = "H";
@@ -429,6 +813,10 @@ function registerVendor(req, res, next) {
 
 app.get( '/v1/vendor/info/:id', function( request, response ) {
     console.log("GET --/v1/vendor/info/");
+   	if(checkVendorApiAunthaticated(request,1) == false && request.isAuthenticated() == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
     return VendorInfoModel.find({ 'hotel.email':request.params.id},function( err, vendor ) {
         if( !err ) {
             console.log(vendor);
@@ -447,6 +835,10 @@ app.post( '/v1/vendor/logo/:id', upload.single('file'),function( req, res ) {
   console.log(req.file.path);
   console.log("VendorLogo post");
   console.log(req.body);
+	if(checkVendorApiAunthaticated(request,1) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
   VendorInfoModel.update({ 'hotel.id':req.params.id},
       {
         $set: { "hotel.logo": req.file.path } ,
@@ -467,8 +859,13 @@ app.post( '/v1/vendor/logo/:id', upload.single('file'),function( req, res ) {
 
 app.post( '/v1/vendor/isopen/:id', function( req, res ) {
   console.log('/v1/vendor/isopen/:id');
+    console.log(req.headers);
+   	if(checkVendorApiAunthaticated(req,1) == false)
+	{
+		return res.send("Not aunthiticated").status(403);
+	}
   console.log(req.params.id);
- console.log(req.body.isopen);
+  console.log(req.body.isopen);
   var isopen = parseInt(req.body.isopen);
   console.log(isopen);
   VendorInfoModel.update({ 'hotel.email':req.params.id},
@@ -481,15 +878,20 @@ app.post( '/v1/vendor/isopen/:id', function( req, res ) {
            
             return res.send('created');;
         } else {
-         console.log( 'updated logo isopen' );
-            console.log( err );
-            return res.send('ERROR');
-        }
-    });
-});
+		console.log( 'updated isopen error' );		 
+	             console.log( err );		 
+	             return res.send('ERROR');		 
+	         }		
+    	     });		
+ });
 
 app.post( '/v1/vendor/review/:id', function( req, res ) {
   console.log('/v1/vendor/review/:id');
+  // console.log(req.headers);
+ 	if(checkVendorApiAunthaticated(req,2) == false)
+	{
+		return res.send("Not aunthiticated").status(403);
+	}
   console.log(req.params.id);
   console.log(req.body.rating);
   console.log(req.body.reviewcomment);
@@ -502,7 +904,8 @@ app.post( '/v1/vendor/review/:id', function( req, res ) {
             console.log( 'updated vendor review created' );
            
             return res.send('created');;
-        } else {
+        } else {  
+
          console.log( 'updated vendor review created' );
             console.log( err );
             return res.send('ERROR');
@@ -512,7 +915,10 @@ app.post( '/v1/vendor/review/:id', function( req, res ) {
 
 app.post( '/v1/vendor/otp/register', function( req, res ) {
     console.log('/v1/vendor/otp/register');
-   
+   	if(checkVendorApiAunthaticated(req,2) == false)
+	  {
+		  return res.send("Not aunthiticated").status(403);
+	  }
     console.log(req.body.phoneNumber);
     console.log(req.body.name);
     console.log(req.body.email);
@@ -578,7 +984,11 @@ app.post( '/v1/vendor/otp/register', function( req, res ) {
 
 });
 app.get( '/v1/vendor/otp/all', function( req, res ) {
-    console.log('/v1/vendor/otp/confirm');
+    console.log('/v1/vendor/otp/all');
+   	if(checkVendorApiAunthaticated(req,0) == false)
+	{
+		return res.send("Not aunthiticated").status(403);
+	}
     return OtpModel.find(function( err, otpInfo ) {
         if( !err ) {
             return res.send( otpInfo );
@@ -590,6 +1000,10 @@ app.get( '/v1/vendor/otp/all', function( req, res ) {
 });
 app.post( '/v1/vendor/otp/confirm', function( req, res ) {
     console.log('/v1/vendor/otp/confirm');
+    if(checkVendorApiAunthaticated(req,2) == false)
+	  {
+	 	 return res.send("Not aunthiticated").status(403);
+	  }
     console.log(req.body.phoneNumber);
     console.log(req.body.otpText);
 
@@ -600,11 +1014,20 @@ app.post( '/v1/vendor/otp/confirm', function( req, res ) {
             //console.log(otpInfo[0].otpnumber);
             if(otpInfo.otpnumber == req.body.otpText)
             {
-                return res.send("Success");
+                // req.body.email2 = req.body.email;
+                // req.body.email = req.body.phoneNumber;
+                registerCustomer2(req, res,function(data)
+                  {
+                     return res.send(data);
+                  });
+               
             }
             else if(otpInfo[0].otpnumber == req.body.otpText)
             {
-                return res.send("Success");
+                  registerCustomer2(req, res,function(data)
+                  {
+                     return res.send(data);
+                  });
             }
             else
             {
@@ -613,15 +1036,53 @@ app.post( '/v1/vendor/otp/confirm', function( req, res ) {
         }
         else {
             console.log( err );
-            return response.send('ERROR');
+            return res.send('ERROR');
         }
     });
 });
 
+app.post( '/v1/vendor/otp/confirm_for_web', function( req, res ) {
+    console.log('/v1/vendor/otp/confirm_for_web');
+    if(checkVendorApiAunthaticated(req,2) == false)
+    {
+     return res.send("Not aunthiticated").status(403);
+    }
+    console.log(req.body.phoneNumber);
+    console.log(req.body.otpText);
+
+    return OtpModel.find({ '_id':req.body.phoneNumber},function( err, otpInfo ) {
+        if( !err ) {
+            console.log(otpInfo);
+            console.log(otpInfo.otpnumber);
+            //console.log(otpInfo[0].otpnumber);
+            if(otpInfo.otpnumber == req.body.otpText)
+            {
+
+                return res.send("Success");
+               
+            }
+            else if(otpInfo[0].otpnumber == req.body.otpText)
+            {
+                 return res.send("Success");
+            }
+            else
+            {
+                return res.send("Error");
+            }
+        }
+        else {
+            console.log( err );
+            return res.send('ERROR');
+        }
+    });
+});
 
 app.post( '/v1/vendor/info/:id', function( req, res ) {
-
-   console.log("VendorInfo post");
+if(checkVendorApiAunthaticated(req,1) == false && req.isAuthenticated() == false)
+{
+	return res.send("Not aunthiticated").status(403);
+}
+  console.log("VendorInfo post");
   console.log(req.body);
             storeVendorInfo(req,res,function(req,res){
            console.log("storeVendorInfo success");
@@ -692,6 +1153,25 @@ console.log(request.params.id);
     });
 }
 
+
+
+//unregister a book
+app.delete( '/v1/vendor/unregister/:id', function( request, response ) {
+    if(checkVendorApiAunthaticated(request,0) == false)
+  {
+    return response.send("Not aunthiticated").status(403);
+  }
+        return VendorInfoModel.remove( { 'hotel.email':request.params.id},function( err ) {
+            if( !err ) {
+                console.log( 'Book removed' );
+                return response.send( '' );
+            } else {
+                console.log( err );
+                return response.send('ERROR');
+            }
+        });
+    //});
+});
 app.get('/old/login', function(req, res) {
     res.render('login', { user : req.user });
 });
@@ -741,41 +1221,206 @@ app.get('/ping', function(req, res){
     res.status(200).send("pong!");
 });
 
-app.get( '/v1/vendor/test', function( request, response ) {
-   
-            return response.send( "vendor" );
-   });
+function googleDistanceMeasure(googledistanceurl,vendor,index,callback)
+{
+            client.get(googledistanceurl, function (data, response) {
+              //  console.log(data);
+                if("elements" in data.rows[0])
+                {
+                //  console.log(data.rows[0].elements[0]);
+                  if("distance" in data.rows[0].elements[0])
+                  {
+                     // console.log(data.rows[0].elements[0].distance.value);
+                      var dist = data.rows[0].elements[0].distance.value /1000;
+                      console.log("dist--",dist);
+                      console.log("deliverrange--", vendor.deliverRange);
+                       if( dist <= vendor.deliverRange)
+                       {
+                        
+                         callback(vendor,index);
+                      }
+                      else
+                      {
+                        callback(null,index);
+                      }
 
-app.get( '/v1/vendor/city', function( request, response ) {
-    console.log("GET --/v1/vendor/city/");
+
+                  }
+                  else
+                      {
+                        callback(null,index);
+                      }
+
+                }
+            });
+}
+app.get( '/v1/vendor/deliveryareasbygps', function( request, response ) {
+    console.log("GET --/v1/vendor/deliveryareasbygps");
+
+    if(checkVendorApiAunthaticated(request,2) == false)
+    {
+      return response.send("Not aunthiticated").status(403);
+    }
     console.log(request.query);
-    return VendorInfoModel.find({ 'address.city':request.query.city},function( err, vendor ) {
-        if( !err ) {
-            console.log(vendor);
-            return response.send( vendor );
-        } else {
-            console.log( err );
-            return response.send('ERROR');
-        }
-    });
-});
-app.get( '/v1/vendor/area', function( request, response ) {
-    console.log("GET --/v1/vendor/area/");
-    console.log(request.query);//find( { price: { $ne: 1.99, $exists: true } } )
+
+  var isbulkrequest = parseInt(request.query.isbulkrequest);
+
+   var indiantime = new Date();
+   indiantime.setHours(indiantime.getHours() + 5);
+   indiantime.setMinutes(indiantime.getMinutes() + 30);
+  var current_time = 0;
+  var binaryValueofTime = [];
+  if(indiantime.getHours() < 11)
+  {
+    current_time = 1;
+    console.log("Morning");
+    console.log(indiantime);
+    binaryValueofTime.push(1);
+  }
+  else if (indiantime.getHours() < 16)
+  {
+      current_time = 2;
+      console.log(indiantime);
+      console.log("Lunch");
+      binaryValueofTime.push(1);
+  }
+  else
+  {
+      current_time = 4;
+      console.log(indiantime);
+      console.log("Dinner");
+  }
+  console.log(current_time);
+  if(isbulkrequest == 1)
+  {
+    console.log("isbulkrequest == 1");
     return VendorInfoModel.find(
-        { 'address.areaName':request.query.areaName},
+        { 
+            isBulkVendor:{ $gte: 1 } ,
+        },
         function( err, vendor ) {
         if( !err ) {
-            console.log(vendor);
-            return response.send( vendor );
+            //console.log("old vendor", vendor);
+            console.log("vendor.length",vendor.length);
+            var vendor2 =[];
+            var i  = 0;
+            for (var j = 0; j < vendor.length; j++) {
+            var googledistanceurl = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&key=AIzaSyA0ZqdBPzMZZBJ3O8bc5p-HtlQptpHIxJE";
+            googledistanceurl = googledistanceurl + "&origins=" + request.query.latitude + "," + request.query.longitude;
+            googledistanceurl = googledistanceurl + "&destinations=" + vendor[j].address.latitude + "," + vendor[j].address.longitude;
+            //&origins=12.9677,77.536&destinations=12.9568,77.5308";
+
+            var deliverRange = vendor[j].deliverRange;
+            console.log("deliverRange " , deliverRange);
+            console.log(googledistanceurl);
+            googleDistanceMeasure(googledistanceurl,vendor[j],j,function(data,index)
+            {
+              i++;
+              if(data !=null)
+              {
+                vendor2.push(data);
+              }
+              if(i == (vendor.length))
+              {
+                            for (var k = 0; k < vendor2.length; k++) {
+                              var menu_array ;
+                              menu_array = vendor2[k].menu;
+                              var new_menu_array = [];
+                              for (var ii = 0; ii < menu_array.length; ii++) {
+                                console.log(current_time);
+                                    if((menu_array[ii].timings & current_time) && (menu_array[ii].availability == 1))
+                                    {
+                                      new_menu_array.push(menu_array[ii]);
+                                    }              
+                                  }
+                              vendor2[k].menu = new_menu_array;
+                            }
+                 return response.send( vendor2 );
+              }
+            });
+            }
+            
+            // console.log("old vendor", vendor);
+           // return response.send( vendor2 );
         } else {
             console.log( err );
             return response.send('ERROR');
         }
     });
+  }
+  else    
+  {
+    console.log("isbulkrequest == else");
+    return VendorInfoModel.find(
+        {   isBulkVendor:{ $lte: 1 } ,
+            deliverAreas:{
+                            $elemMatch: {
+                                 name: request.query.areaName
+                                }
+                            } 
+        },
+        function( err, vendor ) {
+         if( !err ) {
+            //console.log("old vendor", vendor);
+            console.log("vendor.length",vendor.length);
+            var vendor2 =[];
+            var i  = 0;
+            for (var j = 0; j < vendor.length; j++) {
+            var googledistanceurl = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&key=AIzaSyA0ZqdBPzMZZBJ3O8bc5p-HtlQptpHIxJE";
+            googledistanceurl = googledistanceurl + "&origins=" + request.query.latitude + "," + request.query.longitude;
+            googledistanceurl = googledistanceurl + "&destinations=" + vendor[j].address.latitude + "," + vendor[j].address.longitude;
+            //&origins=12.9677,77.536&destinations=12.9568,77.5308";
+
+            var deliverRange = vendor[j].deliverRange;
+            console.log("deliverRange " , deliverRange);
+            console.log(googledistanceurl);
+            googleDistanceMeasure(googledistanceurl,vendor[j],j,function(data,index)
+            {
+              i++;
+              if(data !=null)
+              {
+                vendor2.push(data);
+              }
+             if(i == (vendor.length))
+              {
+                            for (var k = 0; k < vendor2.length; k++) {
+                              var menu_array ;
+                              menu_array = vendor2[k].menu;
+                              var new_menu_array = [];
+                              for (var ii = 0; ii < menu_array.length; ii++) {
+                                console.log(current_time);
+                                if((menu_array[ii].timings & current_time) && (menu_array[ii].availability == 1))
+                                    {
+                                      new_menu_array.push(menu_array[ii]);
+                                    }              
+                                  }
+                              vendor2[k].menu = new_menu_array;
+                            }
+                 return response.send( vendor2 );
+              }
+            });
+            }
+            return response.send(null);
+            // console.log("old vendor", vendor);
+           // return response.send( vendor2 );
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+  }
 });
+
+
+
+
 app.get( '/v1/vendor/delieveryareas', function( request, response ) {
     console.log("GET --/v1/vendor/delieveryareas/");
+
+   	if(checkVendorApiAunthaticated(request,2) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
     console.log(request.query);
 
     var isbulkrequest = parseInt(request.query.isbulkrequest);
@@ -821,21 +1466,21 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
         },
         function( err, vendor ) {
         if( !err ) {
-            console.log("old vendor", vendor);
-            console.log("vendor.length",vendor.length);
+         //   console.log("old vendor", vendor);
+          //  console.log("vendor.length",vendor.length);
             for (var j = 0; j < vendor.length; j++) {
               var menu_array ;
               menu_array = vendor[j].menu;
               var new_menu_array = [];
               for (var i = 0; i < menu_array.length; i++) {
-                    if(menu_array[i].timings & current_time)
+                    if((menu_array[i].timings & current_time) && (menu_array[i].availability == 1))
                     {
                       new_menu_array.push(menu_array[i]);
                     }
               }
               vendor[j].menu = new_menu_array;
             }
-             console.log("old vendor", vendor);
+            // console.log("old vendor", vendor);
             return response.send( vendor );
         } else {
             console.log( err );
@@ -856,7 +1501,7 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
         },
         function( err, vendor ) {
         if( !err ) {
-            console.log(vendor);
+      //      console.log(vendor);
 
              console.log("vendor.length",vendor.length);
             for (var j = 0; j < vendor.length; j++) {
@@ -864,11 +1509,10 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
               menu_array = vendor[j].menu;
               var new_menu_array = [];
               for (var i = 0; i < menu_array.length; i++) {
-                    if(menu_array[i].timings & current_time)
+            	  if((menu_array[i].timings & current_time) && (menu_array[i].availability == 1))
                     {
                       new_menu_array.push(menu_array[i]);
-                    }
-              }
+                    }              }
               vendor[j].menu = new_menu_array;
             }
              console.log("old vendor", vendor);
@@ -881,7 +1525,11 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
     });
   }
 });
-app.get( '/v1/vendor/account/all', function( request, response ) {
+app.get( '/v1/admin/account/all', function( request, response ) {
+   	if(checkVendorApiAunthaticated(request,0) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
     return VendorInfoModel.find(function( err, order ) {
         if( !err ) {
             return response.send( order );
@@ -891,8 +1539,12 @@ app.get( '/v1/vendor/account/all', function( request, response ) {
         }
     });
 });
-app.get( '/v1/vendor/account/:id', function( request, response ) {
+app.get( '/v1/admin/account/:id', function( request, response ) {
   // OrderModel.findById( request.params.id, function( err, book ) 
+   	if(checkVendorApiAunthaticated(request,0) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
      console.log("dasd");
   console.log(request.params.id);
    // return OrderModel.find({ customer:{email:'daya@gmail.com'}},function( err, order ) {
@@ -906,84 +1558,18 @@ app.get( '/v1/vendor/account/:id', function( request, response ) {
     });
  // });
 });
-app.get( '/v1/customer', function( request, response ) {
-    console.log(request.user.local);
-     console.log(request.user.local.email);
-  
-     return CustomerInfoModel.find({ 'id':request.user.local.email},function( err, customerInfo ) {
-        if( !err ) {
-            return response.send( customerInfo );
-        } else {
-            console.log( err );
-            return response.send('ERROR');
-        }
-    });
- // });
-});
-app.post( '/v1/customer/:id', function( request, response ) {
-
-console.log(request.body);
-
-return CustomerInfoModel.findOneAndUpdate({ 'id':request.params.id},
-
-        {
-                id:request.params.id,
-                phone:request.body.phone,
-                vegornonveg:"veg",
-                speciality:"",
-               address:{addressLine1:request.body.Address1,addressLine2:request.body.Address2,
-                street:request.body.street, LandMark:request.body.Landmark, 
-                areaName:request.body.Areaname,city:request.body.City, zip:request.body.zip, 
-                latitude:request.body.latitude,longitude:request.body.longitude }
-            },
-           
-
-    function( err,customer ) {
-        if( !err ) {
-                if(customer == null)
-                {
-                    console.log( "empty" );
-                                        var customer = new CustomerInfoModel({
-                        id:request.params.id,
-                        phone:request.body.phone,
-                        vegornonveg:"veg",
-                        speciality:"",
-                       address:{addressLine1:request.body.Address1,addressLine2:request.body.Address2,
-                        street:request.body.street, LandMark:request.body.Landmark, 
-                        areaName:request.body.Areaname,city:request.body.City, zip:request.body.zip, 
-                        latitude:request.body.latitude,longitude:request.body.longitude }
-                    });
-                 
-                    console.log(request.body);
-                    customer.save( function( err ) {
-                        if( !err ) {
-                            console.log( 'created' );
-                            return response.send( customer );
-                        } else {
-                         console.log( 'error' );
-                            console.log( err );
-                            return response.send('ERROR');
-                        }
-                    });
-                   
-                }
-                
-                    return  response.send(customer);
-               
-            
-
-        } else {
-            console.log( err );
-            return response.send('ERROR');
-        }
-    });
-
-});
 
 
 
 app.get( '/v1/vendor/order/:id', function( request, response ) {
   console.log(request.params.id);
+  console.log(request.headers);
+ 	if((checkVendorApiAunthaticated(request,1) == false) && (checkVendorApiAunthaticated(request,2)) == false && request.isAuthenticated() == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
+     console.log(request.headers);
+
      return OrderModel.find({ 'hotel.email':request.params.id},function( err, order ) {
         if( !err ) {
             return response.send( order );
@@ -994,9 +1580,46 @@ app.get( '/v1/vendor/order/:id', function( request, response ) {
     });
 });
 
-
+app.get( '/v1/vendor/orderall/today', function( request, response ) {
+   	if(checkVendorApiAunthaticated(request,0) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
+    var indiantime = new Date();
+    indiantime.setHours(indiantime.getHours() + 5);
+    indiantime.setMinutes(indiantime.getMinutes() + 30);
+   var start = new Date(indiantime);
+   start.setHours(0,0,0,0);
+   console.log('starts time ' +start);
+   var end = new Date(indiantime);
+  
+   end.setHours(23,59,59,999);
+   console.log('endtime' + end);
+	   return OrderModel.find({  
+	       tracker:{
+	    $elemMatch: {
+	         status:"ORDERED",
+	         time:{$gte: start, $lt: end}
+	        }
+	    }},
+    	function( err, order ) {
+        if( !err ) {
+            console.log("no error");
+            return response.send( order );
+        } else {
+            console.log("error");
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+});
 app.get( '/v1/vendor/order/today/:id', function( request, response ) {
   console.log(request.params.id);
+       console.log(request.headers);
+  	if(checkVendorApiAunthaticated(request,1) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
   var indiantime = new Date();
      indiantime.setHours(indiantime.getHours() + 5);
      indiantime.setMinutes(indiantime.getMinutes() + 30);
@@ -1028,6 +1651,10 @@ app.get( '/v1/vendor/order/today/:id', function( request, response ) {
 
 app.get( '/v1/vendor/order_by_id/:id', function( request, response ) {
      console.log('/v1/vendor/order_by_id/:id');
+	if(checkVendorApiAunthaticated(request,2) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
      console.log(request.params.id);
      return OrderModel.find({ 'id':request.params.id},function( err, order ) {
         if( !err ) {
@@ -1041,8 +1668,15 @@ app.get( '/v1/vendor/order_by_id/:id', function( request, response ) {
 });
 
 
-app.delete( '/v1/vendor/order/:id', function( request, response ) {
-
+app.delete( '/v1/admin/order/:id', function( request, response ) {
+    console.log('/v1/vendor/order/status/:id');
+    console.log(request.params.id);
+    console.log(request.body);
+   	if(checkVendorApiAunthaticated(request,0) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
+   	
         return OrderModel.remove( { 'hotel.email':request.params.id},function( err ) {
             if( !err ) {
                 console.log( 'orders removed' );
@@ -1054,8 +1688,11 @@ app.delete( '/v1/vendor/order/:id', function( request, response ) {
         });
     //});
 });
-app.get( '/v1/vendor/order_all', function( request, response ) {
-    console.log("/v1/vendor/order_all");
+app.get( '/v1/admin/order_all', function( request, response ) {
+   	if(checkVendorApiAunthaticated(request,0) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
     return OrderModel.find(function( err, order ) {
         if( !err ) {
             console.log("no error");
@@ -1118,6 +1755,11 @@ function sendOrderReceivedSmstoVendor(order,phone,order_id)
 }
 app.post( '/v1/vendor/order', function( request, response ) {
 
+     console.log(request.headers);
+ 	if(checkVendorApiAunthaticated(request,2) == false && request.isAuthenticated() == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
   var res = getNextSequence('order',function(data) {
     var order_id = request.body.hotel.id ;
     order_id = order_id + "R";
@@ -1167,7 +1809,7 @@ app.post( '/v1/vendor/order', function( request, response ) {
                         rootRef.update(pn);
 
                          console.log(vendor[0].phone);
-                         sendOrderReceivedSmstoVendor(order,vendor[0].phone,order_id); 
+                        // sendOrderReceivedSmstoVendor(order,vendor[0].phone,order_id); 
 
                       } 
                       else {
@@ -1185,6 +1827,14 @@ app.post( '/v1/vendor/order', function( request, response ) {
 });
 
 app.get( '/v1/vendor/order/summary/:id', function( request, res ) {
+      console.log('/v1/vendor/order/status/:id');
+  	if(checkVendorApiAunthaticated(request,1) == false && request.isAuthenticated() == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
+    console.log(request.params.id);
+    console.log(request.body);
+
    OrderModel.aggregate(
    [
     {$match: { 'hotel.email': request.params.id } },
@@ -1211,7 +1861,10 @@ app.get( '/v1/vendor/order/summary/:id', function( request, res ) {
 
 //Delete a book
 app.delete( '/v1/admin/list', function( request, response ) {
-
+   	if(checkVendorApiAunthaticated(request,0) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
         return OrderModel.remove( {},function( err ) {
             if( !err ) {
                 console.log( 'Book removed' );
@@ -1224,6 +1877,11 @@ app.delete( '/v1/admin/list', function( request, response ) {
 
 });
 app.delete( '/v1/admin/account/all', function( request, response ) {
+   	if(checkVendorApiAunthaticated(request,0) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
+
     return VendorInfoModel.remove( {},function( err ) {
             if( !err ) {
                 console.log( 'vendor removed' );
@@ -1235,10 +1893,14 @@ app.delete( '/v1/admin/account/all', function( request, response ) {
         });
 });
 app.put( '/v1/vendor/order/status/:id', function( request, response ) {
-
+	if(checkVendorApiAunthaticated(request,1) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
     console.log('/v1/vendor/order/status/:id');
     console.log(request.params.id);
     console.log(request.body);
+     console.log(request.headers);
     var indiantime = new Date();
      indiantime.setHours(indiantime.getHours() + 5);
      indiantime.setMinutes(indiantime.getMinutes() + 30);
@@ -1269,36 +1931,19 @@ app.put( '/v1/vendor/order/status/:id', function( request, response ) {
 });
 
 
-app.post( '/v1/vendor/menu/:id', function( request, response ) {
-     console.log("post /vendor/menu/");
-     console.log(request.body);
-     console.log(request.params.id);
-
-     return VendorInfoModel.update({ 'hotel.email':request.params.id},
-        { $addToSet: {menu: {$each:[{name: request.body.fooditem,  price:request.body.foodprice,availability:1,timings:request.body.timings}] }}},function( err, order ) {
-        if( !err ) {
-            console.log("no error");
-            console.log(order);
-            return response.send('Success');
-        } else {
-            console.log( err );
-            return response.send('ERROR');
-        }
-    });
-});
-
-
 app.post( '/v1/admin/coverageArea', function( request, response ) {
-     console.log("post /v1/admin/coverageArea");
-     console.log(request.body);
+  if(checkVendorApiAunthaticated(request,0) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
 
-     //var dd = {'cityName':"dvg",'subAreas':[{'name':"rajajinagar"},{'name':"vijaynagar"}]};
+    // console.log(request.body);
+     console.log("request.user");
+console.log(request.user);
      var dd = {'cityName':request.body.cityName};
-      var coverageArea = new CoverageAreaModel(
+     var coverageArea = new CoverageAreaModel(
          dd);
-
-
-        return coverageArea.save(function( err) {
+       return coverageArea.save(function( err) {
         if( !err ) {
             console.log("no error");
             console.log(coverageArea);
@@ -1308,16 +1953,20 @@ app.post( '/v1/admin/coverageArea', function( request, response ) {
             return response.send('ERROR');
         }
     });
+
 });
 
 app.put( '/v1/admin/coverageArea', function( request, response ) {
      console.log("v1/admin/coverageArea");
-     //console.log(request.headers);
+
      console.log(request.body);
      console.log(request.body.cityName);
      console.log(request.body.areaName);
      console.log(request.body.isBulkAreaOnly);
-
+   	if(checkVendorApiAunthaticated(request,0) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
     var isbulk = parseInt(request.body.isBulkAreaOnly);
     console.log('request.body.isBulkAreaOnly' ,isbulk);
         return CoverageAreaModel.update({ 'cityName':request.body.cityName},
@@ -1335,52 +1984,92 @@ app.put( '/v1/admin/coverageArea', function( request, response ) {
     });
 });
 
-app.get( '/v1/admin/coverageArea', function( request, response ) {
-    console.log("/v1/admin/coverageArea");
-    //console.log(request.headers);
-    // if(request.headers.securekey != securevendorkey || 
-    //   request.headers.version != '1' || 
-    //   request.headers.client != 'bhoomika'
-    //   )
-    // {
-    //   console.log("security not passed");
-    //   return response.send("Not aunthiticated").status(403);
-    // }
+app.put( '/v1/admin/coverageArea/slider', function( request, response ) {
+     console.log("v1/admin/coverageArea");
 
-    return CoverageAreaModel.find(function( err, order ) {
+     console.log(request.body);
+     console.log(request.body.cityName);
+     console.log(request.body.logo1);
+     console.log(request.body.logo2);
+     console.log(request.body.logo3);
+     console.log(request.body.logo4);
+    if(checkVendorApiAunthaticated(request,0) == false)
+  {
+    return response.send("Not aunthiticated").status(403);
+  }
+    
+        return CoverageAreaModel.update({ 'cityName':request.body.cityName},
+            {$set: { "sliders.logo1": request.body.logo1,
+                     "sliders.logo2": request.body.logo2,
+                     "sliders.logo3": request.body.logo3,
+                     "sliders.logo4": request.body.logo4
+             }} ,
+            function( err, order ) 
+             {
         if( !err ) {
             console.log("no error");
-            return response.send( order );
+            console.log(order);
+            return response.send('SUCCESS');
         } else {
-            console.log("error");
             console.log( err );
             return response.send('ERROR');
         }
     });
 });
 
+app.get( '/v1/admin/coverageArea', function( request, response ) {
+    console.log("/v1/admin/coverageArea");
+  	if(checkVendorApiAunthaticated(request,2) == false && request.isAuthenticated() == false)
+  	{
+  		return response.send("Not aunthiticated").status(403);
+  	}
+    console.log("request.user");
+console.log(request.user);
+	    return CoverageAreaModel.find(function( err, order ) {
+	        if( !err ) {
+	            console.log("no error");
+	            return response.send( order );
+	        } else {
+	            console.log("error");
+	            console.log( err );
+	            return response.send('ERROR');
+	        }
+	    });
+
+});
+
 //Delete a book
 app.delete( '/v1/admin/coverageAreaAll', function( request, response ) {
     console.log("/v1/admin/coverageArea");
-  //  ExampleModel.findById( request.params.id, function( err, book ) {
-        return CoverageAreaModel.remove( {},function( err ) {
-            if( !err ) {
-                console.log( 'Book removed' );
-                return response.send( '' );
-            } else {
-                console.log( err );
-                return response.send('ERROR');
-            }
-        });
-    //});
+     	if(checkVendorApiAunthaticated(request,0) == false)
+    	{
+    		return response.send("Not aunthiticated").status(403);
+    	}
+
+		return CoverageAreaModel.remove( {},function( err ) {
+        if( !err ) {
+            console.log( 'Book removed' );
+            return response.send( 'Delete SUCCESS' );
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+		});
+
 });
+
 
 
 app.get( '/v1/vendor/menu/:id', function( request, response ) {
 
   console.log("get /vendor/menu/");
   console.log(request.params.id);
+  console.log(request.headers);
 
+  if(checkVendorApiAunthaticated(request,1) == false && request.isAuthenticated() == false)
+  {
+    return response.send("Not aunthiticated").status(403);
+  }
      return VendorInfoModel.find({ 'hotel.email':request.params.id                               },
       function( err, vendorinfo ) {
         if( !err ) {
@@ -1399,24 +2088,44 @@ app.get( '/v1/vendor/menu/:id', function( request, response ) {
 
 });
 
-//unregister a book
-app.delete( '/v1/vendor/unregister/:id', function( request, response ) {
-  //  ExampleModel.findById( request.params.id, function( err, book ) {
-        return VendorInfoModel.remove( { 'hotel.email':request.params.id},function( err ) {
-            if( !err ) {
-                console.log( 'Book removed' );
-                return response.send( '' );
-            } else {
-                console.log( err );
-                return response.send('ERROR');
-            }
-        });
-    //});
+app.post( '/v1/vendor/menu', function( request, response ) {
+    console.log("post /vendor/menu/");
+    console.log(request.body);
+    console.log(request.user);
+    console.log(request.user.local.email);
+    console.log(" outside aunthiticated");
+  if(checkVendorApiAunthaticated(request,1) == false &&  request.isAuthenticated() == false)
+  {
+   return response.send("Not aunthiticated").status(403);
+  }
+    return VendorInfoModel.update({ 'hotel.email':request.user.local.email},
+       { $addToSet: {menu: {$each:[{name: request.body.fooditem,  
+                                    price:request.body.foodprice,
+                                    availability:1,
+                                    description:request.body.description,
+                                    logo:request.body.logo,
+                                    timings:request.body.timings}] }}},
+       function( err, order ) {
+       if( !err ) {
+           console.log("no error");
+           console.log(order);
+           return response.send('Success');
+       } else {
+           console.log( err );
+           return response.send('ERROR');
+       }
+   });
 });
+
 
 //Delete a menu item
 app.delete( '/v1/vendor/menu/item/:id/:fooditem', function( request, response ) {
      console.log('delete /v1/vendor/menu/item/');
+     console.log(request.headers);
+   	if(checkVendorApiAunthaticated(request,1) == false &&  request.isAuthenticated() == false)
+  	{
+  		return response.send("Not aunthiticated").status(403);
+  	}
      console.log(request.params.id);
       console.log(request.params.fooditem);
         return VendorInfoModel.update( { 'hotel.email':request.params.id},{ $pull: {menu: {"name": request.params.fooditem }}},function( err ) {
@@ -1430,8 +2139,38 @@ app.delete( '/v1/vendor/menu/item/:id/:fooditem', function( request, response ) 
         });
     //});
 });
+
+
+//update a menu item
+app.post( '/v1/vendor/menu/item/:id', function( request, response ) {
+     console.log('update /v1/vendor/menu/item/');
+
+  if(checkVendorApiAunthaticated(request,1) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
+     console.log(request.params.id);
+     console.log(request.body.fooditem);
+     console.log(request.body.availability);
+
+        return VendorInfoModel.update( { 'hotel.email':request.params.id, "menu.name":request.body.fooditem},
+        		{ $set:{"menu.$.availability" : request.body.availability}},function( err ) {
+            if( !err ) {
+                console.log( 'menu updated with availibility' );
+                return response.send( 'Success' );
+            } else {
+                console.log( err );
+                return response.send('ERROR');
+            }
+        });
+    //});
+});
 app.get( '/v1/admin/counters', function( request, response ) {
     console.log("/v1/admin/counters");
+  	if(checkVendorApiAunthaticated(request,0) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
     return CountersModel.find(function( err, order ) {
         if( !err ) {
             console.log("no error");
@@ -1445,6 +2184,10 @@ app.get( '/v1/admin/counters', function( request, response ) {
 });
 app.post( '/v1/admin/counters/:id', function( request, response ) {
     console.log("post /v1/admin/counters");
+  	if(checkVendorApiAunthaticated(request,0) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
     console.log(request.params.id);
      //var dd = {'cityName':"dvg",'subAreas':[{'name':"rajajinagar"},{'name':"vijaynagar"}]};
      var dd = {_id:request.params.id,
@@ -1462,21 +2205,21 @@ app.post( '/v1/admin/counters/:id', function( request, response ) {
         }
     });
 });
-app.get( '/v1/admin/counters/test', function( request, response )
-{
-    console.log('/v1/admin/counters/test');
-    var id = "H";
-    var res = getNextSequence('hotel',function(data) {
-    console.log('got data: '+data);
-    id  = id + data.sequence;
-    console.log(id);
-    return response.send(data);
-    });
-   
-});
-var myCallback = function(data) {
-  console.log('got data: '+data);
-};
+//app.get( '/v1/admin/counters/test', function( request, response )
+//{
+//    console.log('/v1/admin/counters/test');
+//    var id = "H";
+//    var res = getNextSequence('hotel',function(data) {
+//    console.log('got data: '+data);
+//    id  = id + data.sequence;
+//    console.log(id);
+//    return response.send(data);
+//    });
+//   
+//});
+//var myCallback = function(data) {
+//  console.log('got data: '+data);
+//};
 function getNextSequence(name,result)
 {
    
@@ -1499,6 +2242,74 @@ function getNextSequence(name,result)
     });
 
 }
+
+
+function checkVendorApiAunthaticated(request,type)
+{
+	console.log("checkVendorApiAunthaticated 1");
+	console.log(request.headers);
+	console.log(request.headers.version);
+	var version = parseInt(request.headers.version);
+	console.log(version);
+	var ret = false; 
+	if(request.headers.securekey == secureadminkey && request.headers.client == client_key_admin)
+	{
+		console.log("checkVendorApiAunthaticated admin");
+		ret = true;
+	}
+	else if(request.headers.securekey == securewebkey &&
+		      request.headers.version == version_value_1 && 
+		      request.headers.client == client_key_web)
+	{
+		console.log("checkVendorApiAunthaticated web pass");
+		ret = true;
+	}
+	else if(type == 1)
+	{
+		console.log("checkVendorApiAunthaticated vendor");
+		if(request.headers.securekey == securevendorkey &&
+			      request.headers.version == version_value_1 && 
+			      request.headers.client == client_key_vendor)
+		{
+			console.log("checkVendorApiAunthaticated vendor pass");
+			ret = true;
+		}
+	}
+	else if(type == 2)
+	{
+		console.log("checkVendorApiAunthaticated cust");
+		if(request.headers.securekey == securecustomerkey &&
+			      request.headers.version == version_value_1 && 
+			      request.headers.client == client_key_customer)
+		{
+			console.log("checkVendorApiAunthaticated cust pass");
+			ret = true;
+		}
+	}
+	else
+	{
+		console.log("checkVendorApiAunthaticated not auth");
+		ret = false;
+	}
+	return ret;
+}
+app.get( '/v1/admin/api/test', function( request, response )
+{
+	console.log("test 1");
+    var isAunthiticated = checkVendorApiAunthaticated(request,2);
+	if(isAunthiticated == true)
+	{
+		console.log("test 2");
+		return response.send("aunthiticated").status(200);
+	}
+	else
+	{
+		console.log("test 3");
+		return response.send("Not aunthiticated").status(403);
+	}
+	console.log("test 4");
+
+});
 app.post( '/v1/pn/register', function( request, response ) {
     console.log("post v1/pn/register");
     console.log(request.body);
@@ -1594,7 +2405,10 @@ app.post( '/v1/pn/customer/addTofirebase', function( request, response ) {
 
 });
 app.delete( '/v1/admin/counters/:id', function( request, response ) {
-  //  ExampleModel.findById( request.params.id, function( err, book ) {
+  	if(checkVendorApiAunthaticated(request,0) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
         return CountersModel.remove( { '_id':request.params.id},function( err ) {
             if( !err ) {
                 console.log( 'counter removed' );
@@ -1611,7 +2425,14 @@ app.delete( '/v1/admin/counters/:id', function( request, response ) {
 // route middleware to ensure user is logged in
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
+    {
+      console.log("isLoggedIn");
         return next();
+    }
+    else
+    {
+       console.log("not loggedin isLoggedIn");
+    }
 
     res.redirect('/');
 }

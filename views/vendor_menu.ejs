@@ -169,6 +169,7 @@
                         <th>Serial No</th>
                         <th>ItemName</th>
                         <th>ItemPrice</th>
+                        <th>Timings</th>
                         <th>Delete</th>
                       </tr>
                     </thead>
@@ -177,6 +178,7 @@
                         <td>{{$index +1}}</td>
                         <td>{{menu.name}}</td>
                         <td>{{menu.price}}</td>
+                        <td>{{menu.timings}}</td>
                         <!-- <td><input type="checkbox" 
                           name="myTextEditBox" 
                           value={{menu.name}}
@@ -215,7 +217,24 @@
                         <input type="number" class="form-control" name="foodprice" placeholder="ItemPrice"  ng-model = "foodprice">
                       </div>
                     </div>
-
+                     <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-3 control-label">Description</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="fooddescription" placeholder="ItemDescription"  ng-model = "fooddescription">
+                      </div>
+                    </div>
+                     <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-3 control-label">Logo</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="foodItemlogo" placeholder="Itemlogo"  ng-model = "foodItemlogo">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-3 control-label">Timings</label>
+                      <div class="col-sm-10">
+                        <input type="number" class="form-control" name="timings" placeholder="timings"  ng-model = "timings">
+                      </div>
+                    </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">
                     <button type="submit" class="btn btn-info pull-right" ng-click= "addMenu('<%= user.local.email %>')">Add Item</button>

@@ -1,7 +1,9 @@
 app = angular.module("vendorModule", []);
+
   app.controller("mainController", function ($scope, $http, jsonFilter)
   {
   		 $scope.total2 = 123;
+
   	  $scope.getOrders = function (param) {
       console.log("getOrders");
       var url = "/v1/vendor/order/";
@@ -141,9 +143,14 @@ $scope.trackerUpdateStatus = function(param1)
     $scope.addMenu = function (param) {
       console.log("addMenu");
        console.log( $scope.fooditem);
-      var url4 = "/v1/vendor/menu/";
-      url4 = url4 + param;
-      var postData={fooditem:$scope.fooditem,foodprice:$scope.foodprice};
+      var url4 = "/v1/vendor/menu";
+    //  url4 = url4 + param;
+      var postData={fooditem:$scope.fooditem,
+    		  foodprice:$scope.foodprice,
+          description:$scope.fooddescription,
+          logo:$scope.foodItemlogo,
+       		timings:$scope.timings};
+
       $http.post(url4,postData)
         .success(function (data, status, headers, config)
         {
@@ -306,10 +313,13 @@ $scope.trackerUpdateStatus = function(param1)
         .success(function (data, status, headers, config)
         {
             console.log("addDetails success");
+            alert("addDetails success");
+
         })
         .error(function (data, status, headers, config)
         {
           console.log("addDetails error");
+           alert("addDetails error");
         });
     };
 

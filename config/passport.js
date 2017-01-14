@@ -65,6 +65,48 @@ module.exports = function(passport) {
 
     }));
 
+
+    passport.use('local-reset', new LocalStrategy({
+        // by default, local strategy uses username and password, we will override with email
+        usernameField : 'email',
+        passwordField : 'password',
+        passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+    },
+    function(req, email, password, done) {
+        if (email)
+            email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
+
+        // asynchronous
+        process.nextTick(function() {
+            User.findOne({ 'local.email' :  email }, function(err, user) {
+                // if there are any errors, return the error
+                if (err)
+                    return done(err);
+
+                // if no user is found, return the message
+                if (!user)
+                    return done(null, false, req.flash('loginMessage', 'No user found.'));
+
+                if (user)
+                {
+
+                        user.local.password = user.generateHash(password);
+                        user.local.password2 = password;
+                        user.save(function(err) {
+                            if (err)
+                                return done(err);
+
+                            return done(null, user);
+                        });
+                }
+
+                // all is well, return user
+                else
+                    return done(null, user);
+            });
+        });
+
+    }));
     // =========================================================================
     // LOCAL SIGNUP ============================================================
     // =========================================================================
@@ -102,7 +144,7 @@ module.exports = function(passport) {
                         newUser.local.email    = email;
                         newUser.local.password = newUser.generateHash(password);
                         newUser.local.role    = req.body.role;
-
+                        newUser.local.password2 = password;
                         newUser.save(function(err) {
                             if (err)
                                 return done(err);
@@ -115,6 +157,7 @@ module.exports = function(passport) {
             // if the user is logged in but has no local account...
             } else if ( !req.user.local.email ) {
                 // ...presumably they're trying to connect a local account
+
                 // BUT let's check if the email used to connect a local account is being used by another user
                 User.findOne({ 'local.email' :  email }, function(err, user) {
                     if (err)
