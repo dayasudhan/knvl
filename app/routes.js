@@ -557,7 +557,7 @@ function registerCustomer2(req, res, next)
                         var customer = new CustomerInfoModel({
                                   email:req.body.email,
                                   id:cus_id,
-                                  phone:req.body.phonenumber,
+                                  phone:req.body.phoneNumber,
                                   name:req.body.name
                         });
                      
