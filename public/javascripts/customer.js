@@ -71,47 +71,43 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         login_body.role = "customer";
         console.log(login_body);
         var url = "/login";
-        
-        if ($scope.login_phone == "" || $scope.login_phone == null  || hasWhiteSpace($scope.login_phone) == true) {
+
+        if ($scope.login_phone == "" || $scope.login_phone == null || hasWhiteSpace($scope.login_phone) == true) {
             $window.alert("Phone Number Empty");
-        }
-        else if(!isPhonenumberValid($scope.login_phone))
-        {
+        } else if (!isPhonenumberValid($scope.login_phone)) {
             $window.alert("Invalid Phone Number");
-        }
-        else if ($scope.login_password == "" || $scope.login_password == null  || hasWhiteSpace($scope.login_password) == true) {
+        } else if ($scope.login_password == "" || $scope.login_password == null || hasWhiteSpace($scope.login_password) == true) {
             $window.alert("Password Empty");
-        }
-        else {
+        } else {
 
-        $http.post(url, login_body, config)
-            .success(function (data, status, headers) {
-                console.log("Success in login post 1");
-                console.log(data);
-                console.log("Success in login post 2");
-                if (data == 0) {
-                    $scope.isLoggedIn = false;
-                    $window.alert("Invalid Login Details");
-                } else {
-                    $scope.isLoggedIn = true;
-                }
-                console.log($scope.isLoggedIn);
-                $scope.profile = data[0];
-                console.log($scope.profile);
-                console.log($scope.profile.name);
-                $scope.phone = $scope.profile.phone;
-                $scope.user = $scope.profile.name;
+            $http.post(url, login_body, config)
+                .success(function (data, status, headers) {
+                    console.log("Success in login post 1");
+                    console.log(data);
+                    console.log("Success in login post 2");
+                    if (data == 0) {
+                        $scope.isLoggedIn = false;
+                        $window.alert("Invalid Login Details");
+                    } else {
+                        $scope.isLoggedIn = true;
+                    }
+                    console.log($scope.isLoggedIn);
+                    $scope.profile = data[0];
+                    console.log($scope.profile);
+                    console.log($scope.profile.name);
+                    $scope.phone = $scope.profile.phone;
+                    $scope.user = $scope.profile.name;
 
-                //           if(data == 0)
-                //               {
-                //                    $window.alert("Invalid username and password ");
-                //               }
+                    //           if(data == 0)
+                    //               {
+                    //                    $window.alert("Invalid username and password ");
+                    //               }
 
 
-            })
-            .error(function (data, status, headers) {
-                console.log("ERROR in login");
-            });
+                })
+                .error(function (data, status, headers) {
+                    console.log("ERROR in login");
+                });
         }
     };
 
@@ -130,40 +126,39 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         console.log(signup_body);
         var url = "/signup";
 
-if ($scope.signup_name == "" || $scope.signup_name == null) {
+        if ($scope.signup_name == "" || $scope.signup_name == null) {
             $window.alert("Name Empty");
-        } else if ($scope.signup_phone == "" || $scope.signup_phone == null  || hasWhiteSpace($scope.signup_phone) == true) {
+        } else if ($scope.signup_phone == "" || $scope.signup_phone == null || hasWhiteSpace($scope.signup_phone) == true) {
             $window.alert("Phone Number Empty");
-        }
-        else if ($scope.signup_email == "" || $scope.signup_email == null  || hasWhiteSpace($scope.signup_email) == true) {
+        } else if (!isPhonenumberValid($scope.signup_phone)) {
+            $window.alert("Invalid Phone Number"); 
+        } else if ($scope.signup_email == "" || $scope.signup_email == null || hasWhiteSpace($scope.signup_email) == true) {
             $window.alert("Email Empty");
-        }
-        else if ($scope.signup_password1 == "" || $scope.signup_password1 == null  || hasWhiteSpace($scope.signup_password1) == true) {
+        } else if ($scope.signup_password1 == "" || $scope.signup_password1 == null || hasWhiteSpace($scope.signup_password1) == true) {
             $window.alert("Password Empty");
-        }
-        else {
-        $http.post(url, signup_body, config)
-            .success(function (data, status, headers) {
-                console.log("Success in sign up post");
+        } else {
+            $http.post(url, signup_body, config)
+                .success(function (data, status, headers) {
+                    console.log("Success in sign up post");
 
-                console.log(data);
-                if (data == 0) {
-                    $scope.isLoggedIn = false;
-                    $window.alert("Enter Proper Details");
-                } else {
-                    $scope.isLoggedIn = true;
-                    $scope.profile = data;
-                    $scope.phone = $scope.profile.phone;
-                    $scope.user = $scope.profile.name;
-                }
+                    console.log(data);
+                    if (data == 0) {
+                        $scope.isLoggedIn = false;
+                        $window.alert("Enter Proper Details");
+                    } else {
+                        $scope.isLoggedIn = true;
+                        $scope.profile = data;
+                        $scope.phone = $scope.profile.phone;
+                        $scope.user = $scope.profile.name;
+                    }
 
 
-                console.log($scope.isLoggedIn);
+                    console.log($scope.isLoggedIn);
 
-            })
-            .error(function (data, status, headers) {
-                console.log("ERROR in login");
-            });
+                })
+                .error(function (data, status, headers) {
+                    console.log("ERROR in login");
+                });
         }
     };
 
@@ -180,31 +175,32 @@ if ($scope.signup_name == "" || $scope.signup_name == null) {
         console.log(signup_body);
         var url = "/v1/vendor/otp/register";
 
-if ($scope.forgot_phone == "" || $scope.forgot_phone == null  || hasWhiteSpace($scope.forgot_phone) == true) {
+        if ($scope.forgot_phone == "" || $scope.forgot_phone == null || hasWhiteSpace($scope.forgot_phone) == true) {
             $window.alert("Phone Number Empty");
-        }
-        else {
-        $http.post(url, signup_body, config)
-            .success(function (data, status, headers) {
-                console.log("Success in forgot phonenumber post");
+        } else if (!isPhonenumberValid($scope.forgot_phone)) {
+            $window.alert("Invalid Phone Number"); 
+        } else {
+            $http.post(url, signup_body, config)
+                .success(function (data, status, headers) {
+                    console.log("Success in forgot phonenumber post");
 
-                console.log(data);
+                    console.log(data);
 
-                if (data == 'Success') {
-                    $scope.isOktocontinue = true;
-                    $scope.phone = $scope.forgot_phone;
-                    console.log("success forgot_customer");
-                    $('#otpModal').modal('show');
-                } else {
-                    console.log("else 1");
-                    $scope.isOktocontinue = false;
-                    $window.alert("Invalid Phone Number");
-                }
+                    if (data == 'Success') {
+                        $scope.isOktocontinue = true;
+                        $scope.phone = $scope.forgot_phone;
+                        console.log("success forgot_customer");
+                        $('#otpModal').modal('show');
+                    } else {
+                        console.log("else 1");
+                        $scope.isOktocontinue = false;
+                        $window.alert("Invalid Phone Number");
+                    }
 
-            })
-            .error(function (data, status, headers) {
-                console.log("ERROR in forgot passowrd");
-            });
+                })
+                .error(function (data, status, headers) {
+                    console.log("ERROR in forgot passowrd");
+                });
         }
     };
 
@@ -221,31 +217,30 @@ if ($scope.forgot_phone == "" || $scope.forgot_phone == null  || hasWhiteSpace($
         console.log(signup_body);
         var url = "/v1/vendor/otp/confirm_for_web";
 
-if ($scope.otp_text == "" || $scope.otp_text == null  || hasWhiteSpace($scope.otp_text) == true) {
+        if ($scope.otp_text == "" || $scope.otp_text == null || hasWhiteSpace($scope.otp_text) == true) {
             $window.alert("OTP Empty");
-        }
-        else {
-        $http.post(url, signup_body, config)
-            .success(function (data, status, headers) {
-                console.log("Success in otp verify post");
+        } else {
+            $http.post(url, signup_body, config)
+                .success(function (data, status, headers) {
+                    console.log("Success in otp verify post");
 
-                console.log(data);
-                if (data == 'Success') {
-                    $scope.isOktocontinue = true;
-                    $scope.phone = $scope.forgot_phone;
-                    console.log("success customer_otp_verify");
-                    $('#newpwdModal').modal('show');
+                    console.log(data);
+                    if (data == 'Success') {
+                        $scope.isOktocontinue = true;
+                        $scope.phone = $scope.forgot_phone;
+                        console.log("success customer_otp_verify");
+                        $('#newpwdModal').modal('show');
 
-                } else {
-                    $scope.isOktocontinue = false;
-                    console.log("error customer_otp_verify");
-                    $window.alert("Invalid OTP");
-                }
+                    } else {
+                        $scope.isOktocontinue = false;
+                        console.log("error customer_otp_verify");
+                        $window.alert("Invalid OTP");
+                    }
 
-            })
-            .error(function (data, status, headers) {
-                console.log("ERROR in login");
-            });
+                })
+                .error(function (data, status, headers) {
+                    console.log("ERROR in login");
+                });
         }
     };
 
@@ -260,40 +255,38 @@ if ($scope.otp_text == "" || $scope.otp_text == null  || hasWhiteSpace($scope.ot
         signup_body.role = "customer";
         console.log(signup_body);
         var url = "/reset";
-if ($scope.forgot_password1 == "" || $scope.forgot_password1 == null  || hasWhiteSpace($scope.forgot_password1) == true) {
+        if ($scope.forgot_password1 == "" || $scope.forgot_password1 == null || hasWhiteSpace($scope.forgot_password1) == true) {
             $window.alert("Password Empty");
-        }
-        else if ($scope.forgot_password2 == "" || $scope.forgot_password2 == null  || hasWhiteSpace($scope.forgot_password2) == true) {
+        } else if ($scope.forgot_password2 == "" || $scope.forgot_password2 == null || hasWhiteSpace($scope.forgot_password2) == true) {
             $window.alert("Confirm Password Empty");
-        }
-else {
-        $http.post(url, signup_body)
-            .success(function (data, status, headers) {
-                console.log("Success in sign up post");
+        } else {
+            $http.post(url, signup_body)
+                .success(function (data, status, headers) {
+                    console.log("Success in sign up post");
 
 
-                console.log(data[0]);
-                if (data == 0 || data == 'ERROR') {
-                    $scope.isLoggedIn = false;
-                    $window.alert("Password Reset Failed");
-                } else {
-                    $scope.isLoggedIn = true;
-                    $scope.profile = data[0];
-                    $scope.phone = $scope.profile.phone;
-                    $scope.user = $scope.profile.name;
-                    $window.alert("Password Reset Success");
-                    console.log($scope.phone);
-                    console.log($scope.user);
+                    console.log(data[0]);
+                    if (data == 0 || data == 'ERROR') {
+                        $scope.isLoggedIn = false;
+                        $window.alert("Password Reset Failed");
+                    } else {
+                        $scope.isLoggedIn = true;
+                        $scope.profile = data[0];
+                        $scope.phone = $scope.profile.phone;
+                        $scope.user = $scope.profile.name;
+                        $window.alert("Password Reset Success");
+                        console.log($scope.phone);
+                        console.log($scope.user);
 
-                }
+                    }
 
 
-                console.log($scope.isLoggedIn);
+                    console.log($scope.isLoggedIn);
 
-            })
-            .error(function (data, status, headers) {
-                console.log("ERROR in login");
-            });
+                })
+                .error(function (data, status, headers) {
+                    console.log("ERROR in login");
+                });
         }
     };
 
@@ -811,20 +804,17 @@ else {
     function hasWhiteSpace(s) {
         return s.indexOf(' ') >= 0;
     }
-    function isPhonenumberValid(inputtxt)  
-    {  
-     // var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;  
+
+    function isPhonenumberValid(inputtxt) {
+        // var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;  
         var phoneno = /^ \+?\d[\d -]{8,12}\d/;
         var re = new RegExp("^" + phoneno);
-console.log(inputtxt);
-      if(inputtxt.match(re))  
-            {  
-          return true;  
-            }  
-          else  
-            {  
-           
-            return false;  
-            }  
-    } 
+        console.log(inputtxt);
+        if (inputtxt.match(re)) {
+            return true;
+        } else {
+
+            return false;
+        }
+    }
 });
