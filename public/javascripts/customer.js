@@ -601,12 +601,8 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
             $window.alert("Address Line 1 Empty");
         } else if ($scope.addressLine2 == "" || $scope.addressLine2 == null) {
             $window.alert("Address Line 2 Empty");
-        } else if ($scope.street == "" || $scope.street == null) {
-            $window.alert("Street Empty");
         } else if ($scope.LandMark == "" || $scope.LandMark == null) {
             $window.alert("Landmark Empty");
-        } else if ($scope.areaname == "" || $scope.areaname == null) {
-            $window.alert("Areaname Empty");
         } else if ($scope.city == "" || $scope.city == null) {
             $window.alert("City Empty");
         } else if ($scope.zip == "" || $scope.zip == null) {
