@@ -74,6 +74,8 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
 
         if ($scope.login_phone == "" || $scope.login_phone == null || hasWhiteSpace($scope.login_phone) == true) {
             $window.alert("Phone Number Empty");
+        } else if (!$scope.phonenumber($scope.login_phone)) {
+            $window.alert("Invalid Phone Number");
         } else if ($scope.login_password == "" || $scope.login_password == null || hasWhiteSpace($scope.login_password) == true) {
             $window.alert("Password Empty");
         } else {
@@ -158,8 +160,6 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         }
     };
 
-
-
     $scope.forgot_customer = function () {
         console.log("forgot_customer");
         console.log($scope.forgot_phone);
@@ -173,6 +173,8 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
 
         if ($scope.forgot_phone == "" || $scope.forgot_phone == null || hasWhiteSpace($scope.forgot_phone) == true) {
             $window.alert("Phone Number Empty");
+        } else if (!$scope.phonenumber($scope.forgot_phone)) {
+            $window.alert("Invalid Phone Number");
         } else {
             $http.post(url, signup_body, config)
                 .success(function (data, status, headers) {
@@ -794,17 +796,24 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
     function hasWhiteSpace(s) {
         return s.indexOf(' ') >= 0;
     }
-
-    function isPhonenumberValid(inputtxt) {
-        // var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;  
-        var phoneno = /^ \+?\d[\d -]{8,12}\d/;
-        var re = new RegExp("^" + phoneno);
-        console.log(inputtxt);
-        if (inputtxt.match(re)) {
-            return true;
-        } else {
-
-            return false;
-        }
-    }
+    //
+    ////    function isPhonenumberValid(inputtxt) {
+    ////        // var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;  
+    ////        var phoneno = /^ \+?\d[\d -]{8,12}\d/;
+    ////        var re = new RegExp("^" + phoneno);
+    ////        console.log(inputtxt);
+    ////        if (inputtxt.match(re)) {
+    ////            return true;
+    ////        } else {
+    ////
+    ////            return false;
+    ////        }
+    ////    }
+    //
+    //    function validatePhone(field) {
+    //        if (field.match(/^\d{10}/)) {
+    //            return true;
+    //        }
+    //        return false;
+    //    }
 });
