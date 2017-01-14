@@ -74,7 +74,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
 
         if ($scope.login_phone == "" || $scope.login_phone == null || hasWhiteSpace($scope.login_phone) == true) {
             $window.alert("Phone Number Empty");
-        }  else if ($scope.login_password == "" || $scope.login_password == null || hasWhiteSpace($scope.login_password) == true) {
+        } else if ($scope.login_password == "" || $scope.login_password == null || hasWhiteSpace($scope.login_password) == true) {
             $window.alert("Password Empty");
         } else {
 
@@ -173,7 +173,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
 
         if ($scope.forgot_phone == "" || $scope.forgot_phone == null || hasWhiteSpace($scope.forgot_phone) == true) {
             $window.alert("Phone Number Empty");
-        }  else {
+        } else {
             $http.post(url, signup_body, config)
                 .success(function (data, status, headers) {
                     console.log("Success in forgot phonenumber post");
