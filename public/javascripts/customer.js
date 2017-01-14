@@ -74,9 +74,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
 
         if ($scope.login_phone == "" || $scope.login_phone == null || hasWhiteSpace($scope.login_phone) == true) {
             $window.alert("Phone Number Empty");
-        } else if (!isPhonenumberValid($scope.login_phone)) {
-            $window.alert("Invalid Phone Number");
-        } else if ($scope.login_password == "" || $scope.login_password == null || hasWhiteSpace($scope.login_password) == true) {
+        }  else if ($scope.login_password == "" || $scope.login_password == null || hasWhiteSpace($scope.login_password) == true) {
             $window.alert("Password Empty");
         } else {
 
@@ -130,8 +128,6 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
             $window.alert("Name Empty");
         } else if ($scope.signup_phone == "" || $scope.signup_phone == null || hasWhiteSpace($scope.signup_phone) == true) {
             $window.alert("Phone Number Empty");
-        } else if (!isPhonenumberValid($scope.signup_phone)) {
-            $window.alert("Invalid Phone Number"); 
         } else if ($scope.signup_email == "" || $scope.signup_email == null || hasWhiteSpace($scope.signup_email) == true) {
             $window.alert("Email Empty");
         } else if ($scope.signup_password1 == "" || $scope.signup_password1 == null || hasWhiteSpace($scope.signup_password1) == true) {
@@ -177,9 +173,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
 
         if ($scope.forgot_phone == "" || $scope.forgot_phone == null || hasWhiteSpace($scope.forgot_phone) == true) {
             $window.alert("Phone Number Empty");
-        } else if (!isPhonenumberValid($scope.forgot_phone)) {
-            $window.alert("Invalid Phone Number"); 
-        } else {
+        }  else {
             $http.post(url, signup_body, config)
                 .success(function (data, status, headers) {
                     console.log("Success in forgot phonenumber post");
