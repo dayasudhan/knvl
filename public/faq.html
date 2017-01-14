@@ -199,18 +199,17 @@
                                     <div class="headtwo">
                                         <nav>
                                             <ul class="menu">
-                                                <li> <a href="/" target="_parent" class="active">Home</a> </li>
-                                                <li>
-                                                    <a href="https://play.google.com/store/search?q=khaanavali&hl=en" target="_blank"> <span></span></a>
-                                                </li>
+                                                <li> <a href="/" target="_parent"><i class="fa fa-home fa-lg fa-fw"></i>Home</a> </li>
+                                                <li> <a href="https://play.google.com/store/search?q=khaanavali&hl=en" target="_blank"><i class="fa fa-android fa-lg fa-fw" aria-hidden="true"></i></a> </li>
                                                 </li>
                                                 <!--                                                <li> <a href="khaana.html" target="_blank">Khaanavali</a> </li>-->
                                                 <!--                                                <li><img src="../public/sandy/img/gp.png"</li>-->
                                                 <li>
-                                                    <!--<a href="/logout" ng-show="isLoggedIn" >Logout</a>--><a href="#" data-toggle="modal" data-target="#myModal" ng-show="!isLoggedIn">Login</a>
+                                                    <!--<a href="/logout" ng-show="isLoggedIn" >Logout</a>--><a href="#" data-toggle="modal" data-target="#myModal" ng-show="!isLoggedIn"><i class="fa fa-sign-in fa-lg fa-fw"></i>Sign In</a>
                                                     <div class="dropdown profedit" data-toggle="modal" ng-show="isLoggedIn"> <a class="dropdown-toggle" data-toggle="dropdown">{{profile.name}}</a>
                                                         <ul class="dropdown-menu profiledit">
-                                                            <li> <img src="../public/sandy/img/ban.jpg" class="img-circle" alt="User Image">
+                                                            <li>
+                                                                <!-- <img src="../public/sandy/img/ban.jpg" class="img-circle" alt="User Image">-->
                                                                 <p> {{profile.name}} </p>
                                                             </li>
                                                             <li>
@@ -235,19 +234,19 @@
                                                                     <div class="form-group">
                                                                         <ul class="loglist">
                                                                             <li>
-                                                                                <input type="text" class="form-control inputphone" ng-model="login_phone" placeholder="Mobile Number"> </li>
+                                                                                <input type="text" class="form-control inputphone" ng-model="login_phone" placeholder="Mobile Number" maxlength="10"> </li>
                                                                             <!--
                                                                     <li>
                                                                         <input type="text" class="form-control inputnews" placeholder="E-mail ID">
                                                                     </li>
 -->
                                                                             <li>
-                                                                                <input type="password" id="pwd" class="form-control inputpwd" ng-model="login_password" placeholder="Password"> </li>
-                                                                            <li> <a class="forgot" href="#" target="_blank">Forgot Password ?</a> </li>
+                                                                                <input type="password" id="pwd" class="form-control inputpwd" ng-model="login_password" placeholder="Password" maxlength="15"> </li>
+
+                                                                            <li> <a class="forgot" href="#" data-toggle="modal" data-dismiss="modal" data-target="#forgotModal">Forgot Password ?</a></li>
+
                                                                             <li>
-                                                                                <a href="profile.html" target="_parent">
-                                                                                    <button type="button" class="btn btn-success alone" data-dismiss="modal" ng-click="login_customer()">LOGIN</button>
-                                                                                </a>
+                                                                                <button type="button" class="btn btn-success alone" data-dismiss="modal" ng-click="login_customer()">LOGIN</button>
                                                                             </li>
                                                                         </ul>
                                                                     </div>
@@ -273,15 +272,15 @@
                                                                     <div class="form-group">
                                                                         <ul class="loglist">
                                                                             <li>
-                                                                                <input type="text" class="form-control inputname" ng-model="signup_name" placeholder="Name"> </li>
+                                                                                <input type="text" class="form-control inputname" ng-model="signup_name" placeholder="Name" maxlength="15"> </li>
                                                                             <li>
-                                                                                <input type="text" class="form-control inputphone" ng-model="signup_phone" placeholder="Mobile Number"> </li>
+                                                                                <input type="text" class="form-control inputphone" ng-model="signup_phone" placeholder="Mobile Number" maxlength="10"> </li>
                                                                             <li>
-                                                                                <input type="text" class="form-control inputmail" ng-model="signup_email" placeholder="E-mail ID"> </li>
+                                                                                <input type="text" class="form-control inputmail" ng-model="signup_email" placeholder="E-mail ID" maxlength="20"> </li>
                                                                             <li>
-                                                                                <input type="password" id="pwd" class="form-control inputpwd" ng-model="signup_password1" placeholder="Password"> </li>
+                                                                                <input type="password" id="pwd" class="form-control inputpwd" ng-model="signup_password1" placeholder="Password" maxlength="15"> </li>
                                                                             <li>
-                                                                                <input type="password" id="pwd" class="form-control inputcpwd" ng-model="signup_password2" placeholder="Confirm Password"> </li>
+                                                                                <input type="password" id="pwd" class="form-control inputcpwd" ng-model="signup_password2" placeholder="Confirm Password" maxlength="15"> </li>
                                                                             <!--
                                                                             <li>
                                                                                 <div class="checkbox">
@@ -295,6 +294,114 @@
                                                                             </li>
                                                                         </ul>
                                                                     </div>
+                                                                </div>
+                                                                <div class="modal-footer log">
+                                                                    <h2>Already a Member ?</h2>
+                                                                    <ul class="loglist">
+                                                                        <li>
+                                                                            <button type="button" class="btn btn-success alone" data-dismiss="modal" data-toggle="modal" data-target="#myModal">LOGIN</button>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade zoom" id="forgotModal" role="dialog">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header log">
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    <h2>Forgot Password ! Don't Worry.</h2> </div>
+                                                                <div class="modal-body">
+                                                                    <div class="form-group">
+                                                                        <ul class="loglist">
+                                                                            <li>
+                                                                                <input type="text" class="form-control inputphone" ng-model="forgot_phone" placeholder="Enter Mobile Number" maxlength="10"> </li>
+                                                                            <li>
+                                                                                <button type="button" class="btn btn-success alone" data-dismiss="modal" ng-click="forgot_customer()">SUBMIT</button>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer log">
+                                                                    <h2>Not a Member yet ?</h2>
+                                                                    <ul class="loglist">
+                                                                        <li>
+                                                                            <button type="button" class="btn btn-success alone" data-dismiss="modal" data-toggle="modal" data-target="#signupModal">SIGN UP</button>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade zoom" id="otpModal" role="dialog">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header log">
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    <h2>Verify</h2> </div>
+                                                                <div class="modal-body">
+                                                                    <div class="form-group">
+                                                                        <ul class="loglist">
+                                                                            <li>
+                                                                                <input type="text" class="form-control inputphone" ng-model="otp_text" placeholder="Enter OTP" maxlength="10"> </li>
+                                                                            <li>
+
+                                                                                <button type="button" class="btn btn-success alone" data-dismiss="modal" ng-click="customer_otp_verify()">SUBMIT</button>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer log">
+                                                                    <h2>Not a Member yet ?</h2>
+                                                                    <ul class="loglist">
+                                                                        <li>
+                                                                            <button type="button" class="btn btn-success alone" data-dismiss="modal" data-toggle="modal" data-target="#signupModal">SIGN UP</button>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade zoom" id="newpwdModal" role="dialog">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header log">
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    <h2>Enter your New Password</h2> </div>
+                                                                <div class="modal-body">
+                                                                    <div class="form-group">
+                                                                        <ul class="loglist">
+                                                                            <li>
+                                                                                <input type="password" id="pwd" class="form-control inputpwd" ng-model="forgot_password1" placeholder="New Password" maxlength="15"> </li>
+                                                                            <li>
+                                                                                <input type="password" id="pwd" class="form-control inputcpwd" ng-model="forgot_password2" placeholder="Confirm New Password" maxlength="15"> </li>
+                                                                            <li>
+                                                                                <button type="button" class="btn btn-success alone" data-dismiss="modal" data-target="#Modal" ng-click="reset_password()">SUBMIT</button>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="modal-footer log">
+                                                                    <h2>Not a Member yet ?</h2>
+                                                                    <ul class="loglist">
+                                                                        <li>
+                                                                            <button type="button" class="btn btn-success alone" data-dismiss="modal" data-toggle="modal" data-target="#signupModal">SIGN UP</button>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade zoom" id="newpwdModal" role="dialog">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header log">
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    <h2>Confirmation</h2> </div>
+                                                                <div class="modal-body log">
+                                                                    <h2>Your Password has been changed. Thank You !</h2>
                                                                 </div>
                                                                 <div class="modal-footer log">
                                                                     <h2>Already a Member ?</h2>
