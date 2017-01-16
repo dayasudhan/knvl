@@ -1809,7 +1809,7 @@ app.post( '/v1/vendor/order', function( request, response ) {
                         rootRef.update(pn);
 
                          console.log(vendor[0].phone);
-                        // sendOrderReceivedSmstoVendor(order,vendor[0].phone,order_id); 
+                         sendOrderReceivedSmstoVendor(order,vendor[0].phone,order_id); 
 
                       } 
                       else {
