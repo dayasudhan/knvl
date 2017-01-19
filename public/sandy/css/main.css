@@ -1233,7 +1233,7 @@ input.qtyminus {
     font-size: 18px;
     font-weight: 500;
     margin: 5px auto;
-    text-shadow: 3px 3px 3px #000000;
+    text-shadow: 1px 1px 1px #000000;
 }
 
 .teamli li p {
