@@ -77,7 +77,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         } else if (!$scope.phonenumber($scope.login_phone)) {
             $window.alert("Invalid Phone Number");
         } else if ($scope.login_password == "" || $scope.login_password == null || hasWhiteSpace($scope.login_password) == true) {
-            $window.alert("Password Empty");
+            $window.alert("Passwords should not contain Blank Spaces.");
         } else {
 
             $http.post(url, login_body, config)
@@ -130,8 +130,12 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
             $window.alert("Name Empty");
         } else if ($scope.signup_phone == "" || $scope.signup_phone == null || hasWhiteSpace($scope.signup_phone) == true) {
             $window.alert("Phone Number Empty");
+        } else if (!$scope.phonenumber($scope.signup_phone)) {
+            $window.alert("Invalid Phone Number");
         } else if ($scope.signup_email == "" || $scope.signup_email == null || hasWhiteSpace($scope.signup_email) == true) {
             $window.alert("Email Empty");
+        } else if (!$scope.emailid($scope.signup_email)) {
+            $window.alert("Invalid E-Mail");
         } else if ($scope.signup_password1 == "" || $scope.signup_password1 == null || hasWhiteSpace($scope.signup_password1) == true) {
             $window.alert("Password Empty");
         } else {
@@ -421,8 +425,20 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
     $scope.phonenumber = function (inputtxt) {
         console.log("phonenumber 1 ", inputtxt);
         //console.log($scope.selected[address.label]);
-        var phoneno = /^\d{10}$/;
+        var phoneno = /(?:\s+|)((0|(?:(\+|)91))(?:\s|-)*(?:(?:\d(?:\s|-)*\d{9})|(?:\d{2}(?:\s|-)*\d{8})|(?:\d{3}(?:\s|-)*\d{7}))|\d{10})(?:\s+|)/;
         if (phoneno.test(inputtxt)) {
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+    
+    $scope.emailid = function (inputtxt) {
+        console.log("email 1 ", inputtxt);
+        //console.log($scope.selected[address.label]);
+        var mailid = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;;
+        if (mailid.test(inputtxt)) {
             return true;
         } else {
 
