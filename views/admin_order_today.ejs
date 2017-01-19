@@ -184,11 +184,12 @@
                         <th>Time</th>
                         <th>Landmark</th>
                         <th>Address</th>
+                        <th>Status</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr ng-repeat="order in orderlist|orderBy:'date':true | filter:searchText">
-                        <td>{{order._id}}</td>
+                        <td>{{order.id}}</td>
                         <td>{{order.customer.name}}</td>
                         <td>{{order.customer.phone}}</td>
                         <td>{{order.menu[0].name}}</td>
@@ -198,6 +199,7 @@
                         <td>{{order.date | date:'medium'}}</td>
                         <td>{{order.customer.address.LandMark}}</td>
                         <td>{{order.customer.address.areaName}}</td>
+                        <td>{{order.current_status}}</td>
                        </tr>
           
                     </tbody>
@@ -212,7 +214,8 @@
                         <th>HotelEmail</th>
                         <th>Time</th>
                         <th>Landmark</th>
-                        <th>Address</th>                        
+                        <th>Address</th> 
+                        <th>Status</th>                       
                       </tr>
                     </tfoot>
                   </table>

@@ -90,8 +90,10 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
                         $window.alert("Invalid Login Details");
                     } else {
                         $scope.isLoggedIn = true;
+                        $('#myModal').modal('hide');
+                        console.log($scope.isLoggedIn);
                     }
-                    console.log($scope.isLoggedIn);
+                    
                     $scope.profile = data[0];
                     console.log($scope.profile);
                     console.log($scope.profile.name);
@@ -137,8 +139,14 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         } else if (!$scope.emailid($scope.signup_email)) {
             $window.alert("Invalid E-Mail");
         } else if ($scope.signup_password1 == "" || $scope.signup_password1 == null || hasWhiteSpace($scope.signup_password1) == true) {
-            $window.alert("Password Empty");
-        } else {
+            $window.alert("Password 1 Empty");
+        } else if ($scope.signup_password2 == "" || $scope.signup_password2 == null || hasWhiteSpace($scope.signup_password2) == true) {
+            $window.alert("Password 2 Empty");
+        } else if($scope.signup_password1 != $scope.signup_password2)
+        {
+          $window.alert("Password Mismatch");
+        }
+        else {
             $http.post(url, signup_body, config)
                 .success(function (data, status, headers) {
                     console.log("Success in sign up post");
@@ -146,8 +154,9 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
                     console.log(data);
                     if (data == 0) {
                         $scope.isLoggedIn = false;
-                        $window.alert("Enter Proper Details");
+                        $window.alert("Enter Proper Details or User already Exissts");
                     } else {
+                      $('#signupModal').modal('hide');
                         $scope.isLoggedIn = true;
                         $scope.profile = data;
                         $scope.phone = $scope.profile.phone;
@@ -190,6 +199,8 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
                         $scope.isOktocontinue = true;
                         $scope.phone = $scope.forgot_phone;
                         console.log("success forgot_customer");
+                        
+                        $('#forgotModal').modal('hide');
                         $('#otpModal').modal('show');
                     } else {
                         console.log("else 1");
@@ -219,7 +230,8 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
 
         if ($scope.otp_text == "" || $scope.otp_text == null || hasWhiteSpace($scope.otp_text) == true) {
             $window.alert("OTP Empty");
-        } else {
+        } 
+        else {
             $http.post(url, signup_body, config)
                 .success(function (data, status, headers) {
                     console.log("Success in otp verify post");
@@ -229,6 +241,8 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
                         $scope.isOktocontinue = true;
                         $scope.phone = $scope.forgot_phone;
                         console.log("success customer_otp_verify");
+                        
+                           $('#otpModal').modal('hide');
                         $('#newpwdModal').modal('show');
 
                     } else {
@@ -259,7 +273,11 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
             $window.alert("Password Empty");
         } else if ($scope.forgot_password2 == "" || $scope.forgot_password2 == null || hasWhiteSpace($scope.forgot_password2) == true) {
             $window.alert("Confirm Password Empty");
-        } else {
+        }else if($scope.forgot_password1 != $scope.forgot_password2)
+        {
+          $window.alert("Password Mismatch");
+        } 
+        else {
             $http.post(url, signup_body)
                 .success(function (data, status, headers) {
                     console.log("Success in sign up post");
@@ -270,6 +288,8 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
                         $scope.isLoggedIn = false;
                         $window.alert("Password Reset Failed");
                     } else {
+                    
+                      $('#newpwdModal').modal('hide');
                         $scope.isLoggedIn = true;
                         $scope.profile = data[0];
                         $scope.phone = $scope.profile.phone;

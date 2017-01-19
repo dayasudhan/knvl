@@ -557,7 +557,7 @@ function registerCustomer2(req, res, next)
                         var customer = new CustomerInfoModel({
                                   email:req.body.email,
                                   id:cus_id,
-                                  phone:req.body.phonenumber,
+                                  phone:req.body.phoneNumber,
                                   name:req.body.name
                         });
                      
@@ -860,9 +860,9 @@ app.post( '/v1/vendor/logo/:id', upload.single('file'),function( req, res ) {
 app.post( '/v1/vendor/isopen/:id', function( req, res ) {
   console.log('/v1/vendor/isopen/:id');
     console.log(req.headers);
-   	if(checkVendorApiAunthaticated(request,1) == false)
+   	if(checkVendorApiAunthaticated(req,1) == false)
 	{
-		return response.send("Not aunthiticated").status(403);
+		return res.send("Not aunthiticated").status(403);
 	}
   console.log(req.params.id);
   console.log(req.body.isopen);
@@ -887,10 +887,10 @@ app.post( '/v1/vendor/isopen/:id', function( req, res ) {
 
 app.post( '/v1/vendor/review/:id', function( req, res ) {
   console.log('/v1/vendor/review/:id');
-  console.log(request.headers);
- 	if(checkVendorApiAunthaticated(request,2) == false)
+  // console.log(req.headers);
+ 	if(checkVendorApiAunthaticated(req,2) == false)
 	{
-		return response.send("Not aunthiticated").status(403);
+		return res.send("Not aunthiticated").status(403);
 	}
   console.log(req.params.id);
   console.log(req.body.rating);
@@ -904,7 +904,8 @@ app.post( '/v1/vendor/review/:id', function( req, res ) {
             console.log( 'updated vendor review created' );
            
             return res.send('created');;
-        } else {
+        } else {  
+
          console.log( 'updated vendor review created' );
             console.log( err );
             return res.send('ERROR');
@@ -1465,8 +1466,8 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
         },
         function( err, vendor ) {
         if( !err ) {
-            console.log("old vendor", vendor);
-            console.log("vendor.length",vendor.length);
+         //   console.log("old vendor", vendor);
+          //  console.log("vendor.length",vendor.length);
             for (var j = 0; j < vendor.length; j++) {
               var menu_array ;
               menu_array = vendor[j].menu;
@@ -1479,7 +1480,7 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
               }
               vendor[j].menu = new_menu_array;
             }
-             console.log("old vendor", vendor);
+            // console.log("old vendor", vendor);
             return response.send( vendor );
         } else {
             console.log( err );
@@ -1500,7 +1501,7 @@ app.get( '/v1/vendor/delieveryareas', function( request, response ) {
         },
         function( err, vendor ) {
         if( !err ) {
-            console.log(vendor);
+      //      console.log(vendor);
 
              console.log("vendor.length",vendor.length);
             for (var j = 0; j < vendor.length; j++) {
@@ -1808,7 +1809,7 @@ app.post( '/v1/vendor/order', function( request, response ) {
                         rootRef.update(pn);
 
                          console.log(vendor[0].phone);
-                        // sendOrderReceivedSmstoVendor(order,vendor[0].phone,order_id); 
+                         sendOrderReceivedSmstoVendor(order,vendor[0].phone,order_id); 
 
                       } 
                       else {
@@ -1970,6 +1971,39 @@ app.put( '/v1/admin/coverageArea', function( request, response ) {
     console.log('request.body.isBulkAreaOnly' ,isbulk);
         return CoverageAreaModel.update({ 'cityName':request.body.cityName},
             { $addToSet: {'subAreas': {$each:[{name: request.body.areaName, isBulkAreaOnly: isbulk}] }}},
+            function( err, order ) 
+             {
+        if( !err ) {
+            console.log("no error");
+            console.log(order);
+            return response.send('SUCCESS');
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+});
+
+app.put( '/v1/admin/coverageArea/slider', function( request, response ) {
+     console.log("v1/admin/coverageArea");
+
+     console.log(request.body);
+     console.log(request.body.cityName);
+     console.log(request.body.logo1);
+     console.log(request.body.logo2);
+     console.log(request.body.logo3);
+     console.log(request.body.logo4);
+    if(checkVendorApiAunthaticated(request,0) == false)
+  {
+    return response.send("Not aunthiticated").status(403);
+  }
+    
+        return CoverageAreaModel.update({ 'cityName':request.body.cityName},
+            {$set: { "sliders.logo1": request.body.logo1,
+                     "sliders.logo2": request.body.logo2,
+                     "sliders.logo3": request.body.logo3,
+                     "sliders.logo4": request.body.logo4
+             }} ,
             function( err, order ) 
              {
         if( !err ) {

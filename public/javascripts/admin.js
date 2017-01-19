@@ -12,7 +12,7 @@ app = angular.module("adminModule", []);
   	  $scope.getOrders = function () {
       console.log("getOrders");
 
-      var url = "/v1/vendor/order_all";
+      var url = "/v1/admin/order_all";
       //url = url + param;
       $http.get(url,config)
         .success(function (data, status, headers, config)
