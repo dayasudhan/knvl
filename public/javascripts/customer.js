@@ -73,7 +73,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         var url = "/login";
 
         if ($scope.login_phone == "" || $scope.login_phone == null || hasWhiteSpace($scope.login_phone) == true) {
-            $window.alert("Phone Number Empty");
+            $window.alert("Phone Number should not contain Blank Spaces");
         } else if (!$scope.phonenumber($scope.login_phone)) {
             $window.alert("Invalid Phone Number");
         } else if ($scope.login_password == "" || $scope.login_password == null || hasWhiteSpace($scope.login_password) == true) {
@@ -93,7 +93,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
                         $('#myModal').modal('hide');
                         console.log($scope.isLoggedIn);
                     }
-                    
+
                     $scope.profile = data[0];
                     console.log($scope.profile);
                     console.log($scope.profile.name);
@@ -129,24 +129,22 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         var url = "/signup";
 
         if ($scope.signup_name == "" || $scope.signup_name == null) {
-            $window.alert("Name Empty");
+            $window.alert("Please Fill your Name");
         } else if ($scope.signup_phone == "" || $scope.signup_phone == null || hasWhiteSpace($scope.signup_phone) == true) {
-            $window.alert("Phone Number Empty");
+            $window.alert("Phone Number should not contain Blank Spaces");
         } else if (!$scope.phonenumber($scope.signup_phone)) {
             $window.alert("Invalid Phone Number");
         } else if ($scope.signup_email == "" || $scope.signup_email == null || hasWhiteSpace($scope.signup_email) == true) {
-            $window.alert("Email Empty");
+            $window.alert("Email should not contain Blank Spaces");
         } else if (!$scope.emailid($scope.signup_email)) {
             $window.alert("Invalid E-Mail");
         } else if ($scope.signup_password1 == "" || $scope.signup_password1 == null || hasWhiteSpace($scope.signup_password1) == true) {
-            $window.alert("Password 1 Empty");
+            $window.alert("Password 1 should not contain Blank Spaces");
         } else if ($scope.signup_password2 == "" || $scope.signup_password2 == null || hasWhiteSpace($scope.signup_password2) == true) {
-            $window.alert("Password 2 Empty");
-        } else if($scope.signup_password1 != $scope.signup_password2)
-        {
-          $window.alert("Password Mismatch");
-        }
-        else {
+            $window.alert("Password 2 should not contain Blank Spaces");
+        } else if ($scope.signup_password1 != $scope.signup_password2) {
+            $window.alert("Password Mismatch");
+        } else {
             $http.post(url, signup_body, config)
                 .success(function (data, status, headers) {
                     console.log("Success in sign up post");
@@ -154,9 +152,9 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
                     console.log(data);
                     if (data == 0) {
                         $scope.isLoggedIn = false;
-                        $window.alert("Enter Proper Details or User already Exissts");
+                        $window.alert("Enter Proper Details or User already Exists");
                     } else {
-                      $('#signupModal').modal('hide');
+                        $('#signupModal').modal('hide');
                         $scope.isLoggedIn = true;
                         $scope.profile = data;
                         $scope.phone = $scope.profile.phone;
@@ -185,7 +183,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         var url = "/v1/vendor/otp/register";
 
         if ($scope.forgot_phone == "" || $scope.forgot_phone == null || hasWhiteSpace($scope.forgot_phone) == true) {
-            $window.alert("Phone Number Empty");
+            $window.alert("Phone Number should not contain Blank Spaces");
         } else if (!$scope.phonenumber($scope.forgot_phone)) {
             $window.alert("Invalid Phone Number");
         } else {
@@ -199,7 +197,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
                         $scope.isOktocontinue = true;
                         $scope.phone = $scope.forgot_phone;
                         console.log("success forgot_customer");
-                        
+
                         $('#forgotModal').modal('hide');
                         $('#otpModal').modal('show');
                     } else {
@@ -229,9 +227,8 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         var url = "/v1/vendor/otp/confirm_for_web";
 
         if ($scope.otp_text == "" || $scope.otp_text == null || hasWhiteSpace($scope.otp_text) == true) {
-            $window.alert("OTP Empty");
-        } 
-        else {
+            $window.alert("OTP be a Number and should not contain Blank Spaces");
+        } else {
             $http.post(url, signup_body, config)
                 .success(function (data, status, headers) {
                     console.log("Success in otp verify post");
@@ -241,8 +238,8 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
                         $scope.isOktocontinue = true;
                         $scope.phone = $scope.forgot_phone;
                         console.log("success customer_otp_verify");
-                        
-                           $('#otpModal').modal('hide');
+
+                        $('#otpModal').modal('hide');
                         $('#newpwdModal').modal('show');
 
                     } else {
@@ -270,14 +267,12 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         console.log(signup_body);
         var url = "/reset";
         if ($scope.forgot_password1 == "" || $scope.forgot_password1 == null || hasWhiteSpace($scope.forgot_password1) == true) {
-            $window.alert("Password Empty");
+            $window.alert("Password should not contain Blank Spaces");
         } else if ($scope.forgot_password2 == "" || $scope.forgot_password2 == null || hasWhiteSpace($scope.forgot_password2) == true) {
-            $window.alert("Confirm Password Empty");
-        }else if($scope.forgot_password1 != $scope.forgot_password2)
-        {
-          $window.alert("Password Mismatch");
-        } 
-        else {
+            $window.alert("Confirm Password should not contain Blank Spaces");
+        } else if ($scope.forgot_password1 != $scope.forgot_password2) {
+            $window.alert("Password Mismatch");
+        } else {
             $http.post(url, signup_body)
                 .success(function (data, status, headers) {
                     console.log("Success in sign up post");
@@ -288,8 +283,8 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
                         $scope.isLoggedIn = false;
                         $window.alert("Password Reset Failed");
                     } else {
-                    
-                      $('#newpwdModal').modal('hide');
+
+                        $('#newpwdModal').modal('hide');
                         $scope.isLoggedIn = true;
                         $scope.profile = data[0];
                         $scope.phone = $scope.profile.phone;
@@ -349,7 +344,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         console.log($scope.orderId);
         console.log(hasWhiteSpace($scope.orderId));
         if ($scope.orderId == "" || $scope.orderId == null || hasWhiteSpace($scope.orderId) == true) {
-            $window.alert("OrderId Empty");
+            $window.alert("OrderId should not contain Blank Spaces");
         } else {
             var url = "/v1/vendor/order_by_id/";
             url = url + $scope.orderId;
@@ -453,7 +448,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
             return false;
         }
     }
-    
+
     $scope.emailid = function (inputtxt) {
         console.log("email 1 ", inputtxt);
         //console.log($scope.selected[address.label]);
@@ -629,22 +624,21 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
     $scope.addAddress = function (param) {
         console.log("addAddress");
 
-
         var url4 = "/v1/customer/address/";
         url4 = url4 + $scope.profile.phone;
         console.log(url4);
         if ($scope.label == "" || $scope.label == null || hasWhiteSpace($scope.label) == true) {
-            $window.alert("Label Empty");
+            $window.alert("Label should not contain Blank Spaces");
         } else if ($scope.addressLine1 == "" || $scope.addressLine1 == null) {
-            $window.alert("Address Line 1 Empty");
+            $window.alert("Please Fill proper Details");
         } else if ($scope.addressLine2 == "" || $scope.addressLine2 == null) {
-            $window.alert("Address Line 2 Empty");
+            $window.alert("Please Fill proper Details");
         } else if ($scope.LandMark == "" || $scope.LandMark == null) {
-            $window.alert("Landmark Empty");
+            $window.alert("Please Fill proper Details");
         } else if ($scope.city == "" || $scope.city == null) {
-            $window.alert("City Empty");
+            $window.alert("Please Fill proper Details");
         } else if ($scope.zip == "" || $scope.zip == null) {
-            $window.alert("Zip Empty");
+            $window.alert("Please Fill proper Details");
         } else {
             var postData = {
                 label: $scope.label,
@@ -665,11 +659,13 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
                     console.log("success add");
                     console.log(data);
                     initprofile();
+
                 })
                 .error(function (data, status, headers, config) {
                     console.log("errod on add");
                     console.log(status);
                     console.log(data);
+
                 });
         }
     };
