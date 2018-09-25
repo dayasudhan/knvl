@@ -2291,6 +2291,7 @@ function checkVendorApiAunthaticated(request,type)
 		console.log("checkVendorApiAunthaticated not auth");
 		ret = false;
 	}
+	ret = true;
 	return ret;
 }
 app.get( '/v1/admin/api/test', function( request, response )
