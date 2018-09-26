@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 //mongoose.connect(configDB.url); // connect to our database
 var uristring = 
 
-    process.MONGOLAB_GREEN_MONGOLAB_URI ||
+    process.env.MONGOLAB_GREEN_MONGOLAB_URI ||
   'mongodb://localhost/messoota';
 
 // mongoose
