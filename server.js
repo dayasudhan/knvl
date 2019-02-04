@@ -4,7 +4,7 @@
 // get all the tools we need
 var express  = require('express');
 var app      = express();
-var port     = process.env.PORT || 3000;
+var port     = process.env.PORT || 3002;
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
@@ -26,10 +26,11 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 var uristring = 
   process.env.MONGODB_URI ||
   process.env.MONGOLAB_URI ||
-  'mongodb://localhost/messoota';
+  'mongodb://localhost/spaceu';
 
 // mongoose
 mongoose.connect(uristring,function (err, res) {
+  console.log ('Succeeded connected to123: ' + uristring);
   if (err) { 
     console.log ('ERROR connecting to: ' + uristring + '. ' + err);
   } else {

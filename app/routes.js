@@ -1940,10 +1940,15 @@ app.post( '/v1/admin/coverageArea', function( request, response ) {
     // console.log(request.body);
      console.log("request.user");
 console.log(request.user);
+console.log(request.body.cityName);
      var dd = {'cityName':request.body.cityName};
      var coverageArea = new CoverageAreaModel(
          dd);
+         console.log("request.user 45");
+         console.log(coverageArea);
+         console.log("request.user 452");
        return coverageArea.save(function( err) {
+        console.log("no error");
         if( !err ) {
             console.log("no error");
             console.log(coverageArea);
@@ -2025,7 +2030,9 @@ app.get( '/v1/admin/coverageArea', function( request, response ) {
   	}
     console.log("request.user");
 console.log(request.user);
+console.log("no error 1213123");
 	    return CoverageAreaModel.find(function( err, order ) {
+            console.log("no error 1");
 	        if( !err ) {
 	            console.log("no error");
 	            return response.send( order );
@@ -2034,7 +2041,8 @@ console.log(request.user);
 	            console.log( err );
 	            return response.send('ERROR');
 	        }
-	    });
+        });
+        console.log("no error23");
 
 });
 
@@ -2290,7 +2298,8 @@ function checkVendorApiAunthaticated(request,type)
 	{
 		console.log("checkVendorApiAunthaticated not auth");
 		ret = false;
-	}
+    }
+    ret = true;
 	return ret;
 }
 app.get( '/v1/admin/api/test', function( request, response )
