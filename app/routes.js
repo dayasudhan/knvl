@@ -781,8 +781,8 @@ return CustomerInfoModel.findOneAndUpdate({ 'id':request.params.id},
 });
 function registerVendor(req, res, next) {
   console.log("/registerVendor");
-  var hotel_id = "H";
-  var res = getNextSequence('hotel',function(data) {
+  var hotel_id = "V";
+  var res = getNextSequence('vendor',function(data) {
 
     hotel_id = hotel_id + data.sequence;
     console.log(hotel_id);

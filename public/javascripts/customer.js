@@ -322,9 +322,23 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
                 $scope.simpleGetCallResult = logResult("GET ERROR", data, status, headers, config);
             });
     };
-
+    $scope.getworksbasedonarea = function () 
+    {
+        console.log("getworksbasedonarea");
+        console.log($scope.selectedsubArea);
+        if($scope.selectedsubArea == "RajajiNagara")
+        {
+            $scope.typeofwork= ["Architectural","Plumbing","Electrification","Carpentering","Tiles Work", "Structural"];
+        }
+        else
+        {
+            $scope.typeofwork= ["A","P","E","C","T", "Sl"];
+        }
+        console.log($scope.typeofwork);
+    }
     $scope.findRestaurants = function () {
         console.log("findRestaurants");
+        console.log($scope.selectedsubArea);
         //  var url = "/v1/vendor/city?";
         var url = "/v1/vendor/delieveryareas?";
         var search_areaname = $scope.subAreaCoverage[$scope.selectedAreaIndex];
@@ -581,10 +595,12 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
 
                 var cityCoverage = [];
                 var objCity = [];
+                var subcityCoverage = [];
                 angular.forEach(data, function (city) {
                     var obj = new Object();
                     var obj2 = new Object();
                     obj2 = city.cityName;
+                    obj.city = city.cityName;
                     var subAreaCoverage = [];
                     angular.forEach(city.subAreas, function (area) {
                         //  var obj2 = new Object();
@@ -592,18 +608,31 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
                         subAreaCoverage.push(area.name);
                     });
                     obj.subAreas = subAreaCoverage;
+                    obj2.subAreas = subAreaCoverage;
                     $scope.subAreaCoverage = subAreaCoverage
                     cityCoverage.push(obj);
                     objCity.push(obj2)
+                    subcityCoverage.push(subAreaCoverage);
                 });
+                console.log(objCity);
+                console.log(cityCoverage);
                 console.log("sngulr");
-                cityCoverage.citys = objCity;
+                console.log("sngulr");
+              //  cityCoverage.citys = objCity;
                 $scope.cityCoverage = cityCoverage;
                 $scope.selectedCity = 0;
                 $scope.selectedAreaIndex = 0;
-
+                $scope.subAreaCoverage= ["Architectural","Plumbing","Electrification","Carpentering","Tiles Work", "Structural"];
                 console.log($scope.cityCoverage);
-
+                console.log($scope.subAreaCoverage);
+            //     $scope.cityCoverage = [{"sectorName": "nameHere1",
+            // "subSectors": ["sub1", "sub2", "sub3"]
+            // },
+            // {"sectorName": "nameHere2",
+            // "subSectors": ["sub1", "sub2", "sub3"]
+            // }];
+         //   $scope.cityCoverage = data;
+            console.log($scope.cityCoverage);
             })
             .error(function (data, status, headers, config) {
                 $scope.simpleGetCallResult = logResult("GET ERROR", data, status, headers, config);

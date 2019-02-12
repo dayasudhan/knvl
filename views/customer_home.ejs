@@ -62,21 +62,45 @@
         </div>
         <div class="finderkeepers">
             <ul class="findernav">
-                <li class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <!-- <li class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                     <div class="search-input">
                         <select class="form-control search-first" ng-model="selectedCity" ng-options="cityCoverage.citys.indexOf(selectedCity) as selectedCity for selectedCity in cityCoverage.citys"> </select>
                     </div>
+                </li> -->
+                <!-- <li class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                    <div class="search-input">
+                        <select class="form-control search-second" ng-model="selectedAreaIndex" ng-options="cityCoverage.indexOf(selectedCity) as selectedAreaIndex for selectedAreaIndex in cityCoverage[selectedCity]"> </select>
+                    </div>
+                </li> -->
+                <li class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                    <div class="search-input">
+                <select class="form-control search-first" ng-model="selectedsubArea"   ng-change="getworksbasedonarea()">
+                    <option value="">Selet your area</option>
+                        <optgroup ng-repeat='item in cityCoverage' label="{{item.city}}">
+                          <option ng-repeat="option in item.subAreas">{{option}}</option>
+                        </optgroup>
+                    </select>
+                </div>
                 </li>
                 <li class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                     <div class="search-input">
-                        <select class="form-control search-second" ng-model="selectedAreaIndex" ng-options="subAreaCoverage.indexOf(selectedAreaIndex) as selectedAreaIndex for selectedAreaIndex in subAreaCoverage"> </select>
-                    </div>
+                <select class="form-control search-first" ng-model="selectedsubArea32"   ng-change="getworksbasedonarea()">
+                    <option value="">Selet your work required</option>
+              
+                          <option ng-repeat="option in typeofwork">{{option}}</option>
+                        </optgroup>
+                    </select>
+                </div>
                 </li>
+ 
                 <li class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                     <div class="search-input">
                         <button class="btn btn-success btn-block btn-md" ng-click="findRestaurants()">FIND</button>
                     </div>
-                </li>
+                </li> 
+                
+
+                    
                 <!--
 <a ui-sref="menu " ng-click="currentHotel($index) " class="btn btn-primary ">Menu</a>-->
                 <!--div class="col-md-2 col-sm-2 ">    
