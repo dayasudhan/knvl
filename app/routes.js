@@ -145,11 +145,12 @@ app.post('/login', function(req, res, next) {
     console.log('post /login');
       console.log(req.body);
   passport.authenticate('local-login', function(err, user, info) {
-   
+    console.log('post /login 2');
     if (err) {
          console.log("error in login 0");
         return next(err); }
     if (!user) {
+        console.log('post /login 3');
          var redirect_url = '/';
             if(req.body.role == 'customer')
             {
@@ -164,6 +165,7 @@ app.post('/login', function(req, res, next) {
             } 
             
     }
+    console.log('post /login 4');
     req.logIn(user, function(err) {
       if (err) { return next(err); }
       console.log(req.body.role);
@@ -781,7 +783,7 @@ return CustomerInfoModel.findOneAndUpdate({ 'id':request.params.id},
 });
 function registerVendor(req, res, next) {
   console.log("/registerVendor");
-  var hotel_id = "V";
+  var hotel_id = "H";
   var res = getNextSequence('vendor',function(data) {
 
     hotel_id = hotel_id + data.sequence;
@@ -950,11 +952,11 @@ app.post( '/v1/vendor/otp/register', function( req, res ) {
                             otpurl  = otpurl + "&number=" +  req.body.phoneNumber;
                             otpurl  = otpurl + "&text=" +  "Your one time password for khaanavali is : " + otpnum;
                             console.log(otpurl);
-                            client.get(otpurl, 
-                            function (data, response) {
-                                console.log(data);
-                                return res.send("Success");
-                            });
+                            // client.get(otpurl, 
+                            // function (data, response) {
+                            //     console.log(data);
+                            //     return res.send("Success");
+                            // });
                             return res.send( "Success" );
                         } else {
                          console.log( 'error' );
@@ -974,11 +976,12 @@ app.post( '/v1/vendor/otp/register', function( req, res ) {
                 otpurl  = otpurl + "&number=" +  req.body.phoneNumber;
                 otpurl  = otpurl + "&text=" +  "Your one time password for khaanavali is : " + otpnum;
                 console.log(otpurl);
-                client.get(otpurl, 
-                function (data, response) {
-                    console.log(data);
-                    return res.send("Success");
-                });
+                // client.get(otpurl, 
+                // function (data, response) {
+                //     console.log(data);
+                //     return res.send("Success");
+                // });
+                return res.send("Success");
               }
             });
 
@@ -1809,7 +1812,7 @@ app.post( '/v1/vendor/order', function( request, response ) {
                         rootRef.update(pn);
 
                          console.log(vendor[0].phone);
-                         sendOrderReceivedSmstoVendor(order,vendor[0].phone,order_id); 
+                        // sendOrderReceivedSmstoVendor(order,vendor[0].phone,order_id); 
 
                       } 
                       else {

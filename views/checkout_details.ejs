@@ -1,0 +1,117 @@
+<button class="collapsible" ng-click="toggle_function()">Select Address</button>
+<div id = "mydiv1" class="content">
+    <div id = "myaddr"><p>No address saved in your selected city.Please add new address</p></div>
+    <button data-target="#addressModel" data-dismiss="modal" ng-click="add_address()">Continue</button>
+    
+</div>
+<br>
+
+<button class="collapsible" ng-click="toggle_function()">Shedule an Appointment</button>
+<div  id = "mydiv2"  class="content">
+ 
+Select the date and time:  <input type="datetime-local" name="bdaytime">
+<button ng-click="appointment_continue()">Continue</button>
+</div>
+<br>
+<button class="collapsible" ng-click="toggle_function()" >Order Summary</button>
+<div id = "mydiv3"  class="content">
+    <p>Fitting or installation</p>
+    <button data-target="#addressModel" data-dismiss="modal" ng-click="book_appointment()">Book Now</button>
+</div>
+<div class="modal fade" id="addressModel" role="dialog">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+             
+                <div class="modal-body idetails">
+
+                    <h3>DELIVERY ADDRESS</h3>
+                    <div class="deladdresspart">
+                        <ul class="deladdresslist">
+                            <li ng-repeat="address in profile.addresses">
+                                <div class="deladdlist">
+                                    <h3><input type="radio" 
+                                        name="name" required
+                                        ng-click="fnChangeAssetType(address)" > &nbsp; {{address.label}}</h3>
+                                </div>
+                                <div class="deladdlistt">
+                                    <ul class="deladddetails">
+                                        <li>
+                                            <p><span>Address Line 1 :</span> {{address.addressLine1}}</p>
+                                        </li>
+                                        <li>
+                                            <p><span>Address Line 2 :</span> {{address.addressLine2}}</p>
+                                        </li>
+                                     
+                                        <li>
+                                            <p><span>Landmark       :</span> {{address.Landmark}}</p>
+                                        </li>
+                                     
+                                        <li>
+                                            <p><span>City           :</span> {{address.city}}</p>
+                                        </li>
+                                        <li>
+                                            <p><span>Zip            :</span> {{address.zip}}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div> 
+                    <center> Add New Address</center> 
+                </div>
+                <div class="modal-body idetails">
+                    <div>
+                        <!--                                <h3>DELIVERY ADDRESS</h3>-->
+                        <div class="form-group">
+                            <ul class="mordlist">
+                                <li>
+                                    <input type="text" class="form-control" id="user" ng-model="user" placeholder="Enter Name" required> </li>
+                                <li>
+                                    <input type="text" class="form-control" id="inputphone" ng-model="phone" placeholder="Enter Phone Number" required> </li>
+                                <li>
+                                    <input type="text" class="form-control" id="inputflat" ng-model="addressLine1" placeholder="Enter House/Flat No" required> </li>
+                                <li>
+                                    <input type="text" class="form-control" id="inputflat" ng-model="addressLine2" placeholder="Enter Address" required> </li>
+<!--
+                                <li>
+                                    <input type="text" class="form-control" name="inputareaName" ng-model="areaName" placeholder="Enter AreaName" ng-trim="false" required> </li>
+-->
+                                <li>
+                                    <input type="text" class="form-control" id="inputlocality" ng-model="landmark" placeholder="Enter Landmark" required> </li>
+                                <li>
+                                    <input type="text" class="form-control" id="inputlocality" ng-model="city" placeholder="Enter City" required> </li>
+                                <li>
+                                    <input type="text" class="form-control" id="inputlocality" ng-model="zip" placeholder="Enter Zip" required> </li>
+                                <!--
+                                <li>
+                                                                OR
+                                                            </li>
+                                <li>
+                                                                <div class="checkbox">
+                                                                    <ul class="checklist">
+                                                                        <li ng-repeat="address in profile.addresses"><label><input type="checkbox" value="{{profile.address}}">Saved Address ( {{address.label}} )</label></li>
+                                                                        <li><label><input type="checkbox" value="{{profile.address}}">Saved Address ( {{address.label}} )</label></li>
+                                                                        <li><label><input type="checkbox" value="{{profile.address}}">Saved Address ( {{address.label}} )</label></li>
+                                                                    </ul>
+                                                                    
+                                                                </div>
+                                                            </li>
+-->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="idetails">
+                    <h3><span>PAYMENT</span> is only <i>CASH ON DELIVERY.</i></h3> </div>
+                <div class="modal-footer">
+                    <a href="">
+                        <button type="button" class="btn btn-danger" data-target="#myModal3" data-dismiss="modal" ng-click="add_address_continue()" ng-disabled="myForm.$invalid || {{showModal ==false}}">Continue</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>

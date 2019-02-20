@@ -13,7 +13,22 @@ customerApp.config(function ($stateProvider, $urlRouterProvider) {
     // HOME STATES AND NESTED VIEWS ========================================
         .state('home', {
             url: '/',
-            templateUrl: '../../views/customer_home.ejs',
+            templateUrl: '../../views/spaceucustomer_home.ejs',
+            controller: 'mainController'
+        })
+        .state('elec', {
+            url: '/elec',
+            templateUrl: '../../views/electrification_detail.ejs',
+            controller: 'mainController'
+        })
+        .state('checkout', {
+            url: '/checkout',
+            templateUrl: '../../views/checkout_details.ejs',
+            controller: 'mainController'
+        })
+        .state('orderconfirmation', {
+            url: '/orderconfirmation',
+            templateUrl: '../../views/orderconfirm.ejs',
             controller: 'mainController'
         })
         .state('find', {
@@ -32,6 +47,7 @@ customerApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: '../../views/customer_profile.ejs',
             controller: 'mainController'
         })
+        
         //        .state('about', {
         //            url: '/about',
         //            templateUrl: '../../views/customer_about.ejs',
@@ -60,7 +76,73 @@ customerApp.config(function ($stateProvider, $urlRouterProvider) {
 });
 customerApp.controller('mainController', function ($rootScope, $scope, $http, jsonFilter, $window) {
 
+    $scope.addressadded = false;
+    $scope.appointmentselected = false;
+    $scope.orderadded = false;
+    $scope.add_address= function()
+    {
 
+        $('#addressModel').modal('show');
+        $scope.addressadded = true;
+        var x2 = document.getElementById("mydiv2");
+         x2.style.display = x2.scrollHeight + "px";;
+         console.log("add_address");
+    }
+    $scope.add_address_continue= function()
+    {
+        
+       
+        $scope.addressadded = true;
+        var x2 = document.getElementById("mydiv2");
+         x2.style.maxHeight = x2.scrollHeight + "px";;
+         console.log("add_address_continue");
+    }
+    $scope.appointment_continue= function()
+    {
+        
+       
+        $scope.addressadded = true;
+        var x2 = document.getElementById("mydiv3");
+         x2.style.maxHeight = x2.scrollHeight + "px";;
+         console.log("appointment_continue");
+    }
+    $scope.book_appointment= function()
+    {
+        
+       
+        $scope.addressadded = true;
+
+         console.log("book_appointment");
+    }
+    $scope.toggle_function =function()
+    {
+
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < 1; i++) {
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight){
+            content.style.maxHeight = null;
+            } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+            } 
+        });
+    }
+        // var x = document.getElementById("mydiv1");
+         
+        // var x3 = document.getElementById("mydiv3");
+        // if (x.style.maxHeight == (content.scrollHeight + "px")) {
+        //   x2.style.display = "none";
+        //  // x3.style.display = "none";
+        // } else {
+        //     x2.style.display = "block";
+        //    // x3.style.display = "block";
+        // }
+   
+    }
     $scope.login_customer = function () {
         console.log("login_customer");
         console.log($scope.login_phone);
