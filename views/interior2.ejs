@@ -38,7 +38,7 @@
             <div class="start_of_work">
               <h3>   When do you want this work to start </h3>
               <label class="container">
-                    <input type="radio" ng-value="true" name="start_of_work" ng-model="start_of_work" value="Within a week">
+                    <input type="radio" ng-value="true"  name="start_of_work" ng-model="start_of_work" value="Within a week">
                     <span class="checkmark">Within a week</span>
                   </label>
                   <label class="container">
@@ -73,12 +73,102 @@
         <button type="button" class="btn btn-danger btn-lg">Add address</button>
         <a ui-sref="checkout" ng-click="currentHotel($index)"> -->
              <!-- Button trigger modal -->
-<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
+<!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
         Add Address
-      </button>
-      
+      </button> -->
+      <h3>   Select Address </h3>
+      <div class="deladdresspart">
+            <ul class="deladdresslist">
+                <li ng-repeat="address in profile.addresses">
+                    <div class="deladdlist">
+                        <h3><input type="radio" 
+                            name="name" required
+                            ng-click="fnChangeAssetType(address)" > &nbsp; {{address.label}}</h3>
+                    </div>
+                    <div class="deladdlistt">
+                        <ul class="deladddetails">
+                            <li>
+                                <p><span>Address Line 1 :</span> {{address.addressLine1}}</p>
+                            </li>
+                            <li>
+                                <p><span>Address Line 2 :</span> {{address.addressLine2}}</p>
+                            </li>
+                            <!--
+                            <li>
+                                <p><span>Street         :</span> {{address.street}}</p>
+                            </li>
+-->
+                            <li>
+                                <p><span>Landmark       :</span> {{address.Landmark}}</p>
+                            </li>
+                            <!--
+                            <li>
+                                <p><span>Areaname       :</span> {{address.areaName}}</p>
+                            </li>
+-->
+                            <li>
+                                <p><span>City           :</span> {{address.city}}</p>
+                            </li>
+                            <li>
+                                <p><span>Zip            :</span> {{address.zip}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col">
+                <a href="#" data-toggle="modal" data-target="#newaddressModal">
+                    <button type="submit" class="btn btn-primary ">ADD NEW ADDRESS</button>
+                </a>
+                <div class="modal fade" id="newaddressModal" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <label class="rq">All Fields are Mandatory</label>
+                                <div class="adder">
+                                    <h3><input required type="text" class="form-control adders" ng-model="label" placeholder="Label" maxlength="15"></h3> </div>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <ul class="adderslist">
+                                        <li>
+                                            <input type="text" class="form-control adders" ng-model="addressLine1" placeholder="Addressline 1" maxlength="60"> </li>
+                                        <li>
+                                            <input type="text" class="form-control adders" ng-model="addressLine2" placeholder="Addressline 2" maxlength="60"> </li>
+                                        <!--
+                                        <li>
+                                            <input type="text" class="form-control adders" ng-model="street" placeholder="Street" maxlength="15"> </li>
+-->
+                                        <li>
+                                            <input type="text" class="form-control adders" ng-model="LandMark" placeholder="Landmark" maxlength="30"> </li>
+                                        <!--
+                                        <li>
+                                            <input type="text" class="form-control adders" ng-model="areaname" placeholder="Areaname" maxlength="15"> </li>
+-->
+                                        <li>
+                                            <input type="text" class="form-control adders" ng-model="city" placeholder="City" maxlength="20"> </li>
+                                        <li>
+                                            <input type="text" class="form-control adders" ng-model="zip" placeholder="zip" maxlength="6"> </li>
+                                        <!--
+                                        <li>
+                                            <input type="text" class="form-control adders" ng-model="latitude" placeholder="Latitude"> </li>
+                                        <li>
+                                            <input type="text" class="form-control adders" ng-model="longitude" placeholder="Longitude"> </li>
+-->
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary btn-sm" data-dismiss="modal" ng-click="addAddress()">ADD</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
       <!-- Modal -->
-      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -105,7 +195,21 @@
             </div>
           </div>
         </div>
-      </div>
+   
+
+</div>
+<!-- <div class="adddresss">
+    <h4>Address</h4>
+        <p>{{addressLine1}}</p>
+        <p>{{addressLine2}}</p>
+        <p>{{street}} </p>
+        <p>{{landmark }}</p>
+        <p>{{areaName }}</p>
+        <p>{{city}}</p>
+        <p>{{zip }}</p>
+        <p>{{latitude }}</p>
+        <p>{{longitude }}</p>
+</div> -->
       <br>
       <button type="button" class="btn btn-primary" ng-click="place_request()">
             Place Request

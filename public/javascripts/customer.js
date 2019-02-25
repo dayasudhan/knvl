@@ -130,6 +130,11 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
 
          console.log("book_appointment");
     }
+    $scope.saveaddress =function()
+    {
+        console.log("saveaddress");
+        console.log($scope.city);
+    }
     $scope.place_request= function()
     {
         $scope.size_of_property = "2 BHK";
@@ -140,7 +145,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         console.log( $scope.start_of_work);
         console.log( $scope.own_property);
         console.log( $scope.homeoroffice);
-
+        console.log($scope.city);
         console.log("place_request");
     }
     $scope.toggle_function =function()
