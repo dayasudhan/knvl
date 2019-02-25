@@ -7,17 +7,26 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <script src="/javascripts/customer.js"></script>
+
+
+    <link href="/public/sandy/css/netra.css" rel="stylesheet" >
+
+    <title>Space U</title>
     
-    <title>Carousel Template · Bootstrap</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/carousel/">
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script>
+        window.jQuery || document.write('<script src="/sandy/js/vendor/jquery-1.12.0.min.js"><\/script>')
+    </script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> 
+     <link rel="stylesheet" src="/public/sandy/css/bootstrap.css"></script>
+      <link href="https://getbootstrap.com/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
-    <script src="/javascripts/customer.js"></script>
-    <!-- Bootstrap core CSS -->
-<link href="https://getbootstrap.com/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <!-- Bootstrap core CSS --> 
+<script src="/javascripts/customer.js"></script>
+  
 
     <style>
       .bd-placeholder-img {
@@ -36,13 +45,12 @@
       }
     </style>
     <!-- Custom styles for this template -->
-    <link href="carousel.css" rel="stylesheet">
-  </head>
+ </head>
   <body ng-app="mainModule" ng-controller="mainController">
         <div class="mains">
     <header>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="#">Carousel</a>
+    <a class="navbar-brand" href="#">Space U</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -52,20 +60,215 @@
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="#"  data-toggle="modal" data-target="#myModal" ng-show="!isLoggedIn"  ng-click>Sign IN</a>
+          <!-- <a href="#" data-toggle="modal" data-target="#myModal" ng-show="!isLoggedIn"><i class="fa fa-sign-in fa-lg fa-fw"></i>Sign In</a> -->
+          <div class="dropdown profedit" data-toggle="modal" ng-show="isLoggedIn"> <a class="dropdown-toggle" data-toggle="dropdown">{{profile.name}}</a>
+              <ul class="dropdown-menu profiledit">
+                  <li>
+                      <!-- <img src="../public/sandy/img/ban.jpg" class="img-circle" alt="User Image">-->
+                      <p> {{profile.name}} </p>
+                  </li>
+                  <li>
+                      <div class="proone"></div>
+                          <button ui-sref="profile" class="btn btn-success btn-flat">Profile Edit</button>
+                      </div>
+                      <div class="protwo">
+                          <a href="/logout" ng-show="isLoggedIn">
+                              <button class="btn btn-warning btn-flat">Log Out</button>
+                          </a>
+                      </div>
+                  </li>
+              </ul>
+          </div>
+          
         </li>
-        <li class="nav-item">
+        
+
+        <!-- <li class="nav-item">
           <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
+        </li> -->
       </ul>
       <form class="form-inline mt-2 mt-md-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <input class="form-control mr-sm-2" type="text" placeholder="Reference ID" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>
   </nav>
 </header>
 <div>
+    <!-- Modal -->
+
+            <!--<a href="/logout" ng-show="isLoggedIn" >Logout</a>-->
+            <a href="#" data-toggle="modal" data-target="#myModal" ng-show="!isLoggedIn"><i class="fa fa-sign-in fa-lg fa-fw"></i>Sign In</a>
+            <div class="dropdown profedit" data-toggle="modal" ng-show="isLoggedIn"> <a class="dropdown-toggle" data-toggle="dropdown">{{profile.name}}</a>
+                <ul class="dropdown-menu profiledit">
+                    <li>
+                        <!-- <img src="../public/sandy/img/ban.jpg" class="img-circle" alt="User Image">-->
+                        <p> {{profile.name}} </p>
+                    </li>
+                    <li>
+                        <div class="proone">
+                            <button ui-sref="profile" class="btn btn-success btn-flat">Profile Edit</button>
+                        </div>
+                        <div class="protwo">
+                            <a href="/logout" ng-show="isLoggedIn">
+                                <button class="btn btn-warning btn-flat">Log Out</button>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal fade zoom" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header ">
+                                <h3>Login To Your Account</h3> 
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                          </div>
+
+              
+                        <div class="modal-body">
+                            <div class="form-group">
+                              
+                                   
+                                        <input type="text" class="form-control inputphone" ng-model="login_phone" placeholder="Mobile Number" maxlength="10"> </li>
+                                    <!--
+                            <li>
+                                <input type="text" class="form-control inputnews" placeholder="E-mail ID">
+                            </li>
+-->
+                                    
+                                        <input type="password" id="pwd" class="form-control inputpwd" ng-model="login_password" placeholder="Password" maxlength="15"> </li>
+
+                                     <a class="forgot" href="#" data-toggle="modal" data-dismiss="modal" data-target="#forgotModal">Forgot Password ?</a></li>
+
+                                    
+                                        <button type="button" class="btn btn-success alone"  ng-click="login_customer()">LOGIN</button>
+                                    
+                               
+                            </div>
+                        </div>
+                        <div class="modal-footer log">
+                            <h3>Not a Member yet ?</h3>
+                                    <button type="button" class="btn btn-success alone" data-dismiss="modal" data-toggle="modal" data-target="#signupModal">SIGN UP</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade zoom" id="signupModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header log">
+                                <h3>Register</h3> 
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                       <input type="text" class="form-control inputname" ng-model="signup_name" placeholder="Name" maxlength="30"> </li>
+                                        <input type="text" class="form-control inputphone" ng-model="signup_phone" placeholder="Mobile Number" maxlength="10"> </li>
+                                        <input type="text" class="form-control inputmail" ng-model="signup_email" placeholder="E-mail ID" maxlength="40"> </li>
+                                        <input type="password" id="pwd" class="form-control inputpwd" ng-model="signup_password1" placeholder="Password" maxlength="15"> </li>
+                                        <input type="password" id="pwd" class="form-control inputcpwd" ng-model="signup_password2" placeholder="Confirm Password" maxlength="15"> </li>
+                                    <!--
+                                    <li>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="">I accept <a class="lone" href="#" target="_blank">Terms &amp; Conditions</a></label>
+                                        </div>
+                                    </li>
+-->
+                                        <button type="button" class="btn btn-success alone"  ng-click="signup_customer()">REGISTER</button>
+                            </div>
+                        </div>
+                        <div class="modal-footer log">
+                            <h3>Already a Member ?</h3>
+                                    <button type="button" class="btn btn-success alone" data-dismiss="modal" data-toggle="modal" data-target="#myModal">LOGIN</button>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade zoom" id="forgotModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header ">
+                                <h3>Forgot Password! Don't Worry.</h3> 
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                         <input type="text" class="form-control inputphone" ng-model="forgot_phone" placeholder="Enter Mobile Number" maxlength="10"> </li>
+                                        <button type="button" class="btn btn-success alone"  ng-click="forgot_customer()">SUBMIT</button>
+                            </div>
+                        </div>
+                        <div class="modal-footer log">
+                            <h3>Not a Member yet ?</h3>
+                                    <button type="button" class="btn btn-success alone" data-dismiss="modal" data-toggle="modal" data-target="#signupModal">SIGN UP</button>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade zoom" id="otpModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header log">
+                                <h3>Verify</h3 > 
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                       <input type="text" class="form-control inputphone" ng-model="otp_text" placeholder="Enter OTP" maxlength="50"> </li>
+                       
+                                        <button type="button" class="btn btn-success alone"  ng-click="customer_otp_verify()">SUBMIT</button>
+                              </div>
+                        </div>
+                        <div class="modal-footer log">
+                            <h2>Not a Member yet ?</h2>
+                                    <button type="button" class="btn btn-success alone" data-dismiss="modal" data-toggle="modal" data-target="#signupModal">SIGN UP</button>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade zoom" id="newpwdModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header log">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h2>Enter your New Password</h2> </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                       <input type="password" id="pwd" class="form-control inputpwd" ng-model="forgot_password1" placeholder="New Password" maxlength="15"> </li>
+                                        <input type="password" id="pwd" class="form-control inputcpwd" ng-model="forgot_password2" placeholder="Confirm New Password" maxlength="15"> </li>
+                                        <button type="button" class="btn btn-success alone" data-target="#Modal" ng-click="reset_password()">SUBMIT</button>
+                           </div>
+                        </div>
+
+                        <div class="modal-footer log">
+                            <h2>Not a Member yet ?</h2>
+                                     <button type="button" class="btn btn-success alone" data-dismiss="modal" data-toggle="modal" data-target="#signupModal">SIGN UP</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade zoom" id="newpwdModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header log">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h2>Confirmation</h2> </div>
+                        <div class="modal-body log">
+                            <h2>Your Password has been changed. Thank You !</h2>
+                        </div>
+                        <div class="modal-footer log">
+                            <h2>Already a Member ?</h2>
+                                    <button type="button" class="btn btn-success alone" data-dismiss="modal" data-toggle="modal" data-target="#myModal">LOGIN</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      
+
         <div ui-view> </div>
         <div>
 
@@ -75,8 +278,8 @@
         <p class="float-right"><a href="#">Back to top</a></p>
         <p>&copy; 2017-2019 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
       </footer>
+
+
     </main>
     
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-          <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script></body>
-        </body></html>
+         </body></html>

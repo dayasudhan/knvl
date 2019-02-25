@@ -13,12 +13,17 @@ customerApp.config(function ($stateProvider, $urlRouterProvider) {
     // HOME STATES AND NESTED VIEWS ========================================
         .state('home', {
             url: '/',
-            templateUrl: '../../views/spaceucustomer_home.ejs',
+            templateUrl: '../../views/cus_home.ejs',
             controller: 'mainController'
         })
         .state('elec', {
             url: '/elec',
             templateUrl: '../../views/electrification_detail.ejs',
+            controller: 'mainController'
+        })
+        .state('interior', {
+            url: '/interior',
+            templateUrl: '../../views/interior2.ejs',
             controller: 'mainController'
         })
         .state('checkout', {
@@ -88,6 +93,17 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
          x2.style.display = x2.scrollHeight + "px";;
          console.log("add_address");
     }
+    $scope.add_address2= function()
+    {
+
+        console.log("add_address2 1");
+        $('#meraModel').modal('show');
+      //  $('#meraModel').trigger('focus')
+        // $scope.addressadded = true;
+        // var x2 = document.getElementById("mydiv2");
+        //  x2.style.display = x2.scrollHeight + "px";;
+         console.log("add_address2 3");
+    }
     $scope.add_address_continue= function()
     {
         
@@ -113,6 +129,19 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         $scope.addressadded = true;
 
          console.log("book_appointment");
+    }
+    $scope.place_request= function()
+    {
+        $scope.size_of_property = "2 BHK";
+        $scope.start_of_work = "Within a week";
+        $scope.own_property = "Yes";
+        $scope.homeoroffice = "Home";
+        console.log( $scope.size_of_property);
+        console.log( $scope.start_of_work);
+        console.log( $scope.own_property);
+        console.log( $scope.homeoroffice);
+
+        console.log("place_request");
     }
     $scope.toggle_function =function()
     {
