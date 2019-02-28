@@ -63,19 +63,7 @@
               <input type="radio" name="property_type" ng-model="own_property" value="No">
               <span class="checkmark">No</span>
             </label>
-            <!-- <a href="#" ng-click="add_address2()" data-toggle="modal" data-target="#meraModal">
-                    <button type="button" class="btn btn-primary">Add Address</button>
-                </a> -->
-                <!-- <a href="#" data-target="#myModal" ng-show="!isLoggedIn" data-toggle="modal" data-target="#Flogin">
-                    <button type="button" class="btn btn-primary">CHECKOUT</button>
-                </a> -->
-<!-- <a ui-sref="checkout" ng-click="currentHotel($index)">
-        <button type="button" class="btn btn-danger btn-lg">Add address</button>
-        <a ui-sref="checkout" ng-click="currentHotel($index)"> -->
-             <!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
-        Add Address
-      </button> -->
+
       <h3>   Select Address </h3>
       <div class="deladdresspart">
             <ul class="deladdresslist">
@@ -93,19 +81,9 @@
                             <li>
                                 <p><span>Address Line 2 :</span> {{address.addressLine2}}</p>
                             </li>
-                            <!--
-                            <li>
-                                <p><span>Street         :</span> {{address.street}}</p>
-                            </li>
--->
-                            <li>
+                              <li>
                                 <p><span>Landmark       :</span> {{address.Landmark}}</p>
                             </li>
-                            <!--
-                            <li>
-                                <p><span>Areaname       :</span> {{address.areaName}}</p>
-                            </li>
--->
                             <li>
                                 <p><span>City           :</span> {{address.city}}</p>
                             </li>
@@ -167,49 +145,7 @@
                     </div>
                 </div>
             </div> 
-      <!-- Modal -->
-      <!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Contact Address</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                    <div class="form-group">
-                                     <input type="text" class="form-control" id="user" ng-model="user" placeholder="Enter Name" required> </li>
-                                    <input type="text" class="form-control" id="inputphone" ng-model="phone" placeholder="Enter Phone Number" required> </li>
-                                    <input type="text" class="form-control" id="inputflat" ng-model="addressLine1" placeholder="Enter House/Flat No" required> </li>
-                                    <input type="text" class="form-control" id="inputflat" ng-model="addressLine2" placeholder="Enter Address" required> </li>
-                                    <input type="text" class="form-control" id="inputlocality" ng-model="landmark" placeholder="Enter Landmark" required> </li>
-                                    <input type="text" class="form-control" id="inputlocality" ng-model="city" placeholder="Enter City" required> </li>
-                                   <input type="text" class="form-control" id="inputlocality" ng-model="zip" placeholder="Enter Zip" required> </li>
-                          </ul>
-                        </div>
-          </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" >Save Address</button>
-            </div>
-          </div>
-        </div>
-   
 
-</div>
-<!-- <div class="adddresss">
-    <h4>Address</h4>
-        <p>{{addressLine1}}</p>
-        <p>{{addressLine2}}</p>
-        <p>{{street}} </p>
-        <p>{{landmark }}</p>
-        <p>{{areaName }}</p>
-        <p>{{city}}</p>
-        <p>{{zip }}</p>
-        <p>{{latitude }}</p>
-        <p>{{longitude }}</p>
-</div> -->
       <br>
       <button type="button" class="btn btn-primary" ng-click="place_request()">
             Place Request

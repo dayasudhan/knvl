@@ -147,7 +147,64 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         console.log( $scope.homeoroffice);
         console.log($scope.city);
         console.log("place_request");
-    }
+        console.log("order2 function 1");
+        console.log($scope.user);
+        console.log("order2 function 2");
+        
+        console.log("order function 34523");
+        if (!$scope.phonenumber($scope.phone)) {
+            console.log("phonenumber 2");
+            $window.alert("Invalid Phone Number");
+        }  else if ($scope.isLoggedIn === false) {
+            console.log("not loggedin ");
+
+            $('#loginModal').modal('show');
+
+        } else {
+            console.log("order function else");
+            console.log($scope.isLoggedIn);
+            $('#myModal3').modal()
+        }
+    var Order_info =  {
+        "type_of_property": $scope.homeoroffice,
+        "size_of_property": $scope.size_of_property,
+        "type_of_work":"Interior Design",
+        "type_of_sub_work":"Interior Design",
+        "time_to_start_work": $scope.start_of_work,
+        "type_of_ownership":$scope.own_property
+      };
+        var ordarr = {
+           "info" : Order_info,
+            "customer": {
+                "name": $scope.user,
+                "email": "",
+                "phone": $scope.phone,
+                "address": {
+                    "addressLine1": $scope.addressLine1,
+                    "addressLine2": $scope.addressLine2,
+                    "street": $scope.street,
+                    "LandMark": $scope.landmark,
+                    "areaName": $scope.areaName,
+                    "city": $scope.city,
+                    "zip": $scope.zip,
+                    "latitude": $scope.latitude,
+                    "longitude": $scope.longitude
+                }
+            }
+        };
+        $scope.orderSummary = ordarr;
+        var url = "/v1/order";
+        $http.post(url, ordarr)
+            .success(function (data, status, headers) {
+                console.log("Success in postorder");
+
+                console.log(data.id)
+                $scope.orderId = data.id;
+            })
+            .error(function (data, status, headers) {
+                console.log("ERROR in postorder");
+            });
+    };
     $scope.toggle_function =function()
     {
 
@@ -663,10 +720,8 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         };
         $scope.orderSummary = ordarr;
         $scope.total_price = total_price;
-
-
     };
-
+    
     $scope.getCustsomerDetails = function () {
         console.log("getCustsomerDetails");
         var url = "/v1/customer";

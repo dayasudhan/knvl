@@ -1,5 +1,5 @@
 
-var OrderModel = require('../app/models/vendorOrder');
+var OrderModel = require('./models/order');
 var VendorInfoModel = require('../app/models/vendorInfo');
 var CustomerInfoModel = require('../app/models/customerInfo');
 var CoverageAreaModel = require('../app/models/coverageArea');
@@ -1564,7 +1564,7 @@ app.get( '/v1/admin/account/:id', function( request, response ) {
 
 
 
-app.get( '/v1/vendor/order/:id', function( request, response ) {
+app.get( '/v1/order/:id', function( request, response ) {
   console.log(request.params.id);
   console.log(request.headers);
  	if((checkVendorApiAunthaticated(request,1) == false) && (checkVendorApiAunthaticated(request,2)) == false && request.isAuthenticated() == false)
@@ -1583,7 +1583,7 @@ app.get( '/v1/vendor/order/:id', function( request, response ) {
     });
 });
 
-app.get( '/v1/vendor/orderall/today', function( request, response ) {
+app.get( '/v1/orderall/today', function( request, response ) {
    	if(checkVendorApiAunthaticated(request,0) == false)
 	{
 		return response.send("Not aunthiticated").status(403);
@@ -1616,7 +1616,7 @@ app.get( '/v1/vendor/orderall/today', function( request, response ) {
         }
     });
 });
-app.get( '/v1/vendor/order/today/:id', function( request, response ) {
+app.get( '/v1/order/today/:id', function( request, response ) {
   console.log(request.params.id);
        console.log(request.headers);
   	if(checkVendorApiAunthaticated(request,1) == false)
@@ -1652,7 +1652,7 @@ app.get( '/v1/vendor/order/today/:id', function( request, response ) {
 });
 
 
-app.get( '/v1/vendor/order_by_id/:id', function( request, response ) {
+app.get( '/v1/order_by_id/:id', function( request, response ) {
      console.log('/v1/vendor/order_by_id/:id');
 	if(checkVendorApiAunthaticated(request,2) == false)
 	{
@@ -1756,7 +1756,7 @@ function sendOrderReceivedSmstoVendor(order,phone,order_id)
                                 console.log(data);
                             });
 }
-app.post( '/v1/vendor/order', function( request, response ) {
+app.post( '/v1/order', function( request, response ) {
 
      console.log(request.headers);
  	if(checkVendorApiAunthaticated(request,2) == false && request.isAuthenticated() == false)
@@ -1764,7 +1764,7 @@ app.post( '/v1/vendor/order', function( request, response ) {
 		return response.send("Not aunthiticated").status(403);
 	}
   var res = getNextSequence('order',function(data) {
-    var order_id = request.body.hotel.id ;
+    var order_id = request.body.customer.id ;
     order_id = order_id + "R";
     order_id = order_id + data.sequence;
     console.log('ordertype: - ',request.body.ordertype);
@@ -1777,48 +1777,45 @@ app.post( '/v1/vendor/order', function( request, response ) {
         console.log('post order');
         var order = new OrderModel({
             id:order_id,
-            hotel:request.body.hotel,
+            info:request.body.info,
             customer: {name: request.body.customer.name, email: request.body.customer.email, 
                 phone: request.body.customer.phone,  
                 address: request.body.customer.address},
-                menu: request.body.menu,
                 bill_value:request.body.bill_value,
                 deliveryCharge: request.body.deliverCharge,
                 totalCost:request.body.totalCost,
                 current_status:"ORDERED",
                 date:indiantime,
-                instruction:request.body.instruction,
-                ordertype:request.body.ordertype,
                 tracker:  [{status:"ORDERED",time:indiantime}]     });
        
         order.save( function( err ) {
             if( !err ) {
                 console.log( 'created' );
-                console.log( order.hotel.email);
-                VendorInfoModel.find({ 'hotel.email':order.hotel.email},
-                  function( err, vendor ) {
-                      if( !err ) {
-                       //update the pn 
-                        console.log(vendor[0].uniqueid);
+                console.log( order.info.email);
+                // VendorInfoModel.find({ 'hotel.email':order.hotel.email},
+                //   function( err, vendor ) {
+                //       if( !err ) {
+                //        //update the pn 
+                //         console.log(vendor[0].uniqueid);
                        
-                        var pn = {};
+                //         var pn = {};
                          
-                        console.log( order_id);
-                        pn[vendor[0].uniqueid]  = {
-                          msg:order_id
-                        };
+                //         console.log( order_id);
+                //         pn[vendor[0].uniqueid]  = {
+                //           msg:order_id
+                //         };
 
-                        console.log(pn); // should print  Object { name="John"}
-                        rootRef.update(pn);
+                //         console.log(pn); // should print  Object { name="John"}
+                //         rootRef.update(pn);
 
-                         console.log(vendor[0].phone);
-                        // sendOrderReceivedSmstoVendor(order,vendor[0].phone,order_id); 
+                //          console.log(vendor[0].phone);
+                //         // sendOrderReceivedSmstoVendor(order,vendor[0].phone,order_id); 
 
-                      } 
-                      else {
-                        console.log( err );
-                      }
-                    });  
+                //       } 
+                //       else {
+                //         console.log( err );
+                //       }
+                //     });  
                   return response.send( order );
                 } else {
                   console.log( 'error' );
