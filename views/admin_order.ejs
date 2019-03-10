@@ -175,47 +175,52 @@
                     <thead>
                       <tr>
                         <th>Order ID</th>
-                        <th>Customer Name</th>
-                        <th>Customer Phone</th>
-                        <th>Item Name</th>
-                        <th>Item Quantity</th>
-                        <th>HotelName</th>
-                        <th>HotelEmail</th>
-                        <th>Time</th>
-                        <th>Landmark</th>
-                        <th>Address</th>
+                        <th>Customer Details</th>
+                        <th>Type of Property</th>
+                        <th>Property size</th>
+                        <th>Work type</th>
+                        <th>Work sub Type</th>
+                        <th>Time to complete</th>
+                        <th>Property Ownership</th>
+                        <th>Order Time</th>
+                          <th>Address</th>
                         <th>Status</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr ng-repeat="order in orderlist|orderBy:'date':true | filter:searchText">
                         <td>{{order.id}}</td>
-                        <td>{{order.customer.name}}</td>
-                        <td>{{order.customer.phone}}</td>
-                        <td>{{order.menu[0].name}}</td>
-                        <td>{{order.menu[0].no_of_order}}</td>
-                        <td>{{order.hotel.name}}</td>
-                        <td>{{order.hotel.email}}</td>
+                        <td>{{order.customer.name}}
+                        {{order.customer.phone}}</td>
+                        <td>{{order.info.type_of_property}}</td>
+                        <td>{{order.info.size_of_property}}</td>
+                        <td>{{order.info.type_of_work}}</td>
+                        <td>{{order.info.type_of_sub_work}}</td>
+                        <td>{{order.info.time_to_start_work}}</td>
+                        <td>{{order.info.type_of_ownership}}</td>
                         <td>{{order.date | date:'medium'}}</td>
-                        <td>{{order.customer.address.LandMark}}</td>
-                        <td>{{order.customer.address.areaName}}</td>
-                         <td>{{order.current_status}}</td>
+                        <td>{{order.customer.address.addressLine1}}
+                           {{order.customer.address.addressLine2}} 
+                           {{order.customer.address.LandMark}}
+                           {{order.customer.address.city}} 
+                           {{order.customer.address.zip}}</td>
+                          <td>{{order.current_status}}</td>
                        </tr>
           
                     </tbody>
                     <tfoot>
                       <tr>
-                       <th>Order ID</th>
-                        <th>Customer Name</th>
-                        <th>Customer Phone</th>
-                        <th>Item Name</th>
-                        <th>Item Quantity</th>
-                        <th>HotelName</th>
-                        <th>HotelEmail</th>
-                        <th>Time</th>
-                        <th>Landmark</th>
-                        <th>Address</th> 
-                        <th>Status</th>
+                          <th>Order ID</th>
+                          <th>Customer Details</th>
+                          <th>Type of Property</th>
+                          <th>Property size</th>
+                          <th>Work type</th>
+                          <th>Work sub Type</th>
+                          <th>Time to complete</th>
+                          <th>Property Ownership</th>
+                          <th>Order Time</th>
+                            <th>Address</th>
+                          <th>Status</th>
 
                       </tr>
                     </tfoot>

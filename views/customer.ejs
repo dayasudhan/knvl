@@ -59,38 +59,16 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#"  data-toggle="modal" data-target="#myModal" ng-show="!isLoggedIn"  ng-click>Sign IN</a>
-          <!-- <a href="#" data-toggle="modal" data-target="#myModal" ng-show="!isLoggedIn"><i class="fa fa-sign-in fa-lg fa-fw"></i>Sign In</a> -->
-          <div class="dropdown profedit" data-toggle="modal" ng-show="isLoggedIn"> <a class="dropdown-toggle" data-toggle="dropdown">{{profile.name}}</a>
-              <ul class="dropdown-menu profiledit">
-                  <li>
-                      <!-- <img src="../public/sandy/img/ban.jpg" class="img-circle" alt="User Image">-->
-                      <p> {{profile.name}} </p>
-                  </li>
-                  <li>
-                      <div class="proone"></div>
-                          <button ui-sref="profile" class="btn btn-success btn-flat">Profile Edit</button>
-                      </div>
-                      <div class="protwo">
-                          <a href="/logout" ng-show="isLoggedIn">
-                              <button class="btn btn-warning btn-flat">Log Out</button>
-                          </a>
-                      </div>
-                  </li>
-              </ul>
-          </div>
-          
-        </li>
-        
+         </li>
+             <li class="nav-item">
+                <a class="nav-link" href="#"  data-toggle="modal" data-target="#myModal" ng-show="!isLoggedIn"  ng-click>Sign In</a>
+                <a class="nav-link" ui-sref="profile"   ng-show="isLoggedIn"  ng-click>{{profile.name}}</a>
+          </li>
 
-        <!-- <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li> -->
       </ul>
       <form class="form-inline mt-2 mt-md-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Reference ID" aria-label="Search">
+         <a class="nav-link" href="/logout"  ng-show="isLoggedIn" >Log Out</a>
+         <input class="form-control mr-sm-2" type="text" placeholder="Reference ID" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>
@@ -101,7 +79,8 @@
 
             <!--<a href="/logout" ng-show="isLoggedIn" >Logout</a>-->
             <a href="#" data-toggle="modal" data-target="#myModal" ng-show="!isLoggedIn"><i class="fa fa-sign-in fa-lg fa-fw"></i>Sign In</a>
-            <div class="dropdown profedit" data-toggle="modal" ng-show="isLoggedIn"> <a class="dropdown-toggle" data-toggle="dropdown">{{profile.name}}</a>
+            <div class="dropdown profedit" data-toggle="modal" ng-show="isLoggedIn"> 
+                <a class="dropdown-toggle" data-toggle="dropdown">{{profile.name}}</a>
                 <ul class="dropdown-menu profiledit">
                     <li>
                         <!-- <img src="../public/sandy/img/ban.jpg" class="img-circle" alt="User Image">-->

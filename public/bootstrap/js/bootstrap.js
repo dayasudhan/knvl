@@ -1942,11 +1942,11 @@ if (typeof jQuery === 'undefined') {
       .parents('li')
       .addClass('active')
 
-    if (active.parent('.dropdown-menu').length) {
-      active = active
-        .closest('li.dropdown')
-        .addClass('active')
-    }
+    // if (active.parent('.dropdown-menu').length) {
+    //   active = active
+    //     .closest('li.dropdown')
+    //     .addClass('active')
+    // }
 
     active.trigger('activate.bs.scrollspy')
   }

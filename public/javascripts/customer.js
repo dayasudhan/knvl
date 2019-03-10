@@ -84,6 +84,14 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
     $scope.addressadded = false;
     $scope.appointmentselected = false;
     $scope.orderadded = false;
+    $scope.Order_info = {
+        type_of_property: 'Home',
+        size_of_property: '2 BHK',
+        type_of_work:"Interior Design",
+        type_of_sub_work:"Interior Design",
+        time_to_start_work: 'Within a week',
+        type_of_ownership:'Yes'
+      };
     $scope.add_address= function()
     {
 
@@ -138,43 +146,62 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
     $scope.place_request= function()
     {
         $scope.size_of_property = "2 BHK";
-        $scope.start_of_work = "Within a week";
-        $scope.own_property = "Yes";
-        $scope.homeoroffice = "Home";
+        $scope.time_to_start_work = "Within a week";
+        $scope.type_of_ownership = "Yes";
+        $scope.type_of_property = "Home";
         console.log( $scope.size_of_property);
-        console.log( $scope.start_of_work);
-        console.log( $scope.own_property);
-        console.log( $scope.homeoroffice);
+        console.log( $scope.time_to_start_work);
+        console.log( $scope.type_of_ownership);
+        console.log( $scope.type_of_property);
         console.log($scope.city);
         console.log("place_request");
         console.log("order2 function 1");
         console.log($scope.user);
         console.log("order2 function 2");
         
-        console.log("order function 34523");
-        if (!$scope.phonenumber($scope.phone)) {
+        console.log($scope.Order_info.type_of_property );
+        console.log($scope.Order_info.size_of_property );
+        console.log($scope.Order_info.time_to_start_work );
+        console.log($scope.Order_info.type_of_ownership );
+        console.log($scope.isLoggedIn );
+        if(typeof $scope.isLoggedIn === 'undefined')
+        {
+            console.log("not loggedin ");
+            $window.alert("Please login to place a request");
+            $('#myModal').modal('show');
+        }
+         else if ($scope.isLoggedIn === false) {
+            console.log("not loggedin ");
+            $('#myModal').modal('show');
+
+        } 
+        else if (!$scope.phonenumber($scope.phone)) {
             console.log("phonenumber 2");
             $window.alert("Invalid Phone Number");
-        }  else if ($scope.isLoggedIn === false) {
-            console.log("not loggedin ");
-
-            $('#loginModal').modal('show');
-
-        } else {
+        }  else if (!$scope.phonenumber($scope.phone)) {
+            console.log("phonenumber 2");
+            $window.alert("Invalid Phone Number");
+        } 
+        else if (!$scope.phonenumber($scope.phone)) {
+            console.log("phonenumber 2");
+            $window.alert("Invalid Phone Number");
+        } 
+        else {
             console.log("order function else");
             console.log($scope.isLoggedIn);
             $('#myModal3').modal()
-        }
+        
     var Order_info =  {
-        "type_of_property": $scope.homeoroffice,
+        "type_of_property": $scope.type_of_property,
         "size_of_property": $scope.size_of_property,
         "type_of_work":"Interior Design",
         "type_of_sub_work":"Interior Design",
-        "time_to_start_work": $scope.start_of_work,
-        "type_of_ownership":$scope.own_property
+        "time_to_start_work": $scope.time_to_start_work,
+        "type_of_ownership":$scope.type_of_ownership
       };
+
         var ordarr = {
-           "info" : Order_info,
+           "info" : $scope.Order_info,
             "customer": {
                 "name": $scope.user,
                 "email": "",
@@ -204,6 +231,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
             .error(function (data, status, headers) {
                 console.log("ERROR in postorder");
             });
+        }
     };
     $scope.toggle_function =function()
     {
@@ -701,7 +729,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
             "totalCost": totalCost,
             "bill_value": total_price,
             "deliverCharge": $scope.hotel.deliverCharge,
-            "customer": {
+            "customer ": {
                 "name": $scope.user,
                 "email": "",
                 "phone": $scope.phone,

@@ -281,12 +281,12 @@ a:hover {
 
 .profedit .profiledit {
     min-width: 300px;
-    left: -16em;
+    left: 16em;
 }
 
 .profedit .profiledit li {
     padding: 10px;
-    display: block;
+    display: ruby-base-container;
 }
 
 .profedit .profiledit li img {
@@ -303,7 +303,7 @@ a:hover {
 }
 
 .profiledit li:last-child .proone {
-    float: left;
+    float: inline-end;
 }
 
 .profedit .profiledit li:last-child .protwo {

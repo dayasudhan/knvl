@@ -1764,8 +1764,8 @@ app.post( '/v1/order', function( request, response ) {
 		return response.send("Not aunthiticated").status(403);
 	}
   var res = getNextSequence('order',function(data) {
-    var order_id = request.body.customer.id ;
-    order_id = order_id + "R";
+  //  var order_id = request.body.customer.id ;
+    var order_id =  "R";
     order_id = order_id + data.sequence;
     console.log('ordertype: - ',request.body.ordertype);
     console.log(order_id);

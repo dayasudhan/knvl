@@ -5,66 +5,82 @@
 <br>
 
     <h3>    what property do you need interior for? </h3>
-        <div class="cc-selector">
-            <input id="visa" type="radio" name="credit-card"  ng-value="Home" ng-model="homeoroffice" value="Home"/>
+        <!-- <div class="cc-selector">
+            <input id="visa" type="radio" name="credit-card" ng-model="Order_info.type_of_property" ng-value="Home"/>
             <label class="drinkcard-cc visa" for="visa">Home</label>
-            <input id="mastercard" type="radio" name="credit-card"  ng-model="homeoroffice" value="Office"/>
+            <input id="mastercard" type="radio" name="credit-card"  ng-model="Order_info.type_of_property" ng-value="Office"/>
             <label class="drinkcard-cc mastercard"for="mastercard">Office</label>
-        </div>
-
-        <h3>What is the size of the property</h3>
+        </div> -->
+             <input 
+                      type="radio" name="emotion" 
+                      id="sad" class="input-hidden" ng-model="Order_info.type_of_property" value="Home" />
+                    <label for="sad">
+                      <img 
+                        src="/public/sandy/img/spaceu/house.jpg" 
+                        alt="I'm sad" />
+                    </label>
+                    
+                    <input 
+                      type="radio" name="emotion"
+                      id="happy" class="input-hidden" ng-model="Order_info.type_of_property" value="Office" />
+                    <label for="happy">
+                      <img 
+                        src="/public/sandy/img/spaceu/office.jpg" 
+                        alt="I'm happy" />
+                    </label>
+         <h3>What is the size of the property</h3>
         <div class="size_of_property">
         <label class="container">
-          <input type="radio" ng-checked="true" name="size_of_property" ng-model="size_of_property" ng-value="2 BHK">
+          <input type="radio" ng-checked="true" name="size_of_property" ng-model="Order_info.size_of_property" ng-value="2 BHK">
           <span class="checkmark">2 BHK</span>
         </label>
         <label class="container">
-          <input type="radio" ng-model="size_of_property"  name="size_of_property"  value="3 BHK">
+          <input type="radio" ng-model="Order_info.size_of_property"  name="size_of_property"  value="3 BHK">
           <span class="checkmark">3 BHK</span>
         </label>
         <label class="container">
-          <input type="radio" ng-model="size_of_property" name="size_of_property"  value="4 BHK">
+          <input type="radio" ng-model="Order_info.size_of_property" name="size_of_property"  value="4 BHK">
           <span class="checkmark">4 BHK</span>
         </label>
         <label class="container">
-          <input type="radio"  ng-model="size_of_property" name="size_of_property"  value="5 + BHK /Villa/Penthouse">
+          <input type="radio"  ng-model="Order_info.size_of_property" name="size_of_property"  value="5 + BHK /Villa/Penthouse">
           <span class="checkmark">5 + BHK /Villa/Penthouse</span>
         </label>
         <label class="container">
-                <input type="radio" ng-model="size_of_property"  name="size_of_property"  value="Other">
+                <input type="radio" ng-model="Order_info.size_of_property"  name="size_of_property"  value="Other">
                 <span class="checkmark">Other</span>
               </label>
             </div>
-            <div class="start_of_work">
+            <div class="time_to_start_work">
               <h3>   When do you want this work to start </h3>
               <label class="container">
-                    <input type="radio" ng-value="true"  name="start_of_work" ng-model="start_of_work" value="Within a week">
+                    <input type="radio"   name="time_to_start_work" ng-model="Order_info.time_to_start_work" value="Within a week">
                     <span class="checkmark">Within a week</span>
                   </label>
                   <label class="container">
-                    <input type="radio" name="start_of_work" name="start_of_work"  ng-model="start_of_work" value="Within a Month">
+                    <input type="radio" name="time_to_start_work"   ng-model="Order_info.time_to_start_work" value="Within a Month">
                     <span class="checkmark">Within a Month</span>
                   </label>
                   <label class="container">
-                    <input type="radio" name="start_of_work" name="start_of_work"  ng-model="start_of_work" value="Within a 3 Month">
+                    <input type="radio" name="time_to_start_work"  ng-model="Order_info.time_to_start_work" value="Within a 3 Month">
                     <span class="checkmark">Within a 3 Month</span>
                   </label>
                   <label class="container">
-                    <input type="radio" name="start_of_work" name="start_of_work"  ng-model="start_of_work" value="After a 3  Month">
+                    <input type="radio" name="time_to_start_work" ng-model="Order_info.time_to_start_work" value="After a 3  Month">
                     <span class="checkmark">After a 3  Months</span>
                   </label>
                 </div>
         <h3>   Do you already own/lease the property? </h3>
         <label class="property_type">
-              <input type="radio" ng-checked="true" name="property_type" ng-model="own_property" value="Yes">
+              <input type="radio" ng-checked="true" name="property_type" ng-model="Order_info.type_of_ownership" value="Yes">
               <span class="checkmark">Yes</span>
             </label>
             <label class="container">
-              <input type="radio" name="property_type" ng-model="own_property" value="No">
+              <input type="radio" name="property_type" ng-model="Order_info.type_of_ownership" value="No">
               <span class="checkmark">No</span>
             </label>
 
-      <h3>   Select Address </h3>
+      <!-- <h3>   Select Address </h3> -->
       <div class="deladdresspart">
             <ul class="deladdresslist">
                 <li ng-repeat="address in profile.addresses">
@@ -95,7 +111,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col">
+        <!-- <div class="col">
                 <a href="#" data-toggle="modal" data-target="#newaddressModal">
                     <button type="submit" class="btn btn-primary ">ADD NEW ADDRESS</button>
                 </a>
@@ -115,26 +131,15 @@
                                             <input type="text" class="form-control adders" ng-model="addressLine1" placeholder="Addressline 1" maxlength="60"> </li>
                                         <li>
                                             <input type="text" class="form-control adders" ng-model="addressLine2" placeholder="Addressline 2" maxlength="60"> </li>
-                                        <!--
-                                        <li>
-                                            <input type="text" class="form-control adders" ng-model="street" placeholder="Street" maxlength="15"> </li>
--->
+                                       
                                         <li>
                                             <input type="text" class="form-control adders" ng-model="LandMark" placeholder="Landmark" maxlength="30"> </li>
-                                        <!--
-                                        <li>
-                                            <input type="text" class="form-control adders" ng-model="areaname" placeholder="Areaname" maxlength="15"> </li>
--->
+                                      
                                         <li>
                                             <input type="text" class="form-control adders" ng-model="city" placeholder="City" maxlength="20"> </li>
                                         <li>
                                             <input type="text" class="form-control adders" ng-model="zip" placeholder="zip" maxlength="6"> </li>
-                                        <!--
-                                        <li>
-                                            <input type="text" class="form-control adders" ng-model="latitude" placeholder="Latitude"> </li>
-                                        <li>
-                                            <input type="text" class="form-control adders" ng-model="longitude" placeholder="Longitude"> </li>
--->
+                                       
                                     </ul>
                                 </div>
                             </div>
@@ -146,7 +151,7 @@
                 </div>
             </div> 
 
-      <br>
+      <br> -->
       <button type="button" class="btn btn-primary" ng-click="place_request()">
             Place Request
       </button>
