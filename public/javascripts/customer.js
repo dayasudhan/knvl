@@ -186,6 +186,10 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
             console.log("phonenumber 2");
             $window.alert("Invalid Phone Number");
         } 
+        else if(typeof $scope.city === 'undefined'())
+        {
+            $window.alert("Invalid Address");
+        }
         else {
             console.log("order function else");
             console.log($scope.isLoggedIn);
@@ -224,7 +228,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         $http.post(url, ordarr)
             .success(function (data, status, headers) {
                 console.log("Success in postorder");
-
+                $window.alert("Your Request Placed With order ID : ",data.id);
                 console.log(data.id)
                 $scope.orderId = data.id;
             })
