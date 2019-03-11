@@ -31,7 +31,7 @@
          <h3>What is the size of the property</h3>
         <div class="size_of_property">
         <label class="container">
-          <input type="radio" ng-checked="true" name="size_of_property" ng-model="Order_info.size_of_property" ng-value="2 BHK">
+          <input type="radio" ng-checked="true" name="size_of_property" ng-model="Order_info.size_of_property" value="2 BHK">
           <span class="checkmark">2 BHK</span>
         </label>
         <label class="container">
@@ -112,7 +112,7 @@
             </ul>
         </div>
         <!-- <div class="col">
-                <a href="#" data-toggle="modal" data-target="#newaddressModal">
+                <a href="#" data-toggle="modal" data-target="#newaddressModal" ng-show="!profileaddresspresent">
                     <button type="submit" class="btn btn-primary ">ADD NEW ADDRESS</button>
                 </a>
                 <div class="modal fade" id="newaddressModal" role="dialog">
@@ -149,9 +149,9 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>  -->
 
-      <br> -->
+      <br>
       <button type="button" class="btn btn-primary" ng-click="place_request()">
             Place Request
       </button>

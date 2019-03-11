@@ -79,11 +79,13 @@ customerApp.config(function ($stateProvider, $urlRouterProvider) {
         //            controller: 'mainController'
         //        })
 });
-customerApp.controller('mainController', function ($rootScope, $scope, $http, jsonFilter, $window) {
+customerApp.controller('mainController', function ($rootScope, $scope, $http, jsonFilter, $window,$state) {
 
     $scope.addressadded = false;
     $scope.appointmentselected = false;
     $scope.orderadded = false;
+    $rootScope.profileaddresspresent = true;
+ //$scope.isLoggedIn = false;
     $scope.Order_info = {
         type_of_property: 'Home',
         size_of_property: '2 BHK',
@@ -170,7 +172,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
             $window.alert("Please login to place a request");
             $('#myModal').modal('show');
         }
-         else if ($scope.isLoggedIn === false) {
+        else if ($scope.isLoggedIn === false) {
             console.log("not loggedin ");
             $('#myModal').modal('show');
 
@@ -186,14 +188,26 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
             console.log("phonenumber 2");
             $window.alert("Invalid Phone Number");
         } 
-        else if(typeof $scope.city === 'undefined'())
+        else if($rootScope.profile.addresses.length == 0)
         {
             $window.alert("Invalid Address");
+            //window.open("/profile");
+         //   $urlRouterProvider.otherwise('/profile');
+            $state.go('profile');
+        }
+        else if ( typeof $scope.city === 'undefined'){
+            $window.alert("please select address");
         }
         else {
+            
             console.log("order function else");
             console.log($scope.isLoggedIn);
             $('#myModal3').modal()
+
+            var answer = confirm("Are you sure you want to place the request?")
+            if (answer) {
+                console.log("Yes");
+           
         
     var Order_info =  {
         "type_of_property": $scope.type_of_property,
@@ -228,7 +242,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         $http.post(url, ordarr)
             .success(function (data, status, headers) {
                 console.log("Success in postorder");
-                $window.alert("Your Request Placed With order ID : ",data.id);
+                $window.alert("Your Request Placed With order ID : " + data.id);
                 console.log(data.id)
                 $scope.orderId = data.id;
             })
@@ -236,6 +250,11 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
                 console.log("ERROR in postorder");
             });
         }
+   
+        else {
+            console.log("No");
+        }
+    } 
     };
     $scope.toggle_function =function()
     {
@@ -299,16 +318,33 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
                         console.log($scope.isLoggedIn);
                     }
 
-                    $scope.profile = data[0];
-                    console.log($scope.profile);
-                    console.log($scope.profile.name);
-                    $scope.phone = $scope.profile.phone;
-                    $scope.user = $scope.profile.name;
+                    $rootScope.profile = data[0];
+                    $rootScope.profile = $rootScope.profile;
+                    console.log($rootScope.profile);
+                   // console.log($rootScope.profile.addresses);
+                   // console.log($rootScope.profile.addresses.length);
+                    console.log($rootScope.profile.name);
+                    $scope.phone = $rootScope.profile.phone;
+                    $scope.user = $rootScope.profile.name;
 
                     //           if(data == 0)
                     //               {
                     //                    $window.alert("Invalid username and password ");
                     //               }
+                    if(($rootScope.profile.addresses.length > 0 )&&  ($scope.isLoggedIn == true))
+                    {
+                        console.log(" profileaddresspresent 1");
+                        $rootScope.profileaddresspresent = true;
+                    }
+                    else if(typeof $scope.isLoggedIn === 'undefined')
+                    {
+                        console.log(" profileaddresspresent 2");
+                        $rootScope.profileaddresspresent = true;
+                    }
+                    else{
+                        console.log(" profileaddresspresent 3");
+                        $rootScope.profileaddresspresent = false;
+                    }
 
 
                 })
@@ -361,9 +397,9 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
                     } else {
                         $('#signupModal').modal('hide');
                         $scope.isLoggedIn = true;
-                        $scope.profile = data;
-                        $scope.phone = $scope.profile.phone;
-                        $scope.user = $scope.profile.name;
+                        $rootScope.profile = data;
+                        $scope.phone = $rootScope.profile.phone;
+                        $scope.user = $rootScope.profile.name;
                     }
 
 
@@ -491,9 +527,9 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
 
                         $('#newpwdModal').modal('hide');
                         $scope.isLoggedIn = true;
-                        $scope.profile = data[0];
-                        $scope.phone = $scope.profile.phone;
-                        $scope.user = $scope.profile.name;
+                        $rootScope.profile = data[0];
+                        $scope.phone = $rootScope.profile.phone;
+                        $scope.user = $rootScope.profile.name;
                         $window.alert("Password Reset Success");
                         console.log($scope.phone);
                         console.log($scope.user);
@@ -789,7 +825,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
     $scope.updateCitySelected = function () {};
     $scope.getCityCoverage = function () {
         console.log("getCityCoverage");
-        initprofile2();
+        initinitprofile2();
         var url = "/v1/admin/coverageArea";
         $http.get(url, config)
             .success(function (data, status, headers, config) {
@@ -857,7 +893,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         console.log("addAddress");
 
         var url4 = "/v1/customer/address/";
-        url4 = url4 + $scope.profile.phone;
+        url4 = url4 + $rootScope.profile.phone;
         console.log(url4);
         if ($scope.label == "" || $scope.label == null || hasWhiteSpace($scope.label) == true) {
             $window.alert("Label should not contain Blank Spaces");
@@ -909,7 +945,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         var url4 = "/v1/customer/address/";
         console.log(address);
 
-        url4 = url4 + $scope.profile.phone + "/" + address.label;
+        url4 = url4 + $rootScope.profile.phone + "/" + address.label;
         console.log(url4);
 
         $http.delete(url4)
@@ -928,7 +964,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
     function initprofile2() {
         console.log("initprofile2");
         var url = "/v1/customer/";
-        //url = url + $scope.profile.phone;
+        //url = url + $rootScope.profile.phone;
         $http.get(url).success(function (data, status, headers) {
                 console.log("Success in get");
                 // console.log(data);
@@ -940,11 +976,11 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
                     $scope.isLoggedIn = true;
                 }
                 console.log($scope.isLoggedIn);
-                $scope.profile = data[0];
-                console.log($scope.profile);
-                console.log($scope.profile.name);
-                $scope.phone = $scope.profile.phone;
-                $scope.user = $scope.profile.name;
+                $rootScope.profile = data[0];
+                console.log($rootScope.profile);
+                console.log($rootScope.profile.name);
+                $scope.phone = $rootScope.profile.phone;
+                $scope.user = $rootScope.profile.name;
                 $scope.isLoggedIn = true;
             })
             .error(function (data, status, headers) {
@@ -959,7 +995,7 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
         var url4 = "/v1/customer/address/";
         //  console.log(address);
 
-        url4 = url4 + $scope.profile.phone + "/" + $scope.editaddress.label;
+        url4 = url4 + $rootScope.profile.phone + "/" + $scope.editaddress.label;
         console.log(url4);
 
         var postData = {
@@ -1009,15 +1045,16 @@ customerApp.controller('mainController', function ($rootScope, $scope, $http, js
 
     function initprofile() {
         var url = "/v1/customer/phone/";
-        url = url + $scope.profile.phone;
+        console.log(" initprofile function");
+        url = url + $rootScope.profile.phone;
         $http.get(url).success(function (data, status, headers) {
-                console.log("Success in get");
+                console.log("Success in get initprofile");
                 console.log(data);
 
 
-                $scope.profile = data[0];
-                console.log($scope.profile);
-                console.log($scope.profile.name);
+                $rootScope.profile = data[0];
+                console.log($rootScope.profile);
+                console.log($rootScope.profile.name);
             })
             .error(function (data, status, headers) {
                 console.log("ERROR in init get");
