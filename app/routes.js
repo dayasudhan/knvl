@@ -781,14 +781,16 @@ return CustomerInfoModel.findOneAndUpdate({ 'id':request.params.id},
 });
 function registerVendor(req, res, next) {
   console.log("/registerVendor");
+  console.log(req.body.email);
   var hotel_id = "H";
-  var res = getNextSequence('hotel',function(data) {
+  var res = getNextSequence('feederStation',function(data) {
 
     hotel_id = hotel_id + data.sequence;
     console.log(hotel_id);
 
       var vendorInfo = new VendorInfoModel({
-        hotel:{email:req.body.email,id:hotel_id}
+        email:req.body.email,
+        id:hotel_id
       });
       vendorInfo.save( function( err ) {
         if( !err ) {
@@ -817,7 +819,7 @@ app.get( '/v1/vendor/info/:id', function( request, response ) {
 	{
 		return response.send("Not aunthiticated").status(403);
 	}
-    return VendorInfoModel.find({ 'hotel.email':request.params.id},function( err, vendor ) {
+    return VendorInfoModel.find({ 'email':request.params.id},function( err, vendor ) {
         if( !err ) {
             console.log(vendor);
             return response.send( vendor );
@@ -1095,30 +1097,14 @@ function storeVendorInfo(request,response,callback,param)
 console.log("storeVendorInfo");
 console.log(request.params.id);
 
- VendorInfoModel.update({ 'hotel.email':request.params.id},
+ VendorInfoModel.update({ 'email':request.params.id},
       {
-        hotel:{name:request.body.Name,email:request.params.id, id:request.body.id},
-       address:{addressLine1:request.body.Address1,addressLine2:request.body.Address2,
-        street:request.body.street, LandMark:request.body.Landmark, 
-        areaName:request.body.Areaname,city:request.body.City, zip:request.body.zip, 
-        latitude:request.body.latitude,longitude:request.body.longitude },
         phone:request.body.phone ,
-        logo:request.body.logo,
+        stationname:request.body.stationname ,
         speciality:request.body.speciality,
         vegornonveg:request.body.vegornonveg,
-        deliverRange: request.body.deliverRange,
-        deliverCharge: request.body.deliverCharge,
-        deliveryTime: request.body.deliveryTime,
-        deliverAreas:request.body.deliverareas,
-        minimumOrder: request.body.minimumOrder,
-        isOpen:1,
-        orderAcceptTimings:request.body.orderAcceptTimings,
-        isBulkVendor:request.body.isBulkVendor,
-        bulkdeliverCharge:request.body.bulkdeliverCharge,
-        bulkdeliverRange: request.body.bulkdeliverRange,
-        bulkminimumOrder:request.body.bulkminimumOrder,
-        bulkdeliveryTime:request.body.bulkdeliveryTime
-      },
+        orderAcceptTimings:request.body.orderAcceptTimings
+        },
        function( err ) {
         if( !err ) {
             console.log( 'storeVendorInfo created' );
@@ -2070,7 +2056,7 @@ app.get( '/v1/vendor/menu/:id', function( request, response ) {
   {
     return response.send("Not aunthiticated").status(403);
   }
-     return VendorInfoModel.find({ 'hotel.email':request.params.id                               },
+     return VendorInfoModel.find({ 'email':request.params.id                               },
       function( err, vendorinfo ) {
         if( !err ) {
              console.log("no error");
@@ -2091,24 +2077,22 @@ app.get( '/v1/vendor/menu/:id', function( request, response ) {
 app.post( '/v1/vendor/menu', function( request, response ) {
     console.log("post /vendor/menu/");
     console.log(request.body);
-    console.log(request.user);
+  //  console.log(request.user);
     console.log(request.user.local.email);
+    console.log(request.body.timings);
     console.log(" outside aunthiticated");
-  if(checkVendorApiAunthaticated(request,1) == false &&  request.isAuthenticated() == false)
-  {
-   return response.send("Not aunthiticated").status(403);
-  }
-    return VendorInfoModel.update({ 'hotel.email':request.user.local.email},
-       { $addToSet: {menu: {$each:[{name: request.body.fooditem,  
-                                    price:request.body.foodprice,
-                                    availability:1,
-                                    description:request.body.description,
-                                    logo:request.body.logo,
+//   if(checkVendorApiAunthaticated(request,1) == false &&  request.isAuthenticated() == false)
+//   {
+//    return response.send("Not aunthiticated").status(403);
+//   }
+    return VendorInfoModel.update({ 'email':request.user.local.email},
+       { $addToSet: {menu: {$each:[{feedername: request.body.feedername,  
+                                    feederno:request.body.feederno,
                                     timings:request.body.timings}] }}},
        function( err, order ) {
        if( !err ) {
            console.log("no error");
-           console.log(order);
+          // console.log(order);
            return response.send('Success');
        } else {
            console.log( err );
@@ -2117,6 +2101,30 @@ app.post( '/v1/vendor/menu', function( request, response ) {
    });
 });
 
+
+
+app.post( '/v1/vendor/feeder', function( request, response ) {
+    console.log("post /vendor/feeder/");
+    console.log(request.body);
+  //  console.log(request.user);
+    console.log(request.user.local.email);
+  //  console.log(request.body.timings);
+    console.log(" outside aunthiticated");
+
+    return VendorInfoModel.update({ 'email':request.user.local.email},
+       { $addToSet: {menu: {$each:[{feedername: request.body.feedername,  
+                                    feederno: request.body.feederno}] }}},
+       function( err, order ) {
+       if( !err ) {
+           console.log("no error ");
+         
+           return response.send('Success');
+       } else {
+           console.log( err );
+           return response.send('ERROR');
+       }
+   });
+});
 
 //Delete a menu item
 app.delete( '/v1/vendor/menu/item/:id/:fooditem', function( request, response ) {
@@ -2128,9 +2136,9 @@ app.delete( '/v1/vendor/menu/item/:id/:fooditem', function( request, response ) 
   	}
      console.log(request.params.id);
       console.log(request.params.fooditem);
-        return VendorInfoModel.update( { 'hotel.email':request.params.id},{ $pull: {menu: {"name": request.params.fooditem }}},function( err ) {
+        return VendorInfoModel.update( { 'email':request.params.id},{ $pull: {menu: {"feederno": request.params.fooditem }}},function( err ) {
             if( !err ) {
-                console.log( 'Book removed' );
+                console.log( 'feeder removed' );
                 return response.send( '' );
             } else {
                 console.log( err );
@@ -2145,18 +2153,18 @@ app.delete( '/v1/vendor/menu/item/:id/:fooditem', function( request, response ) 
 app.post( '/v1/vendor/menu/item/:id', function( request, response ) {
      console.log('update /v1/vendor/menu/item/');
 
-  if(checkVendorApiAunthaticated(request,1) == false)
-	{
-		return response.send("Not aunthiticated").status(403);
-	}
+//   if(checkVendorApiAunthaticated(request,1) == false)
+// 	{
+// 		return response.send("Not aunthiticated").status(403);
+// 	}
      console.log(request.params.id);
-     console.log(request.body.fooditem);
-     console.log(request.body.availability);
+      console.log(request.body);
+    //  console.log(request.body.availability);
 
-        return VendorInfoModel.update( { 'hotel.email':request.params.id, "menu.name":request.body.fooditem},
-        		{ $set:{"menu.$.availability" : request.body.availability}},function( err ) {
+        return VendorInfoModel.update( { 'email':request.params.id, "menu.feederno":request.body.feederno},
+        		{ $set:{"menu.$.timings" : request.body.timings}},function( err ) {
             if( !err ) {
-                console.log( 'menu updated with availibility' );
+                console.log( 'menu  timings updated' );
                 return response.send( 'Success' );
             } else {
                 console.log( err );
@@ -2290,7 +2298,8 @@ function checkVendorApiAunthaticated(request,type)
 	{
 		console.log("checkVendorApiAunthaticated not auth");
 		ret = false;
-	}
+    }
+    return ret = true;
 	return ret;
 }
 app.get( '/v1/admin/api/test', function( request, response )

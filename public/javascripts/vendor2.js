@@ -108,11 +108,23 @@ $scope.trackerUpdateStatus = function(param1)
       console.log("getmenulist");
       var url3 = "/v1/vendor/menu/";
       url3 = url3 + param;
+      $scope.feeders = [];
+      $scope.feederNos = [];
+     console.log($scope.selectedfeeder )
+      var feederslist = [];
+      var feedersnolist = [];
       $http.get(url3)
         .success(function (data, status, headers, config)
         {
           $scope.menuList = data;
-          
+          console.log(data);
+          angular.forEach(data, function(area) {
+            var feeder  = area.feederno + '(' +area.feedername +')';
+            feederslist.push(feeder);
+            feedersnolist.push( area.feederno);
+          });
+          $scope.feeders = feederslist;
+          $scope.feederNos = feedersnolist;
         })
         .error(function (data, status, headers, config)
         {
@@ -124,7 +136,8 @@ $scope.trackerUpdateStatus = function(param1)
        console.log(param);
        console.log(foodmenu);
       var url4 = "/v1/vendor/menu/item/";
-      url4 = url4 + param + "/" + foodmenu.name;
+      url4 = url4 + param + "/" + foodmenu.feederno;
+      console.log(url4);
       $http.delete(url4,$scope.selection)
         .success(function (data, status, headers, config)
         {
@@ -143,14 +156,30 @@ $scope.trackerUpdateStatus = function(param1)
     $scope.addMenu = function (param) {
       console.log("addMenu");
        console.log( $scope.fooditem);
-      var url4 = "/v1/vendor/menu";
-    //  url4 = url4 + param;
-      var postData={fooditem:$scope.fooditem,
-    		  foodprice:$scope.foodprice,
-          description:$scope.fooddescription,
-          logo:$scope.foodItemlogo,
-       		timings:$scope.timings};
-
+       console.log( $scope.selectedfeeder);
+       console.log($scope.feederNos[$scope.selectedfeeder]);
+      var url4 = "/v1/vendor/menu/item/";
+      var daystartTimevalue = "",dayendTimevalue = "",nightstartTimevalue="",nightendTimevalue="";
+        if($scope.daySupport  == 'Yes')
+        {
+          daystartTimevalue = ($scope.daystarttime.getHours()) + ':' + ($scope.daystarttime.getMinutes());
+          dayendTimevalue = ($scope.dayendtime.getHours()) + ':' + ($scope.dayendtime.getMinutes());
+        }
+        if($scope.nightSupport  == 'Yes')
+        {
+          nightstartTimevalue = ($scope.nightstarttime.getHours()) + ':' + ($scope.nightstarttime.getMinutes());
+          nightendTimevalue = ($scope.nightendtime.getHours()) + ':' + ($scope.nightendtime.getMinutes());
+        }
+        var timings2 = {dayshift:{startTime:daystartTimevalue,endTime:dayendTimevalue,available:$scope.daySupport},
+                      nightshift:{startTime:nightstartTimevalue,endTime:nightendTimevalue,available:$scope.nightSupport},
+                                }
+        console.log(timings2);
+      url4 = url4 + param;
+      console.log(url4);
+      var postData={feederno:$scope.feederNos[$scope.selectedfeeder],
+          feedername:$scope.feedername,
+         timings:timings2};
+         console.log(postData);
       $http.post(url4,postData)
         .success(function (data, status, headers, config)
         {
@@ -197,116 +226,11 @@ $scope.trackerUpdateStatus = function(param1)
       $scope.addDetails = function (param) {
       console.log("addDetails 1");
 
-      var bulktype = 0;
-      if($scope.isBulkVendor == 'nonBulkType')
-      {
-          bulktype =  0;
-      }
-      else if($scope.isBulkVendor == 'BulkType')
-      {
-          bulktype  = 2;
-      }
-      else
-      {
-          bulktype = 1;
-      }
-
-      var deliverAreas =  [];
-      if(bulktype ==0 || bulktype ==1)
-      {
-        angular.forEach($scope.deliverareas, function(item) {
-           var obj = new Object();
-            obj.name = item;
-            obj.isBulkAreaOnly = 0;
-            deliverAreas.push(obj);
-        })
-      }
-
-      if(bulktype ==2 || bulktype ==1)
-      {
-        angular.forEach($scope.bulkdeliverareas, function(item) {
-
-           var obj = new Object();
-            obj.name = item;
-
-            console.log(item,"2");
-            var exist = 0;
-            for (var i = 0; i < deliverAreas.length; i++) {
-                if (deliverAreas[i].name === item) {
-                  console.log("present 1");
-                   exist = 1;
-                }
-            }
-          
-
-            if(exist === 1)
-            {
-              console.log("present 2");
-             
-            }
-            else
-            {
-              console.log("present 3");
-              obj.isBulkAreaOnly = 1;
-              deliverAreas.push(obj);
-            }
-        })
-      }
-      
-      console.log("deliverAreas",deliverAreas);
-
-      $scope.hotelcity = $scope.cityCoverage.citys[$scope.selectedCity]
-      console.log($scope.hotelcity);
-      console.log($scope.deliverareas);
-      console.log($scope.morningSupportTime);
-      console.log($scope.morningstarttime);
-      console.log($scope.morningendtime);
-     
-    var mornstartTimevalue = "",mornendTimevalue = "",lunchstartTimevalue="",lunchendTimevalue="",dinnerendTimevalue="",dinnerstartTimevalue="";
-    if($scope.morningSupportTime  == 'Yes')
-    {
-           mornstartTimevalue = ($scope.morningstarttime.getHours()) + ':' + ($scope.morningstarttime.getMinutes());
-          mornendTimevalue = ($scope.morningendtime.getHours()) + ':' + ($scope.morningendtime.getMinutes());
-     }
-     if($scope.lunchSupportTime  == 'Yes')  
-     {  
-          lunchstartTimevalue = ($scope.lunchstarttime.getHours()) + ':' + ($scope.lunchstarttime.getMinutes());
-          lunchendTimevalue = ($scope.lunchendtime.getHours()) + ':' + ($scope.lunchendtime.getMinutes());
-      }
-      if($scope.dinnerSupportTime  == 'Yes')
-      {  
-          dinnerendTimevalue = ($scope.dinnerendtime.getHours()) + ':' + ($scope.dinnerendtime.getMinutes());
-          dinnerstartTimevalue = ($scope.dinnerstarttime.getHours()) + ':' + ($scope.dinnerstarttime.getMinutes());
-      }
-      var orderAcceptTimingsValue = {Morning:{startTime:mornstartTimevalue,endTime:mornendTimevalue,available:$scope.morningSupportTime},
-                        Lunch:{startTime:lunchstartTimevalue,endTime:lunchendTimevalue,available:$scope.lunchSupportTime},
-                        Dinner:{startTime:dinnerstartTimevalue,endTime:dinnerendTimevalue,available:$scope.dinnerSupportTime}
-                            }
-      console.log(orderAcceptTimingsValue);
-
-
-
-      var url = "/v1/vendor/info/";
-      url = url + param;
-      var postData={Name:$scope.hotelName, username: param, id:$scope.hotelId,
-        Address1:$scope.hotelAddress1, phone:$scope.hotelphone,
-        Address2:"", street :"",Landmark:$scope.hotelLandmark, 
-        Areaname:$scope.hotelAreaname, 
-        City:$scope.hotelcity, zip:$scope.hotelzip,latitude:$scope.latitude, longitude:$scope.longitude, logo:"",
-         vegornonveg:$scope.vegornonveg, 
-         speciality: $scope.speciality , 
-         deliverRange:$scope.deliverRange,
-         deliverCharge:$scope.deliverCharge,
-         deliveryTime:$scope.deliveryTime,
-         minimumOrder:$scope.minimumOrder,
-         orderAcceptTimings:orderAcceptTimingsValue,
-         deliverareas:deliverAreas,
-         isBulkVendor:bulktype,
-         bulkdeliverCharge:$scope.bulkdeliverCharge,
-         bulkdeliverRange: $scope.bulkdeliverRange,
-         bulkminimumOrder:$scope.bulkminimumOrder,
-         bulkdeliveryTime:$scope.bulkdeliveryTime
-
+       var url = "/v1/vendor/feeder";
+    //   url = url + param;
+      var postData={
+        feederno:$scope.feederno,
+        feedername:$scope.feedername
        };
 
       $http.post(url,postData)

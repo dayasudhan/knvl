@@ -157,7 +157,7 @@
         <section class="content">
           <div class="row">
 
-            <div class="col-xs-8">
+            <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">Menu Table</h3>
@@ -167,24 +167,24 @@
                     <thead>
                       <tr>
                         <th>Serial No</th>
-                        <th>ItemName</th>
-                        <th>ItemPrice</th>
-                        <th>Timings</th>
-                        <th>Delete</th>
+                        <th>FeederNo</th>
+                        <th>FeederName</th>
+                         <th>Timings</th>
+                        <th>Delete</th> 
                       </tr>
                     </thead>
                     <tbody>
                       <tr ng-repeat="menu in menuList">
                         <td>{{$index +1}}</td>
-                        <td>{{menu.name}}</td>
-                        <td>{{menu.price}}</td>
-                        <td>{{menu.timings}}</td>
-                        <!-- <td><input type="checkbox" 
+                        <td>{{menu.feederno}}</td>
+                        <td>{{menu.feedername}}</td>
+                        <td>{{menu.timings}}</td> 
+                       <!-- <td><input type="checkbox" 
                           name="myTextEditBox" 
                           value={{menu.name}}
                            ng-checked="selection.indexOf(menu) > -1"
                            ng-click="toggleSelection(menu)">
-                        </td> -->
+                        </td>  -->
                         <td><button type="submit" class="btn btn-info pull-right" ng-click= "deleteMenu('<%= user.local.email %>',menu)">Delete</button></td>
 
                       </tr>
@@ -196,7 +196,7 @@
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
             </div><!-- /.col -->
-              <div class="col-xs-4">
+              <div class="col-xs-12">
 <!-- Horizontal Form -->
               <div class="box box-info">
                 <div class="box-header with-border">
@@ -204,20 +204,40 @@
                 </div><!-- /.box-header -->
                 <!-- form start -->
                 <form class="form-horizontal">
-                  <div class="box-body">
+                  <div class="box-body"> 
+                    
                     <div class="form-group">
-                      <label for="inputEmail3" class="col-sm-3 control-label">ItemName</label>
+                      
+                      <label for="inputtime" class="col-sm-2 control-label">Week</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" name="fooditem" placeholder="ItemName" ng-model = "fooditem">
+                         Start date:
+                        <input type="date" ng-model = "startdate" >
+                            End date:
+                        <input type="date" ng-model = "enddate" >
+                      
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="inputPassword3" class="col-sm-3 control-label">Price</label>
+                        <label for="inputEmail3"name="City"  class="col-sm-2 control-label">Feeder No</label>
+                        <div class="col-sm-10">
+                         <select  class="form-control select2" style="width: 100%;" ng-model = "selectedfeeder" 
+                              ng-options="feeders.indexOf(selectedfeeder) as selectedfeeder for selectedfeeder in feeders "  required >
+                            </select>
+                          </div>
+                      </div> 
+                    <!-- <div class="form-group">
+                      <label for="inputEmail3" class="col-sm-3 control-label">Feeder No</label>
                       <div class="col-sm-10">
-                        <input type="number" class="form-control" name="foodprice" placeholder="ItemPrice"  ng-model = "foodprice">
+                        <input type="text" class="form-control" name="fooditem" placeholder="ItemName" ng-model = "feederno">
                       </div>
                     </div>
-                     <div class="form-group">
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-3 control-label">Feeder Name</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="foodprice" placeholder="ItemPrice"  ng-model = "feedername">
+                      </div>
+                    </div> -->
+                     <!-- <div class="form-group">
                       <label for="inputPassword3" class="col-sm-3 control-label">Description</label>
                       <div class="col-sm-10">
                         <input type="text" class="form-control" name="fooddescription" placeholder="ItemDescription"  ng-model = "fooddescription">
@@ -228,13 +248,43 @@
                       <div class="col-sm-10">
                         <input type="text" class="form-control" name="foodItemlogo" placeholder="Itemlogo"  ng-model = "foodItemlogo">
                       </div>
-                    </div>
-                    <div class="form-group">
+                    </div> -->
+                    <!-- <div class="form-group">
                       <label for="inputPassword3" class="col-sm-3 control-label">Timings</label>
                       <div class="col-sm-10">
                         <input type="number" class="form-control" name="timings" placeholder="timings"  ng-model = "timings">
                       </div>
-                    </div>
+                    </div> -->
+                  
+                    <div class="form-group">
+                      
+                        <label for="inputtime" class="col-sm-2 control-label">Day Shift</label>
+                        <div class="col-sm-10">
+                           Start time:
+                          <input type="time" ng-model = "daystarttime" >
+                              End time:
+                          <input type="time" ng-model = "dayendtime" >
+                          Support:
+                          <select ng-model = "daySupport" required>
+                               <option>Yes</option>
+                              <option>No</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="inputtime" class="col-sm-2 control-label">Night Shift</label>
+                          <div class="col-sm-10">
+                             Start time:
+                            <input type="time" ng-model = "nightstarttime" >
+                                End time:
+                            <input type="time" ng-model = "nightendtime" >
+                            Support:
+                            <select ng-model = "nightSupport" required>
+                                 <option>Yes</option>
+                                <option>No</option>
+                            </select> 
+                          </div>
+                        </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">
                     <button type="submit" class="btn btn-info pull-right" ng-click= "addMenu('<%= user.local.email %>')">Add Item</button>
