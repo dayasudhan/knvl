@@ -1,6 +1,10 @@
 {
   "name": "node-authentication",
   "main": "server.js",
+  "engines": {
+    "node": "0.6.12"
+  , "npm": "1.1.4"
+  },
   "dependencies": {
     "bcrypt-nodejs": "latest",
     "body-parser": "~1.0.0",
