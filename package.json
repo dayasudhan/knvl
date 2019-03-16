@@ -2,7 +2,7 @@
   "name": "node-authentication",
   "main": "server.js",
   "engines": {
-    "node": "0.6.12"
+    "node": "6.11.1"
   , "npm": "1.1.4"
   },
   "dependencies": {
