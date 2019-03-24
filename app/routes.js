@@ -1,7 +1,7 @@
 
 var OrderModel = require('../app/models/vendorOrder');
 var VendorInfoModel = require('../app/models/vendorInfo');
-var VoterInfoModel = require('../app/models/voterinfo');
+var VoterInfoModel = require('../app/models/voterInfo');
 var CustomerInfoModel = require('../app/models/customerInfo');
 var CoverageAreaModel = require('../app/models/coverageArea');
 var CountersModel = require('../app/models/counters');

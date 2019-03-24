@@ -28,4 +28,5 @@ var mongoose = require('mongoose');
 //Model
 var VoterInfoModel = mongoose.model( 'VoterInfoSchema', VoterInfoSchema );
 
+
 module.exports = VoterInfoModel;
