@@ -2441,7 +2441,7 @@ app.post( '/v1/voterinfo/:id', function( req, res ) {
 //   }
     console.log('/v1/voterinfo/ 1');
     console.log(req.body);
-    console.log(req.body.letter);
+    console.log(req.body.Letter);
     console.log('/v1/voterinfo/ 2');
     console.log(req.body);
    // var receivedData =  JSON.parse(req.body);
