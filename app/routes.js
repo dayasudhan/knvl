@@ -2441,7 +2441,7 @@ app.post( '/v1/voterinfo/:id', function( req, res ) {
 //   }
     console.log('/v1/voterinfo/ 1');
     console.log(req.body);
-    console.log(req.body.Letter);
+    console.log(req.body.Personalrequirements);
     console.log('/v1/voterinfo/ 2');
     console.log(req.body);
    // var receivedData =  JSON.parse(req.body);
@@ -2452,27 +2452,27 @@ app.post( '/v1/voterinfo/:id', function( req, res ) {
 var voterinfomodel = new VoterInfoModel(
                 { 
                 'username':req.params.id,
-                'Personalrequirements':req.body.letter.Personalrequirements,
-                'Boothrequirements':req.body.letter.Boothrequirements,
-                'VoterID':req.body.letter.VoterID,
-                'Name':req.body.letter.Name,
-                'Phone':req.body.letter.Phone,
-                'State':req.body.letter.State,
-                'LS':req.body.letter.LS,
-                'VS':req.body.letter.VS,
-                'ZP':req.body.letter.ZP,
-                'TP':req.body.letter.TP,
-                'GP':req.body.letter.GP,
-                'FinancialStatus':req.body.letter.FinancialStatus,
-                'Cast':req.body.letter.Cast,
-                'Language':req.body.letter.Language,
-                'Party':req.body.letter.Party,
-                'BoothNo':req.body.letter.BoothNo,
-                'BoothName':req.body.letter.BoothName,
-                'VoterListPageNo':req.body.letter.VoterListPageNo,
-                'VoterListSerialNo':req.body.letter.VoterListSerialNo,
-                'FamilyMemebers':req.body.letter.FamilyMemebers,
-                'Headoffamily':Strireq.body.letter.Headoffamily
+                'Personalrequirements':req.body.Personalrequirements,
+                'Boothrequirements':req.body.Boothrequirements,
+                'VoterID':req.body.VoterID,
+                'Name':req.body.Name,
+                'Phone':req.body.Phone,
+                'State':req.body.State,
+                'LS':req.body.LS,
+                'VS':req.body.VS,
+                'ZP':req.body.ZP,
+                'TP':req.body.TP,
+                'GP':req.body.GP,
+                'FinancialStatus':req.body.FinancialStatus,
+                'Cast':req.body.Cast,
+                'Language':req.body.Language,
+                'Party':req.body.Party,
+                'BoothNo':req.body.BoothNo,
+                'BoothName':req.body.BoothName,
+                'VoterListPageNo':req.body.VoterListPageNo,
+                'VoterListSerialNo':req.body.VoterListSerialNo,
+                'FamilyMemebers':req.body.FamilyMemebers,
+                'Headoffamily':Strireq.body.Headoffamily
                 });
                 voterinfomodel.save( function( err ) {
                       if( !err ) 
