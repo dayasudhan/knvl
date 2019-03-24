@@ -783,14 +783,14 @@ return CustomerInfoModel.findOneAndUpdate({ 'id':request.params.id},
 function registerVendor(req, res, next) {
   console.log("/registerVendor");
   console.log(req.body.email);
-  var hotel_id = "H";
-  var res = getNextSequence('feederStation',function(data) {
+  var hotel_id = "R";
+  var res = getNextSequence('Volunteer',function(data) {
 
     hotel_id = hotel_id + data.sequence;
     console.log(hotel_id);
 
-      var vendorInfo = new VendorInfoModel({
-        email:req.body.email,
+      var vendorInfo = new VoterInfoModel({
+        username:req.body.email,
         id:hotel_id
       });
       vendorInfo.save( function( err ) {
@@ -2486,28 +2486,7 @@ var voterinfomodel = new VoterInfoModel(
                         }
                     });
 
-    return VoterInfoModel.update({ 'username':req.params.id},
-          { 
-            $addToSet: {inbox: {$each:[{
-                        name: req.body.name,
-                        phoneno: req.body.phone,
-                        emailid:req.body.emailid,
-                        time:indiantime,
-                        letter: req.body.letter}], }}},
-            function( err, order ) 
-            {
-                if( !err ) {
-                  console.log( 'updated inbox' );
-                  return res.send('Successfully');
-                } 
-                else 
-                {
-                  console.log( 'updated inbox error' );     
-                  console.log( err );     
-                  return res.send('ERROR');     
-                }    
-           });    
-  });
+});
   app.get( '/v1/voterinfo/:id', function( request, response ) {
     console.log("GET -'/v1/voterinfo/:id");
 

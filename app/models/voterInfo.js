@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
     var VoterInfoSchema = new mongoose.Schema({
+         userid:String,
          username:String,
          Personalrequirements:String,
          Boothrequirements:String,
