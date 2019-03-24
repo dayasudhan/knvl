@@ -1,6 +1,7 @@
 
 var OrderModel = require('../app/models/vendorOrder');
 var VendorInfoModel = require('../app/models/vendorInfo');
+var VoterInfoModel = require('../app/models/voterinfo');
 var CustomerInfoModel = require('../app/models/customerInfo');
 var CoverageAreaModel = require('../app/models/coverageArea');
 var CountersModel = require('../app/models/counters');
@@ -2200,8 +2201,10 @@ app.post( '/v1/admin/counters/:id', function( request, response ) {
      //var dd = {'cityName':"dvg",'subAreas':[{'name':"rajajinagar"},{'name':"vijaynagar"}]};
      var dd = {_id:request.params.id,
                 sequence:0};
+    console.log("post /v1/admin/counters 2");
       var counters = new CountersModel(
          dd);
+         console.log("post /v1/admin/counters 3");
         return counters.save(function( err) {
         if( !err ) {
             console.log("no error");
@@ -2429,8 +2432,98 @@ app.delete( '/v1/admin/counters/:id', function( request, response ) {
         });
     //});
 });
-};
 
+app.post( '/v1/voterinfo/:id', function( req, res ) {
+    console.log("post /v1/voterinfo/");
+//   if(checkVendorApiAunthaticated(req,2) == false && req.isAuthenticated() == false)
+//   {
+//     return res.send("Not aunthiticated").status(403);
+//   }
+    console.log('/v1/voterinfo/ 1');
+    console.log(req.body);
+    console.log(req.body.letter);
+    console.log('/v1/voterinfo/ 2');
+    console.log(req.body);
+   // var receivedData =  JSON.parse(req.body);
+
+    var indiantime = new Date();
+    indiantime.setHours(indiantime.getHours() + 5);
+    indiantime.setMinutes(indiantime.getMinutes() + 30);
+var voterinfomodel = new VoterInfoModel(
+                { 
+                'username':req.params.id,
+                'Personalrequirements':req.body.letter.Personalrequirements,
+                'Boothrequirements':req.body.letter.Boothrequirements,
+                'VoterID':req.body.letter.VoterID,
+                'Name':req.body.letter.Name,
+                'Phone':req.body.letter.Phone,
+                'State':req.body.letter.State,
+                'LS':req.body.letter.LS,
+                'VS':req.body.letter.VS,
+                'ZP':req.body.letter.ZP,
+                'TP':req.body.letter.TP,
+                'GP':req.body.letter.GP,
+                'FinancialStatus':req.body.letter.FinancialStatus,
+                'Cast':req.body.letter.Cast,
+                'Language':req.body.letter.Language,
+                'Party':req.body.letter.Party,
+                'BoothNo':req.body.letter.BoothNo,
+                'BoothName':req.body.letter.BoothName,
+                'VoterListPageNo':req.body.letter.VoterListPageNo,
+                'VoterListSerialNo':req.body.letter.VoterListSerialNo,
+                'FamilyMemebers':req.body.letter.FamilyMemebers,
+                'Headoffamily':Strireq.body.letter.Headoffamily
+                });
+                voterinfomodel.save( function( err ) {
+                      if( !err ) 
+                      {
+                            
+                            return res.send( "Success" );
+                        } else {
+                         console.log( 'error' );
+                            console.log( err );
+                            return res.send('ERROR');
+                        }
+                    });
+
+    return VoterInfoModel.update({ 'username':req.params.id},
+          { 
+            $addToSet: {inbox: {$each:[{
+                        name: req.body.name,
+                        phoneno: req.body.phone,
+                        emailid:req.body.emailid,
+                        time:indiantime,
+                        letter: req.body.letter}], }}},
+            function( err, order ) 
+            {
+                if( !err ) {
+                  console.log( 'updated inbox' );
+                  return res.send('Successfully');
+                } 
+                else 
+                {
+                  console.log( 'updated inbox error' );     
+                  console.log( err );     
+                  return res.send('ERROR');     
+                }    
+           });    
+  });
+  app.get( '/v1/voterinfo/:id', function( request, response ) {
+    console.log("GET -'/v1/voterinfo/:id");
+
+    return VoterInfoModel.find({ 'username':request.params.id},
+      function( err, vendor ) {
+        if( !err ) {
+            console.log(vendor);
+
+            return response.send( vendor );
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+});
+};
 // route middleware to ensure user is logged in
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
