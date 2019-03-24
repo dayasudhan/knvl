@@ -2472,7 +2472,7 @@ var voterinfomodel = new VoterInfoModel(
                 'VoterListPageNo':req.body.VoterListPageNo,
                 'VoterListSerialNo':req.body.VoterListSerialNo,
                 'FamilyMemebers':req.body.FamilyMemebers,
-                'Headoffamily':Strireq.body.Headoffamily
+                'Headoffamily':req.body.Headoffamily
                 });
                 voterinfomodel.save( function( err ) {
                       if( !err ) 
