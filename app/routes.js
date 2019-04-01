@@ -1,5 +1,6 @@
 
 var OrderModel = require('../app/models/vendorOrder');
+var ConstituencyModel = require('../app/models/constituencyInfo')
 var VendorInfoModel = require('../app/models/vendorInfo');
 var VoterInfoModel = require('../app/models/voterInfo');
 var CustomerInfoModel = require('../app/models/customerInfo');
@@ -2472,7 +2473,12 @@ var voterinfomodel = new VoterInfoModel(
                 'VoterListPageNo':req.body.VoterListPageNo,
                 'VoterListSerialNo':req.body.VoterListSerialNo,
                 'FamilyMemebers':req.body.FamilyMemebers,
-                'Headoffamily':req.body.Headoffamily
+                'Headoffamily':req.body.Headoffamily,
+                'Communityleader1':req.body.Communityleader1,
+                'Communityleader2':req.body.Communityleader2,
+                'Communityleader3':req.body.Communityleader3,
+                'Gender':req.body.Gender,
+                'Guardian':req.body.Guardian
                 });
                 voterinfomodel.save( function( err ) {
                       if( !err ) 
@@ -2502,7 +2508,181 @@ var voterinfomodel = new VoterInfoModel(
         }
     });
 });
+app.post( '/v1/admin/constituency', function( request, response ) {
+    if(checkVendorApiAunthaticated(request,0) == false)
+      {
+          return response.send("Not aunthiticated").status(403);
+      }
+  
+      // console.log(request.body);
+       console.log("request.user");
+       console.log(request.user);
+             
+       var dd2 = {
+        state:'Karnataka',
+        lokasabha:[{name:'Shimoga', 
+                    vidhanasabha:[{name:'Thirthahalli', 
+                                   zp:[{name:'Nagara',
+                                        tp:[{name:'Nagara',
+                                            gp:[{name:'Andaga Diduru'}]
+                                        }]
+                                }]
+                      }] 
+                  }]   
+        };
+
+       var coverageArea = new ConstituencyModel(
+           dd2);
+         return coverageArea.save(function( err) {
+          if( !err ) {
+              console.log("no error");
+
+              console.log(coverageArea);
+              return response.send(coverageArea);
+          } else {
+              console.log( err );
+              return response.send('ERROR');
+          }
+      });
+  
+  });
+  
+  app.put( '/v1/admin/constituency/lokasabha', function( request, response ) {
+       console.log("put v1/admin/constituency");
+  
+       console.log(request.body);
+       console.log(request.body.state);
+       console.log(request.body.lokasabha);
+       console.log(request.body.vidhanasabha);
+       console.log(request.body.zp);
+       console.log(request.body.tp);
+       console.log(request.body.gp);
+         if(checkVendorApiAunthaticated(request,0) == false)
+      {
+          return response.send("Not aunthiticated").status(403);
+      }
+      var isbulk = parseInt(request.body.isBulkAreaOnly);
+      console.log('request.body.isBulkAreaOnly' ,isbulk);
+          return ConstituencyModel.update({ 'state':request.body.state},
+              { $addToSet: {'lokasabha': {$each:[{name: request.body.lokasabha,vidhanasabha:[] }] }}},
+              function( err, order ) 
+               {
+          if( !err ) {
+              console.log("no error");
+              console.log(order);
+              return response.send('SUCCESS');
+          } else {
+              console.log( err );
+              return response.send('ERROR');
+          }
+      });
+  });
+  app.put( '/v1/admin/constituency/vidhanasabha', function( request, response ) {
+    console.log("put v1/admin/constituency");
+
+    console.log(request.body);
+    console.log(request.body.state);
+    console.log(request.body.lokasabha);
+    console.log(request.body.vidhanasabha);
+    console.log(request.body.zp);
+    console.log(request.body.tp);
+    console.log(request.body.gp);
+      if(checkVendorApiAunthaticated(request,0) == false)
+   {
+       return response.send("Not aunthiticated").status(403);
+   }
+   var isbulk = parseInt(request.body.isBulkAreaOnly);
+   console.log('request.body.isBulkAreaOnly' ,isbulk);
+       return ConstituencyModel.update({ 'state':request.body.state,'lokasabha.name':request.body.lokasabha},
+           { $addToSet: {'lokasabha.$.vidhanasabha': {$each:[{name: request.body.vidhanasabha,
+            zp:[] }] }}},
+           function( err, order ) 
+            {
+       if( !err ) {
+           console.log("no error");
+           console.log(order);
+           return response.send('SUCCESS');
+       } else {
+           console.log( err );
+           return response.send('ERROR');
+       }
+   });
+});
+
+app.put( '/v1/admin/constituency/zp', function( request, response ) {
+    console.log("put v1/admin/constituency");
+
+    console.log(request.body);
+    console.log(request.body.state);
+    console.log(request.body.lokasabha);
+    console.log(request.body.vidhanasabha);
+    console.log(request.body.zp);
+    console.log(request.body.tp);
+    console.log(request.body.gp);
+      if(checkVendorApiAunthaticated(request,0) == false)
+   {
+       return response.send("Not aunthiticated").status(403);
+   }
+   var isbulk = parseInt(request.body.isBulkAreaOnly);
+   console.log('request.body.isBulkAreaOnly' ,isbulk);
+       return ConstituencyModel.update({ 'state':request.body.state,'lokasabha.name':request.body.lokasabha,
+       'lokasabha.vidhanasabha.name':request.body.vidhanasabha},
+           { $addToSet: {'lokasabha.$.vidhanasabha.1.zp': {$each:[{name: request.body.zp,tp:[] }] }}},
+           function( err, order ) 
+            {
+       if( !err ) {
+           console.log("no error");
+           console.log(order);
+           return response.send('SUCCESS');
+       } else {
+           console.log( err );
+           return response.send('ERROR');
+       }
+   });
+});
+  app.get( '/v1/admin/constituency', function( request, response ) {
+    console.log("/v1/admin/coverageArea");
+  	if(checkVendorApiAunthaticated(request,2) == false && request.isAuthenticated() == false)
+  	{
+  		return response.send("Not aunthiticated").status(403);
+  	}
+    console.log("request.user");
+console.log(request.user);
+	    return ConstituencyModel.find(function( err, order ) {
+	        if( !err ) {
+	            console.log("no error");
+	            return response.send( order );
+	        } else {
+	            console.log("error");
+	            console.log( err );
+	            return response.send('ERROR');
+	        }
+	    });
+
+});
+//Delete a book
+app.delete( '/v1/admin/constituencyall', function( request, response ) {
+    console.log("delete /v1/admin/constituencyall");
+     	if(checkVendorApiAunthaticated(request,0) == false)
+    	{
+    		return response.send("Not aunthiticated").status(403);
+    	}
+
+		return CoverageAreaModel.remove( {},function( err ) {
+        if( !err ) {
+            console.log( 'Book removed' );
+            return response.send( 'Delete SUCCESS' );
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+		});
+
+});
 };
+
+
+
 // route middleware to ensure user is logged in
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())

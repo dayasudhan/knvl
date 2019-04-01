@@ -23,7 +23,12 @@ var mongoose = require('mongoose');
          VoterListPageNo:String,
          VoterListSerialNo:String,
          FamilyMemebers:String,
-         Headoffamily:String
+         Headoffamily:String,
+         Gender:String,
+         Guardian:String,
+         Communityleader1:String,
+         Communityleader2:String,
+         Communityleader3:String
          });
 //Model
 var VoterInfoModel = mongoose.model( 'VoterInfoSchema', VoterInfoSchema );
