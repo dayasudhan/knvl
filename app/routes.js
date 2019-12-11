@@ -2226,7 +2226,7 @@ app.post( '/v1/admin/station/:circleid/:divisionid/:subdivisionid/:stationid', f
       if( !err ) {
           console.log("no error ");
         
-          return response.send(order);
+          return response.send("ok");
       } else {
           console.log( err );
           return response.send('ERROR');
