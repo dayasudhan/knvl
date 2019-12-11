@@ -1,6 +1,7 @@
 
 var OrderModel = require('../app/models/vendorOrder');
 var VendorInfoModel = require('../app/models/vendorInfo');
+var stationModel = require('../app/models/stationList');
 var CustomerInfoModel = require('../app/models/customerInfo');
 var CoverageAreaModel = require('../app/models/coverageArea');
 var CountersModel = require('../app/models/counters');
@@ -2126,7 +2127,134 @@ app.post( '/v1/vendor/feeder', function( request, response ) {
        }
    });
 });
+app.get( '/v1/admin/circle', function( request, response ) {
+    console.log("/v1/admin/counters");
+  	if(checkVendorApiAunthaticated(request,0) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
+    return stationModel.find(function( err, order ) {
+        if( !err ) {
+            console.log("no error");
+            return response.send( order );
+        } else {
+            console.log("error");
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+});
+app.post( '/v1/admin/circle/:id', function( request, response ) {
+    console.log("post /v1/admin/counters");
+  	if(checkVendorApiAunthaticated(request,0) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
+    console.log(request.params.id);
+     //var dd = {'cityName':"dvg",'subAreas':[{'name':"rajajinagar"},{'name':"vijaynagar"}]};
+     var dd = {circlename:request.params.id,division:[]};
+      var counters = new stationModel(dd);
+        return counters.save(function( err) {
+        if( !err ) {
+            console.log("no error");
+            console.log(counters);
+            return response.send(counters);
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+});
+app.post( '/v1/admin/division/:divisionid/:circleid', function( request, response ) {
+    console.log("post /v1/admin/division");
+  	if(checkVendorApiAunthaticated(request,0) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
+    console.log(request.params.id);
+     //var dd = {'cityName':"dvg",'subAreas':[{'name':"rajajinagar"},{'name':"vijaynagar"}]};
+     var dd = {divisionname:request.params.divisionid,subdivision:[]};
+    //   var counters = new stationModel(dd);
+    console.log(request.params.divisionid);
+    console.log(request.params.circleid);
+    // { $addToSet: {menu: {$each:[{feedername: request.body.feedername,  
+    //     feederno: request.body.feederno}] }}},
+      return stationModel.update({ 'circlename':request.params.circleid},
+      { $addToSet: {division: {$each:[{divisionname: request.params.divisionid,  
+        subdivision: []}] }}},
+      function( err, order ) {
+      if( !err ) {
+          console.log("no error ");
+        
+          return response.send(order);
+      } else {
+          console.log( err );
+          return response.send('ERROR');
+      }
+  });
+});
 
+app.post( '/v1/admin/station/:circleid/:divisionid/:subdivisionid/:stationid', function( request, response ) {
+    console.log("post /v1/admin/division");
+  	if(checkVendorApiAunthaticated(request,0) == false)
+	{
+		return response.send("Not aunthiticated").status(403);
+	}
+    console.log(request.params.id);
+     //var dd = {'cityName':"dvg",'subAreas':[{'name':"rajajinagar"},{'name':"vijaynagar"}]};
+   //  var dd = {divisionname:request.params.divisionid,subdivision:[]};
+    //   var counters = new stationModel(dd);
+    console.log(request.params);
+  //  console.log(request.params.circleid);
+    // { $addToSet: {menu: {$each:[{feedername: request.body.feedername,  
+    //     feederno: request.body.feederno}] }}},
+    // db.students2.findAndModify({
+    //     query: { _id : 1 },
+    //     update: { $set: { "grades.$[elem].mean" : 100 } },
+    //     arrayFilters: [ { "elem.grade": { $gte: 85 } } ]
+    //  })
+    return stationModel.update({ 'circlename':request.params.circleid},
+    { $addToSet: {division: {divisionname: request.params.divisionid,  
+                             subdivisionname: request.params.subdivisionid,
+                             stationname: request.params.stationid,
+                            } }},
+    //   return stationModel.findAndModify({
+    //     query: { 'circlename':request.params.circleid},
+    //      update:{ $addToSet: {division: {divisionname: request.params.divisionid, subdivision: []} }},
+        
+      function( err, order ) {
+      if( !err ) {
+          console.log("no error ");
+        
+          return response.send(order);
+      } else {
+          console.log( err );
+          return response.send('ERROR');
+      }
+      });
+});
+app.post( '/v1/vendor/station', function( request, response ) {
+    console.log("post /vendor/station/");
+    console.log(request.body);
+  //  console.log(request.user);
+    console.log(request.user.local.email);
+  //  console.log(request.body.timings);
+    console.log(" outside aunthiticated");
+
+    return stationModel.update({ 'circle':request.user.local.email},
+       { $addToSet: {menu: {$each:[{feedername: request.body.feedername,  
+                                    feederno: request.body.feederno}] }}},
+       function( err, order ) {
+       if( !err ) {
+           console.log("no error ");
+         
+           return response.send('Success');
+       } else {
+           console.log( err );
+           return response.send('ERROR');
+       }
+   });
+});
 //Delete a menu item
 app.delete( '/v1/vendor/menu/item/:id/:fooditem', function( request, response ) {
      console.log('delete /v1/vendor/menu/item/');
