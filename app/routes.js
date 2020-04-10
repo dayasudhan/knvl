@@ -2126,7 +2126,7 @@ app.post( '/v1/vendor/menu/:id', function( request, response ) {
   {
    return response.send("Not aunthiticated").status(403);
   }
-    return VendorInfoModel.update({ 'hotel.email':params.id},
+    return VendorInfoModel.update({ 'hotel.email':request.params.id},
        { $addToSet: {menu: {$each:[{name: request.body.fooditem,  
                                     price:request.body.foodprice,
                                     availability:1,
