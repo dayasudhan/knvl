@@ -2116,7 +2116,34 @@ app.post( '/v1/vendor/menu', function( request, response ) {
        }
    });
 });
-
+app.post( '/v1/vendor/menu/:id', function( request, response ) {
+    console.log("post /vendor/menu/");
+    console.log(request.body);
+    console.log(request.params.id);
+   // console.log(request.user.local.email);
+    console.log(" outside aunthiticated");
+  if(checkVendorApiAunthaticated(request,1) == false &&  request.isAuthenticated() == false)
+  {
+   return response.send("Not aunthiticated").status(403);
+  }
+    return VendorInfoModel.update({ 'hotel.email':params.id},
+       { $addToSet: {menu: {$each:[{name: request.body.fooditem,  
+                                    price:request.body.foodprice,
+                                    availability:1,
+                                    description:request.body.description,
+                                    logo:request.body.logo,
+                                    timings:request.body.timings}] }}},
+       function( err, order ) {
+       if( !err ) {
+           console.log("no error");
+           console.log(order);
+           return response.send('Success');
+       } else {
+           console.log( err );
+           return response.send('ERROR');
+       }
+   });
+});
 
 //Delete a menu item
 app.delete( '/v1/vendor/menu/item/:id/:fooditem', function( request, response ) {
