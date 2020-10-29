@@ -23,10 +23,11 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 // configuration ===============================================================
 //mongoose.connect(configDB.url); // connect to our database
-var uristring = 
+var uristring = 'mongodb+srv://heroku_mhgndgwl:Knvl$54321@cluster0.3b3lz.mongodb.net/heroku_mhgndgwl?retryWrites=true&w=majority'
 
-    process.env.MONGOLAB_GREEN_MONGOLAB_URI ||
-  'mongodb://localhost/messoota';
+   // process.env.MONGOLAB_GREEN_MONGOLAB_URI ||
+    
+  //'mongodb://localhost/messoota';
 
 // mongoose
 mongoose.connect(uristring,function (err, res) {
