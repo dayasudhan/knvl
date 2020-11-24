@@ -1096,7 +1096,7 @@ console.log("storeVendorInfo");
 console.log(request.body);
 console.log(request.params.id);
 
- VendorInfoModel.update({ 'hotel.email':request.params.id},
+ VendorInfoModel.updateOne({ 'hotel.email':request.params.id},
       {
         hotel:{name:request.body.Name,email:request.params.id, id:request.body.id},
        address:{addressLine1:request.body.Address1,addressLine2:request.body.Address2,
