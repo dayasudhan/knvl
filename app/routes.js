@@ -835,7 +835,7 @@ app.post( '/v1/vendor/logo/:id', upload.single('file'),function( req, res ) {
   console.log(req.file.path);
   console.log("VendorLogo post");
   console.log(req.body);
-	if(checkVendorApiAunthaticated(request,1) == false)
+	if(checkVendorApiAunthaticated(req,1) == false)
 	{
 		return response.send("Not aunthiticated").status(403);
 	}
@@ -1098,13 +1098,12 @@ console.log(request.params.id);
 
  VendorInfoModel.update({ 'hotel.email':request.params.id},
       {
-        hotel:{name:request.body.Name,email:request.params.id, id:request.body.id},
+        hotel:{name:request.body.Name,email:request.params.id,logo:request.body.logo, id:request.body.id},
        address:{addressLine1:request.body.Address1,addressLine2:request.body.Address2,
         street:request.body.street, LandMark:request.body.Landmark, 
         areaName:request.body.Areaname,city:request.body.City, zip:request.body.zip, 
         latitude:request.body.latitude,longitude:request.body.longitude },
-        phone:request.body.phone ,
-        logo:request.body.logo,
+        phone:request.body.phone ,        
         speciality:request.body.speciality,
         vegornonveg:request.body.vegornonveg,
         deliverRange: request.body.deliverRange,

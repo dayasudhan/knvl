@@ -283,6 +283,7 @@ $scope.trackerUpdateStatus = function(param1)
                         Dinner:{startTime:dinnerstartTimevalue,endTime:dinnerendTimevalue,available:$scope.dinnerSupportTime}
                             }
       console.log(orderAcceptTimingsValue);
+      console.log($scope.hotellogo);
 //
       $scope.latitude = 0;
       $scope.longitude = 0;
@@ -291,7 +292,7 @@ $scope.trackerUpdateStatus = function(param1)
       $scope.bulkminimumOrder= 0;
       $scope.bulkdeliveryTime= 0;
       $scope.deliverRange =3 ;
-      $scope.deliverCharge  = 10;q
+      $scope.deliverCharge  = 10;
       $scope.deliveryTime = 60;
       var url = "/v1/vendor/info/";
       url = url + param;
@@ -299,7 +300,8 @@ $scope.trackerUpdateStatus = function(param1)
         Address1:$scope.hotelAddress1, phone:$scope.hotelphone,
         Address2:"", street :"",Landmark:$scope.hotelLandmark, 
         Areaname:$scope.hotelAreaname, 
-        City:$scope.hotelcity, zip:$scope.hotelzip,latitude:$scope.latitude, longitude:$scope.longitude, logo:"",
+        City:$scope.hotelcity, zip:$scope.hotelzip,latitude:$scope.latitude, longitude:$scope.longitude, 
+        logo:$scope.hotellogo,
          vegornonveg:$scope.vegornonveg, 
          speciality: $scope.speciality , 
          deliverRange:$scope.deliverRange,
