@@ -2280,45 +2280,45 @@ function checkVendorApiAunthaticated(request,type)
 	var version = parseInt(request.headers.version);
 	console.log(version);
 	var ret = false; 
-	if(request.headers.securekey == secureadminkey && request.headers.client == client_key_admin)
-	{
-		console.log("checkVendorApiAunthaticated admin");
-		ret = true;
-	}
-	else if(request.headers.securekey == securewebkey &&
-		      request.headers.version == version_value_1 && 
-		      request.headers.client == client_key_web)
-	{
-		console.log("checkVendorApiAunthaticated web pass");
-		ret = true;
-	}
-	else if(type == 1)
-	{
-		console.log("checkVendorApiAunthaticated vendor");
-		if(request.headers.securekey == securevendorkey &&
-			      request.headers.version == version_value_1 && 
-			      request.headers.client == client_key_vendor)
-		{
-			console.log("checkVendorApiAunthaticated vendor pass");
-			ret = true;
-		}
-	}
-	else if(type == 2)
-	{
-		console.log("checkVendorApiAunthaticated cust");
-		if(request.headers.securekey == securecustomerkey &&
-			      request.headers.version == version_value_1 && 
-			      request.headers.client == client_key_customer)
-		{
-			console.log("checkVendorApiAunthaticated cust pass");
-			ret = true;
-		}
-	}
-	else
-	{
-		console.log("checkVendorApiAunthaticated not auth");
-		ret = false;
-	}
+	// if(request.headers.securekey == secureadminkey && request.headers.client == client_key_admin)
+	// {
+	// 	console.log("checkVendorApiAunthaticated admin");
+	// 	ret = true;
+	// }
+	// else if(request.headers.securekey == securewebkey &&
+	// 	      request.headers.version == version_value_1 && 
+	// 	      request.headers.client == client_key_web)
+	// {
+	// 	console.log("checkVendorApiAunthaticated web pass");
+	// 	ret = true;
+	// }
+	// else if(type == 1)
+	// {
+	// 	console.log("checkVendorApiAunthaticated vendor");
+	// 	if(request.headers.securekey == securevendorkey &&
+	// 		      request.headers.version == version_value_1 && 
+	// 		      request.headers.client == client_key_vendor)
+	// 	{
+	// 		console.log("checkVendorApiAunthaticated vendor pass");
+	// 		ret = true;
+	// 	}
+	// }
+	// else if(type == 2)
+	// {
+	// 	console.log("checkVendorApiAunthaticated cust");
+	// 	if(request.headers.securekey == securecustomerkey &&
+	// 		      request.headers.version == version_value_1 && 
+	// 		      request.headers.client == client_key_customer)
+	// 	{
+	// 		console.log("checkVendorApiAunthaticated cust pass");
+	// 		ret = true;
+	// 	}
+	// }
+	// else
+	// {
+	// 	console.log("checkVendorApiAunthaticated not auth");
+	// 	ret = false;
+	// }
 	ret = true;
 	return ret;
 }
