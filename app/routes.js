@@ -948,7 +948,7 @@ app.post( '/v1/vendor/otp/register', function( req, res ) {
                             var otpurl = "https://www.smsgatewayhub.com/api/mt/SendSMS?APIKey=mhgGNz6lk0ytziomd49mcQ&senderid=WEBSMS&channel=2&DCS=0&flashsms=0&route=1";
                             //&number=919566229075&text=test message";
                             otpurl  = otpurl + "&number=" +  req.body.phoneNumber;
-                            otpurl  = otpurl + "&text=" +  "Your one time password for khaanavali is : " + otpnum;
+                            otpurl  = otpurl + "&text=" +  "Your one time password for QuickBuy is : " + otpnum;
                             console.log(otpurl);
                             client.get(otpurl, 
                             function (data, response) {
@@ -972,7 +972,7 @@ app.post( '/v1/vendor/otp/register', function( req, res ) {
                 var otpurl = "https://www.smsgatewayhub.com/api/mt/SendSMS?APIKey=mhgGNz6lk0ytziomd49mcQ&senderid=WEBSMS&channel=2&DCS=0&flashsms=0&route=1";
                 //&number=919566229075&text=test message";
                 otpurl  = otpurl + "&number=" +  req.body.phoneNumber;
-                otpurl  = otpurl + "&text=" +  "Your one time password for khaanavali is : " + otpnum;
+                otpurl  = otpurl + "&text=" +  "Your one time password for QuickBuy is : " + otpnum;
                 console.log(otpurl);
                 client.get(otpurl, 
                 function (data, response) {
