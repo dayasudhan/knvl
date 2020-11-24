@@ -23,7 +23,7 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 // configuration ===============================================================
 //mongoose.connect(configDB.url); // connect to our database
-var uristring =     process.env.ATLAS_URISTRINGc||'mongodb://localhost/qkbuy' ;
+var uristring =     process.env.ATLAS_URISTRING ||'mongodb://localhost/qkbuy' ;
     
   //'mongodb://localhost/messoota';
 
