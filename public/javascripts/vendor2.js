@@ -283,9 +283,16 @@ $scope.trackerUpdateStatus = function(param1)
                         Dinner:{startTime:dinnerstartTimevalue,endTime:dinnerendTimevalue,available:$scope.dinnerSupportTime}
                             }
       console.log(orderAcceptTimingsValue);
-
-
-
+//
+      $scope.latitude = 0;
+      $scope.longitude = 0;
+      $scope.bulkdeliverCharge= 0;
+      $scope.bulkdeliverRange= 0;
+      $scope.bulkminimumOrder= 0;
+      $scope.bulkdeliveryTime= 0;
+      $scope.deliverRange =3 ;
+      $scope.deliverCharge  = 10;
+      $scope.deliveryTime = 60;
       var url = "/v1/vendor/info/";
       url = url + param;
       var postData={Name:$scope.hotelName, username: param, id:$scope.hotelId,
@@ -308,7 +315,7 @@ $scope.trackerUpdateStatus = function(param1)
          bulkdeliveryTime:$scope.bulkdeliveryTime
 
        };
-
+console.log(postData)
       $http.post(url,postData)
         .success(function (data, status, headers, config)
         {

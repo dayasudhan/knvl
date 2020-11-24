@@ -186,13 +186,13 @@
                       </div>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label for="inputEmail3"  class="col-sm-2 control-label">Speciality</label>
                       <div class="col-sm-10">
                         <input type="text" class="form-control"  name="Speciality"  placeholder="Khaanavali" ng-model = "speciality" required>
                       </div>
-                    </div>
-                    <div class="form-group">
+                    </div> -->
+                    <!-- <div class="form-group">
                       <label for="inputEmail3"  class="col-sm-2 control-label">Veg/Non Veg</label>
                       <div class="col-sm-10">
                           <select class="form-control select2" style="width: 100%;" ng-model = "vegornonveg" required>
@@ -200,7 +200,7 @@
                             <option>Non Vegetarain</option>
 
                           </select>
-                      </div>
+                      </div> -->
                     </div>
                     <div class="form-group">
                       <label for="inputEmail3"  class="col-sm-2 control-label">Phone</label>
@@ -209,7 +209,7 @@
                       </div>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label for="inputEmail3"  class="col-sm-2 control-label">DeliveryType</label>
                       <div class="col-sm-10">
                           <select class="form-control select2" style="width: 100%;" ng-model = "isBulkVendor" required>
@@ -219,7 +219,7 @@
 
                           </select>
                       </div>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                       <label for="inputdeliverrange"  class="col-sm-2 control-label">Delivery Range in KM's</label>
                       <div class="col-sm-10">
@@ -242,15 +242,15 @@
                       <div class="col-sm-10">
                         <input type="number" class="form-control"  name="phone" 
                         min="0" max="200"
-                        placeholder="0" ng-model = "deliverCharge" required>
+                        placeholder="20" ng-model = "deliverCharge" required>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputdeliverrange"  class="col-sm-2 control-label">Minimum Order in Rupees's</label>
                       <div class="col-sm-10">
                         <input type="number" class="form-control"  name="phone" 
-                        min="0" max="200"
-                        placeholder="0" ng-model = "minimumOrder" required>
+                        min="0" max="500"
+                        ng-init = "100" ng-model = "minimumOrder" required>
                       </div>
                     </div>
                     <div class="form-group">
@@ -307,7 +307,7 @@
                         <input type="Number" class="form-control"  name="zip" placeholder="zip" ng-model = "hotelzip" required>
                       </div>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label for="inputEmail3" name="latitude"  class="col-sm-2 control-label">latitude</label>
                       <div class="col-sm-10">
                         <input type="text" class="form-control" name="latitude" placeholder="latitude" ng-model = "latitude" required>
@@ -318,10 +318,10 @@
                       <div class="col-sm-10">
                         <input type="text" class="form-control" name="longitude" placeholder="longitude" ng-model = "longitude">
                       </div>
-                    </div>
+                    </div> -->
                    
                     
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label for="inputtime" class="col-sm-2 control-label">Morning</label>
                       <div class="col-sm-10">
                          Start time:
@@ -365,12 +365,12 @@
                         </select>
                       </div>
                                 
-                    </div>
+                    </div> -->
 
 
 
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label for="inputdeliverrange"  class="col-sm-2 control-label">Bulk Delivery Range in KM's</label>
                       <div class="col-sm-10">
                         <input type="number" class="form-control"  name="bulkdeliverRange" placeholder="3" ng-model 
@@ -410,7 +410,7 @@
                           <select multiple class="form-control select2" style="width: 100%;" ng-model = "bulkdeliverareas" ng-options="o for o in cityCoverage[selectedCity].subAreas track by o"  required="">
                         </select>
                       </div>
-                    </div>
+                    </div> -->
 
 
 
@@ -423,27 +423,7 @@
                 </form>
               </div><!-- /.box -->
               </div>
-              <div class="col-xs-4">
-<!-- Horizontal Form -->
-              <div class="box box-info">
-                <div class="box-header with-border">
-                  <h3 class="box-title">LogoAdd</h3>
-                </div><!-- /.box-header -->
-                <!-- form start -->
-                <form class="form-horizontal">
-                  <div class="form-group">
-                      <label for="exampleInputFile" class="col-sm-2 control-label">Logo</label>
-                      <div class="col-sm-10">
-                        <input type="file" name="file" id="logoinputfile" onchange="angular.element(this).scope().addLogo('<%= user.local.email %>',this.files)">
-                      </div>
-                    </div>
-                  <!--div class="box-footer">
-                    <button type="submit" class="btn btn-info pull-right" ng-click= "addLogo('<%= user.local.email %>')">Add Logo</button>
 
-                  </div><!-- /.box-footer -->
-                </form>
-              </div><!-- /.box -->
-              </div>
           </div><!-- /.row -->
 
         </section><!-- /.content -->

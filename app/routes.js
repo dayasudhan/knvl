@@ -1093,6 +1093,7 @@ if(checkVendorApiAunthaticated(req,1) == false && req.isAuthenticated() == false
 function storeVendorInfo(request,response,callback,param)
 {
 console.log("storeVendorInfo");
+console.log(request.body);
 console.log(request.params.id);
 
  VendorInfoModel.update({ 'hotel.email':request.params.id},
