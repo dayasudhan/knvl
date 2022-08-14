@@ -47,7 +47,7 @@
     <div class="wrapper" ng-controller="DetailsController">
       <header
         class="main-header"
-        data-ng-init="getDetails('<%= user.local.email %>')"
+        data-ng-init="getDetails('<%= user.username %>')"
       >
         <!-- Logo -->
         <a href="../../index2.html" class="logo">
@@ -103,7 +103,7 @@
                     class="user-image"
                     alt="User Image"
                   />
-                  <span class="hidden-xs"><%= user.local.email%></span>
+                  <span class="hidden-xs"><%= user.username%></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
@@ -167,7 +167,7 @@
               />
             </div>
             <div class="pull-left info">
-              <p><%= user.local.email%></p>
+              <p><%= user.username%></p>
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
@@ -684,12 +684,12 @@
                     <button
                       type="submit"
                       class="btn btn-info pull-right"
-                      ng-click="addDetails('<%= user.local.email %>')"
+                      ng-click="addDetails('<%= user.username %>')"
                     >
                       Submit
                     </button>
 
-                    <!--button type="submit" class="btn btn-default" onclick="menu_add(this.form,'<%= user.local.email %>')">Submit</button>&nbsp;<a href="/"-->
+                    <!--button type="submit" class="btn btn-default" onclick="menu_add(this.form,'<%= user.username %>')">Submit</button>&nbsp;<a href="/"-->
                   </div>
                   <!-- /.box-footer -->
                 </form>
@@ -714,12 +714,12 @@
                         type="file"
                         name="file"
                         id="logoinputfile"
-                        onchange="angular.element(this).scope().addLogo('<%= user.local.email %>',this.files)"
+                        onchange="angular.element(this).scope().addLogo('<%= user.username %>',this.files)"
                       />
                     </div>
                   </div>
                   <!--div class="box-footer">
-                    <button type="submit" class="btn btn-info pull-right" ng-click= "addLogo('<%= user.local.email %>')">Add Logo</button>
+                    <button type="submit" class="btn btn-info pull-right" ng-click= "addLogo('<%= user.username %>')">Add Logo</button>
 
                   </div><!-- /.box-footer -->
                 </form>

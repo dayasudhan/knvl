@@ -2486,6 +2486,21 @@ module.exports = function (app, passport) {
     console.log("result", result);
     response.send(result);
   });
+  app.get("/v1/test2", async function (request, response) {
+    const result = await prisma.users.findMany({});
+    console.log("result", result);
+    response.send(result);
+  });
+
+  app.get("/v1/test3", async function (request, response) {
+    const result = await prisma.users.findUnique({
+      where: {
+        id: 6,
+      },
+    });
+    console.log("result", result);
+    response.send(result);
+  });
 };
 
 // route middleware to ensure user is logged in
