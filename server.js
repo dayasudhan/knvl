@@ -4,7 +4,7 @@
 // get all the tools we need
 var express = require("express");
 var app = express();
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 5000;
 var mongoose = require("mongoose");
 var passport = require("passport");
 var flash = require("connect-flash");
@@ -25,7 +25,8 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 var uristring =
   process.env.MONGODB_URI ||
   process.env.MONGOLAB_URI ||
-  "mongodb+srv://heroku_mhgndgwl:sudhan@cluster0.3b3lz.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb://127.0.0.1:27017/farm";
+//"mongodb+srv://heroku_mhgndgwl:sudhan@cluster0.3b3lz.mongodb.net/?retryWrites=true&w=majority";
 
 // mongoose
 mongoose.connect(uristring, function (err, res) {
